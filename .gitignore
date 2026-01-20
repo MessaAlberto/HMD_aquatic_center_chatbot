@@ -1,4 +1,6 @@
 .trash
+evaluation/results/
+evaluation/ground_truth_data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
