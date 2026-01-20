@@ -1,0 +1,857 @@
+[
+    {
+        "input": "Do I need a medical certificate?",
+        "expected_intent": "ask_rules",
+        "expected_slots": {
+            "topic": "medical certificate"
+        }
+    },
+    {
+        "input": "I want to sign up for neonatal.",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "facility_type": "neonatal"
+        }
+    },
+    {
+        "input": "Is the lido open Monday?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "lido",
+            "date": "Monday"
+        }
+    },
+    {
+        "input": "Opening hours for tomorrow please.",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "date": "tomorrow"
+        }
+    },
+    {
+        "input": "Is the swimming_pool open next Friday?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "swimming_pool",
+            "date": "next Friday"
+        }
+    },
+    {
+        "input": "Book neonatal for teens.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "neonatal",
+            "target_age": "teens"
+        }
+    },
+    {
+        "input": "Price for senior single_entry?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "senior",
+            "subscription_type": "single_entry"
+        }
+    },
+    {
+        "input": "I want to report a dirty floor.",
+        "expected_intent": "report_issue",
+        "expected_slots": {
+            "problem_type": "dirty floor"
+        }
+    },
+    {
+        "input": "Opening hours for today please.",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "date": "today"
+        }
+    },
+    {
+        "input": "Opening hours for 2023-10-25 please.",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "date": "2023-10-25"
+        }
+    },
+    {
+        "input": "Price for adult monthly?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "adult",
+            "subscription_type": "monthly"
+        }
+    },
+    {
+        "input": "I like football.",
+        "expected_intent": "out_of_scope",
+        "expected_slots": {}
+    },
+    {
+        "input": "How much is the single_entry for courses?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "single_entry",
+            "facility_type": "courses"
+        }
+    },
+    {
+        "input": "I need to buy black goggles.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "black",
+            "item": "goggles"
+        }
+    },
+    {
+        "input": "I need to buy black swimsuit.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "black",
+            "item": "swimsuit"
+        }
+    },
+    {
+        "input": "The broken locker is annoying.",
+        "expected_intent": "report_issue",
+        "expected_slots": {
+            "problem_type": "broken locker"
+        }
+    },
+    {
+        "input": "Is the swimming cap mandatory?",
+        "expected_intent": "ask_rules",
+        "expected_slots": {
+            "topic": "swimming cap"
+        }
+    },
+    {
+        "input": "Sign me up for neonatal adults class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "neonatal",
+            "target_age": "adults"
+        }
+    },
+    {
+        "input": "I want the intermediate hydrobike course on Monday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "intermediate",
+            "course_activity": "hydrobike",
+            "day_preference": "Monday"
+        }
+    },
+    {
+        "input": "When is the gym open?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "gym"
+        }
+    },
+    {
+        "input": "What is the capital of Italy?",
+        "expected_intent": "out_of_scope",
+        "expected_slots": {}
+    },
+    {
+        "input": "I need to buy black slippers.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "black",
+            "item": "slippers"
+        }
+    },
+    {
+        "input": "How much is the annual for gym?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "annual",
+            "facility_type": "gym"
+        }
+    },
+    {
+        "input": "I want to sign up for aquagym.",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "facility_type": "aquagym"
+        }
+    },
+    {
+        "input": "Do you have discounts for senior?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "senior"
+        }
+    },
+    {
+        "input": "Opening hours for next Friday please.",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "date": "next Friday"
+        }
+    },
+    {
+        "input": "Book swimming_school for teens.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "swimming_school",
+            "target_age": "teens"
+        }
+    },
+    {
+        "input": "Do I need a swimming cap?",
+        "expected_intent": "ask_rules",
+        "expected_slots": {
+            "topic": "swimming cap"
+        }
+    },
+    {
+        "input": "I want to sign up for swimming_school.",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "facility_type": "swimming_school"
+        }
+    },
+    {
+        "input": "The dirty floor is annoying.",
+        "expected_intent": "report_issue",
+        "expected_slots": {
+            "problem_type": "dirty floor"
+        }
+    },
+    {
+        "input": "Book neonatal for adults.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "neonatal",
+            "target_age": "adults"
+        }
+    },
+    {
+        "input": "Price for student single_entry?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "student",
+            "subscription_type": "single_entry"
+        }
+    },
+    {
+        "input": "Is the reception open today?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "reception",
+            "date": "today"
+        }
+    },
+    {
+        "input": "I want to report a broken locker.",
+        "expected_intent": "report_issue",
+        "expected_slots": {
+            "problem_type": "broken locker"
+        }
+    },
+    {
+        "input": "Price for child annual?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "child",
+            "subscription_type": "annual"
+        }
+    },
+    {
+        "input": "When is the spa open?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "spa"
+        }
+    },
+    {
+        "input": "How much is the 10_entries for gym?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "10_entries",
+            "facility_type": "gym"
+        }
+    },
+    {
+        "input": "Do you sell slippers?",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "item": "slippers"
+        }
+    },
+    {
+        "input": "Do I need a slippers?",
+        "expected_intent": "ask_rules",
+        "expected_slots": {
+            "topic": "slippers"
+        }
+    },
+    {
+        "input": "Is the lido open next Friday?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "lido",
+            "date": "next Friday"
+        }
+    },
+    {
+        "input": "Price for adult annual?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "adult",
+            "subscription_type": "annual"
+        }
+    },
+    {
+        "input": "How much is the annual for courses?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "annual",
+            "facility_type": "courses"
+        }
+    },
+    {
+        "input": "How much is the monthly for spa?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "monthly",
+            "facility_type": "spa"
+        }
+    },
+    {
+        "input": "The cold shower is annoying.",
+        "expected_intent": "report_issue",
+        "expected_slots": {
+            "problem_type": "cold shower"
+        }
+    },
+    {
+        "input": "How much is the single_entry for gym?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "single_entry",
+            "facility_type": "gym"
+        }
+    },
+    {
+        "input": "Sign me up for aquagym adults class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "aquagym",
+            "target_age": "adults"
+        }
+    },
+    {
+        "input": "I need to buy blue goggles.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "blue",
+            "item": "goggles"
+        }
+    },
+    {
+        "input": "Can I order a pizza?",
+        "expected_intent": "out_of_scope",
+        "expected_slots": {}
+    },
+    {
+        "input": "Is the slippers mandatory?",
+        "expected_intent": "ask_rules",
+        "expected_slots": {
+            "topic": "slippers"
+        }
+    },
+    {
+        "input": "Sign me up for aquagym teens class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "aquagym",
+            "target_age": "teens"
+        }
+    },
+    {
+        "input": "Do you have discounts for student?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "student"
+        }
+    },
+    {
+        "input": "I want to report a cold shower.",
+        "expected_intent": "report_issue",
+        "expected_slots": {
+            "problem_type": "cold shower"
+        }
+    },
+    {
+        "input": "Book aquagym for kids.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "aquagym",
+            "target_age": "kids"
+        }
+    },
+    {
+        "input": "Book hydrobike for kids.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "hydrobike",
+            "target_age": "kids"
+        }
+    },
+    {
+        "input": "Is the medical certificate mandatory?",
+        "expected_intent": "ask_rules",
+        "expected_slots": {
+            "topic": "medical certificate"
+        }
+    },
+    {
+        "input": "Sign me up for swimming_school teens class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "swimming_school",
+            "target_age": "teens"
+        }
+    },
+    {
+        "input": "I need to buy red goggles.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "red",
+            "item": "goggles"
+        }
+    },
+    {
+        "input": "Book swimming_school for kids.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "swimming_school",
+            "target_age": "kids"
+        }
+    },
+    {
+        "input": "I want the advanced neonatal course on Friday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "advanced",
+            "course_activity": "neonatal",
+            "day_preference": "Friday"
+        }
+    },
+    {
+        "input": "How much is the annual for swimming_pool?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "annual",
+            "facility_type": "swimming_pool"
+        }
+    },
+    {
+        "input": "I want the advanced aquagym course on Tuesday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "advanced",
+            "course_activity": "aquagym",
+            "day_preference": "Tuesday"
+        }
+    },
+    {
+        "input": "I want to sign up for hydrobike.",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "facility_type": "hydrobike"
+        }
+    },
+    {
+        "input": "I want the intermediate aquagym course on Tuesday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "intermediate",
+            "course_activity": "aquagym",
+            "day_preference": "Tuesday"
+        }
+    },
+    {
+        "input": "I want the advanced aquagym course on Monday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "advanced",
+            "course_activity": "aquagym",
+            "day_preference": "Monday"
+        }
+    },
+    {
+        "input": "I want the advanced swimming_school course on Friday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "advanced",
+            "course_activity": "swimming_school",
+            "day_preference": "Friday"
+        }
+    },
+    {
+        "input": "Price for student monthly?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "student",
+            "subscription_type": "monthly"
+        }
+    },
+    {
+        "input": "I need to buy blue swimsuit.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "blue",
+            "item": "swimsuit"
+        }
+    },
+    {
+        "input": "Opening hours for Monday please.",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "date": "Monday"
+        }
+    },
+    {
+        "input": "Book hydrobike for adults.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "hydrobike",
+            "target_age": "adults"
+        }
+    },
+    {
+        "input": "When is the lido open?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "lido"
+        }
+    },
+    {
+        "input": "Is the gym open tomorrow?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "gym",
+            "date": "tomorrow"
+        }
+    },
+    {
+        "input": "Sign me up for hydrobike adults class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "hydrobike",
+            "target_age": "adults"
+        }
+    },
+    {
+        "input": "Sign me up for hydrobike teens class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "hydrobike",
+            "target_age": "teens"
+        }
+    },
+    {
+        "input": "I need to buy red swimsuit.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "red",
+            "item": "swimsuit"
+        }
+    },
+    {
+        "input": "I want the intermediate aquagym course on Monday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "intermediate",
+            "course_activity": "aquagym",
+            "day_preference": "Monday"
+        }
+    },
+    {
+        "input": "I need to buy red towel.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "red",
+            "item": "towel"
+        }
+    },
+    {
+        "input": "Is the reception open Monday?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "reception",
+            "date": "Monday"
+        }
+    },
+    {
+        "input": "I want the beginner hydrobike course on Monday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "beginner",
+            "course_activity": "hydrobike",
+            "day_preference": "Monday"
+        }
+    },
+    {
+        "input": "Is the gym open next Friday?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "gym",
+            "date": "next Friday"
+        }
+    },
+    {
+        "input": "I want the beginner neonatal course on Monday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "beginner",
+            "course_activity": "neonatal",
+            "day_preference": "Monday"
+        }
+    },
+    {
+        "input": "Book hydrobike for teens.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "hydrobike",
+            "target_age": "teens"
+        }
+    },
+    {
+        "input": "I need to buy blue towel.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "blue",
+            "item": "towel"
+        }
+    },
+    {
+        "input": "Do you have discounts for child?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "child"
+        }
+    },
+    {
+        "input": "How much is the 10_entries for spa?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "10_entries",
+            "facility_type": "spa"
+        }
+    },
+    {
+        "input": "Do you have discounts for adult?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "adult"
+        }
+    },
+    {
+        "input": "Sign me up for swimming_school kids class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "swimming_school",
+            "target_age": "kids"
+        }
+    },
+    {
+        "input": "Do you sell swimsuit?",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "item": "swimsuit"
+        }
+    },
+    {
+        "input": "Is the spa open 2023-10-25?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "spa",
+            "date": "2023-10-25"
+        }
+    },
+    {
+        "input": "I want the intermediate swimming_school course on Friday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "intermediate",
+            "course_activity": "swimming_school",
+            "day_preference": "Friday"
+        }
+    },
+    {
+        "input": "Sign me up for neonatal teens class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "neonatal",
+            "target_age": "teens"
+        }
+    },
+    {
+        "input": "Book aquagym for teens.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "aquagym",
+            "target_age": "teens"
+        }
+    },
+    {
+        "input": "Price for adult 10_entries?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "user_category": "adult",
+            "subscription_type": "10_entries"
+        }
+    },
+    {
+        "input": "Do you sell towel?",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "item": "towel"
+        }
+    },
+    {
+        "input": "Book swimming_school for adults.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "swimming_school",
+            "target_age": "adults"
+        }
+    },
+    {
+        "input": "I want the advanced swimming_school course on Monday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "advanced",
+            "course_activity": "swimming_school",
+            "day_preference": "Monday"
+        }
+    },
+    {
+        "input": "Sign me up for aquagym kids class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "aquagym",
+            "target_age": "kids"
+        }
+    },
+    {
+        "input": "How much is the monthly for gym?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "monthly",
+            "facility_type": "gym"
+        }
+    },
+    {
+        "input": "Book aquagym for adults.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "aquagym",
+            "target_age": "adults"
+        }
+    },
+    {
+        "input": "I want the advanced neonatal course on Monday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "advanced",
+            "course_activity": "neonatal",
+            "day_preference": "Monday"
+        }
+    },
+    {
+        "input": "I want the beginner aquagym course on Monday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "beginner",
+            "course_activity": "aquagym",
+            "day_preference": "Monday"
+        }
+    },
+    {
+        "input": "Is the lido open today?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "lido",
+            "date": "today"
+        }
+    },
+    {
+        "input": "I want the beginner hydrobike course on Tuesday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "beginner",
+            "course_activity": "hydrobike",
+            "day_preference": "Tuesday"
+        }
+    },
+    {
+        "input": "I need to buy black towel.",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "color": "black",
+            "item": "towel"
+        }
+    },
+    {
+        "input": "I want the intermediate neonatal course on Friday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "intermediate",
+            "course_activity": "neonatal",
+            "day_preference": "Friday"
+        }
+    },
+    {
+        "input": "I want the intermediate hydrobike course on Tuesday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "intermediate",
+            "course_activity": "hydrobike",
+            "day_preference": "Tuesday"
+        }
+    },
+    {
+        "input": "Do you sell goggles?",
+        "expected_intent": "buy_equipment",
+        "expected_slots": {
+            "item": "goggles"
+        }
+    },
+    {
+        "input": "I want the advanced aquagym course on Friday.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "level": "advanced",
+            "course_activity": "aquagym",
+            "day_preference": "Friday"
+        }
+    },
+    {
+        "input": "When is the reception open?",
+        "expected_intent": "ask_opening_hours",
+        "expected_slots": {
+            "facility_type": "reception"
+        }
+    },
+    {
+        "input": "How much is the annual for spa?",
+        "expected_intent": "ask_pricing",
+        "expected_slots": {
+            "subscription_type": "annual",
+            "facility_type": "spa"
+        }
+    },
+    {
+        "input": "Sign me up for hydrobike kids class.",
+        "expected_intent": "book_course",
+        "expected_slots": {
+            "course_activity": "hydrobike",
+            "target_age": "kids"
+        }
+    }
+]
