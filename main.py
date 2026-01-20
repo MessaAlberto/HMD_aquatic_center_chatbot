@@ -25,24 +25,18 @@ def main():
     # nlg = NLG(model, tokenizer)
     # tracker = StateTracker()
 
-    messages = [
-        {
-            "role": "system",
-            "content": f"Hello! You are {model_name} agent. How can I help you?"
-        }
-    ]
+    print("Chatbot is ready! Type 'exit' to quit.")
 
     while True:
-        user_input = input(f"Bot: {messages[-1]['content']}\nYou: ")
+        user_input = input(f"You: ")
         if user_input.lower() in ["exit", "quit", "stop"]:
             print("Bot: Goodbye!")
             break
 
-        # messages.append(f"User: {user_input}")
-
         # --- STEP 1: NLU (Understand) ---
-        nlu_result = nlu.predict(user_input, messages)
-        print(f"DEBUG NLU: {nlu_result}")
+        nlu_result = nlu.predict(user_input)
+
+        dispaly_conversation(NLU, user_input, str(nlu_result))
 
         # --- STEP 2: DM (Decide) ---
         # action, data = dm.decide_action(nlu_result, tracker)
