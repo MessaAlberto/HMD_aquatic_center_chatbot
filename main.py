@@ -2,8 +2,8 @@ import torch
 from transformers import AutoTokenizer
 
 from components.NLU import NLU
-from components.DM import DM
-from components.NLG import NLG
+# from components.DM import DM
+# from components.NLG import NLG
 from utils.models import MODELS
 from utils.display import dispaly_conversation
 # from utils.state_tracker import StateTracker
@@ -20,9 +20,9 @@ def main():
     )
     messages = []
 
-    nlu = NLU(model, tokenizer)
-    dm = DM(database=None)
-    nlg = NLG(model, tokenizer)
+    nlu = NLU(model, tokenizer, generate_response)
+    # dm = DM(database=None)
+    # nlg = NLG(model, tokenizer)
     # tracker = StateTracker()
 
     messages = [
@@ -41,7 +41,7 @@ def main():
         # messages.append(f"User: {user_input}")
 
         # --- STEP 1: NLU (Understand) ---
-        nlu_result = nlu.predict(user_input, messages, generate_response)
+        nlu_result = nlu.predict(user_input, messages)
         print(f"DEBUG NLU: {nlu_result}")
 
         # --- STEP 2: DM (Decide) ---
