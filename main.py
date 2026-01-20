@@ -18,7 +18,6 @@ def main():
         dtype="auto",
         device_map="cuda:0"
     )
-    messages = []
 
     nlu = NLU(model, tokenizer, generate_response)
     # dm = DM(database=None)

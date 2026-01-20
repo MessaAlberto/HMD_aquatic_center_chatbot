@@ -8,7 +8,7 @@ class NLU:
         self.generate_fn = generate_fn
 
     def predict(self, user_input):
-        system_msg = {"role": "system", "content": NLU_INTENT_PROMPT}
+        system_msg = [{"role": "system", "content": NLU_INTENT_PROMPT}]
         
         nlu_out = self.generate_fn(
             self.model,
