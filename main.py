@@ -40,14 +40,15 @@ def main():
         dispaly_conversation(NLU, user_input, str(nlu_result))
 
         dialogue_state = tracker.update(nlu_result)
+        print(f"DEBUG Dialogue State: {dialogue_state}")
 
         # --- STEP 2: DM (Decide) ---
-        action = dm.predict(dialogue_state, db_result=None)
-        dispaly_conversation("DM (Decision)", str(dialogue_state), str(action))
+        nba = dm.predict(dialogue_state, db_result=None)
+        dispaly_conversation("DM (Decision)", str(dialogue_state), str(nba))
 
         final_response = None
-        if action.get("type") == "query_db":
-            query_intent = action.get("intent")
+        if nba.get("type") == "query_db":
+            query_intent = nba.get("intent")
             query_slots = dialogue_state["slots"]
 
             db_results = db.query_database(query_intent, query_slots)

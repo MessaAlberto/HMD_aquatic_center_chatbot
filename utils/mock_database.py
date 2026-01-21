@@ -92,43 +92,7 @@ VALID_DATA = {
 # ===================
 #   LOGIC FUNCTIONS
 # ===================
-
-class MockDatabase:
-    def __init__(self):
-        pass
-
-    def validate_slot_value(slot_name, value):
-        """
-        Checks if a slot value exists in the allowed lists.
-        Used by the Middleware/State Tracker before calling the DM.
-        """
-        if not value:
-            return True  # Null is handled by DM as 'missing slot', not 'invalid value'
-
-        val_norm = str(value).lower().replace(" ", "_")
-
-        # Map NLU slot names to Validation keys if necessary
-        key_map = {
-            "facility_type": "facility_type",
-            "course": "course_activity",
-            "course_activity": "course_activity",
-            "user_cat": "user_category",
-            "user_category": "user_category",
-            "sub_type": "subscription_type",
-            "subscription_type": "subscription_type",
-            "item": "item"
-        }
-
-        if slot_name in key_map:
-            check_key = key_map[slot_name]
-            if check_key in VALID_DATA:
-                # Flexible check (e.g., "pool" in "swimming_pool")
-                return any(val_norm in valid_item or valid_item in val_norm for valid_item in VALID_DATA[check_key])
-
-        return True
-
-
-    def normalize_date(date_str):
+def normalize_date(date_str):
         """
         Converts user-provided date strings into datetime.date objects.
         Handles relative terms (today, tomorrow), weekdays, and ISO dates.
@@ -180,6 +144,40 @@ class MockDatabase:
 
         return None, None
 
+
+class MockDatabase:
+    def __init__(self):
+        pass
+
+    def validate_slot_value(slot_name, value):
+        """
+        Checks if a slot value exists in the allowed lists.
+        Used by the Middleware/State Tracker before calling the DM.
+        """
+        if not value:
+            return True  # Null is handled by DM as 'missing slot', not 'invalid value'
+
+        val_norm = str(value).lower().replace(" ", "_")
+
+        # Map NLU slot names to Validation keys if necessary
+        key_map = {
+            "facility_type": "facility_type",
+            "course": "course_activity",
+            "course_activity": "course_activity",
+            "user_cat": "user_category",
+            "user_category": "user_category",
+            "sub_type": "subscription_type",
+            "subscription_type": "subscription_type",
+            "item": "item"
+        }
+
+        if slot_name in key_map:
+            check_key = key_map[slot_name]
+            if check_key in VALID_DATA:
+                # Flexible check (e.g., "pool" in "swimming_pool")
+                return any(val_norm in valid_item or valid_item in val_norm for valid_item in VALID_DATA[check_key])
+
+        return True
 
     def query_database(intent, slots):
         """
