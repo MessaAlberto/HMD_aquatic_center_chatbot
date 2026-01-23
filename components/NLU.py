@@ -7,6 +7,9 @@ class NLU:
         self.tokenizer = tokenizer
         self.generate_fn = generate_fn
 
+    def clean_slot_values(self, slots: dict):
+        return {k: (None if v in ["null", "None", ""] else v) for k, v in slots.items()}
+
     def predict(self, user_input):
         system_msg = [{"role": "system", "content": NLU_INTENT_PROMPT}]
         
@@ -23,6 +26,11 @@ class NLU:
             # Strip markdown code blocks if present
             json_str = nlu_out.replace("```json", "").replace("```", "").strip()
             data = json.loads(json_str)
+
+            # Clean "null" string
+            if "slots" in data:
+                data["slots"] = self.clean_slot_values(data["slots"])
+
         except json.JSONDecodeError:
             # Fallback for parsing errors
             data = {"intent": "out_of_scope", "slots": {}}

@@ -3,7 +3,7 @@ from transformers import AutoTokenizer
 
 from components.NLU import NLU
 from components.DM import DM
-# from components.NLG import NLG
+from components.NLG import NLG
 from utils.models import MODELS
 from utils.display import dispaly_conversation
 from utils.dialogue_state_tracker import StateTracker
@@ -22,7 +22,7 @@ def main():
 
     nlu = NLU(model, tokenizer, generate_response)
     dm = DM(model, tokenizer, generate_response)
-    # nlg = NLG(model, tokenizer)
+    nlg = NLG(model, tokenizer)
     
     tracker = StateTracker()
     db = MockDatabase()
@@ -43,29 +43,30 @@ def main():
         print(f"DEBUG Dialogue State: {dialogue_state}")
 
         # --- STEP 2: DM (Decide) ---
-        nba = dm.predict(dialogue_state, db_result=None)
+        nba = dm.prepare_db_query(dialogue_state)
         dispaly_conversation("DM (Decision)", str(dialogue_state), str(nba))
 
-        final_response = None
-        if nba.get("type") == "query_db":
-            query_intent = nba.get("intent")
-            query_slots = dialogue_state["slots"]
+        if nba.get("nba") == "validate_data":
+            # Data validation step
+            db_args = {
+                "intent": nba.get("intent"),
+                "slots": nba.get("slots"),
+                "slots_to_validate": nba.get("slots_to_validate"),
+                "active_task": nba.get("active_task"),
+            }
 
-            db_results = db.query_database(query_intent, query_slots)
-            print(f"DEBUG DB Results: {db_results}")
+            if nba.get("user"):
+                db_args["user"] = nba.get("user")
 
-            final_response = dm.predict(dialogue_state, db_result=db_results)
-            if db_results is None:
-
-                nba = dm.predict(nlu_result, db_results=[])
-            else:
-                tracker.update(nlu_result, nba, db_results)
+            db_result = db.query_database(**db_args)
+            nba = dm.make_dm_decision(dialogue_state, db_result=db_result)
         else:
-            tracker.update(nlu_result, nba)
+            nba = dm.make_dm_decision(dialogue_state, db_result=None)
 
         # --- STEP 3: NLG (Respond) ---
-        # bot_response = nlg.generate_response(action, data)
+        bot_response = nlg.generate_response(nba, user_input)
 
+        dispaly_conversation(NLG, str(nba), bot_response)
         # print(f"Bot: {bot_response}")
         # messages.append(f"Assistant: {bot_response}")
 
