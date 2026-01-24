@@ -37,7 +37,7 @@ def main():
 
         # --- STEP 1: NLU (Understand) ---
         nlu_result = nlu.predict(user_input)
-        display_conversation("NLU (Understand)", user_input, str(nlu_result))
+        display_conversation([{"role": "system", "content": "NLU (Understand)"}], user_input, str(nlu_result))
 
         dialogue_state = tracker.update(nlu_result)
         print(f"DEBUG Dialogue State: {dialogue_state}")
@@ -45,7 +45,7 @@ def main():
         # --- STEP 2: DM (Decide) ---
         nba = dm.prepare_db_query(dialogue_state)
         print(f"DEBUG DM NBA: {nba}")
-        display_conversation("DM (Decision)", str(dialogue_state), str(nba))
+        display_conversation([{"role": "system", "content": "DM (Decision)"}], str(dialogue_state), str(nba))
 
         if nba.get("nba") == "validate_data":
             # Data validation step
@@ -65,11 +65,11 @@ def main():
         else:
             nba = dm.make_dm_decision(dialogue_state, db_result=None)
 
-        display_conversation("DM (Decide)", str(dialogue_state), str(nba))
+        display_conversation([{"role": "system", "content": "DM (Decide)"}], str(dialogue_state), str(nba))
         # --- STEP 3: NLG (Respond) ---
         bot_response = nlg.generate_response(nba, user_input)
 
-        display_conversation("NLG (Respond)", str(nba), bot_response)
+        display_conversation([{"role": "system", "content": "NLG (Respond)"}], str(nba), bot_response)
         # print(f"Bot: {bot_response}")
         # messages.append(f"Assistant: {bot_response}")
 

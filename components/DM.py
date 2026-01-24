@@ -52,6 +52,7 @@ class DM:
         self.update_internal_state(intent, slots, new_values)
 
         if len(new_values) > 0:
+            print(f"DEBUG DM Preparing DB Query for intent: {intent}, slots: {slots}, new_values: {new_values}")
             db_args = {
                 "nba": "validate_data",
                 "intent": intent,
@@ -63,10 +64,14 @@ class DM:
             if self.user_profile["name"] or self.user_profile["surname"]:
                 db_args["user"] = self.user_profile
 
+            print(f"DEBUG DM Prepared DB Args: {db_args}")
             return db_args
+        
+        print("DEBUG DM No new values to validate, no DB query prepared.")
         return None
     
     def make_dm_decision(self, dst_output, db_result=None):
+        print("DEBUG DM Making decision. DB Result null?" , db_result is None)
         intent = dst_output["state"]["intent"]
 
         if db_result is not None:
@@ -74,6 +79,7 @@ class DM:
             if normalized_slots:
                 dst_output["state"]["slots"] = normalized_slots
                 dst_output["report"]["new_values"] = []
+                print(f"DEBUG DM Updated slots with normalized values from DB: {normalized_slots}")
 
         # Update internal state
         slots = dst_output["state"]["slots"]
@@ -111,6 +117,7 @@ class DM:
             # - "intent_switch": changed intent, no new slots
             # - "correlated_intent_switch": changed intent, some new slots
             sys_prompt = DM_NO_NEW_VALUES_PROMPT
+            print("DEBUG DM Using NO_NEW_VALUES prompt.")
         else:
             # {
             #   "state": {
@@ -144,8 +151,10 @@ class DM:
 
             if db_result["status"] == "error":
                 sys_prompt = DM_ERROR_PROMPT
+                print("DEBUG DM Using ERROR prompt.")
             else:
                 sys_prompt = DM_SUCCESS_PROMPT
+                print("DEBUG DM Using SUCCESS prompt.")
 
         system_msg = [{"role": "system", "content": sys_prompt}]
         dm_out = self.generate_fn(
