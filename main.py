@@ -5,7 +5,7 @@ from components.NLU import NLU
 from components.DM import DM
 from components.NLG import NLG
 from utils.models import MODELS
-from utils.display import dispaly_conversation
+from utils.display import display_conversation
 from utils.dialogue_state_tracker import StateTracker
 from utils.mock_database import MockDatabase
 
@@ -37,15 +37,15 @@ def main():
 
         # --- STEP 1: NLU (Understand) ---
         nlu_result = nlu.predict(user_input)
-        dispaly_conversation(NLU, user_input, str(nlu_result))
+        display_conversation("NLU (Understand)", user_input, str(nlu_result))
 
         dialogue_state = tracker.update(nlu_result)
         print(f"DEBUG Dialogue State: {dialogue_state}")
 
         # --- STEP 2: DM (Decide) ---
         nba = dm.prepare_db_query(dialogue_state)
-        dispaly_conversation("DM (Decision)", str(dialogue_state), str(nba))
         print(f"DEBUG DM NBA: {nba}")
+        display_conversation("DM (Decision)", str(dialogue_state), str(nba))
 
         if nba.get("nba") == "validate_data":
             # Data validation step
@@ -65,10 +65,11 @@ def main():
         else:
             nba = dm.make_dm_decision(dialogue_state, db_result=None)
 
+        display_conversation("DM (Decide)", str(dialogue_state), str(nba))
         # --- STEP 3: NLG (Respond) ---
         bot_response = nlg.generate_response(nba, user_input)
 
-        dispaly_conversation(NLG, str(nba), bot_response)
+        display_conversation("NLG (Respond)", str(nba), bot_response)
         # print(f"Bot: {bot_response}")
         # messages.append(f"Assistant: {bot_response}")
 
