@@ -45,6 +45,7 @@ def main():
         # --- STEP 2: DM (Decide) ---
         nba = dm.prepare_db_query(dialogue_state)
         dispaly_conversation("DM (Decision)", str(dialogue_state), str(nba))
+        print(f"DEBUG DM NBA: {nba}")
 
         if nba.get("nba") == "validate_data":
             # Data validation step
@@ -58,6 +59,7 @@ def main():
             if nba.get("user"):
                 db_args["user"] = nba.get("user")
 
+            print(f"DEBUG DB Query Args: {db_args}")
             db_result = db.query_database(**db_args)
             nba = dm.make_dm_decision(dialogue_state, db_result=db_result)
         else:

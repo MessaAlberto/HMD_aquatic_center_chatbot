@@ -922,7 +922,7 @@ class MockDatabase:
     def __init__(self):
         pass
 
-    def query_database(intent, slots, slots_to_validate, active_task, user=None):
+    def query_database(self, intent, slots, slots_to_validate, active_task, user=None):
         """
         Perform data normalization and database query / validation based on the intent and slots.
 
