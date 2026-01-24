@@ -380,6 +380,12 @@ def query_opening_hours(slots):
     date_str = slots.get("date")
     time_str = slots.get("time")
 
+    if not date_str and not time_str:
+        return {
+            "status": "success",
+            "message": "Missing: date and time",
+        }
+
     facility_norm = facility.lower().replace(" ", "_")
     if facility_norm not in OPENING_HOURS:
         return {
@@ -418,6 +424,8 @@ def query_opening_hours(slots):
                 is_open = open_t <= check_t <= close_t
         except ValueError:
             is_open = False
+    else:
+        is_open = True
 
     return {
         "status": "success",

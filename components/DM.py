@@ -90,7 +90,7 @@ class DM:
         dst_output["state"]["user"] = self.user_profile
 
         # Choose prompt
-        if db_result is not None:
+        if db_result is None:
             # If db_result is None, then the slots have already been passed to the db and normalized, easy to check (not necessarily all slots filled):
             # {
             #   "state": {
@@ -156,6 +156,7 @@ class DM:
                 sys_prompt = DM_SUCCESS_PROMPT
                 print("DEBUG DM Using SUCCESS prompt.")
 
+        print(f"DEBUG DM DST Output for decision: {dst_output}")
         system_msg = [{"role": "system", "content": sys_prompt}]
         dm_out = self.generate_fn(
             self.model,
