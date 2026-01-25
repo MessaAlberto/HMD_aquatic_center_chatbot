@@ -85,10 +85,10 @@ COURSE_SCHEDULE = {
 
 SHOP_INVENTORY = {
     "goggles": {"price": 15.00, "colors": ["blue", "black", "red", "clear"], "brand": "Speedo"},
-    "swimsuit": {"price": 35.00, "sizes": ["S", "M"], "brand": "Arena"},
-    "towel": {"price": 12.00, "colors": ["white", "blue"], "brand": "Decathlon"},
-    "slippers": {"price": 10.00, "sizes": ["XS", "M", "L", "XL"], "brand": "Adidas"},
-    "cap": {"price": 5.00, "colors": ["red", "blue", "black", "yellow"], "brand": "Arena"}
+    "swimsuit": {"price": 35.00, "colors": ["purple", "black", "red", "white"], "sizes": ["S", "M"], "brand": "Arena"},
+    "towel": {"price": 12.00, "colors": ["white", "blue"], "sizes": ["S", "M"], "brand": "Decathlon"},
+    "slippers": {"price": 10.00, "colors": ["blue", "black", "red"], "sizes": ["XS", "M", "L", "XL"], "brand": "Adidas"},
+    "cap": {"price": 5.00, "colors": ["red", "blue", "black", "yellow"], "sizes": ["S", "M"], "brand": "Arena"}
 }
 
 # Subscription
@@ -207,6 +207,9 @@ def normalize_date(date_str):
 
 
 def get_day_interval(hours_info, day_name):
+    """
+    Given opening hours info and a day name, return the opening interval for that day.
+    """
     if not day_name:
         return None
 
@@ -231,6 +234,28 @@ def get_day_interval(hours_info, day_name):
 def retrieve_matching_bookings(bookings, mapping_old_to_db, normalized_slots):
     matching_bookings = []
 
+    # If all old values are missing, return course_name slots or date and people_count slots
+    all_missing = all(not normalized_slots.get(k) for k in mapping_old_to_db.keys())
+    if all_missing:
+        if "course_activity_old" in mapping_old_to_db:
+            course_list = ", ".join(bookings[i].get("course_activity", "") for i in range(len(bookings)))
+            return None, {
+                "status": "success",
+                "keyword": "booked_list",
+                "slot": "course_activity_old",
+                "info": f"Available courses: {course_list}",
+                "slots": normalized_slots,
+            }
+        if "date_old" in mapping_old_to_db and "people_count_old" in mapping_old_to_db:
+            date_list = ", ".join(bookings[i].get("date", "") for i in range(len(bookings)))
+            return None, {
+                "status": "success",
+                "keyword": "booked_list",
+                "slot": "date_old",
+                "info": f"Available dates: {date_list}",
+                "slots": normalized_slots,
+            }
+
     for booked in bookings:
         all_match = True
         for slot_key, db_key in mapping_old_to_db.items():
@@ -246,29 +271,32 @@ def retrieve_matching_bookings(bookings, mapping_old_to_db, normalized_slots):
     if not matching_bookings:
         return None, {
             "status": "error",
-            "message": f"No matching booking in DB",
-            "slots": normalized_slots
+            "keyword": "not_found",
+            "slot": "course_activity_old" if "course_activity_old" in mapping_old_to_db else "date_old",
         }
     
     if len(matching_bookings) > 1:
         return None, {
             "status": "success",
-            "message": f"Found {len(matching_bookings)} matching booking in DB",
+            "keyword": "booked_list",
+            "slot": "course_activity_old" if "course_activity_old" in mapping_old_to_db else "date_old",
+            "info": "Available bookings: " + ", ".join(b.get("course_activity", "") if "course_activity_old" in mapping_old_to_db else b.get("date", "") for b in matching_bookings),
             "slots": normalized_slots,
-            "matching_bookings": matching_bookings
         }
     
-    # Only one booking matches, proceed with new values
+    # Only one booking matches, proceed to confirmation
     booking_to_modify = matching_bookings[0]
 
     # If old booking not complete, return for confirmation
     missing_old = [k for k in mapping_old_to_db.keys() if not normalized_slots.get(k)]
     if missing_old:
+        normalized_slots.update(booking_to_modify)  # fill in missing old values from booking
         return None, {
             "status": "success",
-            "message": f"Missing: {', '.join(missing_old)}",
+            "keyword": "confirm_old",
+            "info": "Old booking details filled",
             "slots": normalized_slots,
-            "matching_booking": booking_to_modify
+            
         }
     
     return booking_to_modify, None
@@ -383,28 +411,29 @@ def query_opening_hours(slots):
     if not date_str and not time_str:
         return {
             "status": "success",
-            "message": "Missing: date and time",
+            "keyword": "missing",
+            "slot": "date",
         }
 
     facility_norm = facility.lower().replace(" ", "_")
     if facility_norm not in OPENING_HOURS:
         return {
             "status": "error",
-            "message": f"Not found facility in DB"
+            "keyword": "not_found",
+            "slot": "facility_type",
         }
 
     normalized_date, day_name = normalize_date(date_str)
+    if not normalized_date and not day_name:        # could not parse date
+        return {
+            "status": "error",
+            "keyword": "not_understand",
+            "slot": "date",
+        }
     date_display = normalized_date.strftime("%d/%m/%Y") if normalized_date else date_str
 
     hours_info = OPENING_HOURS[facility_norm]
     interval = get_day_interval(hours_info, day_name)
-
-    if not interval:
-        return {
-            "status": "success",
-            "message": f"Fullfilled: closed (allowed: {', '.join(hours_info.keys())})",
-            "slots": {"facility_type": facility_norm, "date": date_display, "time": time_str}
-        }
 
     open_time, close_time = interval.split("-")
     open_t = datetime.strptime(open_time, "%H:%M").time()
@@ -429,45 +458,52 @@ def query_opening_hours(slots):
 
     return {
         "status": "success",
-        "message": f"Fullfilled: {is_open} (allowed: {', '.join(hours_info.keys())})",
+        "keyword": "complete",
+        "result": "open" if is_open else "closed",
+        "info": f"Schedule {interval} {interval}",
         "slots": {"facility_type": facility_norm, "date": date_display, "time": time_str, "notes": hours_info.get("notes")}
     }
 
 
 def query_pricing(slots):
-    facility_raw = slots.get("facility_type")
+    facility_raw = slots.get("facility_type") or "swimming_pool"
     sub_type_raw = slots.get("subscription_type")
     user_cat_raw = slots.get("user_category")
 
-    if not facility_raw:
-        return {
-            "status": "error",
-            "message": "Missing facility."
-        }
-
     facility = facility_raw.lower().replace(" ", "_")
     sub_type = sub_type_raw.lower() if sub_type_raw else None
-    user_cat = user_cat_raw.lower() if user_cat_raw else "adult"
+    user_cat = user_cat_raw.lower() if user_cat_raw else None
 
     if facility not in PRICING:
         return {
             "status": "error",
-            "message": "Not found facility in DB",
+            "keyword": "not_found",
             "slots": {"facility_type": facility_raw, "subscription_type": sub_type_raw, "user_category": user_cat_raw}
         }
 
     available_subs = PRICING[facility]
 
+    # validate subscription type
     if not sub_type or sub_type not in available_subs:
         subs_list = ", ".join(available_subs.keys())
         return {
             "status": "success",
-            "message": f"Fullfilled: available subscriptions: {subs_list}",
+            "keyword": "missing",
+            "slot": "subscription_type",
+            "info": f"Available subscription types: {subs_list}",
             "slots": {"facility_type": facility_raw, "subscription_type": sub_type_raw, "user_category": user_cat_raw}
         }
 
-    if user_cat not in DISCOUNTS:
-        user_cat = "adult"
+    # validate user category
+    if not user_cat or user_cat not in DISCOUNTS:
+        sub_list = ", ".join(DISCOUNTS.keys())
+        return {
+            "status": "success",
+            "keyword": "missing",
+            "slot": "user_category",
+            "info": f"Available user categories: {sub_list}",
+            "slots": {"facility_type": facility_raw, "subscription_type": sub_type_raw, "user_category": user_cat_raw}
+        }
 
     base_price = available_subs[sub_type]
     multiplier = DISCOUNTS[user_cat]
@@ -475,7 +511,8 @@ def query_pricing(slots):
 
     return {
         "status": "success",
-        "message": f"Fullfilled: price is €{final_price:.2f}",
+        "keyword": "complete",
+        "result": f"price is €{final_price:.2f}",
         "slots": {"facility_type": facility_raw, "subscription_type": sub_type_raw, "user_category": user_cat_raw}
     }
 
@@ -483,9 +520,11 @@ def query_pricing(slots):
 def query_rules(slots):
     topic = slots.get("topic")
     if not topic:
+        topic_list = ", ".join(RULES.keys())
         return {
-            "status": "error",
-            "message": f"Not found topic in DB (allowed: {', '.join(RULES.keys())})",
+            "status": "success",
+            "keyword": "missing",
+            "info": f"Available topics: {topic_list}",
             "slots": {"topic": topic}
         }
 
@@ -499,7 +538,8 @@ def query_rules(slots):
             if key_norm == "swimming_cap":
                 return {
                     "status": "success",
-                    "message": f"Fullfilled: {rule}",
+                    "keyword": "complete",
+                    "result": f"{rule}",
                     "slots": {"topic": topic}
                 }
             continue
@@ -508,7 +548,8 @@ def query_rules(slots):
         if topic_norm == key_norm or topic_norm in key_norm or key_norm in topic_norm:
             return {
                 "status": "success",
-                "message": f"Fullfilled: {rule}",
+                "keyword": "complete",
+                "info": f"{rule}",
                 "slots": {"topic": topic}
             }
 
@@ -517,13 +558,15 @@ def query_rules(slots):
             if topic_norm[i:i+4] in key_norm:
                 return {
                     "status": "success",
-                    "message": f"Fullfilled: {rule}",
+                    "keyword": "complete",
+                    "info": f"{rule}",
                     "slots": {"topic": topic}
                 }
 
     return {
-        "status": "error",
-        "message": f"Not found topic in DB (allowed: {', '.join(RULES.keys())})",
+        "status": "success",
+        "keyword": "missing",
+        "info": f"Available topics: {', '.join(RULES.keys())}",
         "slots": {"topic": topic}
     }
 
@@ -534,21 +577,17 @@ def query_user_identification(slots):
 
     if not name or not surname:
         return {
-            "status": "error",
-            "message": f"Missing: {'name and surname' if not name and not surname else 'name' if not name else 'surname'}."
-        }
-
-    user = f"{name.strip().lower()}_{surname.strip().lower()}"
-    if not user:
-        return {
             "status": "success",
-            "message": f"Not found user in DB.",
+            "keyword": "missing",
+            "info": f"Missing: {'name and surname' if not name and not surname else 'name' if not name else 'surname'}.",
             "slots": {"name": name, "surname": surname}
         }
 
+    user = f"{name.strip().lower()}_{surname.strip().lower()}"
+
     return {
         "status": "success",
-        "message": f"Found user: {user}.",
+        "keyword": "complete",
         "slots": {"name": name, "surname": surname}
     }
 
@@ -564,7 +603,9 @@ def query_book_course(slots, slots_to_validate, user):
     if not is_valid:
         return {
             "status": "error",
-            "message": f"'{day_pref}' is not valid for '{course}' (allowed: {', '.join(allowed_days)})",
+            "keyword": "not_valid",
+            "slot": "day_preference",
+            "info": f"Allowed days for {course}: {', '.join(allowed_days)}",
             "slots": normalized_slots
         }
 
@@ -572,9 +613,35 @@ def query_book_course(slots, slots_to_validate, user):
     required_fields = ["course_activity", "target_age", "level", "day_preference"]
     missing_fields = [f for f in required_fields if f not in normalized_slots]
     if missing_fields:
+        if missing_fields[0] == "course_activity":
+            return {
+                "status": "success",
+                "keyword": "missing",
+                "slot": "course_activity",
+                "info": f"Available activities: {', '.join(COURSE_SCHEDULE.keys())}",
+                "slots": normalized_slots,
+            }
+        elif missing_fields[0] == "target_age":
+            return {
+                "status": "success",
+                "keyword": "missing",
+                "slot": "target_age",
+                "info": f"Available: kids, teens, adults",
+                "slots": normalized_slots,
+            }
+        elif missing_fields[0] == "level":
+            return {
+                "status": "success",
+                "keyword": "missing",
+                "slot": "level",
+                "info": f"Available: beginner, intermediate, advanced",
+                "slots": normalized_slots,
+            }
         return {
             "status": "success",
-            "message": f"Missing: {', '.join(missing_fields)}",
+            "keyword": "missing",
+            "slot": "day_preference",
+            "info": f"Available: {', '.join(allowed_days)}",
             "slots": normalized_slots,
         }
 
@@ -592,29 +659,44 @@ def query_book_course(slots, slots_to_validate, user):
             if booked.get("target_age") != normalized_slots.get("target_age"):
                 return {
                     "status": "error",
-                    "message": f"Missmatch: {booked.get("target_age")}(DB) vs {normalized_slots.get("target_age")}(input)",
+                    "keyword": "conflict",
+                    "slot": "target_age",
+                    "result": "mismatch",
+                    "info": f"DB target_age: {booked.get('target_age')}",
                     "slots": normalized_slots
                 }
 
-            # Check overlaps on "course_activity" and "day_preference" with exception for "target_age" and "level"
-            exclude_keys = {"target_age", "level"}
-            overlap = set(booked.keys()).intersection(set(normalized_slots.keys())) - exclude_keys
-            if overlap:
+            # Check overlaps on "course_activity" or "day_preference"
+            if normalized_slots.get("course_activity") == booked.get("course_activity"):
                 return {
                     "status": "error",
-                    "message": f"Overlaps: {', '.join(overlap)}",
+                    "keyword": "conflict",
+                    "slot": "course_activity",
+                    "result": "overlap",
+                    "info": f"Already booked activity: {booked.get('course_activity')} on {booked.get('day_preference')}",
+                    "slots": normalized_slots
+                }
+            if normalized_slots.get("day_preference") == booked.get("day_preference"):
+                return {
+                    "status": "error",
+                    "keyword": "conflict",
+                    "slot": "day_preference",
+                    "result": "overlap",
+                    "info": f"Already booked day: {booked.get('day_preference')} for activity {booked.get('course_activity')}",
                     "slots": normalized_slots
                 }
         return {
             "status": "success",
-            "message": f"Fullfilled book + {user_key}",
+            "keyword": "complete",
+            "info": "ask_confirmation",
             "slots": normalized_slots
         }
 
     # User not in DB, success for complete booking slots
     return {
         "status": "success",
-        "message": f"Fullfilled book + missing user",
+        "keyword": "missing",
+        "slot": "user",
         "slots": normalized_slots
     }
 
@@ -628,17 +710,49 @@ def query_book_spa(slots, slots_to_validate, user):
     if not is_valid:
         return {
             "status": "error",
-            "message": f"'{normalized_slots.get('time_new')}' not valid for 'spa' (allowed: {OPENING_HOURS['spa']['Mon-Sun']})",
+            "keyword": "not_valid",
+            "slot": "time",
+            "info": f"Allowed time range: {OPENING_HOURS['spa']['Mon-Sun']}",
             "slots": normalized_slots
         }
+
+    # Validate people_count
+    people_count = normalized_slots.get("people_count")
+    if people_count:
+        try:
+            count = int(people_count)
+            if count > 8:
+                return {
+                    "status": "error",
+                    "keyword": "not_valid",
+                    "slot": "people_count",
+                    "info": f"Allowed max people_count: 8",
+                    "slots": normalized_slots
+                }
+        except ValueError:
+            return {
+                "status": "error",
+                "keyword": "not_understand",
+                "slot": "people_count",
+                "slots": normalized_slots
+            }
 
     # Check completeness
     required_fields = ["date", "time", "people_count"]
     missing_fields = [f for f in required_fields if f not in normalized_slots]
     if missing_fields:
+        if missing_fields[0] == "time":
+            return {
+                "status": "success",
+                "keyword": "missing",
+                "slot": "time",
+                "info": f"Available time range: {OPENING_HOURS['spa']['Mon-Sun']}",
+                "slots": normalized_slots,
+            }
         return {
             "status": "success",
-            "message": f"Missing: {', '.join(missing_fields)}",
+            "keyword": "missing",
+            "slot": f"{missing_fields[0]}",
             "slots": normalized_slots,
         }
 
@@ -653,23 +767,27 @@ def query_book_spa(slots, slots_to_validate, user):
 
         for booked in bookings:
             # Check overlaps only on date
-            overlap = set(booked.keys()).intersection(set(normalized_slots.keys())).intersection({"date"})
-            if overlap:
+            if normalized_slots.get("date") == booked.get("date"):
                 return {
                     "status": "error",
-                    "message": f"Overlaps: {booked.get('date')}",
+                    "keyword": "conflict",
+                    "slot": "date",
+                    "result": "overlap",
+                    "info": f"Already booked spa on: {booked.get('date')} for {booked.get('people_count')}",
                     "slots": normalized_slots
                 }
         return {
             "status": "success",
-            "message": f"Fullfilled book + {user_key}",
+            "keyword": "complete",
+            "info": "ask_confirmation",
             "slots": normalized_slots
         }
 
     # User not in DB, success for complete booking slots
     return {
         "status": "success",
-        "message": f"Fullfilled book + missing user",
+        "keyword": "missing",
+        "slot": "user",
         "slots": normalized_slots
     }
 
@@ -677,22 +795,27 @@ def query_book_spa(slots, slots_to_validate, user):
 def query_modify_book_course(slots, slots_to_validate, user):
     if not user:
         return {
-            "status": "error",
-            "message": "Missing: user"
+            "status": "success",
+            "keyword": "missing",
+            "slot": "user"
         }
 
     user_key = get_user_key(user.get("name"), user.get("surname"))
     if user_key not in USERS_DB:
         return {
             "status": "error",
-            "message": f"Not found user in DB: {user_key}"
+            "keyword": "not_found",
+            "slot": "user",
+            "result": "not_found"
         }
 
     bookings = USERS_DB[user_key].get("booked_courses", [])
     if not bookings:
         return {
             "status": "error",
-            "message": "Not booked courses found in DB"
+            "keyword": "not_found",
+            "slot": "course_activity_old",
+            "result": "not_found"
         }
 
     # Normalize old and new values
@@ -710,6 +833,24 @@ def query_modify_book_course(slots, slots_to_validate, user):
     if booking_to_modify is None:
         return error_return
 
+    # If all new values are same as old, ask for at least one modification
+    all_new_same_as_old = True
+    for new_key, old_key in mapping_old_to_db.items():
+        new_value = normalized_slots.get(new_key)
+        old_value = booking_to_modify.get(old_key)
+        if new_value and new_value.lower() != old_value.lower():
+            all_new_same_as_old = False
+            break
+
+    if all_new_same_as_old:
+        return {
+            "status": "error",
+            "keyword": "not_modified",
+            "slot": [normalized_slots["course_activity_old"], normalized_slots["level_old"], normalized_slots["day_preference_old"]],
+            "info": f"Ask for at least one modification",
+            "slots": normalized_slots
+        }
+
     # Validate day_preference_new on course_activity_new
     course_new = normalized_slots.get("course_activity_new")
     day_new = normalized_slots.get("day_preference_new")
@@ -717,49 +858,45 @@ def query_modify_book_course(slots, slots_to_validate, user):
     if not is_valid:
         return {
             "status": "error",
-            "message": f"'{day_new}' is not valid for '{course_new}' (allowed: {', '.join(allowed_days)})",
+            "keyword": "not_valid",
+            "slot": "day_preference_new",
+            "info": f"Allowed days for {course_new}: {', '.join(allowed_days)}",
             "slots": normalized_slots
         }
 
-    # Check new values
-    new_keys = ["course_activity_new", "target_age_new", "level_new", "day_preference_new"]
-    missing_new = [k for k in new_keys if not normalized_slots.get(k)]
-    if missing_new:
-        return {
-            "status": "success",
-            "message": f"Missing: {', '.join(missing_new)}",
-            "slots": normalized_slots,
-            "matching_booking": booking_to_modify
-        }
-
-    # All new values present and valid
+    # At least one modification present
     return {
         "status": "success",
-        "message": f"Fullfilled modification + {user_key}",
+        "keyword": "complete",
+        "info": "modify_or_confirm",
         "slots": normalized_slots,
-        "matching_booking": booking_to_modify
     }
 
 
 def query_modify_book_spa(slots, slots_to_validate, user):
     if not user:
         return {
-            "status": "error",
-            "message": "Missing: user"
+            "status": "success",
+            "keyword": "missing",
+            "slot": "user"
         }
 
     user_key = get_user_key(user.get("name"), user.get("surname"))
     if user_key not in USERS_DB:
         return {
             "status": "error",
-            "message": f"Not found user in DB: {user_key}"
+            "keyword": "not_found",
+            "slot": "user",
+            "result": "not_found"
         }
 
     bookings = USERS_DB[user_key].get("booked_spa", [])
     if not bookings:
         return {
             "status": "error",
-            "message": f"Not booked spa found in DB"
+            "keyword": "not_found",
+            "slot": "spa",
+            "result": "not_found"
         }
 
     # Normalize old and new values
@@ -776,33 +913,42 @@ def query_modify_book_spa(slots, slots_to_validate, user):
     if booking_to_modify is None:
         return error_return
 
+    # If all new values are same as old, ask for at least one modification
+    all_new_same_as_old = True
+    for new_key, old_key in mapping_old_to_db.items():
+        new_value = normalized_slots.get(new_key)
+        old_value = booking_to_modify.get(old_key)
+        if new_value and new_value.lower() != old_value.lower():
+            all_new_same_as_old = False
+            break
+
+    if all_new_same_as_old:
+        return {
+            "status": "error",
+            "keyword": "not_modified",
+            "slot": [normalized_slots["date_old"], normalized_slots["time_old"], normalized_slots["people_count_old"]],
+            "info": f"Ask for at least one modification",
+            "slots": normalized_slots
+        }
+
     # Validate new time slot
     if normalized_slots.get("time_new"):
         is_valid = validate_time_in_range(normalized_slots.get("time_new"))
         if not is_valid:
             return {
                 "status": "error",
-                "message": f"'{normalized_slots.get('time_new')}' not valid for 'spa' (allowed: {OPENING_HOURS['spa']['Mon-Sun']})",
+                "keyword": "not_valid",
+                "slot": "time_new",
+                "info": f"Allowed times for spa: {OPENING_HOURS['spa']['Mon-Sun']}",
                 "slots": normalized_slots
             }
 
-    # Check new values
-    new_keys = ["date_new", "time_new", "people_count_new"]
-    missing_new = [k for k in new_keys if not normalized_slots.get(k)]
-    if missing_new:
-        return {
-            "status": "success",
-            "message": f"Missing: {', '.join(missing_new)}",
-            "slots": normalized_slots,
-            "matching_booking": booking_to_modify
-        }
-
-    # All new values present and valid
+    # At least one modification present
     return {
         "status": "success",
-        "message": f"Fullfilled modification + {user_key}",
+        "keyword": "complete",
+        "info": "modify_or_confirm",
         "slots": normalized_slots,
-        "matching_booking": booking_to_modify
     }
 
 
@@ -821,55 +967,78 @@ def query_buy_equipment(slots, slots_to_validate):
 
     if not item or item not in SHOP_INVENTORY:
         return {
-            "status": "error",
-            "message": f"Missing: item (available: {', '.join(SHOP_INVENTORY.keys())})",
+            "status": "success",
+            "keyword": "missing",
+            "slot": "item",
+            "info": f"Available items: {', '.join(SHOP_INVENTORY.keys())}",
             "slots": normalize_slots
         }
 
     product = SHOP_INVENTORY[item]
 
-    # Brand check (if provided)
-    if brand and "brand" in product and brand != product["brand"].lower():
-        return {
-            "status": "error",
-            "message": f"Brand not available (allowed: {product['brand']})",
-            "slots": normalize_slots
-        }
-
     # Color check (if provided)
     if color:
-        if "colors" not in product:
-            return {
-                "status": "error",
-                "message": "Color options not available",
-                "slots": normalize_slots
-            }
         if color not in product["colors"]:
             return {
                 "status": "error",
-                "message": f"Color not available (allowed: {product['colors']})",
+                "keyword": "not_valid",
+                "slot": "color",
+                "info": f"Available colors for {item}: {', '.join(product['colors'])}",
                 "slots": normalize_slots
             }
+    else:
+        return {
+            "status": "success",
+            "keyword": "missing",
+            "slot": "color",
+            "info": f"Available colors for {item}: {', '.join(product['colors'])}",
+            "slots": normalize_slots,
+        }
 
     # Size check (if provided)
-    if size:
-        if "sizes" not in product:
+    if item != "goggles":  # goggles have no size
+        if size:
+            if size not in product["sizes"]:
+                return {
+                    "status": "error",
+                    "keyword": "not_valid",
+                    "slot": "size",
+                    "info": f"Available sizes for {item}: {', '.join(product['sizes'])}",
+                    "slots": normalize_slots
+                }
+        else:
+            return {
+                "status": "success",
+                "keyword": "missing",
+                "slot": "size",
+                "info": f"Available sizes for {item}: {', '.join(product['sizes'])}",
+                "slots": normalize_slots,
+            }
+
+    # Brand check (if provided)
+    if brand:
+        if brand != product["brand"].lower():
             return {
                 "status": "error",
-                "message": "Size options not available",
+                "keyword": "not_valid",
+                "slot": "brand",
+                "info": f"Available brand for {item}: {product['brand']}",
                 "slots": normalize_slots
             }
-        if size not in product["sizes"]:
+        else:
             return {
-                "status": "error",
-                "message": f"Size not available (allowed: {product['sizes']})",
-                "slots": normalize_slots
+                "status": "success",
+                "keyword": "missing",
+                "slot": "brand",
+                "info": f"Available brand for {item}: {product['brand']}",
+                "slots": normalize_slots,
             }
 
     # Success
     return {
         "status": "success",
-        "message": f"Fullfilled: price €{product['price']:.2f}",
+        "keyword": "complete",
+        "info": f"Price is €{product['price']:.2f}",
         "slots": normalize_slots
     }
 
@@ -877,15 +1046,9 @@ def query_buy_equipment(slots, slots_to_validate):
 def query_report_lost_item(slots, slots_to_validate, user):
     if not user:
         return {
-            "status": "error",
-            "message": "Missing user"
-        }
-
-    user_key = get_user_key(user.get("name"), user.get("surname"))
-    if user_key not in USERS_DB:
-        return {
-            "status": "error",
-            "message": "Not found user in DB"
+            "status": "success",
+            "keyword": "missing",
+            "slot": "user"
         }
 
     # Normalize input slots
@@ -897,31 +1060,37 @@ def query_report_lost_item(slots, slots_to_validate, user):
     if missing:
         return {
             "status": "success",
-            "message": f"Missing values: {', '.join(missing)}",
+            "keyword": "missing",
+            "slot": missing[0],
             "slots": normalized_slots
         }
 
-    lost_items = USERS_DB[user_key].get("lost_items", [])
+    # If user already exist, check if already reported
+    user_key = get_user_key(user.get("name"), user.get("surname"))
+    if user_key in USERS_DB:
+        lost_items = USERS_DB[user_key].get("lost_items", [])
 
-    # Check for duplicate report
-    for lost in lost_items:
-        all_match = True
-        for key in required_keys:
-            if normalized_slots.get(key).lower() != lost.get(key, "").lower():
-                all_match = False
-                break
+        # Check for duplicate report
+        for lost in lost_items:
+            all_match = True
+            for key in required_keys:
+                if normalized_slots.get(key).lower() != lost.get(key, "").lower():
+                    all_match = False
+                    break
 
-        if all_match:
-            return {
-                "status": "error",
-                "message": "Overlap: identical report",
-                "slots": normalized_slots
-            }
+            if all_match:
+                return {
+                    "status": "error",
+                    "keyword": "conflict",
+                    "slot": "item",
+                    "info": f"Item already reported lost: {normalized_slots.get('item')} on {normalized_slots.get('date_lost')}",
+                    "slots": normalized_slots
+                }
 
     # New valid report
     return {
         "status": "success",
-        "message": "Fullfilled report lost item",
+        "keyword": "complete",
         "slots": normalized_slots
     }
 

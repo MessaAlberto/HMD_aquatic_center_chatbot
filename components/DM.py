@@ -133,14 +133,15 @@ class DM:
             #       }
             #   },
             #   "report": {
-            #       "status": "success",
-            #       "message": "Fullfilled: book_course",
-            #       "matching_booking": { ... }
+            #       "keyword": "missing",
+            #       "slot": "size",
+            #       "result": null,
+            #       "info": "Available sizes for swimsuit: small, medium, large",
             #   }
             # }
             dst_output["report"] = {
                 k: db_result[k]
-                for k in ["status", "message", "matching_booking"]
+                for k in ["keyword", "slot", "result", "info"]
                 if k in db_result
             }
 
