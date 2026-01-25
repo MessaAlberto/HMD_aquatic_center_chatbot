@@ -1,5 +1,5 @@
 import json
-from prompts import NLU_INTENT_PROMPT
+from prompts import NLU_INTENT_PROMPT, NLU_CONTEXT_INSTRUCTION
 
 class NLU:
     def __init__(self, model, tokenizer, generate_fn):
@@ -10,8 +10,19 @@ class NLU:
     def clean_slot_values(self, slots: dict):
         return {k: (None if v in ["null", "None", ""] else v) for k, v in slots.items()}
 
-    def predict(self, user_input):
-        system_msg = [{"role": "system", "content": NLU_INTENT_PROMPT}]
+    def predict(self, user_input, history):
+        # Get last system action and corresponding flag
+        last_system_msg = history.get_last_bot_message() or "None"
+        flag = history.get_flag() or "None"
+
+        # Prepare context-aware instruction
+        context_instruction = NLU_CONTEXT_INSTRUCTION.format(
+            system_last_msg=last_system_msg,
+            flag_instruction=flag
+        )
+
+        full_content = context_instruction + "\n\n" + NLU_INTENT_PROMPT
+        system_msg = [{"role": "system", "content": full_content}]
         
         nlu_out = self.generate_fn(
             self.model,
@@ -19,6 +30,8 @@ class NLU:
             system_msg,
             user_input)
         
+        print(f"DEBUG NLU Context Flag: {flag}")
+        print(f"DEBUG NLU Context Instruction: {context_instruction}")
         print(f"DEBUG NLU Output: {nlu_out}")
         
         # Clean and parse JSON output

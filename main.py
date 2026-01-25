@@ -8,6 +8,7 @@ from utils.models import MODELS
 from utils.display import display_conversation
 from utils.dialogue_state_tracker import StateTracker
 from utils.mock_database import MockDatabase
+from utils.history import History
 
 
 def main():
@@ -26,6 +27,7 @@ def main():
     
     tracker = StateTracker()
     db = MockDatabase()
+    history = History()
 
     print("Chatbot is ready! Type 'exit' to quit.")
 
@@ -35,8 +37,10 @@ def main():
             print("Bot: Goodbye!")
             break
 
+        history.add_message("user", user_input)
+
         # --- STEP 1: NLU (Understand) ---
-        nlu_result = nlu.predict(user_input)
+        nlu_result = nlu.predict(user_input, history)
         display_conversation([{"role": "system", "content": "NLU (Understand)"}], user_input, str(nlu_result))
 
         dialogue_state = tracker.update(nlu_result)
@@ -66,8 +70,16 @@ def main():
             nba = dm.make_dm_decision(dialogue_state, db_result=None)
 
         display_conversation([{"role": "system", "content": "DM (Decide)"}], str(dialogue_state), str(nba))
+
+        final_action = nba.get("action")
+        history.add_message("system", final_action)
+        history.set_last_system_action(final_action)
+        history.set_flag(final_action)
+
         # --- STEP 3: NLG (Respond) ---
         bot_response = nlg.generate_response(nba, user_input)
+
+        history.add_message("system", bot_response)
 
         display_conversation([{"role": "system", "content": "NLG (Respond)"}], str(nba), bot_response)
         # print(f"Bot: {bot_response}")
