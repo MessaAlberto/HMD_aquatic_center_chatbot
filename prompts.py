@@ -13,7 +13,7 @@ NLU_CONTEXT_INSTRUCTION = """
 ### CONTEXT AWARENESS (CRITICAL):
 The previous system message was: "{system_last_msg}"
 The system expects: {flag_instruction}
-The active task is different from current intent, it's a more big intent at (dialogue state) and not as single response as current intent is: {active_task}
+The Current Active Task (underlying intent) is: {active_task}
 
 If the user replies briefly (e.g., "Yes", "No", "The first one", "Mario"), INTERPRET it based on the expected flag.
 
@@ -348,26 +348,29 @@ Output:
 
 DM_SUCCESS_PROMPT = """
 You are the Decision Maker (DM).
+Use this prompt ONLY when Report["status"] == "success".
 
 Your goal is to map database reports to a UNIFIED ACTION SCHEMA for the NLG.
-Analyze the 'keyword', 'slot', and 'info' fields in the Report.
 
 ### INPUT STRUCTURE
-The input is a JSON object containing:
-- State: The current dialogue state.
-- Report: A dictionary with:
+- **State**: The current dialogue state (contains ALL slots, some might be null).
+- **Report**: The SPECIFIC instructions from the backend.
     - "keyword": missing, complete, confirm_old, booked_list.
-    - "slot": The specific slot involved.
-    - "info": Hints (e.g., 'ask_confirmation') or list of options.
-    - "result": The computed answer (e.g., 'open', 'price is 10').
+    - "slot": The SPECIFIC slot involved in this turn.
+    - "info": Hints or options.
+
+### CRITICAL RULES (READ CAREFULLY)
+1. **IGNORE THE STATE FOR MISSING DATA:** Do NOT verify if fields in 'State' are null. Only look at **Report["slot"]**.
+2. **PRIORITY:** The `Report` object is the ONLY source of truth for the next action.
+3. If `State["user"]` is null but `Report["slot"]` is "date", you MUST request "date", NOT "user".
 
 ### UNIFIED ACTION SCHEMA
 
 1. **request_identity**
-    - Use when keyword is 'missing' AND slot is 'user'.
+    - Trigger: Keyword is 'missing' AND Report["slot"] == 'user'.
 
 2. **request_slot**
-    - Use when keyword is 'missing' AND slot is NOT 'user'.
+    - Trigger: Keyword is 'missing' AND Report["slot"] != 'user'.
 
 3. **confirm_transaction**
     - Use when keyword is 'complete' AND 'info' asks for confirmation (e.g., 'ask_confirmation', 'modify_or_confirm').
