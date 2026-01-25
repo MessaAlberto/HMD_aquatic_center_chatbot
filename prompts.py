@@ -13,12 +13,21 @@ NLU_CONTEXT_INSTRUCTION = """
 ### CONTEXT AWARENESS (CRITICAL):
 The previous system message was: "{system_last_msg}"
 The system expects: {flag_instruction}
+The active task is different from current intent, it's a more big intent at (dialogue state) and not as single response as current intent is: {active_task}
 
-If the user replies briefly (e.g., "Yes", "The first one", "Mario"), INTERPRET it based on the expected flag.
-- If EXPECT_CONFIRMATION -> "Yes" means intent="confirm" (or fill confirmation slot).
-- If EXPECT_SELECTION -> "The first one" maps to the first option offered.
-- If EXPECT_NAME -> "Mario" fills the name slot.
+If the user replies briefly (e.g., "Yes", "No", "The first one", "Mario"), INTERPRET it based on the expected flag.
+
+- If EXPECT_CONFIRMATION:
+    - "Yes", "Confirm", "OK", "Go ahead" -> Intent: "confirmation_response", Slot: "response": "agree"
+    - "No", "Cancel", "Stop" -> Intent: "confirmation_response", Slot: "response": "deny"
+    
+- If EXPECT_SELECTION:
+    - "The first one", "Option A" -> Map to the specific slot offered (e.g., if offering courses, fill "course_activity").
+    
+- If EXPECT_NAME:
+    - "Mario", "It's me" -> Intent: "user_identification", fill "name".
 """
+
 
 NLU_INTENT_PROMPT = """
 Identify the user's intent and extract the relevant entities (slots) based strictly on the schema below.
@@ -113,23 +122,40 @@ Output EXCLUSIVELY in JSON format.
         - date_lost (Example: yesterday, 19/02/2026)
     - Description: User reports a lost object.
 
-11. **out_of_scope**
+11. **confirmation_response** (Flow Control)
+    - Slots:
+        - response (Allowed: [agree, deny])
+        - ANY other slot from other intents if mentioned (e.g., date, time, course_activity)
+    - Description: Use ONLY when the system has explicitly asked for a confirmation (yes/no). IMPORTANT: If the user modifies something (e.g., "No, I want Monday"), extract 'deny' AND the new slot value with key reference to the active task intent (if "active task" == "modify_booked_course" -> slot is "day_preference": Monday; if "active task" == "modify_booked_spa" -> slot is "date": Monday).
+
+11. **confirmation_response** (Flow Control)
+    - Slots:
+        - response (Allowed: [agree, deny])
+        - [Dynamic Slots]: Extract any other slot mentioned ONLY by the user that is relevant to the *Active Task*.
+    - Description: Use ONLY when the system has explicitly asked for a confirmation (EXPECT_CONFIRMATION).
+    - **CRITICAL** if Active task is "modify_booked_course/spa", try to understand if user intent an "_old" or "_new" slot based on the context of the modification.
+
+12. **out_of_scope**
     - Description: Chit-chat or unrelated topics. Output {"intent": "out_of_scope", "slots": {}}.
 
 ### Examples:
 
 User: "I would like to sign up for the aquagym course for adults on Monday."
-JSON: {{"intent": "book_course", "slots": {"course_activity": "aquagym", "target_age": "adults", "day_preference": "Monday", "level": null}}
+JSON: {"intent": "book_course", "slots": {"course_activity": "aquagym", "target_age": "adults", "day_preference": "Monday", "level": null}}
 
-User: "I lost my red goggles in the changing room yesterday."
-JSON: {"intent": "report_lost_item", "slots": {"item": "goggles", "item_color": "red", "location": "changing room", "date_lost": "yesterday"}}
+Previous system message: "Do you confirm your booking for aquagym on Monday?"
+User: "Yes, that's correct." (Context: System asked to confirm)
+JSON: {"intent": "confirmation_response", "slots": {"response": "agree"}}
 
-User: "Can you change my spa booking from 4 to 2 people move it on next Wednesday?"
-JSON: {"intent": "modify_booked_spa", "slots": {"people_count_old": "4", "people_count_new": "2", "date_new": "Wednesday", "date_old": null, "time_old": null, "time_new": null}}
+Previous system message: "Do you confirm changing your swimming school from Monday to Tuesday?"
+Active Task: booked_course
+User: "No, change the day to Friday."
+JSON: {"intent": "confirmation_response", "slots": {"response": "deny", "day_preference": "Friday"}}
 
 User: "Hi, how are you?"
 JSON: {"intent": "out_of_scope", "slots": {}}
 """
+
 
 DM_NO_NEW_VALUES_PROMPT = """
 You are the Decision Maker (DM).
@@ -346,7 +372,7 @@ The input is a JSON object containing:
 3. **confirm_transaction**
     - Use when keyword is 'complete' AND 'info' asks for confirmation (e.g., 'ask_confirmation', 'modify_or_confirm').
 
-4. **confirm_modification**
+4. **confirm_old_values**
     - Use when keyword is 'confirm_old'. Checks old values before modifying.
 
 5. **inform_answer**
@@ -372,15 +398,15 @@ The input is a JSON object containing:
     - IF Report["info"] contains "ask_confirmation" OR "modify_or_confirm":
         -> action: "confirm_transaction"
         -> target_slot: null (the NLG will use current slots from state)
-        -> info: null
+        -> info: "ask_confirmation" or "modify_or_confirm"
     - ELSE:
         -> action: "inform_answer"
         -> target_slot: null
         -> info: Use Report["result"] if present, otherwise use Report["info"]
 
 3. IF keyword is "confirm_old":
-    -> action: "confirm_modification"
-    -> target_slot: "old_values"
+    -> action: "confirm_old_values"
+    -> target_slot: slots that end with "_old"
     -> info: Report["info"]
 
 4. IF keyword is "booked_list":
@@ -411,7 +437,7 @@ Output:
 {
     "action": "confirm_transaction",
     "target_slot": null,
-    "info": null
+    "info": "ask_confirmation"
 }
 
 Input Report: { "keyword": "booked_list", "slot": "course_activity_old", "info": "Available bookings: swimming_school, aquagym" }
@@ -454,8 +480,8 @@ Your task is to generate a response in ENGLISH based on the provided instruction
    - **Goal**: Ask the user for final confirmation to proceed with the booking or action.
    - **Context**: Assume the user has provided all necessary details.
 
-**4. ACTION: confirm_modification**
-   - **Goal**: Ask if the user wants to update the *old* values (indicated in `target_slot`) with new ones.
+**4. ACTION: confirm_old_values**
+   - **Goal**: Ask if the user wants to update the *old* values (indicated in `info`) with new ones.
 
 **5. ACTION: reject_value / notify_conflict**
    - **Goal**: Politely inform the user that their input for `target_slot` cannot be accepted.

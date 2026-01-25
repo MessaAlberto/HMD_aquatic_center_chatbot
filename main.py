@@ -47,7 +47,8 @@ def main():
         print(f"DEBUG Dialogue State: {dialogue_state}")
 
         # --- STEP 2: DM (Decide) ---
-        nba = dm.prepare_db_query(dialogue_state)
+        nba, active_task = dm.prepare_db_query(dialogue_state)
+        history.set_active_task(active_task)
         print(f"DEBUG DM NBA: {nba}")
         display_conversation([{"role": "system", "content": "DM (Decision)"}], str(dialogue_state), str(nba))
 
@@ -82,8 +83,6 @@ def main():
         history.add_message("system", bot_response)
 
         display_conversation([{"role": "system", "content": "NLG (Respond)"}], str(nba), bot_response)
-        # print(f"Bot: {bot_response}")
-        # messages.append(f"Assistant: {bot_response}")
 
 
 if __name__ == "__main__":

@@ -294,7 +294,7 @@ def retrieve_matching_bookings(bookings, mapping_old_to_db, normalized_slots):
         return None, {
             "status": "success",
             "keyword": "confirm_old",
-            "info": "Old booking details filled",
+            "info": f"Old booking details: " + ", ".join(f"{k}: {booking_to_modify.get(v, '')}" for k, v in mapping_old_to_db.items()),
             "slots": normalized_slots,
             
         }
@@ -844,8 +844,8 @@ def query_modify_book_course(slots, slots_to_validate, user):
 
     if all_new_same_as_old:
         return {
-            "status": "error",
-            "keyword": "not_modified",
+            "status": "success",
+            "keyword": "missing",
             "slot": [normalized_slots["course_activity_old"], normalized_slots["level_old"], normalized_slots["day_preference_old"]],
             "info": f"Ask for at least one modification",
             "slots": normalized_slots
@@ -924,8 +924,8 @@ def query_modify_book_spa(slots, slots_to_validate, user):
 
     if all_new_same_as_old:
         return {
-            "status": "error",
-            "keyword": "not_modified",
+            "status": "success",
+            "keyword": "missing",
             "slot": [normalized_slots["date_old"], normalized_slots["time_old"], normalized_slots["people_count_old"]],
             "info": f"Ask for at least one modification",
             "slots": normalized_slots

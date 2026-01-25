@@ -18,7 +18,6 @@ class DM:
             "intent": None,
             "slots": {},
             "slots_to_validate": [],
-            "status": "idle"  # idle, filling, ready_to_confirm, confirmed
         }
 
     def update_internal_state(self, intent, slots, new_values):
@@ -34,15 +33,69 @@ class DM:
             new_values = self.active_task["slots_to_validate"]    # new_values "name" or "surname" are overwritten
             return
 
+        if intent == "confirmation_response":
+            # Update new_values and slots of active task based on confirmation response
+            if self.active_task["intent"] in ["modify_booked_course", "modify_booked_spa"]:
+                if slots.get("response") == "agree":    # User confirmed old values
+                    if self.active_task["intent"] == "modify_booked_course":
+                        new_key_list = ["course_activity_new", "target_age_new", "day_preference_new", "level_new"]
+                    else:
+                        new_key_list = ["date_new", "time_new", "people_count_new"]
+
+                    # Merge slots into active task slots
+                    for key in slots:
+                        if key != "response":
+                            self.active_task["slots"][key] = slots[key]
+                            if key not in new_values:
+                                new_values.append(key)
+
+                    # If in new_key_list are all None, copy old values
+                    all_none = True
+                    for key in new_key_list:
+                        if self.active_task["slots"].get(key) is not None:
+                            all_none = False
+                            break
+                    print(f"DEBUG DM active_task slots: {self.active_task['slots']}")
+                    print(f"DEBUG DM slots and new_values: {slots}, {new_values}")
+                    if all_none:
+                        # Copy old values to new keys
+                        for key in new_key_list:
+                            old_key = key.replace("_new", "_old")
+                            self.active_task["slots"][key] = self.active_task["slots"].get(old_key, None)
+                            if key not in new_values:
+                                new_values.append(key)
+                    else:
+                        for key in new_key_list:
+                            if self.active_task["slots"].get(key) is None:
+                                # Copy old values to new keys
+                                old_key = key.replace("_new", "_old")
+                                self.active_task["slots"][key] = self.active_task["slots"].get(old_key, None)
+                                if old_key not in new_values:
+                                    new_values.append(old_key)
+                    # if not new_value:
+                    #     # Copy old values to new keys
+                    #     for key in new_key_list:
+                    #         old_key = key.replace("_new", "_old")
+                    #         slots[key] = self.active_task["slots"].get(old_key, None)
+                    #         if old_key not in new_values:
+                    #             new_values.append(old_key)
+
+                else:
+                    # TODO
+                    print("DEBUG DM User denied confirmation, no changes applied yet.")
+            # remove from new_values the "response" slot
+            if "response" in new_values:
+                new_values.remove("response")
+
+            # cahnge intent and slots with active task
+            intent = self.active_task["intent"]
+            slots = self.active_task["slots"]
+            return
+
         # Update active task
         self.active_task["intent"] = intent
         self.active_task["slots"].update(slots)
         self.active_task["slots_to_validate"] = new_values
-        if all(value is not None for value in self.active_task["slots"].values()):
-            self.active_task["status"] = "ready_to_confirm"
-        else:
-            self.active_task["status"] = "filling"
-
 
     def prepare_db_query(self, dst_output):
         intent = dst_output["state"]["intent"]
@@ -65,13 +118,18 @@ class DM:
                 db_args["user"] = self.user_profile
 
             print(f"DEBUG DM Prepared DB Args: {db_args}")
-            return db_args
-        
+            return db_args, self.active_task["intent"]
+
         print("DEBUG DM No new values to validate, no DB query prepared.")
-        return None
-    
+        return {
+            "nba": "no_validation_needed",
+            "intent": intent,
+            "slots": slots,
+            "active_task": self.active_task,
+        }
+
     def make_dm_decision(self, dst_output, db_result=None):
-        print("DEBUG DM Making decision. DB Result null?" , db_result is None)
+        print("DEBUG DM Making decision. DB Result null?", db_result is None)
         intent = dst_output["state"]["intent"]
 
         if db_result is not None:
@@ -145,17 +203,17 @@ class DM:
                 if k in db_result
             }
 
-            # Special handling: if intent is "user_identification" but active task is something else, revert intent to active task becuase slots belong to that
-            if dst_output["state"]["intent"] == "user_identification":
-                if self.active_task["intent"] in ["book_course", "book_spa", "modify_course_booking", "modify_spa_booking"]:
-                    dst_output["state"]["intent"] = self.active_task["intent"]
-
             if db_result["status"] == "error":
                 sys_prompt = DM_ERROR_PROMPT
                 print("DEBUG DM Using ERROR prompt.")
             else:
                 sys_prompt = DM_SUCCESS_PROMPT
                 print("DEBUG DM Using SUCCESS prompt.")
+
+        # Special handling: if intent is "user_identification" but active task is something else, revert intent to active task becuase slots belong to that
+        if dst_output["state"]["intent"] == "user_identification":
+            if self.active_task["intent"] in ["book_course", "book_spa", "modify_course_booking", "modify_spa_booking", "report_lost_item"]:
+                dst_output["state"]["intent"] = self.active_task["intent"]
 
         print(f"DEBUG DM DST Output for decision: {dst_output}")
         system_msg = [{"role": "system", "content": sys_prompt}]

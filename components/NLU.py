@@ -14,11 +14,13 @@ class NLU:
         # Get last system action and corresponding flag
         last_system_msg = history.get_last_bot_message() or "None"
         flag = history.get_flag() or "None"
+        active_task = history.get_active_task() or "None"
 
         # Prepare context-aware instruction
         context_instruction = NLU_CONTEXT_INSTRUCTION.format(
             system_last_msg=last_system_msg,
-            flag_instruction=flag
+            flag_instruction=flag,
+            active_task=active_task
         )
 
         full_content = context_instruction + "\n\n" + NLU_INTENT_PROMPT

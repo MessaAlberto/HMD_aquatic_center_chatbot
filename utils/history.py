@@ -1,6 +1,6 @@
 FLAG_ACTION_MAP = {
     "confirm_transaction": "EXPECT_CONFIRMATION",
-    "confirm_modification": "EXPECT_CONFIRMATION",
+    "confirm_old_values": "EXPECT_CONFIRMATION",
     "offer_chioces": "EXPECT_SELECTION",
     "request_identity": "EXPECT_NAME SURNAME",
     "request_slot": "EXPECT_SLOT_VALUE",
@@ -11,6 +11,7 @@ class History():
     def __init__(self):
         self.messages = []
         self.last_system_action = None
+        self.active_task = None
         self.flag = None
 
     def add_message(self, role, content):
@@ -33,6 +34,12 @@ class History():
 
     def get_last_system_action(self):
         return self.last_system_action
+    
+    def set_active_task(self, task):
+        self.active_task = task
+
+    def get_active_task(self):
+        return self.active_task
     
     def set_flag(self, action):
         self.flag = FLAG_ACTION_MAP.get(action, None)

@@ -1,6 +1,4 @@
 import copy
-from utils.mock_database import COURSE_SCHEDULE, SHOP_INVENTORY, normalize_date
-
 
 class StateTracker:
     def __init__(self):
