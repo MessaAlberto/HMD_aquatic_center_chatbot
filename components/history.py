@@ -1,12 +1,3 @@
-FLAG_ACTION_MAP = {
-    "confirm_transaction": "EXPECT_CONFIRMATION",
-    "confirm_old_values": "EXPECT_CONFIRMATION",
-    "offer_chioces": "EXPECT_SELECTION",
-    "request_identity": "EXPECT_NAME SURNAME",
-    "request_slot": "EXPECT_SLOT_VALUE",
-}
-
-
 class History():
     def __init__(self):
         self.messages = []
@@ -46,3 +37,8 @@ class History():
 
     def get_flag(self):
         return self.flag
+
+    def get_last_n_messages(self, n=4):
+        if n <= 0:
+            return []
+        return self.messages[-n:]

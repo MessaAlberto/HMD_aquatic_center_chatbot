@@ -1,5 +1,12 @@
 import json
-from prompts import NLU_INTENT_PROMPT, NLU_CONTEXT_INSTRUCTION
+import re
+
+from prompts.nlu_prompt import (
+    NLU_CONTEXT,
+    NLU_PROMPT_V2,
+    ONE_SHOT_EXAMPLE
+)
+
 
 class NLU:
     def __init__(self, model, tokenizer, generate_fn):
@@ -7,48 +14,38 @@ class NLU:
         self.tokenizer = tokenizer
         self.generate_fn = generate_fn
 
-    def clean_slot_values(self, slots: dict):
-        return {k: (None if v in ["null", "None", ""] else v) for k, v in slots.items()}
+    def parse_llm_json(self, text: str) -> dict:
+        """Estrazione robusta del JSON tramite Regex."""
+        try:
+            return json.loads(text)
+        except Exception:
+            pattern = r"```json\s*(.*?)\s*```"
+            match = re.search(pattern, text, re.DOTALL)
+            if match:
+                try:
+                    return json.loads(match.group(1))
+                except Exception:
+                    pass
+            return {"intent": "out_of_scope", "slots": {}}
 
-    def predict(self, user_input, history):
-        # Get last system action and corresponding flag
-        last_system_msg = history.get_last_bot_message() or "None"
-        flag = history.get_flag() or "None"
-        active_task = history.get_active_task() or "None"
+    def predict(self, history):
+        # Assemblaggio del Prompt: v2_one_shot
+        intent_prompt = f"{NLU_CONTEXT}\n{NLU_PROMPT_V2}\n{ONE_SHOT_EXAMPLE}"
 
-        # Prepare context-aware instruction
-        context_instruction = NLU_CONTEXT_INSTRUCTION.format(
-            system_last_msg=last_system_msg,
-            flag_instruction=flag,
-            active_task=active_task
-        )
+        messages = [{"role": "system", "content": intent_prompt}]
+        hist_msgs = history.get_last_n_messages(5)
 
-        full_content = context_instruction + "\n\n" + NLU_INTENT_PROMPT
-        system_msg = [{"role": "system", "content": full_content}]
-        
+        if hist_msgs:
+            messages.extend(hist_msgs)
+
         nlu_out = self.generate_fn(
             self.model,
             self.tokenizer,
-            system_msg,
-            user_input)
-        
-        print(f"DEBUG NLU Context Flag: {flag}")
-        print(f"DEBUG NLU Context Instruction: {context_instruction}")
-        print(f"DEBUG NLU Output: {nlu_out}")
-        
-        # Clean and parse JSON output
-        try:
-            # Strip markdown code blocks if present
-            json_str = nlu_out.replace("```json", "").replace("```", "").strip()
-            data = json.loads(json_str)
+            messages)
 
-            # Clean "null" string
-            if "slots" in data:
-                data["slots"] = self.clean_slot_values(data["slots"])
+        print(f"DEBUG NLU Raw Output: {nlu_out}")
 
-        except json.JSONDecodeError:
-            # Fallback for parsing errors
-            data = {"intent": "out_of_scope", "slots": {}}
-        
+        data = self.parse_llm_json(nlu_out)
+
         print(f"DEBUG NLU Parsed Data: {data}")
         return data

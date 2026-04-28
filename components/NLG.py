@@ -1,5 +1,5 @@
 import json
-from prompts import NLG_SYSTEM_PROMPT
+from prompts.nlg_prompt import NLG_BASE_PROMPT, INTENT_PROMPTS
 
 class NLG:
     def __init__(self, model, tokenizer, generate_fn):
@@ -7,28 +7,34 @@ class NLG:
         self.tokenizer = tokenizer
         self.generate_fn = generate_fn
 
-    def generate_response(self, dm_action_data, last_user_message):
-        try:
-            dm_instruction_str = json.dumps(dm_action_data, ensure_ascii=False, indent=2)
-        except (TypeError, ValueError):
-            dm_instruction_str = str(dm_action_data)
+    def predict(self, dm_action_data: dict, dialogue_state: dict, history) -> str:
+        dm_str = json.dumps(dm_action_data, indent=2)
+        ds_str = json.dumps(dialogue_state, indent=2)
+        
+        current_intent = dialogue_state.get("intent", "default")
+        intent_specific_block = INTENT_PROMPTS.get(current_intent, INTENT_PROMPTS["default"])
 
-        input_data = f"""
-USER INPUT: "{last_user_message}"
-DM INSTRUCTION:
-{dm_instruction_str}
-"""
-
-        system_msg = [{"role": "system", "content": NLG_SYSTEM_PROMPT}]
+        system_content = (
+            f"{NLG_BASE_PROMPT}\n\n"
+            f"{intent_specific_block}\n"
+            f"--- END OF INSTRUCTIONS & EXAMPLES ---\n\n"
+            f"CURRENT DIALOGUE STATE:\n{ds_str}\n\n"
+            f"CURRENT DM INSTRUCTION:\n{dm_str}"
+        )
+        
+        messages = [{"role": "system", "content": system_content}]
+        
+        hist_msgs = history.get_last_n_messages(3)
+        if hist_msgs:
+            messages.extend(hist_msgs)
 
         response_text = self.generate_fn(
             self.model,
             self.tokenizer,
-            system_msg,
-            input_data
+            messages
         )
 
-        print(f"DEBUG NLG Input Inst: {dm_instruction_str}")
+        print(f"DEBUG NLG Input DM Action: {dm_str}")
         print(f"DEBUG NLG Generated: {response_text}")
 
         return response_text.strip()
