@@ -1,3 +1,4 @@
+import difflib
 from datetime import datetime
 
 # ===================
@@ -83,7 +84,7 @@ TIME_RANGES = {
 }
 
 PRICING = {
-    "swimming_pool": {
+    "public_swim": {
         "day_pass": 8.50,
         "10_entry_pass": 75.00,
         "monthly_pass": 60.00,
@@ -189,22 +190,22 @@ RULES_DB = {
 COURSES_DB = {
     "aquagym": {
         "days": ["monday", "wednesday", "friday"],
-        "ages": ["teens", "adults"],
+        "ages": ["teen", "adult"],
         "levels": ["beginner", "intermediate", "advanced"]
     },
     "hydrobike": {
         "days": ["tuesday", "thursday"],
-        "ages": ["teens", "adults"],
+        "ages": ["teen", "adult"],
         "levels": ["intermediate", "advanced"]
     },
     "swimming_school": {
         "days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
-        "ages": ["children", "teens", "adults"],
+        "ages": ["child", "teen", "adult"],
         "levels": ["beginner", "intermediate", "advanced"]
     },
     "newborn_swimming": {
         "days": ["saturday", "sunday"],
-        "ages": ["children"],
+        "ages": ["child"],
         "levels": ["beginner"]
     }
 }
@@ -223,21 +224,21 @@ USERS_DB = {
         "booked_courses": [
             {
                 "course_activity": "swimming_school",
-                "target_age": "adults",
+                "target_age": "adult",
                 "level": "intermediate",
-                "day_preference": "monday",
+                "day_preference": "tuesday",
             },
             {
                 "course_activity": "aquagym",
-                "target_age": "adults",
+                "target_age": "adult",
                 "level": "beginner",
                 "day_preference": "wednesday",
             },
             {
                 "course_activity": "hydrobike",
-                "target_age": "adults",
+                "target_age": "adult",
                 "level": "intermediate",
-                "day_preference": "monday",
+                "day_preference": "tuesday",
             }
         ],
         "lost_items": [
@@ -266,6 +267,7 @@ USERS_DB = {
     }
 }
 
+
 class MockDatabase:
     """
     Slot values are aready cleaned up through dst. They are or None or DB values.
@@ -273,6 +275,21 @@ class MockDatabase:
 
     def __init__(self, dst):
         self.dst = dst
+
+    def _ensure_user_exists(self, user_id):
+        if user_id not in USERS_DB:
+            USERS_DB[user_id] = {
+                "booked_courses": [],
+                "booked_spa": [],
+                "lost_items": []
+            }
+        else:
+            if "booked_courses" not in USERS_DB[user_id]:
+                USERS_DB[user_id]["booked_courses"] = []
+            if "booked_spa" not in USERS_DB[user_id]:
+                USERS_DB[user_id]["booked_spa"] = []
+            if "lost_items" not in USERS_DB[user_id]:
+                USERS_DB[user_id]["lost_items"] = []
 
     def get_opening_hours(self, facility_type=None, date=None, time=None, **kwargs):
         # VALIDATE values if present
@@ -359,32 +376,32 @@ class MockDatabase:
             }
         }
 
-    def get_pricing(self, facility_type=None, sub_type=None, user_category=None, **kwargs):
+    def get_pricing(self, service_type=None, sub_type=None, user_category=None, **kwargs):
         # VALIDATE values if present
-        if facility_type:
-            facility_pricing = PRICING[facility_type]
-            if sub_type and sub_type not in facility_pricing:
+        if service_type:
+            service_pricing = PRICING[service_type]
+            if sub_type and sub_type not in service_pricing:
                 return {
                     "status": "INVALID_VALUE",
                     "violating_slot": "sub_type",
-                    "options": list(facility_pricing.keys())
+                    "options": list(service_pricing.keys())
                 }
 
         # CHECK completeness
-        if not facility_type:
+        if not service_type:
             return {
                 "status": "MISSING_SLOT",
-                "violating_slot": "facility_type",
+                "violating_slot": "service_type",
                 "options": list(PRICING.keys())
             }
 
-        facility_pricing = PRICING[facility_type]
+        service_pricing = PRICING[service_type]
 
         if not sub_type:
             return {
                 "status": "MISSING_SLOT",
                 "violating_slot": "sub_type",
-                "options": list(facility_pricing.keys())
+                "options": list(service_pricing.keys())
             }
 
         if not user_category:
@@ -398,7 +415,7 @@ class MockDatabase:
         return {
             "status": "INFORM",
             "enriched_data": {
-                "price": facility_pricing[sub_type] * DISCOUNTS.get(user_category, 1.0)
+                "price": service_pricing[sub_type] * DISCOUNTS.get(user_category, 1.0)
             }
         }
 
@@ -594,11 +611,21 @@ class MockDatabase:
                 "violating_slot": "confirmation",
                 "options": ["agree", "deny"],
             }
-        
+
         if confirmation == "deny":
             return {
                 "status": "CANCELLED"
             }
+
+        user_id = f"{user.get('name')}_{user.get('surname')}".lower()
+        self._ensure_user_exists(user_id)
+
+        USERS_DB[user_id]["booked_courses"].append({
+            "course_activity": course_activity,
+            "target_age": target_age,
+            "level": level,
+            "day_preference": day_preference
+        })
 
         return {"status": "CONFIRMED"}
 
@@ -697,12 +724,21 @@ class MockDatabase:
                 "status": "CANCELLED"
             }
 
+        user_id = f"{user_data.get('name')}_{user_data.get('surname')}".lower()
+        self._ensure_user_exists(user_id)
+
+        USERS_DB[user_id]["booked_spa"].append({
+            "date": date,
+            "time": time,
+            "people_count": int(people_count)
+        })
+
         return {"status": "CONFIRMED"}
 
     def get_modify_booked_course(self,
-                               course_activity_old=None, target_age_old=None, level_old=None, day_preference_old=None,
-                               course_activity_new=None, target_age_new=None, level_new=None, day_preference_new=None,
-                               user=None, confirmation=None, **kwargs):
+                                 course_activity_old=None, target_age_old=None, level_old=None, day_preference_old=None,
+                                 course_activity_new=None, target_age_new=None, level_new=None, day_preference_new=None,
+                                 user=None, confirmation=None, **kwargs):
 
         user_data = user or {}
 
@@ -713,8 +749,24 @@ class MockDatabase:
             return {"status": "MISSING_SLOT", "violating_slot": "surname", "options": []}
         user_id = f"{user_data.get('name')}_{user_data.get('surname')}".lower()
 
+        if user_id not in USERS_DB:
+            return {
+                "status": "INVALID_VALUE",
+                "violating_slot": f"name_surname",
+                "options": []
+            }
+
         # FASE 2: RICERCA INTELLIGENTE (Auto-completamento)
         user_bookings = USERS_DB.get(user_id, {}).get("booked_courses", [])
+
+        if not user_bookings:
+            # L'utente esiste, ma non ha MAI prenotato un corso
+            return {
+                "status": "INVALID_VALUE",
+                "violating_slot": "",
+                "options": ["(no previous bookings)"]
+            }
+
         matching_bookings = []
 
         for b in user_bookings:
@@ -853,13 +905,29 @@ class MockDatabase:
 
         # FASE 6: CONFERMA
         if not confirmation:
+            diff_old = []
+            diff_new = []
+
+            if target_age_old != eval_age:
+                diff_old.append(target_age_old)
+                diff_new.append(eval_age)
+            if level_old != eval_level:
+                diff_old.append(level_old)
+                diff_new.append(eval_level)
+            if day_preference_old != eval_day:
+                diff_old.append(day_preference_old)
+                diff_new.append(eval_day)
+
+            old_details = f" ({', '.join(diff_old)})" if diff_old else ""
+            new_details = f" ({', '.join(diff_new)})" if diff_new else ""
+
             return {
                 "status": "MISSING_SLOT",
                 "violating_slot": "confirmation",
                 "options": ["agree", "deny"],
                 "enriched_data": {
-                    "old_booking": f"{course_activity_old} ({day_preference_old})",
-                    "new_booking": f"{eval_course} ({eval_day})"
+                    "old_booking": f"{course_activity_old}{old_details}",
+                    "new_booking": f"{eval_course}{new_details}"
                 }
             }
 
@@ -868,11 +936,32 @@ class MockDatabase:
                 "status": "CANCELLED"
             }
 
+        # --- SALVATAGGIO NEL DB ---
+        user_id = f"{user_data.get('name')}_{user_data.get('surname')}".lower()
+        user_courses = USERS_DB.get(user_id, {}).get("booked_courses", [])
+
+        for i, booking in enumerate(user_courses):
+            if (booking["course_activity"] == course_activity_old and
+                booking["target_age"] == target_age_old and
+                booking["level"] == level_old and
+                    booking["day_preference"] == day_preference_old):
+
+                # Rimuove la vecchia prenotazione
+                user_courses.pop(i)
+                # Inserisce la nuova
+                user_courses.append({
+                    "course_activity": eval_course,
+                    "target_age": eval_age,
+                    "level": eval_level,
+                    "day_preference": eval_day
+                })
+                break
+
         return {"status": "CONFIRMED"}
 
     def get_modify_booked_spa(self, date_old=None, time_old=None, people_count_old=None,
-                            date_new=None, time_new=None, people_count_new=None,
-                            user=None, confirmation=None, **kwargs):
+                              date_new=None, time_new=None, people_count_new=None,
+                              user=None, confirmation=None, **kwargs):
         user_data = user or {}
 
         # FASE 1: IDENTITÀ
@@ -882,8 +971,23 @@ class MockDatabase:
             return {"status": "MISSING_SLOT", "violating_slot": "surname", "options": []}
         user_id = f"{user_data.get('name')}_{user_data.get('surname')}".lower()
 
+        if user_id not in USERS_DB:
+            return {
+                "status": "INVALID_VALUE",
+                "violating_slot": "name",
+                "options": []
+            }
+
         # FASE 2: RICERCA INTELLIGENTE (Auto-completamento)
         user_bookings = USERS_DB.get(user_id, {}).get("booked_spa", [])
+
+        if not user_bookings:
+            return {
+                "status": "INVALID_VALUE",
+                "violating_slot": "", # La data è il perno della spa, quindi la blocchiamo
+                "options": ["(no previous bookings)"]
+            }
+
         matching_bookings = []
 
         for b in user_bookings:
@@ -973,7 +1077,8 @@ class MockDatabase:
             return {
                 "status": "OVERLAP",
                 "violating_slot": "time_new",  # Chiediamo un nuovo orario per risolvere il loop
-                "options": ["10:00 - 21:00"],  # Anche se in realtà tutte le fasce orarie sono libere, forniamo un'opzione valida per sbloccare
+                # Anche se in realtà tutte le fasce orarie sono libere, forniamo un'opzione valida per sbloccare
+                "options": ["10:00 - 21:00"],
                 "blacklist": [time_old]  # Escludiamo l'orario vecchio per evitare che l'utente lo riproponga
             }
 
@@ -1006,20 +1111,58 @@ class MockDatabase:
             "people_count_new": eval_count
         }
 
-        # Update possible null value slots in the dialogue state
         self.dst.update_predicted_slots(full_slots_to_save)
 
         if not confirmation:
+            diff_old = []
+            diff_new = []
+
+            if date_old != eval_date:
+                diff_old.append(str(date_old))
+                diff_new.append(str(eval_date))
+            if time_old != eval_time:
+                diff_old.append(str(time_old))
+                diff_new.append(str(eval_time))
+            if str(people_count_old) != str(eval_count):
+                diff_old.append(f"{people_count_old} people")
+                diff_new.append(f"{eval_count} people")
+
+            old_details = f" ({', '.join(diff_old)})" if diff_old else ""
+            new_details = f" ({', '.join(diff_new)})" if diff_new else ""
+
             return {
                 "status": "MISSING_SLOT",
                 "violating_slot": "confirmation",
-                "options": ["agree", "deny"]
+                "options": ["agree", "deny"],
+                "enriched_data": {
+                    "old_booking": f"Spa{old_details}",
+                    "new_booking": f"Spa{new_details}"
+                }
             }
-        
+
         if confirmation == "deny":
             return {
                 "status": "CANCELLED"
             }
+
+        # --- SALVATAGGIO NEL DB ---
+        user_id = f"{user_data.get('name')}_{user_data.get('surname')}".lower()
+        user_spas = USERS_DB.get(user_id, {}).get("booked_spa", [])
+
+        for i, booking in enumerate(user_spas):
+            if (booking["date"] == date_old and
+                booking["time"] == time_old and
+                    str(booking["people_count"]) == str(people_count_old)):
+
+                # Rimuove la vecchia prenotazione
+                user_spas.pop(i)
+                # Inserisce la nuova
+                user_spas.append({
+                    "date": eval_date,
+                    "time": eval_time,
+                    "people_count": int(eval_count)
+                })
+                break
 
         return {"status": "CONFIRMED"}
 
@@ -1120,16 +1263,16 @@ class MockDatabase:
             }
         }
 
-    def get_report_lost_item(self, item=None, item_color=None, last_seen_location=None, last_seen_date=None, user=None, **kwargs):
+    def get_report_lost_item(self, lost_item=None, item_color=None, last_seen_location=None, last_seen_date=None, user=None, **kwargs):
         user_data = user or {}
 
         if not user_data.get("name"):
             return {"status": "MISSING_SLOT", "violating_slot": "name", "options": []}
         if not user_data.get("surname"):
             return {"status": "MISSING_SLOT", "violating_slot": "surname", "options": []}
+        
         user_id = f"{user_data.get('name')}_{user_data.get('surname')}".lower()
 
-        # VALIDATE values if present
         if last_seen_date:
             try:
                 date_obj = datetime.strptime(last_seen_date, "%Y-%m-%d")
@@ -1146,9 +1289,8 @@ class MockDatabase:
                     "options": []
                 }
 
-        # CHECK completeness
-        if not item:
-            return {"status": "MISSING_SLOT", "violating_slot": "item", "options": []}
+        if not lost_item:
+            return {"status": "MISSING_SLOT", "violating_slot": "lost_item", "options": []}
         if not item_color:
             return {"status": "MISSING_SLOT", "violating_slot": "item_color", "options": []}
         if not last_seen_location:
@@ -1156,20 +1298,43 @@ class MockDatabase:
         if not last_seen_date:
             return {"status": "MISSING_SLOT", "violating_slot": "last_seen_date", "options": []}
 
-        # VALIDATE overlaps
         user_lost_items = USERS_DB.get(user_id, {}).get("lost_items", [])
 
         for lost in user_lost_items:
-            if (lost.get("item") == item and
+            db_item = str(lost.get("item", "")).lower()
+            current_item = str(lost_item).lower()
+            
+            is_substring = (current_item in db_item) or (db_item in current_item)
+            similarity = difflib.SequenceMatcher(None, current_item, db_item).ratio()
+            is_typo = similarity >= 0.75
+            
+            if ((is_substring or is_typo) and
                 lost.get("item_color") == item_color and
                 lost.get("location") == last_seen_location and
                 lost.get("date_lost") == last_seen_date):
 
                 return {
                     "status": "OVERLAP",
-                    "violating_slot": "item",
+                    "violating_slot": "lost_item",
                     "options": [],
-                    "blacklist": [item]
+                    "blacklist": [lost_item]
                 }
 
+        self._ensure_user_exists(user_id)
+        
+        USERS_DB[user_id]["lost_items"].append({
+            "item": lost_item,
+            "item_color": item_color,
+            "location": last_seen_location,
+            "date_lost": last_seen_date
+        })
+
         return {"status": "CONFIRMED"}
+
+    def get_user_identification(self, name=None, surname=None, **kwargs):
+        if name or surname:
+            return {"status": "CONFIRMED"}
+        return {"status": "MISSING_SLOT", "violating_slot": "name", "options": []}
+
+    def get_out_of_scope(self, **kwargs):
+        return {"status": "INFORM", "enriched_data": {}}

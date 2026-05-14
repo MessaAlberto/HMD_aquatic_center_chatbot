@@ -4,7 +4,7 @@ import re
 from prompts.nlu_prompt import (
     NLU_CONTEXT,
     NLU_PROMPT_V2,
-    ONE_SHOT_EXAMPLE
+    FEW_SHOT_EXAMPLE
 )
 
 
@@ -30,7 +30,7 @@ class NLU:
 
     def predict(self, history):
         # Assemblaggio del Prompt: v2_one_shot
-        intent_prompt = f"{NLU_CONTEXT}\n{NLU_PROMPT_V2}\n{ONE_SHOT_EXAMPLE}"
+        intent_prompt = f"{NLU_CONTEXT}\n{NLU_PROMPT_V2}\n{FEW_SHOT_EXAMPLE}"
 
         messages = [{"role": "system", "content": intent_prompt}]
         hist_msgs = history.get_last_n_messages(5)

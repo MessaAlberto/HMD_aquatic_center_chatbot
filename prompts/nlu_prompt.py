@@ -10,9 +10,9 @@
 #     {"role": "user", "content": "..."}
 #   - Conversation history format:
 #     [
-#       {"role": "system", "content": "..."},
+#       {"role": "assistant", "content": "..."},
 #       {"role": "user", "content": "..."},
-#       {"role": "system", "content": "..."},
+#       {"role": "assistant", "content": "..."},
 #     ]
 
 # OUTPUT:
@@ -58,11 +58,11 @@ OUTPUT:
 RULES:
 1. Output strictly the JSON object, without any additional text.
 2. Do not hallucinate or invent intents, slots, or values.
-3. If a slot defines allowed values in brackets [], you MUST use exactly one of those terms.
-4. If a slot value is not explicitly provided in the current user input, return it as null.
-5. Use the conversation history ONLY to understand context and resolve the intent. NEVER extract or copy slot values from the history.
-6. Extract temporal expressions (dates and times) verbatim exactly as spoken. Do not convert or format them.
-7. Leave the "confirmation" slot as null unless the user explicitly agrees or denies in the current input.
+3. If a slot defines allowed values in brackets [], map the input to one of those terms ONLY if it is a clear match. If the user mentions something completely unrelated or out of scope (e.g. "luna park"), return null for that slot or classify the intent as "out_of_scope".
+4. INTENT ONLY: Use the history strictly to resolve the user's intent. Extract slots ONLY from the latest input, returning null for old values.
+5. Extract temporal expressions (dates and times) verbatim exactly as spoken. Do not convert or format them.
+6. Leave the "confirmation" slot as null unless the user explicitly agrees or denies in the current input.
+7. Correctly identify names and surnames even if provided in "Surname Name" order (e.g., "Verdi Carlo" -> name: "Carlo", surname: "Verdi").
 """
 
 # relative_time NOT CONVERTED, allowed/description everywhere
@@ -78,7 +78,7 @@ SUPPORTED INTENTS AND SLOTS:
 2. "ask_pricing":
   - Description: User is asking about the pricing.
   - Slots:
-    - facility_type: types of facilities. Allowed values: [swimming_pool, gym, spa, course, lido].
+    - service_type: types of facilities. Allowed values: [public_swim, gym, spa, course, lido].
     - sub_type: specific type of subscription. Allowed values: [day_pass, monthly_pass, annual_pass, 10_entry_pass].
     - user_category: category of user. Allowed values: [adult, child, senior, student].
 
@@ -92,7 +92,7 @@ SUPPORTED INTENTS AND SLOTS:
   - Description: User wants to book a course.
   - Slots:
     - course_activity: type of course. Allowed values: [aquagym, hydrobike, swimming_school, newborn_swimming].
-    - target_age: target age group for the course. Allowed values: [children, teens, adults].
+    - target_age: target age group for the course. Allowed values: [child, teen, adult].
     - level: skill level for the course. Allowed values: [beginner, intermediate, advanced].
     - day_preference: preferred day of the week. Allowed values: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday].
     - name: user's first name.
@@ -115,11 +115,11 @@ SUPPORTED INTENTS AND SLOTS:
     - name: user's first name.
     - surname: user's last name.
     - course_activity_old: current type of course. Allowed values: [aquagym, hydrobike, swimming_school, newborn_swimming].
-    - target_age_old: current target age group for the course. Allowed values: [children, teens, adults].
+    - target_age_old: current target age group for the course. Allowed values: [child, teen, adult].
     - level_old: current skill level for the course. Allowed values: [beginner, intermediate, advanced].
     - day_preference_old: current preferred day of the week. Allowed values: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday].
     - course_activity_new: new type of course. Allowed values: [aquagym, hydrobike, swimming_school, newborn_swimming].
-    - target_age_new: new target age group for the course. Allowed values: [children, teens, adults].
+    - target_age_new: new target age group for the course. Allowed values: [child, teen, adult].
     - level_new: new skill level for the course. Allowed values: [beginner, intermediate, advanced].
     - day_preference_new: new preferred day of the week. Allowed values: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday].
     - confirmation: whether the user confirms the modification details. Allowed values: [agree, deny].
@@ -149,7 +149,7 @@ SUPPORTED INTENTS AND SLOTS:
 9. "report_lost_item":
   - Description: User wants to report a lost item.
   - Slots:
-    - item: type of lost item.
+    - lost_item: type of lost item.
     - item_color: color of the lost item if relevant.
     - last_seen_location: where the user last saw the item.
     - last_seen_date: when the user last saw the item.
@@ -179,7 +179,7 @@ SUPPORTED INTENTS AND SLOTS:
 
 2. "ask_pricing":
   - Slots:
-    - facility_type: [swimming_pool, gym, spa, course, lido].
+    - service_type: [public_swim, gym, spa, course, lido].
     - sub_type: [day_pass, monthly_pass, annual_pass, 10_entry_pass].
     - user_category: [adult, child, senior, student].
 
@@ -191,7 +191,7 @@ SUPPORTED INTENTS AND SLOTS:
 4. "book_course":
   - Slots:
     - course_activity: [aquagym, hydrobike, swimming_school, newborn_swimming].
-    - target_age: [children, teens, adults].
+    - target_age: [child, teen, adult].
     - level: [beginner, intermediate, advanced].
     - day_preference: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday].
     - name: user's first name.
@@ -212,11 +212,11 @@ SUPPORTED INTENTS AND SLOTS:
     - name: user's first name.
     - surname: user's last name.
     - course_activity_old: [aquagym, hydrobike, swimming_school, newborn_swimming].
-    - target_age_old: [children, teens, adults].
+    - target_age_old: [child, teen, adult].
     - level_old: [beginner, intermediate, advanced].
     - day_preference_old: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday].
     - course_activity_new: [aquagym, hydrobike, swimming_school, newborn_swimming].
-    - target_age_new: [children, teens, adults].
+    - target_age_new: [child, teen, adult].
     - level_new: [beginner, intermediate, advanced].
     - day_preference_new: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday].
     - confirmation: [agree, deny].
@@ -243,7 +243,7 @@ SUPPORTED INTENTS AND SLOTS:
 
 9. "report_lost_item":
   - Slots:
-    - item: type of lost item.
+    - lost_item: type of lost item.
     - item_color: color of the lost item.
     - last_seen_location: where the user last saw the item.
     - last_seen_date: verbatim temporal expressions.
@@ -275,14 +275,14 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I'm interested in the monthly pass for the swimming pool"},
-    {"role": "system", "content": "Are you a student, adult, senior?"}
+    {"role": "assistant", "content": "Are you a student, adult, senior?"}
   ]
   input: "I'm a student"
   output:
   {
     "intent": "ask_pricing",
     "slots": {
-      "facility_type": null,
+      "service_type": null,
       "sub_type": null,
       "user_category": "student"
     }
@@ -291,7 +291,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "Can I wear shoes in the changing room?"},
-    {"role": "system", "content": "No, wearing shoes in the changing room is not allowed."}
+    {"role": "assistant", "content": "No, wearing shoes in the changing room is not allowed."}
   ]
   input: "What about the swimming pool area?"
   output:
@@ -309,7 +309,7 @@ EXAMPLE:
     "intent": "book_course",
     "slots": {
       "course_activity": "swimming_school",
-      "target_age": "children",
+      "target_age": "child",
       "level": null,
       "day_preference": "Saturday",
       "name": null,
@@ -335,7 +335,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I want to book a spa session for tomorrow evening for 2 people."},
-    {"role": "system", "content": "Great, do you want to confirm the booking details: a spa session for tomorrow evening for 2 people?"}
+    {"role": "assistant", "content": "Great, do you want to confirm the booking details: a spa session for tomorrow evening for 2 people?"}
   ]
   input: "Yes, please confirm the booking."
   output:
@@ -354,7 +354,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I want to modify day of my booked course"},
-    {"role": "system", "content": "Sure, can you please provide your name and surname?"}
+    {"role": "assistant", "content": "Sure, can you please provide your name and surname?"}
   ]
   input: "My name is John Doe"
   output:
@@ -414,7 +414,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I need to buy a swimming cap please."},
-    {"role": "system", "content": "Sure, which size do you need? We have S, M, L, XL."}
+    {"role": "assistant", "content": "Sure, which size do you need? We have S, M, L, XL."}
   ]
   input: "I need a size M."
   output:
@@ -432,14 +432,14 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "Please help, I lost my shoes in the gym this morning."},
-    {"role": "system", "content": "I'm sorry to hear that. Do you remember the color of the shoes?"}
+    {"role": "assistant", "content": "I'm sorry to hear that. Do you remember the color of the shoes?"}
   ]
   input: "I think they were black."
   output:
   {
     "intent": "report_lost_item",
     "slots": {
-      "item": null,
+      "lost_item": null,
       "item_color": "black",
       "last_seen_location": null,
       "last_seen_date": null,
@@ -494,7 +494,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "What are the opening hours for the swimming pool?"},
-    {"role": "system", "content": "The swimming pool is open from 6am to 10pm every day."}
+    {"role": "assistant", "content": "The swimming pool is open from 6am to 10pm every day."}
   ]
   input: "And the gym?"
   output:
@@ -507,23 +507,12 @@ EXAMPLE:
     }
   }
 
-- input: "How much does a single entry for the swimming pool cost?"
-  output:
-  {
-    "intent": "ask_pricing",
-    "slots": {
-      "facility_type": "swimming_pool",
-      "sub_type": "day_pass",
-      "user_category": null
-    }
-  }
-
 - input: "How much does a course cost per month for students?"
   output:
   {
     "intent": "ask_pricing",
     "slots": {
-      "facility_type": null,
+      "service_type": "course",
       "sub_type": "monthly_pass",
       "user_category": "student"
     }
@@ -532,16 +521,32 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I'm interested in the monthly pass for the swimming pool"},
-    {"role": "system", "content": "Are you a student, adult, senior?"}
+    {"role": "assistant", "content": "Are you a student, adult, senior?"}
   ]
   input: "I'm a student"
   output:
   {
     "intent": "ask_pricing",
     "slots": {
-      "facility_type": null,
+      "service_type": null,
       "sub_type": null,
       "user_category": "student"
+    }
+  }
+
+  - history:
+  [
+    {"role": "user", "content": "How much is the annual pass for a student for the course?"},
+    {"role": "assistant", "content": "The annual pass for a student is 560 euros."}
+  ]
+  input: "And for the public swim?"
+  output:
+  {
+    "intent": "ask_pricing",
+    "slots": {
+      "service_type": "public_swim",
+      "sub_type": null,
+      "user_category": null
     }
   }
 
@@ -578,7 +583,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "Can I wear shoes in the changing room?"},
-    {"role": "system", "content": "No, wearing shoes in the changing room is not allowed."}
+    {"role": "assistant", "content": "No, wearing shoes in the changing room is not allowed."}
   ]
   input: "What about the swimming pool area?"
   output:
@@ -596,7 +601,7 @@ EXAMPLE:
     "intent": "book_course",
     "slots": {
       "course_activity": "swimming_school",
-      "target_age": "children",
+      "target_age": "child",
       "level": null,
       "day_preference": "Saturday",
       "name": null,
@@ -608,7 +613,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I want to attend the hydrobike course on Wednesdays."},
-    {"role": "system", "content": "Great choice! Can you please provide your preferred day of the week for the course?"}
+    {"role": "assistant", "content": "Great choice! Can you please provide your preferred day of the week for the course?"}
   ]
   input: "On Wednesdays it would be better for me."
   output:
@@ -628,7 +633,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I'm a beginner"},
-    {"role": "system", "content": "Thanks for the info! Do you confirm that you want to book a beginner aquagym course for adults on Wednesdays?"}
+    {"role": "assistant", "content": "Thanks for the info! Do you confirm that you want to book a beginner aquagym course for adults on Wednesdays?"}
   ]
   input: "No, I change my mind"
   output:
@@ -648,7 +653,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "On Fridays it would be better for me"},
-    {"role": "system", "content": "Got it, let's recap the details: you want to book a swimming school course for your (adult), level advanced on Fridays. Can you please confirm?"}
+    {"role": "assistant", "content": "Got it, let's recap the details: you want to book a swimming school course for your (adult), level advanced on Fridays. Can you please confirm?"}
   ]
   input: "Actually, it's for my teen daughter, not for me."
   output:
@@ -682,7 +687,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "At 10am, please."},
-    {"role": "system", "content": "Great, how many people will be attending the spa session?"}
+    {"role": "assistant", "content": "Great, how many people will be attending the spa session?"}
   ]
   input: "It will be just me."
   output:
@@ -701,7 +706,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I want to book a spa session for tomorrow evening for 2 people."},
-    {"role": "system", "content": "Great, do you want to confirm the booking details: a spa session for tomorrow evening for 2 people?"}
+    {"role": "assistant", "content": "Great, do you want to confirm the booking details: a spa session for tomorrow evening for 2 people?"}
   ]
   input: "Yes, please confirm the booking."
   output:
@@ -739,7 +744,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I want to modify day of my booked course"},
-    {"role": "system", "content": "Sure, can you please provide your name and surname?"}
+    {"role": "assistant", "content": "Sure, can you please provide your name and surname?"}
   ]
   input: "My name is John Doe"
   output:
@@ -799,9 +804,9 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I want change my spa booking from next Monday to next Tuesday."},
-    {"role": "system", "content": "Sure, can you please provide your name and surname?"},
+    {"role": "assistant", "content": "Sure, can you please provide your name and surname?"},
     {"role": "user", "content": "My name is Jane Smith"},
-    {"role": "system", "content": "Thank you, Jane. Can you please confirm that you want to change your spa booking from next Monday to next Tuesday?"}
+    {"role": "assistant", "content": "Thank you, Jane. Can you please confirm that you want to change your spa booking from next Monday to next Tuesday?"}
   ]
   input: "Yes, that's correct."
   output:
@@ -836,7 +841,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "I need to buy a swimming cap please."},
-    {"role": "system", "content": "Sure, which size do you need? We have S, M, L, XL."}
+    {"role": "assistant", "content": "Sure, which size do you need? We have S, M, L, XL."}
   ]
   input: "I need a size M."
   output:
@@ -854,7 +859,7 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "Red goggles, please."},
-    {"role": "system", "content": "Sure, do you confirm that you want to buy red Arena goggles?"}
+    {"role": "assistant", "content": "Sure, do you confirm that you want to buy red Arena goggles?"}
   ]
   input: "Yes, that's correct."
   output:
@@ -874,7 +879,7 @@ EXAMPLE:
   {
     "intent": "report_lost_item",
     "slots": {
-      "item": "goggles",
+      "lost_item": "goggles",
       "item_color": null,
       "last_seen_location": null,
       "last_seen_date": "yesterday",
@@ -886,14 +891,14 @@ EXAMPLE:
 - history:
   [
     {"role": "user", "content": "Please help, I lost my shoes in the gym this morning."},
-    {"role": "system", "content": "I'm sorry to hear that. Do you remember the color of the shoes?"}
+    {"role": "assistant", "content": "I'm sorry to hear that. Do you remember the color of the shoes?"}
   ]
   input: "I think they were black."
   output:
   {
     "intent": "report_lost_item",
     "slots": {
-      "item": null,
+      "lost_item": null,
       "item_color": "black",
       "last_seen_location": null,
       "last_seen_date": null,
@@ -912,13 +917,23 @@ EXAMPLE:
     }
   }
 
-- input: "John Doe here"
+- input: "Ferrari Francesco here"
   output:
   {
     "intent": "user_identification",
     "slots": {
-      "name": "John",
-      "surname": "Doe"
+      "name": "Francesco",
+      "surname": "Ferrari"
+    }
+  }
+
+- input: "Hi, I'm Giulia Serra"
+  output:
+  {
+    "intent": "user_identification",
+    "slots": {
+      "name": "Giulia",
+      "surname": "Serra"
     }
   }
 

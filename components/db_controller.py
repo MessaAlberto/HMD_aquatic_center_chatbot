@@ -15,7 +15,9 @@ class DBController:
             "modify_booked_course": self.db.get_modify_booked_course,
             "modify_booked_spa": self.db.get_modify_booked_spa,
             "buy_equipment": self.db.get_buy_equipment,
-            "report_lost_item": self.db.get_report_lost_item
+            "report_lost_item": self.db.get_report_lost_item,
+            "user_identification": self.db.get_user_identification,
+            "out_of_scope": self.db.get_out_of_scope
         }
 
         self.needs_user_profile = {

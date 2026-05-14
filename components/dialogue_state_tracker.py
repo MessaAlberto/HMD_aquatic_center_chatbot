@@ -4,12 +4,13 @@ from typing import Any, Dict, Optional
 import dateparser
 from datetime import datetime, timedelta
 
-VALID_FACILITIES = ["swimming_pool", "gym", "spa", "lido", "reception", "course"]
+VALID_FACILITIES = ["swimming_pool", "gym", "spa", "lido", "reception"]
+VALID_SERVICIES = ["public_swim", "gym", "spa", "course", "lido"]
 VALID_SUB_TYPES = ["day_pass", "monthly_pass", "annual_pass", "10_entry_pass"]
 VALID_USER_CATEGORIES = ["adult", "child", "senior", "student"]
 VALID_TOPICS = ["swimming_pool", "gym", "spa", "lido", "changing_room"]
 VALID_COURSES = ["aquagym", "hydrobike", "swimming_school", "newborn_swimming"]
-VALID_TARGET_AGES = ["children", "teens", "adults"]
+VALID_TARGET_AGES = ["child", "teen", "adult"]
 VALID_LEVELS = ["beginner", "intermediate", "advanced"]
 VALID_DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 VALID_EQUIPMENT = ["swimming_cap", "goggles", "towel", "slippers", "swimsuit"]
@@ -17,14 +18,14 @@ VALID_CONFIRMATION = ["agree", "deny"]
 
 INTENT_SCHEMAS = {
     "ask_opening_hours": ["facility_type", "date", "time"],
-    "ask_pricing": ["facility_type", "sub_type", "user_category"],
+    "ask_pricing": ["service_type", "sub_type", "user_category"],
     "ask_rules": ["topic", "specific_inquiry"],
     "book_course": ["course_activity", "target_age", "level", "day_preference", "name", "surname", "confirmation"],
     "book_spa": ["date", "time", "people_count", "name", "surname", "confirmation"],
     "modify_booked_course": ["name", "surname", "course_activity_old", "target_age_old", "level_old", "day_preference_old", "course_activity_new", "target_age_new", "level_new", "day_preference_new", "confirmation"],
     "modify_booked_spa": ["name", "surname", "date_old", "time_old", "people_count_old", "date_new", "time_new", "people_count_new", "confirmation"],
     "buy_equipment": ["item", "size", "color", "brand", "confirmation"],
-    "report_lost_item": ["item", "item_color", "last_seen_location", "last_seen_date", "name", "surname"],
+    "report_lost_item": ["lost_item", "item_color", "last_seen_location", "last_seen_date", "name", "surname"],
     "user_identification": ["name", "surname"],
     "out_of_scope": []
 }
@@ -96,6 +97,11 @@ class StateTracker:
             if "tonight" in exp_lower or "this morning" in exp_lower:
                 exp_lower = exp_lower.replace("tonight", "today").replace("this morning", "today")
 
+            if "this weekend" in exp_lower:
+                exp_lower = exp_lower.replace("this weekend", "saturday")
+
+            exp_lower = exp_lower.replace("this ", "")
+
             if "next weekend" in exp_lower:
                 exp_lower = exp_lower.replace("next weekend", "saturday")
             elif "next week" in exp_lower:
@@ -154,6 +160,7 @@ class StateTracker:
 
         VALIDATION_MAP = {
             "facility_type": VALID_FACILITIES,
+            "service_type": VALID_SERVICIES,
             "topic": VALID_TOPICS,
             "sub_type": VALID_SUB_TYPES,
             "user_category": VALID_USER_CATEGORIES,
@@ -259,6 +266,24 @@ class StateTracker:
 
         validated_updates = self._validate_slots(self.ds["intent"], new_slots)
 
+        actual_changes = []
+        print("\n--- DEBUG DST: ANALISI CAMBIAMENTI REALI ---")
+        for k, v in validated_updates.items():
+            old_val = self.ds["slots"].get(k)
+            
+            # SE v NON È VUOTO, CONFRONTIAMO LE LORO RAPPRESENTAZIONI A STRINGA
+            if v is not None and str(old_val) != str(v):
+                actual_changes.append(k)
+                # Stampa il nome dello slot, il vecchio valore (con tipo) e il nuovo (con tipo)
+                print(f"  [!] Slot '{k}' modificato: {old_val} ({type(old_val).__name__}) -> {v} ({type(v).__name__})")
+        
+        print(f"  => Lista actual_changes: {actual_changes}")
+        print("--------------------------------------------\n")
+        
+        if "confirmation" in actual_changes and len(actual_changes) > 1:
+            print("  [DEBUG DST] Confirmation rimossa perché sono stati rilevati altri cambiamenti contemporaneamente!")
+            validated_updates["confirmation"] = None
+
         self._update_user_profile(validated_updates)
         self._update_dialogue_state_slots(validated_updates)
 
@@ -267,6 +292,7 @@ class StateTracker:
                 value is None for key, value in self.ds["slots"].items() if key != "confirmation"
             )
             if has_empy_slots:
+                print("  [DEBUG DST] Confirmation rimossa perché ci sono ancora slot vuoti nello stato.")
                 self.ds["slots"]["confirmation"] = None
 
         if self.ds["slots"] != old_ds["slots"] or self.ds["intent"] != old_ds["intent"]:
@@ -287,5 +313,13 @@ class StateTracker:
         slots_to_clear = [s.strip() for s in violating_slots.split(",")]
         
         for slot in slots_to_clear:
+            # Pulisce lo slot dallo stato corrente
             if slot in self.ds["slots"]:
                 self.ds["slots"][slot] = None
+            # CRITICO: Pulisce lo slot anche dal profilo globale se è un dato di identità!
+            if slot in self.user_profile:
+                self.user_profile[slot] = None
+
+    def complete_task(self) -> None:
+        self.ds["intent"] = None
+        self.ds["slots"] = {}

@@ -126,7 +126,7 @@ EXAMPLES:
   "dialogue_state": {
     "intent": "ask_pricing",
     "slots": {
-      "facility_type": "gym",
+      "service_type": "gym",
       "sub_type": "monthly",
       "user_category": "student"
     }

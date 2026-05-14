@@ -28,6 +28,7 @@ class Chatbot:
         print("Chatbot is ready! Type 'exit' to quit.")
 
         while True:
+            print("---------------------------------------------")
             user_input = input("You: ")
             if user_input.lower() in ["exit", "quit", "stop"]:
                 print("Bot: Goodbye!")
@@ -47,5 +48,10 @@ class Chatbot:
             print(f"DEBUG DM NBA: {nba}")
 
             response = self.NLG.predict(nba, dialogue_state, self.history)
-            self.history.add_message("system", response)
+            self.history.add_message("assistant", response)
+            print("---------------------------------------------")
             print(f"Bot: {response}")
+
+            if db_result and db_result.get("status") in ["CONFIRMED", "CANCELLED"]:
+                self.dst.complete_task()
+                print("DEBUG: Task completed. Dialogue state has been reset (User profile preserved).")

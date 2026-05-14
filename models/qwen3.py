@@ -1,7 +1,7 @@
 from typing import Dict, List, Optional
 import torch
 from transformers import PreTrainedTokenizer
-
+from datetime import datetime
 
 def prepare_text(
     tokenizer: PreTrainedTokenizer,
@@ -24,6 +24,15 @@ def prepare_text(
 def generate_response(model, tokenizer, messages, max_new_tokens=128):
     messages = messages if messages else []
     text_input = prepare_text(tokenizer, messages)
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"prompt_debug_{timestamp}.txt"
+    
+    try:
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(text_input)
+    except Exception as e:
+        print(f"Failed to save debug file: {e}")
 
     model_inputs = tokenizer([text_input], return_tensors="pt").to(model.device)
 
