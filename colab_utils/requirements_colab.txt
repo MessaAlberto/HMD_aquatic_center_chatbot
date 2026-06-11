@@ -1,0 +1,13 @@
+accelerate
+transformers
+torch
+huggingface_hub[cli]
+pyarrow
+python-dotenv
+bitsandbytes
+sacrebleu
+protobuf
+sentencepiece
+pandas
+pillow
+dateparser

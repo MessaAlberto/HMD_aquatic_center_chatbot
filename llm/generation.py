@@ -2,6 +2,10 @@ from typing import Dict, List, Optional
 import torch
 from transformers import PreTrainedTokenizer
 from datetime import datetime
+from settings import APP_DEBUG
+import logging
+
+logger = logging.getLogger(__name__)
 
 def prepare_text(
     tokenizer: PreTrainedTokenizer,
@@ -9,8 +13,6 @@ def prepare_text(
 ):
     if messages is None:
         messages = []
-
-    # print(f"DEBUG prepare_text - messages: {messages}")
 
     text = tokenizer.apply_chat_template(
         messages,
@@ -25,14 +27,15 @@ def generate_response(model, tokenizer, messages, max_new_tokens=128):
     messages = messages if messages else []
     text_input = prepare_text(tokenizer, messages)
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"prompt_debug_{timestamp}.txt"
-    
-    try:
-        with open(filename, "w", encoding="utf-8") as f:
-            f.write(text_input)
-    except Exception as e:
-        print(f"Failed to save debug file: {e}")
+    if APP_DEBUG:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"prompt_debug_{timestamp}.txt"
+
+        try:
+            with open(filename, "w", encoding="utf-8") as f:
+                f.write(text_input)
+        except Exception as e:
+            logger.warning("Failed to save debug file: %s", e)
 
     model_inputs = tokenizer([text_input], return_tensors="pt").to(model.device)
 
@@ -63,6 +66,21 @@ def generate_response_batch(model, tokenizer, messages_batch, max_new_tokens=128
     for messages in messages_batch:
         messages = messages if messages else []
         text_inputs.append(prepare_text(tokenizer, messages))
+
+    # --- SALVATAGGIO DEBUG BATCH ---
+    if APP_DEBUG:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"prompt_batch_debug_{timestamp}.txt"
+        
+        try:
+            with open(filename, "w", encoding="utf-8") as f:
+                for i, text in enumerate(text_inputs):
+                    f.write(f"=== BATCH PROMPT {i+1} ===\n")
+                    f.write(text)
+                    f.write("\n\n")
+        except Exception as e:
+            logger.warning("Failed to save debug batch file: %s", e)
+    # -------------------------------
 
     model_inputs = tokenizer(text_inputs, return_tensors="pt", padding=True).to(model.device)
 

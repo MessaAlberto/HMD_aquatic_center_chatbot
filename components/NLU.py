@@ -2,22 +2,21 @@ import json
 import re
 
 from prompts.nlu_prompt import (
-    NLU_CONTEXT,
-    NLU_PROMPT_V2,
-    FEW_SHOT_EXAMPLE
+    NLU_BASE_CONTEXT,
+    INTENT_SCHEMAS_PROMPTS
 )
+import logging
+logger = logging.getLogger(__name__)
 
 
 class NLU:
-    def __init__(self, model, tokenizer, generate_fn):
-        self.model = model
-        self.tokenizer = tokenizer
-        self.generate_fn = generate_fn
+    def __init__(self, llm):
+        self.llm = llm
 
-    def parse_llm_json(self, text: str) -> dict:
-        """Estrazione robusta del JSON tramite Regex."""
+    def parse_llm_json(self, text: str, fallback_intent: str) -> dict:
         try:
-            return json.loads(text)
+            parsed = json.loads(text)
+            return parsed
         except Exception:
             pattern = r"```json\s*(.*?)\s*```"
             match = re.search(pattern, text, re.DOTALL)
@@ -26,26 +25,62 @@ class NLU:
                     return json.loads(match.group(1))
                 except Exception:
                     pass
-            return {"intent": "out_of_scope", "slots": {}}
+            return {"intent": fallback_intent, "slots": {}}
 
-    def predict(self, history):
-        # Assemblaggio del Prompt: v2_one_shot
-        intent_prompt = f"{NLU_CONTEXT}\n{NLU_PROMPT_V2}\n{FEW_SHOT_EXAMPLE}"
+    def predict_batch(self, segments: list, history) -> list:
+        messages_batch = []
 
-        messages = [{"role": "system", "content": intent_prompt}]
-        hist_msgs = history.get_last_n_messages(5)
+        for seg in segments:
+            target_intent = seg.get("intent", "out_of_scope")
+            segment_text = seg.get("segment", "")
 
-        if hist_msgs:
-            messages.extend(hist_msgs)
+            schema_and_examples = INTENT_SCHEMAS_PROMPTS.get(
+                target_intent,
+                INTENT_SCHEMAS_PROMPTS["out_of_scope"]
+            )
 
-        nlu_out = self.generate_fn(
-            self.model,
-            self.tokenizer,
-            messages)
+            system_prompt = f"{NLU_BASE_CONTEXT}\n\n{schema_and_examples}"
+            messages = [{"role": "system", "content": system_prompt.strip()}]
 
-        print(f"DEBUG NLU Raw Output: {nlu_out}")
+            # Otteniamo la history strutturata (ignoriamo last_utt perché usiamo il segment_text)
+            conv_history, last_utterance = history.get_json_history_and_last_utterance(n=4)
 
-        data = self.parse_llm_json(nlu_out)
+            # Costruiamo il payload specifico per il NLU
+            payload = {
+                "conversation_history": conv_history,
+                "full_user_message": last_utterance,
+                "target_intent": target_intent,
+                "target_segment": segment_text
+            }
 
-        print(f"DEBUG NLU Parsed Data: {data}")
-        return data
+            messages.append({"role": "user", "content": json.dumps(payload, indent=2)})
+
+            # final_command = (
+            #     "CRITICAL: You must extract slot values EXCLUSIVELY from the 'target_segment'. "
+            #     "Use the 'conversation_history' ONLY as background context to resolve pronouns.\n\n"
+            #     "INPUT DATA:\n"
+            #     f"{json.dumps(payload, indent=2)}"
+            # )
+            
+            # messages.append({"role": "user", "content": final_command})
+
+            messages_batch.append(messages)
+
+        nlu_outputs = self.llm.generate_batch(
+            messages_batch=messages_batch,
+            max_new_tokens=256
+        )
+
+        results = []
+        for i, out in enumerate(nlu_outputs):
+            target_intent = segments[i].get("intent", "out_of_scope")
+
+            parsed_data = self.parse_llm_json(out, target_intent)
+            parsed_data["intent"] = target_intent
+
+            logger.debug("NLU Segment %s Raw Output: %s", i, out)
+            logger.debug("NLU Segment %s Parsed: %s", i, parsed_data)
+
+            results.append(parsed_data)
+
+        return results

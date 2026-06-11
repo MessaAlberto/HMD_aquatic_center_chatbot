@@ -3,6 +3,9 @@ import difflib
 from typing import Any, Dict, Optional
 import dateparser
 from datetime import datetime, timedelta
+import logging
+logger = logging.getLogger(__name__)
+
 
 VALID_FACILITIES = ["swimming_pool", "gym", "spa", "lido", "reception"]
 VALID_SERVICIES = ["public_swim", "gym", "spa", "course", "lido"]
@@ -24,15 +27,23 @@ INTENT_SCHEMAS = {
     "book_spa": ["date", "time", "people_count", "name", "surname", "confirmation"],
     "modify_booked_course": ["name", "surname", "course_activity_old", "target_age_old", "level_old", "day_preference_old", "course_activity_new", "target_age_new", "level_new", "day_preference_new", "confirmation"],
     "modify_booked_spa": ["name", "surname", "date_old", "time_old", "people_count_old", "date_new", "time_new", "people_count_new", "confirmation"],
+    "cancel_booked_course": ["course_activity", "target_age", "level", "day_preference", "name", "surname", "confirmation"],
+    "cancel_booked_spa": ["date", "time", "people_count", "name", "surname", "confirmation"],
     "buy_equipment": ["item", "size", "color", "brand", "confirmation"],
     "report_lost_item": ["lost_item", "item_color", "last_seen_location", "last_seen_date", "name", "surname"],
     "user_identification": ["name", "surname"],
     "out_of_scope": []
 }
 
+
 class StateTracker:
     def __init__(self, reference_date: Optional[str] = None, reference_time: Optional[str] = None):
         self.ds: Dict[str, Any] = {
+            "intent": None,
+            "slots": {}
+        }
+
+        self.last_completed_ds: Dict[str, Any] = {
             "intent": None,
             "slots": {}
         }
@@ -55,6 +66,7 @@ class StateTracker:
 
     def reset(self) -> None:
         self.ds = {"intent": None, "slots": {}}
+        self.last_completed_ds = {"intent": None, "slots": {}}
         self.user_profile = {"name": None, "surname": None}
         self.has_ds_changed = False
 
@@ -72,18 +84,20 @@ class StateTracker:
         exp_lower = str(expression).lower().strip()
         now = self.reference_datetime
 
-        if "right now" in exp_lower:
-            if "time" in slot_type:
-                return now.strftime("%H:%M")
-            if "date" in slot_type:
-                return now.strftime("%Y-%m-%d")
-
         if "time" in slot_type:
             time_mapping = {
+                "right now": now.strftime("%H:%M"),
+                "early morning": "07:00",
                 "morning": "09:00",
                 "this morning": "09:00",
+                "after breakfast": "10:00",
+                "lunchtime": "12:30",
+                "around lunch": "12:30",
+                "after lunch": "14:00",
                 "afternoon": "15:00",
+                "late afternoon": "17:00",
                 "evening": "18:00",
+                "after dinner": "20:00",
                 "tonight": "20:00",
                 "night": "21:00"
             }
@@ -91,36 +105,44 @@ class StateTracker:
                 if key in exp_lower:
                     return val
 
-        if "date" in slot_type:
-            exp_lower = exp_lower.replace("on ", "").replace("for ", "").replace("the ", "")
+            words = exp_lower.split()
+            for word in words:
+                matches = difflib.get_close_matches(word, time_mapping.keys(), n=1, cutoff=0.75)
+                if matches:
+                    return time_mapping[matches[0]]
 
+        is_next = False
+        if "date" in slot_type:
+            if "right now" in exp_lower:
+                return now.strftime("%Y-%m-%d")
+                
+            exp_lower = exp_lower.replace("on ", "").replace("for ", "").replace("the ", "")
+            
             if "tonight" in exp_lower or "this morning" in exp_lower:
                 exp_lower = exp_lower.replace("tonight", "today").replace("this morning", "today")
-
-            if "this weekend" in exp_lower:
-                exp_lower = exp_lower.replace("this weekend", "saturday")
-
-            exp_lower = exp_lower.replace("this ", "")
-
-            if "next weekend" in exp_lower:
-                exp_lower = exp_lower.replace("next weekend", "saturday")
-            elif "next week" in exp_lower:
+                
+            if "weekend" in exp_lower:
+                exp_lower = exp_lower.replace("this weekend", "saturday").replace("next weekend", "saturday").replace("weekend", "saturday")
+                
+            if "next week" in exp_lower:
                 exp_lower = exp_lower.replace("next week", "monday")
-
+                
             time_words = ["morning", "afternoon", "evening", "night"]
             for tw in time_words:
                 exp_lower = exp_lower.replace(tw, "").strip()
-
+                
             days_with_s = ["mondays", "tuesdays", "wednesdays", "thursdays", "fridays", "saturdays", "sundays"]
             for d in days_with_s:
                 if d in exp_lower:
                     exp_lower = exp_lower.replace(d, d[:-1])
-
+            
             if "next " in exp_lower:
+                is_next = True
                 exp_lower = exp_lower.replace("next ", "")
+                
+            exp_lower = exp_lower.replace("this ", "")
 
         prefer_dates = 'past' if slot_type == "last_seen_date" else 'future'
-
         settings = {
             'RELATIVE_BASE': now,
             'PREFER_DATES_FROM': prefer_dates,
@@ -133,17 +155,15 @@ class StateTracker:
             return None
 
         if "date" in slot_type:
-            orig = str(expression).lower()
-            if "next " in orig and "next weekend" not in orig and "next week" not in orig:
-                if parsed_datetime.date() <= now.date():
-                    parsed_datetime += timedelta(days=7)
-
+            if is_next and parsed_datetime.date() <= now.date():
+                parsed_datetime += timedelta(days=7)
+                
             if slot_type == "last_seen_date" and parsed_datetime.date() > now.date():
                 try:
                     parsed_datetime = parsed_datetime.replace(year=parsed_datetime.year - 1)
                 except ValueError:
                     parsed_datetime = parsed_datetime - timedelta(days=365)
-
+                    
             return parsed_datetime.strftime("%Y-%m-%d")
 
         elif "time" in slot_type:
@@ -176,7 +196,7 @@ class StateTracker:
             str(v).lower().strip() == "right now"
             for k, v in slots.items() if v is not None and ("date" in k or "time" in k)
         )
-        
+
         if is_right_now:
             if "date" in valid_schema:
                 cleaned_slots["date"] = self._parse_temporal_expression("right now", "date")
@@ -228,9 +248,14 @@ class StateTracker:
         return cleaned_slots
 
     def _handle_context_switch(self, new_intent: Optional[str]) -> None:
-        if new_intent and new_intent != self.ds["intent"]:
-            self.ds["intent"] = new_intent
-            self.ds["slots"] = {slot: None for slot in INTENT_SCHEMAS.get(new_intent, [])}
+        if new_intent:
+            if new_intent != self.ds["intent"] or not self.ds.get("slots"):
+                self.ds["intent"] = new_intent
+                
+                if new_intent == self.last_completed_ds.get("intent") and new_intent.startswith("ask_"):
+                    self.ds["slots"] = self.last_completed_ds["slots"].copy()
+                else:
+                    self.ds["slots"] = {slot: None for slot in INTENT_SCHEMAS.get(new_intent, [])}
 
     def _update_user_profile(self, validated_updates: Dict[str, Any]) -> None:
         if validated_updates.get("name"):
@@ -248,7 +273,7 @@ class StateTracker:
 
     def get_user_profile(self) -> Dict[str, Optional[str]]:
         return self.user_profile
-    
+
     def get_has_ds_changed(self) -> bool:
         return self.has_ds_changed
 
@@ -267,21 +292,19 @@ class StateTracker:
         validated_updates = self._validate_slots(self.ds["intent"], new_slots)
 
         actual_changes = []
-        print("\n--- DEBUG DST: ANALISI CAMBIAMENTI REALI ---")
+        logger.debug("--- DEBUG DST: ANALISI CAMBIAMENTI REALI ---")
         for k, v in validated_updates.items():
             old_val = self.ds["slots"].get(k)
-            
-            # SE v NON È VUOTO, CONFRONTIAMO LE LORO RAPPRESENTAZIONI A STRINGA
+
             if v is not None and str(old_val) != str(v):
                 actual_changes.append(k)
-                # Stampa il nome dello slot, il vecchio valore (con tipo) e il nuovo (con tipo)
-                print(f"  [!] Slot '{k}' modificato: {old_val} ({type(old_val).__name__}) -> {v} ({type(v).__name__})")
-        
-        print(f"  => Lista actual_changes: {actual_changes}")
-        print("--------------------------------------------\n")
-        
+                logger.debug("  [!] Slot '%s' modificato: %s (%s) -> %s (%s)", k, old_val, type(old_val).__name__, v, type(v).__name__)
+
+        logger.debug("  => Lista actual_changes: %s", actual_changes)
+        logger.debug("--------------------------------------------\n")
+
         if "confirmation" in actual_changes and len(actual_changes) > 1:
-            print("  [DEBUG DST] Confirmation rimossa perché sono stati rilevati altri cambiamenti contemporaneamente!")
+            logger.debug("  [DEBUG DST] Confirmation rimossa perché sono stati rilevati altri cambiamenti contemporaneamente!")
             validated_updates["confirmation"] = None
 
         self._update_user_profile(validated_updates)
@@ -292,11 +315,14 @@ class StateTracker:
                 value is None for key, value in self.ds["slots"].items() if key != "confirmation"
             )
             if has_empy_slots:
-                print("  [DEBUG DST] Confirmation rimossa perché ci sono ancora slot vuoti nello stato.")
+                logger.debug("  [DEBUG DST] Confirmation rimossa perché ci sono ancora slot vuoti nello stato.")
                 self.ds["slots"]["confirmation"] = None
 
         if self.ds["slots"] != old_ds["slots"] or self.ds["intent"] != old_ds["intent"]:
             self.has_ds_changed = True
+
+        logger.debug("DEBUG DST: Stato aggiornato: %s", self.ds)
+        logger.debug("DEBUG DST: Profilo utente aggiornato: %s", self.user_profile)
 
         return self.ds
 
@@ -309,17 +335,23 @@ class StateTracker:
     def clean_invalid_slots(self, violating_slots: str) -> None:
         if not violating_slots:
             return
-        
+
         slots_to_clear = [s.strip() for s in violating_slots.split(",")]
-        
+
         for slot in slots_to_clear:
-            # Pulisce lo slot dallo stato corrente
             if slot in self.ds["slots"]:
                 self.ds["slots"][slot] = None
-            # CRITICO: Pulisce lo slot anche dal profilo globale se è un dato di identità!
             if slot in self.user_profile:
                 self.user_profile[slot] = None
 
     def complete_task(self) -> None:
+        self.last_completed_ds = {
+            "intent": self.ds["intent"],
+            "slots": self.ds["slots"].copy()
+        }
+        
+        if "confirmation" in self.last_completed_ds["slots"]:
+            self.last_completed_ds["slots"]["confirmation"] = None
+
         self.ds["intent"] = None
         self.ds["slots"] = {}

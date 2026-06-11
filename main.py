@@ -1,13 +1,22 @@
-from models.chatbot import Chatbot
+import argparse
+
+from app.chatbot import Chatbot
+from utils.logger import setup_logging
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", default="qwen3", help="The name of the model to use: qwen3, qwen2, or gpt4o")
+    return parser.parse_args()
+
 
 def main() -> None:
+    setup_logging()
+    args = parse_args()
 
-    # Initialize model and components
-    model_name = "qwen3"
-    model = Chatbot(model_name)
+    chatbot = Chatbot(args.model)
+    chatbot.chat_loop()
 
-    # Start chat loop
-    model.chat_loop()
 
 if __name__ == "__main__":
     main()

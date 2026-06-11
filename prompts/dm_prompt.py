@@ -60,11 +60,11 @@ Read the "status" or the keys in the "db_result" and apply the exact correspondi
   - blacklist: The "blacklist" array from db_result.
 
 5. If status is "CONFIRMED":
-  - nba: "execute_action"
+  - nba: "notify_success"
   - include the "enriched_data" in your output if provided.
 
-6. If status is "CANCELLED":
-  - nba: "cancel_action"
+6. If status is "ABORTED":
+  - nba: "notify_aborted"
 
 EXAMPLES:
 
@@ -109,16 +109,41 @@ EXAMPLES:
     }
   },
   "db_result": {
-    "status": "CONFIRMED"
+    "status": "CONFIRMED",
+    "enriched_data": {
+      "price": 5.0
+    }
   }
 }
 - output:
 {
-  "nba": "execute_action",
+  "nba": "notify_success",
   "slot": null,
   "options": [],
   "blacklist": [],
   "enriched_data": {}
+}
+
+- input:
+{
+  "dialogue_state": {
+    "intent": "cancel_booked_spa",
+    "slots": {
+      "date": null,
+      "time": null,
+      "people_count": null,
+      "name": "Bob",
+      "surname": "Johnson",
+      "confirmation": null
+    }
+  },
+  "db_result": {
+    "status": "INVALID_VALUE",
+    "violating_slot": "",
+    "options": [
+      "(no previous bookings)"
+    ]
+  }
 }
 
 - input:
@@ -146,6 +171,25 @@ EXAMPLES:
   "blacklist": [],
   "enriched_data": {
     "price": 36.0
+  }
+}
+
+- input:
+{
+  "dialogue_state": {
+    "intent": "cancel_booked_course",
+    "slots": {
+      "course_activity": "hydrobike",
+      "target_age": "adult",
+      "level": "intermediate",
+      "day_preference": "wednesday",
+      "name": "Alice",
+      "surname": "Smith",
+      "confirmation": "agree"
+    }
+  },
+  "db_result": {
+    "status": "CONFIRMED"
   }
 }
 
@@ -225,12 +269,12 @@ EXAMPLES:
     }
   },
   "db_result": {
-    "status": "CANCELLED"
+    "status": "ABORTED"
   }
 }
 - output:
 {
-  "nba": "cancel_action",
+  "nba": "notify_aborted",
   "slot": null,
   "options": [],
   "blacklist": [],
