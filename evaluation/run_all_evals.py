@@ -72,16 +72,7 @@ def run_for_model(model_name: str, batch_size: int, components: list[str]) -> No
 
         if "nlg" in components:
             print("\nRunning NLG evaluation...", flush=True)
-            nlg_args = Namespace(
-                model=model_name,
-                batch_size=batch_size,
-                ground_truth=DEFAULT_GROUND_TRUTH_PATH,
-                results_dir=DEFAULT_RESULTS_DIR,
-                predictions_path=None,
-                max_samples=None,
-                manual_review=False,
-            )
-            run_nlg(nlg_args, llm=llm)
+            run_nlg(model_name=model_name, batch_size=batch_size, llm=llm)
 
     finally:
         clear_model(llm)
