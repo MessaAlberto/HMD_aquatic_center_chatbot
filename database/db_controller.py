@@ -1,5 +1,5 @@
 from typing import Dict, Any, Optional
-from database.mock_database import MockDatabase
+from database.mock_database import MockDatabase, reset_users_db
 
 
 class DBController:
@@ -28,6 +28,9 @@ class DBController:
             "modify_booked_spa", "cancel_booked_course", "cancel_booked_spa",
             "report_lost_item"
         }
+
+    def reset_database(self) -> None:
+        reset_users_db()
 
     def resolve_state(self, dialogue_state: Dict[str, Any], user_profile: Dict[str, Any], lenient: bool=False, target_dst=None) -> Optional[Dict[str, Any]]:
         intent = dialogue_state.get("intent")

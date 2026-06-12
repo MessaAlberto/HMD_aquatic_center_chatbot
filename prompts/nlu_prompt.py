@@ -22,7 +22,7 @@ RULES:
 3. Use 'conversation_history' and 'full_user_message' only to interpret explicit references in 'target_segment', such as pronouns, short answers, corrections, confirmations, or choices among options just offered by the assistant.
 4. If a slot defines allowed values in brackets [], map the user's wording to one of those values when the meaning is clear. If the user mentions something unrelated or out of scope for that slot, such as "luna park", return null.
 5. If a slot is not present or cannot be understood from the target segment in context, set its value to null.
-6. Extract temporal expressions exactly as spoken by the user. Do not format them.
+6. Extract temporal expressions exactly as spoken by the user, but keep date and time separated when both are present in the same phrase. Do not format them.
 7. Leave the 'confirmation' slot as null unless the assistant explicitly asked for confirmation.
 8. Correctly identify names and surnames even if provided in "Name Surname" or "Surname Name" order.
 9. Do not extract values that clearly belong to another separate request outside the target segment.
@@ -90,6 +90,15 @@ EXAMPLES:
 
 - input:
   {
+    "conversation_history": [],
+    "full_user_message": "Is the lido open next Saturday afternoon?",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "Is the lido open next Saturday afternoon?"
+  }
+  output: {"intent": "ask_opening_hours", "slots": {"facility_type": "lido", "date": "next Saturday", "time": "afternoon"}}
+
+- input:
+  {
     "conversation_history": [
       {"role": "user", "text": "Do you know what time the spa closes today?"},
       {"role": "assistant", "text": "The spa closes at 21:00 today."}
@@ -111,6 +120,18 @@ EXAMPLES:
     "target_segment": "Great, and the day after tomorrow?"
   }
   output: {"intent": "ask_opening_hours", "slots": {"facility_type": "swimming_pool", "date": "the day after tomorrow", "time": null}}
+
+- input:
+  {
+    "conversation_history": [
+      {"role": "user", "text": "Is the spa open today?"},
+      {"role": "assistant", "text": "The spa is open today from 10:00 to 21:00."}
+    ],
+    "full_user_message": "And tomorrow evening?",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "And tomorrow evening?"
+  }
+  output: {"intent": "ask_opening_hours", "slots": {"facility_type": "spa", "date": "tomorrow", "time": "evening"}}
 
 - input:
   {
@@ -490,6 +511,15 @@ EXAMPLES:
     "target_segment": "Can we move it to 16:00 instead?"
   }
   output: {"intent": "modify_booked_spa", "slots": {"name": null, "surname": null, "date_old": null, "time_old": null, "people_count_old": null, "date_new": null, "time_new": "16:00", "people_count_new": null, "confirmation": null}}
+
+- input:
+  {
+    "conversation_history": [],
+    "full_user_message": "Move my spa booking from next Tuesday morning to next Friday evening.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Move my spa booking from next Tuesday morning to next Friday evening."
+  }
+  output: {"intent": "modify_booked_spa", "slots": {"name": null, "surname": null, "date_old": "next Tuesday", "time_old": "morning", "people_count_old": null, "date_new": "next Friday", "time_new": "evening", "people_count_new": null, "confirmation": null}}
 
 - input:
   {

@@ -1,0 +1,1496 @@
+[
+  {
+    "id": "nlg_001",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "How much does an entry to the lido cost?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "lido",
+          "sub_type": "day_pass",
+          "user_category": null
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "user_category",
+        "options": [
+          "child",
+          "student",
+          "senior",
+          "adult"
+        ],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "lido",
+          "ticket",
+          "entry",
+          "price"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_002",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "How much is a single gym entry for students?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "day_pass",
+          "user_category": "student"
+        }
+      },
+      "dm_action": {
+        "nba": "provide_information",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {
+          "price": 8.0
+        }
+      }
+    },
+    "checks": {
+      "must_not_be_question": true,
+      "max_questions": 0,
+      "must_contain_any": [
+        [
+          "€8",
+          "8.00",
+          "8 euro",
+          "8 euros"
+        ],
+        [
+          "gym"
+        ],
+        [
+          "student",
+          "students"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_003",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "How much is a monthly subscription for the spa?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa",
+          "sub_type": null,
+          "user_category": null
+        }
+      },
+      "dm_action": {
+        "nba": "clarify_invalid_value",
+        "slot": "sub_type",
+        "options": [
+          "day_pass",
+          "10_entry_pass"
+        ],
+        "blacklist": [
+          "monthly_pass"
+        ],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "spa"
+        ],
+        [
+          "monthly",
+          "subscription"
+        ],
+        [
+          "not offer",
+          "do not offer",
+          "don't offer",
+          "not available"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_004",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "When does the swimming pool open?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "swimming_pool",
+          "date": null,
+          "time": null
+        }
+      },
+      "dm_action": {
+        "nba": "provide_information",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {
+          "schedule": {
+            "Mon-Fri": "06:00-22:00",
+            "Sat": "08:00-20:00",
+            "Sun": "09:00-14:00"
+          },
+          "notes": ""
+        }
+      }
+    },
+    "checks": {
+      "must_not_be_question": true,
+      "max_questions": 0,
+      "must_contain_any": [
+        [
+          "swimming pool",
+          "pool"
+        ],
+        [
+          "06:00"
+        ],
+        [
+          "22:00"
+        ],
+        [
+          "08:00"
+        ],
+        [
+          "20:00"
+        ],
+        [
+          "09:00"
+        ],
+        [
+          "14:00"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_005",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "When does it open tomorrow?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": null,
+          "date": "2026-04-05",
+          "time": null
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "facility_type",
+        "options": [
+          "swimming_pool",
+          "gym",
+          "lido",
+          "reception"
+        ],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "facility",
+          "area",
+          "which",
+          "service"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_006",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Are there any rules I should know about?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": null,
+          "specific_inquiry": null
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "topic",
+        "options": [
+          "swimming_pool",
+          "gym",
+          "changing_room",
+          "spa",
+          "lido"
+        ],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "rules",
+          "policy",
+          "policies"
+        ],
+        [
+          "area",
+          "facility",
+          "where",
+          "which"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_007",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Can children enter the spa?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "spa",
+          "specific_inquiry": "children"
+        }
+      },
+      "dm_action": {
+        "nba": "provide_information",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {
+          "matched_rules": {
+            "age_restriction": "Children under 14 are not allowed in the spa area."
+          }
+        }
+      }
+    },
+    "checks": {
+      "must_not_be_question": true,
+      "max_questions": 0,
+      "must_contain_any": [
+        [
+          "children",
+          "kids"
+        ],
+        [
+          "under 14",
+          "14"
+        ],
+        [
+          "not allowed",
+          "cannot",
+          "can't"
+        ],
+        [
+          "spa"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_008",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Can I smoke in the bar?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "bar",
+          "specific_inquiry": "smoking"
+        }
+      },
+      "dm_action": {
+        "nba": "clarify_invalid_value",
+        "slot": "topic",
+        "options": [
+          "swimming_pool",
+          "gym",
+          "changing_room",
+          "spa",
+          "lido"
+        ],
+        "blacklist": [
+          "bar"
+        ],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "bar"
+        ],
+        [
+          "not",
+          "don't",
+          "do not",
+          "no specific"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_009",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Can I sign up for the aquagym course for teens on Monday?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "teen",
+          "level": null,
+          "day_preference": "monday",
+          "name": null,
+          "surname": null,
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "level",
+        "options": [
+          "beginner",
+          "intermediate",
+          "advanced"
+        ],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "aquagym",
+          "course"
+        ],
+        [
+          "level"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_010",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "My name is Emma Williams."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school",
+          "target_age": "child",
+          "level": "beginner",
+          "day_preference": "monday",
+          "name": "Emma",
+          "surname": "Williams",
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "confirm",
+          "correct",
+          "right"
+        ],
+        [
+          "Emma"
+        ],
+        [
+          "Williams"
+        ],
+        [
+          "swimming school",
+          "swimming_school"
+        ],
+        [
+          "beginner"
+        ],
+        [
+          "monday"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_011",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "I want to book a yoga course on Friday."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "yoga",
+          "target_age": "adult",
+          "level": null,
+          "day_preference": "friday",
+          "name": null,
+          "surname": null,
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "clarify_invalid_value",
+        "slot": "course_activity",
+        "options": [
+          "hydrobike",
+          "swimming_school",
+          "aquagym",
+          "newborn_swimming"
+        ],
+        "blacklist": [
+          "yoga"
+        ],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "yoga"
+        ],
+        [
+          "not offer",
+          "do not offer",
+          "don't offer",
+          "not available"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_012",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "I want to book swimming school on Friday."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school",
+          "target_age": "child",
+          "level": "beginner",
+          "day_preference": "friday",
+          "name": "Bob",
+          "surname": "Johnson",
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "resolve_conflict",
+        "slot": "day_preference",
+        "options": [
+          "tuesday",
+          "thursday"
+        ],
+        "blacklist": [
+          "friday"
+        ],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "friday"
+        ],
+        [
+          "already",
+          "conflict",
+          "not available",
+          "another booking",
+          "booking"
+        ]
+      ],
+      "no_false_promise": false
+    }
+  },
+  {
+    "id": "nlg_013",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Yes, I confirm."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "adult",
+          "level": "intermediate",
+          "day_preference": "wednesday",
+          "name": "Alice",
+          "surname": "Smith",
+          "confirmation": "agree"
+        }
+      },
+      "dm_action": {
+        "nba": "notify_success",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_not_be_question": true,
+      "max_questions": 0,
+      "must_contain_any": [
+        [
+          "booked",
+          "confirmed",
+          "all set"
+        ],
+        [
+          "Alice"
+        ],
+        [
+          "hydrobike"
+        ],
+        [
+          "wednesday"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_014",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "No, cancel it."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "monday",
+          "name": "Mario",
+          "surname": "Rossi",
+          "confirmation": "deny"
+        }
+      },
+      "dm_action": {
+        "nba": "notify_aborted",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_not_be_question": true,
+      "max_questions": 0,
+      "must_contain_any": [
+        [
+          "not booked",
+          "no course",
+          "aborted",
+          "cancelled",
+          "canceled"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_015",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "I want to book the spa and also ask about gym prices."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-07-13",
+          "time": null,
+          "people_count": 2,
+          "name": null,
+          "surname": null,
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "time",
+        "options": [
+          "10:00 - 21:00"
+        ],
+        "blacklist": [],
+        "enriched_data": {},
+        "step_by_step_mode": true
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "one thing",
+          "one step",
+          "first",
+          "start"
+        ],
+        [
+          "time",
+          "what time"
+        ],
+        [
+          "spa"
+        ],
+        [
+          "10:00"
+        ],
+        [
+          "21:00"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_016",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Can I book the spa at 23:00?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-07-13",
+          "time": "23:00",
+          "people_count": 2,
+          "name": "Luigi",
+          "surname": "Verdi",
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "clarify_invalid_value",
+        "slot": "time",
+        "options": [
+          "10:00 - 21:00"
+        ],
+        "blacklist": [
+          "23:00"
+        ],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "10:00"
+        ],
+        [
+          "21:00"
+        ],
+        [
+          "not available",
+          "outside",
+          "only",
+          "between"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_017",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Yes, confirm it."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-07-13",
+          "time": "15:30",
+          "people_count": 2,
+          "name": "Luigi",
+          "surname": "Verdi",
+          "confirmation": "agree"
+        }
+      },
+      "dm_action": {
+        "nba": "notify_success",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_not_be_question": true,
+      "max_questions": 0,
+      "must_contain_any": [
+        [
+          "spa"
+        ],
+        [
+          "booked",
+          "confirmed",
+          "reserved",
+          "all set"
+        ],
+        [
+          "15:30"
+        ],
+        [
+          "2",
+          "two"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_018",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Can I change my hydrobike course to beginner level?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "tuesday",
+          "name": "Mario",
+          "surname": "Rossi",
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "resolve_conflict",
+        "slot": "level",
+        "options": [
+          "intermediate"
+        ],
+        "blacklist": [
+          "beginner"
+        ],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "level"
+        ],
+        [
+          "intermediate"
+        ],
+        [
+          "beginner"
+        ],
+        [
+          "cannot",
+          "can't",
+          "not allowed",
+          "not possible"
+        ]
+      ],
+      "no_false_promise": false
+    }
+  },
+  {
+    "id": "nlg_019",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Cancel my aquagym booking."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "wednesday",
+          "name": "Mario",
+          "surname": "Rossi",
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "blacklist": [],
+        "enriched_data": {
+          "booking_to_cancel": "aquagym (beginner - wednesday)"
+        }
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "cancel"
+        ],
+        [
+          "aquagym"
+        ],
+        [
+          "beginner"
+        ],
+        [
+          "wednesday"
+        ],
+        [
+          "confirm",
+          "correct",
+          "proceed"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_020",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "I want to buy a white towel in size M."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "size": "M",
+          "color": "white",
+          "brand": null,
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "brand",
+        "options": [
+          "decathlon",
+          "arena"
+        ],
+        "blacklist": [],
+        "enriched_data": {
+          "brand_prices": {
+            "decathlon": 12.0,
+            "arena": 15.0
+          }
+        }
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "towel"
+        ],
+        [
+          "white"
+        ],
+        [
+          "M",
+          "size M"
+        ],
+        [
+          "€12",
+          "12.00",
+          "12 euro"
+        ],
+        [
+          "€15",
+          "15.00",
+          "15 euro"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_021",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "I want to buy a towel in size XL."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "size": "XL",
+          "color": null,
+          "brand": null,
+          "confirmation": null
+        }
+      },
+      "dm_action": {
+        "nba": "clarify_invalid_value",
+        "slot": "size",
+        "options": [
+          "M",
+          "L"
+        ],
+        "blacklist": [
+          "XL"
+        ],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "max_questions": 1,
+      "must_mention_options": true,
+      "must_contain_any": [
+        [
+          "towel"
+        ],
+        [
+          "XL"
+        ],
+        [
+          "not",
+          "don't",
+          "do not",
+          "not available"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_022",
+    "input": {
+      "history": [
+        {
+          "role": "assistant",
+          "content": "Do you prefer the green, yellow, or red goggles?"
+        },
+        {
+          "role": "user",
+          "content": "I choose the red ones."
+        },
+        {
+          "role": "assistant",
+          "content": "Arena goggles cost €18.00. Do you confirm the purchase?"
+        },
+        {
+          "role": "user",
+          "content": "Yes, I do."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles",
+          "size": null,
+          "color": "red",
+          "brand": "arena",
+          "confirmation": "agree"
+        }
+      },
+      "dm_action": {
+        "nba": "notify_success",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {
+          "price": 18.0
+        },
+        "queue_recovery": true,
+        "recovered_intent": "modify_booked_course"
+      }
+    },
+    "checks": {
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "reception",
+          "pay",
+          "pick up",
+          "purchase"
+        ],
+        [
+          "goggles",
+          "item"
+        ],
+        [
+          "modify",
+          "course",
+          "previous",
+          "earlier"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_023",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "I lost my red backpack yesterday."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "lost_item": "backpack",
+          "item_color": "red",
+          "last_seen_location": null,
+          "last_seen_date": "2026-03-10",
+          "name": "Bob",
+          "surname": "Johnson"
+        }
+      },
+      "dm_action": {
+        "nba": "request_slot",
+        "slot": "last_seen_location",
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "where",
+          "location",
+          "last see",
+          "last seen"
+        ],
+        [
+          "backpack"
+        ],
+        [
+          "red"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_024",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "I lost my black wallet tomorrow."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "lost_item": "wallet",
+          "item_color": "black",
+          "last_seen_location": "lido",
+          "last_seen_date": "2026-04-30",
+          "name": "Eve",
+          "surname": "Brown"
+        }
+      },
+      "dm_action": {
+        "nba": "clarify_invalid_value",
+        "slot": "last_seen_date",
+        "options": [
+          "today or earlier"
+        ],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "must_be_question": true,
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "future",
+          "today or earlier",
+          "can't be",
+          "cannot be"
+        ],
+        [
+          "when",
+          "date"
+        ],
+        [
+          "wallet"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_025",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "I'm Laura. Also, what time does the pool open?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "user_identification",
+        "slots": {
+          "name": "Laura",
+          "surname": null
+        }
+      },
+      "dm_action": {
+        "nba": "notify_success",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {},
+        "is_multitask": true
+      }
+    },
+    "checks": {
+      "max_words": 8,
+      "max_sentences": 1,
+      "max_questions": 0,
+      "must_not_be_question": true,
+      "must_contain_any": [
+        [
+          "Laura"
+        ]
+      ],
+      "must_not_contain": [
+        "how can I help",
+        "what can I do",
+        "prices",
+        "opening hours",
+        "pool"
+      ]
+    }
+  },
+  {
+    "id": "nlg_026",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Hello!"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "greeting_closing",
+        "slots": {}
+      },
+      "dm_action": {
+        "nba": "provide_information",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "hello",
+          "hi",
+          "welcome"
+        ],
+        [
+          "aquatic center",
+          "center",
+          "bookings",
+          "opening hours",
+          "prices",
+          "lost items"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_027",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Can you tell me what the weather is like today?"
+        }
+      ],
+      "dialogue_state": {
+        "intent": "out_of_scope",
+        "slots": {}
+      },
+      "dm_action": {
+        "nba": "provide_information",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {}
+      }
+    },
+    "checks": {
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "only",
+          "can't",
+          "cannot",
+          "afraid"
+        ],
+        [
+          "aquatic center",
+          "center"
+        ],
+        [
+          "bookings",
+          "opening hours",
+          "prices",
+          "rules",
+          "lost items"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_028",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "Can you confirm my spa booking and tell me the gym price?"
+        },
+        {
+          "role": "assistant",
+          "content": "Your spa booking has been confirmed."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "day_pass",
+          "user_category": "adult"
+        }
+      },
+      "dm_action": {
+        "nba": "provide_information",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {
+          "price": 10.0
+        },
+        "is_multitask": true,
+        "is_second_response": true
+      }
+    },
+    "checks": {
+      "must_not_be_question": true,
+      "max_questions": 0,
+      "max_sentences": 1,
+      "must_contain_any": [
+        [
+          "also",
+          "as for",
+          "regarding",
+          "and"
+        ],
+        [
+          "gym"
+        ],
+        [
+          "€10",
+          "10.00",
+          "10 euro"
+        ]
+      ]
+    }
+  },
+  {
+    "id": "nlg_029",
+    "input": {
+      "history": [
+        {
+          "role": "user",
+          "content": "How much is a day pass for the gym? Can I also book a spa for 2 people?"
+        },
+        {
+          "role": "assistant",
+          "content": "Let's start simple. Is the gym ticket for a child, student, senior, or adult?"
+        },
+        {
+          "role": "user",
+          "content": "I'm an adult."
+        }
+      ],
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "day_pass",
+          "user_category": "adult"
+        }
+      },
+      "dm_action": {
+        "nba": "provide_information",
+        "slot": null,
+        "options": [],
+        "blacklist": [],
+        "enriched_data": {
+          "price": 10.0
+        },
+        "queue_recovery": true,
+        "recovered_intent": "book_spa"
+      }
+    },
+    "checks": {
+      "max_questions": 1,
+      "must_contain_any": [
+        [
+          "€10",
+          "10.00",
+          "10 euro"
+        ],
+        [
+          "gym",
+          "day pass"
+        ],
+        [
+          "spa"
+        ],
+        [
+          "book",
+          "booking",
+          "reserve",
+          "reservation",
+          "interested"
+        ]
+      ]
+    }
+  }
+]

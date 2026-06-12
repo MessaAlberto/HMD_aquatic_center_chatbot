@@ -35,9 +35,7 @@ class Chatbot:
 
     def reset_all(self) -> None:
         self.reset_state()
-        # Add DB reset here only if DBController has a specific method for it.
-        # Example:
-        # self.db_controller.reset()
+        self.db_controller.reset_database()
 
     def _prepare_pipeline(self, nlu_result, target_dst, lenient=False):
         ds = target_dst.update(nlu_result)

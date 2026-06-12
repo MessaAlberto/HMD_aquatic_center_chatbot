@@ -1,0 +1,7287 @@
+[
+  {
+    "id": "dm_001",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "swimming_pool"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": {
+            "Mon-Fri": "06:00-22:00",
+            "Sat": "08:00-20:00",
+            "Sun": "09:00-14:00"
+          },
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": {
+          "Mon-Fri": "06:00-22:00",
+          "Sat": "08:00-20:00",
+          "Sun": "09:00-14:00"
+        },
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_002",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "swimming_pool",
+          "date": "2026-06-15"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": "06:00-22:00",
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": "06:00-22:00",
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_003",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "swimming_pool",
+          "date": "2026-06-15",
+          "time": "10:00"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "is_open": true,
+          "schedule": "06:00-22:00",
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "is_open": true,
+        "schedule": "06:00-22:00",
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_004",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "gym"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": {
+            "Mon-Fri": "06:00-23:00",
+            "Sat-Sun": "08:00-20:00"
+          },
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": {
+          "Mon-Fri": "06:00-23:00",
+          "Sat-Sun": "08:00-20:00"
+        },
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_005",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "gym",
+          "date": "2026-06-15"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": "06:00-23:00",
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": "06:00-23:00",
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_006",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "gym",
+          "date": "2026-06-15",
+          "time": "10:00"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "is_open": true,
+          "schedule": "06:00-23:00",
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "is_open": true,
+        "schedule": "06:00-23:00",
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_007",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "spa"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": {
+            "Mon-Sun": "10:00-21:00"
+          },
+          "notes": "Reservation required"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": {
+          "Mon-Sun": "10:00-21:00"
+        },
+        "notes": "Reservation required"
+      }
+    }
+  },
+  {
+    "id": "dm_008",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "spa",
+          "date": "2026-06-15"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": "10:00-21:00",
+          "notes": "Reservation required"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": "10:00-21:00",
+        "notes": "Reservation required"
+      }
+    }
+  },
+  {
+    "id": "dm_009",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "spa",
+          "date": "2026-06-15",
+          "time": "10:00"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "is_open": true,
+          "schedule": "10:00-21:00",
+          "notes": "Reservation required"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "is_open": true,
+        "schedule": "10:00-21:00",
+        "notes": "Reservation required"
+      }
+    }
+  },
+  {
+    "id": "dm_010",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "lido"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": {
+            "Mon-Sun": "09:00-19:00"
+          },
+          "notes": "Summer season only"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": {
+          "Mon-Sun": "09:00-19:00"
+        },
+        "notes": "Summer season only"
+      }
+    }
+  },
+  {
+    "id": "dm_011",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "lido",
+          "date": "2026-06-15"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": "09:00-19:00",
+          "notes": "Summer season only"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": "09:00-19:00",
+        "notes": "Summer season only"
+      }
+    }
+  },
+  {
+    "id": "dm_012",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "lido",
+          "date": "2026-06-15",
+          "time": "10:00"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "is_open": true,
+          "schedule": "09:00-19:00",
+          "notes": "Summer season only"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "is_open": true,
+        "schedule": "09:00-19:00",
+        "notes": "Summer season only"
+      }
+    }
+  },
+  {
+    "id": "dm_013",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "reception"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": {
+            "Mon-Sun": "08:00-20:00"
+          },
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": {
+          "Mon-Sun": "08:00-20:00"
+        },
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_014",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "reception",
+          "date": "2026-06-15"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": "08:00-20:00",
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": "08:00-20:00",
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_015",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "reception",
+          "date": "2026-06-15",
+          "time": "10:00"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "is_open": true,
+          "schedule": "08:00-20:00",
+          "notes": ""
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "is_open": true,
+        "schedule": "08:00-20:00",
+        "notes": ""
+      }
+    }
+  },
+  {
+    "id": "dm_016",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "facility_type",
+        "options": [
+          "swimming_pool",
+          "gym",
+          "spa",
+          "lido",
+          "reception"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "facility_type",
+      "options": [
+        "swimming_pool",
+        "gym",
+        "spa",
+        "lido",
+        "reception"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_017",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "date": "bad-date"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "date",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "date",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_018",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "gym",
+          "time": "bad-time"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "time",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "time",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_019",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_opening_hours",
+        "slots": {
+          "facility_type": "spa",
+          "time": "18:00"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "schedule": {
+            "Mon-Sun": "10:00-21:00"
+          },
+          "notes": "Reservation required"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "schedule": {
+          "Mon-Sun": "10:00-21:00"
+        },
+        "notes": "Reservation required"
+      }
+    }
+  },
+  {
+    "id": "dm_020",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "public_swim"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "sub_type",
+        "options": [
+          "day_pass",
+          "10_entry_pass",
+          "monthly_pass",
+          "annual_pass"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "sub_type",
+      "options": [
+        "day_pass",
+        "10_entry_pass",
+        "monthly_pass",
+        "annual_pass"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_021",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "public_swim",
+          "sub_type": "day_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "child",
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "child",
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_022",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "public_swim",
+          "sub_type": "day_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 8.5
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 8.5
+      }
+    }
+  },
+  {
+    "id": "dm_023",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "public_swim",
+          "sub_type": "day_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 6.800000000000001
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 6.800000000000001
+      }
+    }
+  },
+  {
+    "id": "dm_024",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "public_swim",
+          "sub_type": "10_entry_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "child",
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "child",
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_025",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "public_swim",
+          "sub_type": "10_entry_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 75.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 75.0
+      }
+    }
+  },
+  {
+    "id": "dm_026",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "public_swim",
+          "sub_type": "10_entry_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 60.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 60.0
+      }
+    }
+  },
+  {
+    "id": "dm_027",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "sub_type",
+        "options": [
+          "day_pass",
+          "10_entry_pass",
+          "monthly_pass",
+          "annual_pass"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "sub_type",
+      "options": [
+        "day_pass",
+        "10_entry_pass",
+        "monthly_pass",
+        "annual_pass"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_028",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "day_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_029",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "day_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 10.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 10.0
+      }
+    }
+  },
+  {
+    "id": "dm_030",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "day_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 8.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 8.0
+      }
+    }
+  },
+  {
+    "id": "dm_031",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "10_entry_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_032",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "10_entry_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 90.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 90.0
+      }
+    }
+  },
+  {
+    "id": "dm_033",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "gym",
+          "sub_type": "10_entry_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 72.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 72.0
+      }
+    }
+  },
+  {
+    "id": "dm_034",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "sub_type",
+        "options": [
+          "day_pass",
+          "10_entry_pass"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "sub_type",
+      "options": [
+        "day_pass",
+        "10_entry_pass"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_035",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa",
+          "sub_type": "day_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_036",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa",
+          "sub_type": "day_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 25.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 25.0
+      }
+    }
+  },
+  {
+    "id": "dm_037",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa",
+          "sub_type": "day_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 20.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 20.0
+      }
+    }
+  },
+  {
+    "id": "dm_038",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa",
+          "sub_type": "10_entry_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_039",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa",
+          "sub_type": "10_entry_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 220.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 220.0
+      }
+    }
+  },
+  {
+    "id": "dm_040",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa",
+          "sub_type": "10_entry_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 176.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 176.0
+      }
+    }
+  },
+  {
+    "id": "dm_041",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "course"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "sub_type",
+        "options": [
+          "monthly_pass",
+          "annual_pass"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "sub_type",
+      "options": [
+        "monthly_pass",
+        "annual_pass"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_042",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "course",
+          "sub_type": "monthly_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "child",
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "child",
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_043",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "course",
+          "sub_type": "monthly_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 80.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 80.0
+      }
+    }
+  },
+  {
+    "id": "dm_044",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "course",
+          "sub_type": "monthly_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 64.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 64.0
+      }
+    }
+  },
+  {
+    "id": "dm_045",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "course",
+          "sub_type": "annual_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "child",
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "child",
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_046",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "course",
+          "sub_type": "annual_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 700.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 700.0
+      }
+    }
+  },
+  {
+    "id": "dm_047",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "course",
+          "sub_type": "annual_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 560.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 560.0
+      }
+    }
+  },
+  {
+    "id": "dm_048",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "lido"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "sub_type",
+        "options": [
+          "day_pass",
+          "monthly_pass",
+          "annual_pass"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "sub_type",
+      "options": [
+        "day_pass",
+        "monthly_pass",
+        "annual_pass"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_049",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "lido",
+          "sub_type": "day_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "child",
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "child",
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_050",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "lido",
+          "sub_type": "day_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 10.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 10.0
+      }
+    }
+  },
+  {
+    "id": "dm_051",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "lido",
+          "sub_type": "day_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 8.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 8.0
+      }
+    }
+  },
+  {
+    "id": "dm_052",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "lido",
+          "sub_type": "monthly_pass"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "user_category",
+        "options": [
+          "child",
+          "student",
+          "senior",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "user_category",
+      "options": [
+        "child",
+        "student",
+        "senior",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_053",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "lido",
+          "sub_type": "monthly_pass",
+          "user_category": "adult"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 70.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 70.0
+      }
+    }
+  },
+  {
+    "id": "dm_054",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "lido",
+          "sub_type": "monthly_pass",
+          "user_category": "student"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "price": 56.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 56.0
+      }
+    }
+  },
+  {
+    "id": "dm_055",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {
+          "service_type": "spa",
+          "sub_type": "annual_pass"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "sub_type",
+        "options": [
+          "day_pass",
+          "10_entry_pass"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "sub_type",
+      "options": [
+        "day_pass",
+        "10_entry_pass"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_056",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_pricing",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "service_type",
+        "options": [
+          "public_swim",
+          "gym",
+          "spa",
+          "course",
+          "lido"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "service_type",
+      "options": [
+        "public_swim",
+        "gym",
+        "spa",
+        "course",
+        "lido"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_057",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "swimming_pool"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "swimming_cap": "Mandatory in the main pool at all times.",
+            "medical_certificate": "Required for competitive courses and annual_pass subscriptions.",
+            "shower": "You must take a shower before entering the pool.",
+            "lane_etiquette": "Always swim on the right side of the lane."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "swimming_cap": "Mandatory in the main pool at all times.",
+          "medical_certificate": "Required for competitive courses and annual_pass subscriptions.",
+          "shower": "You must take a shower before entering the pool.",
+          "lane_etiquette": "Always swim on the right side of the lane."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_058",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "swimming_pool",
+          "specific_inquiry": "Can I ask about cap?"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "swimming_cap": "Mandatory in the main pool at all times."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "swimming_cap": "Mandatory in the main pool at all times."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_059",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "swimming_pool",
+          "specific_inquiry": "something unclear"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "swimming_cap": "Mandatory in the main pool at all times.",
+            "medical_certificate": "Required for competitive courses and annual_pass subscriptions.",
+            "shower": "You must take a shower before entering the pool.",
+            "lane_etiquette": "Always swim on the right side of the lane."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "swimming_cap": "Mandatory in the main pool at all times.",
+          "medical_certificate": "Required for competitive courses and annual_pass subscriptions.",
+          "shower": "You must take a shower before entering the pool.",
+          "lane_etiquette": "Always swim on the right side of the lane."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_060",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "gym"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "towel": "Mandatory to use on all machines and benches.",
+            "shoes": "Clean indoor shoes are required. No street shoes allowed.",
+            "weights": "Please return all dumbbells and weights to their racks after use."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "towel": "Mandatory to use on all machines and benches.",
+          "shoes": "Clean indoor shoes are required. No street shoes allowed.",
+          "weights": "Please return all dumbbells and weights to their racks after use."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_061",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "gym",
+          "specific_inquiry": "Can I ask about towel?"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "towel": "Mandatory to use on all machines and benches."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "towel": "Mandatory to use on all machines and benches."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_062",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "gym",
+          "specific_inquiry": "something unclear"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "towel": "Mandatory to use on all machines and benches.",
+            "shoes": "Clean indoor shoes are required. No street shoes allowed.",
+            "weights": "Please return all dumbbells and weights to their racks after use."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "towel": "Mandatory to use on all machines and benches.",
+          "shoes": "Clean indoor shoes are required. No street shoes allowed.",
+          "weights": "Please return all dumbbells and weights to their racks after use."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_063",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "changing_room"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "padlock": "Required for lockers. Bring your own or buy one at the shop.",
+            "slippers": "Mandatory in the changing rooms and showers."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "padlock": "Required for lockers. Bring your own or buy one at the shop.",
+          "slippers": "Mandatory in the changing rooms and showers."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_064",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "changing_room",
+          "specific_inquiry": "Can I ask about padlock?"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "padlock": "Required for lockers. Bring your own or buy one at the shop."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "padlock": "Required for lockers. Bring your own or buy one at the shop."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_065",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "changing_room",
+          "specific_inquiry": "something unclear"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "padlock": "Required for lockers. Bring your own or buy one at the shop.",
+            "slippers": "Mandatory in the changing rooms and showers."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "padlock": "Required for lockers. Bring your own or buy one at the shop.",
+          "slippers": "Mandatory in the changing rooms and showers."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_066",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "spa"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "swimsuit": "Swimsuits are mandatory. Nudity is not allowed.",
+            "silence": "Please maintain a quiet environment. Whispering only.",
+            "age_restriction": "Children under 14 are not allowed in the spa area."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "swimsuit": "Swimsuits are mandatory. Nudity is not allowed.",
+          "silence": "Please maintain a quiet environment. Whispering only.",
+          "age_restriction": "Children under 14 are not allowed in the spa area."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_067",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "spa",
+          "specific_inquiry": "Can I ask about swimsuit?"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "swimsuit": "Swimsuits are mandatory. Nudity is not allowed."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "swimsuit": "Swimsuits are mandatory. Nudity is not allowed."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_068",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "spa",
+          "specific_inquiry": "something unclear"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "swimsuit": "Swimsuits are mandatory. Nudity is not allowed.",
+            "silence": "Please maintain a quiet environment. Whispering only.",
+            "age_restriction": "Children under 14 are not allowed in the spa area."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "swimsuit": "Swimsuits are mandatory. Nudity is not allowed.",
+          "silence": "Please maintain a quiet environment. Whispering only.",
+          "age_restriction": "Children under 14 are not allowed in the spa area."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_069",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "lido"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "food": "Picnics are allowed only in designated lawn areas.",
+            "glass": "Glass bottles and containers are strictly forbidden."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "food": "Picnics are allowed only in designated lawn areas.",
+          "glass": "Glass bottles and containers are strictly forbidden."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_070",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "lido",
+          "specific_inquiry": "Can I ask about food?"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "food": "Picnics are allowed only in designated lawn areas."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "food": "Picnics are allowed only in designated lawn areas."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_071",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "lido",
+          "specific_inquiry": "something unclear"
+        }
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {
+          "matched_rules": {
+            "food": "Picnics are allowed only in designated lawn areas.",
+            "glass": "Glass bottles and containers are strictly forbidden."
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "matched_rules": {
+          "food": "Picnics are allowed only in designated lawn areas.",
+          "glass": "Glass bottles and containers are strictly forbidden."
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_072",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "topic",
+        "options": [
+          "swimming_pool",
+          "gym",
+          "changing_room",
+          "spa",
+          "lido"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "topic",
+      "options": [
+        "swimming_pool",
+        "gym",
+        "changing_room",
+        "spa",
+        "lido"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_073",
+    "input": {
+      "dialogue_state": {
+        "intent": "ask_rules",
+        "slots": {
+          "topic": "parking"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "topic",
+        "options": [
+          "swimming_pool",
+          "gym",
+          "changing_room",
+          "spa",
+          "lido"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "topic",
+      "options": [
+        "swimming_pool",
+        "gym",
+        "changing_room",
+        "spa",
+        "lido"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_074",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "date",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "date",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_075",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "bad-date"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "date",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "date",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_076",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "time",
+        "options": [
+          "10:00 - 21:00"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "time",
+      "options": [
+        "10:00 - 21:00"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_077",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "bad"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "time",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "time",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_078",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "22:00"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "time",
+        "options": [
+          "10:00 - 21:00"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "time",
+      "options": [
+        "10:00 - 21:00"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_079",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "15:00"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "people_count",
+        "options": [
+          "1-8"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "people_count",
+      "options": [
+        "1-8"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_080",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "15:00",
+          "people_count": 0
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "people_count",
+        "options": [
+          "1-8"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "people_count",
+      "options": [
+        "1-8"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_081",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "15:00",
+          "people_count": 2
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_082",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "15:00",
+          "people_count": 2,
+          "name": "Anna",
+          "surname": null
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_083",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "15:00",
+          "people_count": 2,
+          "name": null,
+          "surname": "Blu"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_084",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-15",
+          "time": "15:30",
+          "people_count": 2,
+          "name": "luigi",
+          "surname": "verdi"
+        }
+      },
+      "db_result": {
+        "status": "OVERLAP",
+        "violating_slot": "date",
+        "options": [],
+        "blacklist": [
+          "2026-06-15"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "resolve_conflict",
+      "slot": "date",
+      "options": [],
+      "blacklist": [
+        "2026-06-15"
+      ],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_085",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "15:00",
+          "people_count": 2,
+          "name": "Anna",
+          "surname": "Blu"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_086",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "15:00",
+          "people_count": 2,
+          "name": "Anna",
+          "surname": "Blu",
+          "confirmation": "deny"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_087",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_spa",
+        "slots": {
+          "date": "2026-06-20",
+          "time": "15:00",
+          "people_count": 2,
+          "name": "Anna",
+          "surname": "Blu",
+          "confirmation": "agree"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_088",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "course_activity",
+        "options": [
+          "aquagym",
+          "hydrobike",
+          "swimming_school",
+          "newborn_swimming"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "course_activity",
+      "options": [
+        "aquagym",
+        "hydrobike",
+        "swimming_school",
+        "newborn_swimming"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_089",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "monday"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "course_activity",
+        "options": [
+          "aquagym",
+          "swimming_school"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "course_activity",
+      "options": [
+        "aquagym",
+        "swimming_school"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_090",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "target_age": "senior",
+          "level": "advanced",
+          "day_preference": "sunday"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "target_age, level, day_preference",
+        "options": [
+          "aquagym",
+          "hydrobike",
+          "swimming_school",
+          "newborn_swimming"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "target_age, level, day_preference",
+      "options": [
+        "aquagym",
+        "hydrobike",
+        "swimming_school",
+        "newborn_swimming"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_091",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "target_age",
+        "options": [
+          "teen",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "target_age",
+      "options": [
+        "teen",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_092",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "invalid_age"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "target_age",
+        "options": [
+          "teen",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "target_age",
+      "options": [
+        "teen",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_093",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "teen"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "level",
+        "options": [
+          "beginner",
+          "intermediate",
+          "advanced"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "level",
+      "options": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_094",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "teen",
+          "level": "wrong"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "level",
+        "options": [
+          "beginner",
+          "intermediate",
+          "advanced"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "level",
+      "options": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_095",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "teen",
+          "level": "beginner"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "day_preference",
+        "options": [
+          "monday",
+          "wednesday",
+          "friday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "day_preference",
+      "options": [
+        "monday",
+        "wednesday",
+        "friday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_096",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "teen",
+          "level": "beginner",
+          "day_preference": "wrongday"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "day_preference",
+        "options": [
+          "monday",
+          "wednesday",
+          "friday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "day_preference",
+      "options": [
+        "monday",
+        "wednesday",
+        "friday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_097",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "teen",
+          "level": "beginner",
+          "day_preference": "monday"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_098",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "target_age",
+        "options": [
+          "teen",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "target_age",
+      "options": [
+        "teen",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_099",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "invalid_age"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "target_age",
+        "options": [
+          "teen",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "target_age",
+      "options": [
+        "teen",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_100",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "teen"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "level",
+        "options": [
+          "intermediate",
+          "advanced"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "level",
+      "options": [
+        "intermediate",
+        "advanced"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_101",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "teen",
+          "level": "wrong"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "level",
+        "options": [
+          "intermediate",
+          "advanced"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "level",
+      "options": [
+        "intermediate",
+        "advanced"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_102",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "teen",
+          "level": "intermediate"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "day_preference",
+        "options": [
+          "tuesday",
+          "thursday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "day_preference",
+      "options": [
+        "tuesday",
+        "thursday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_103",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "teen",
+          "level": "intermediate",
+          "day_preference": "wrongday"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "day_preference",
+        "options": [
+          "tuesday",
+          "thursday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "day_preference",
+      "options": [
+        "tuesday",
+        "thursday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_104",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "teen",
+          "level": "intermediate",
+          "day_preference": "tuesday"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_105",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "target_age",
+        "options": [
+          "child",
+          "teen",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "target_age",
+      "options": [
+        "child",
+        "teen",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_106",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school",
+          "target_age": "invalid_age"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "target_age",
+        "options": [
+          "child",
+          "teen",
+          "adult"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "target_age",
+      "options": [
+        "child",
+        "teen",
+        "adult"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_107",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school",
+          "target_age": "child"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "level",
+        "options": [
+          "beginner",
+          "intermediate",
+          "advanced"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "level",
+      "options": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_108",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school",
+          "target_age": "child",
+          "level": "wrong"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "level",
+        "options": [
+          "beginner",
+          "intermediate",
+          "advanced"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "level",
+      "options": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_109",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school",
+          "target_age": "child",
+          "level": "beginner"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "day_preference",
+        "options": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "day_preference",
+      "options": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_110",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school",
+          "target_age": "child",
+          "level": "beginner",
+          "day_preference": "wrongday"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "day_preference",
+        "options": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "day_preference",
+      "options": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_111",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "swimming_school",
+          "target_age": "child",
+          "level": "beginner",
+          "day_preference": "monday"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_112",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "newborn_swimming"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "target_age",
+        "options": [
+          "child"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "target_age",
+      "options": [
+        "child"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_113",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "newborn_swimming",
+          "target_age": "invalid_age"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "target_age",
+        "options": [
+          "child"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "target_age",
+      "options": [
+        "child"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_114",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "newborn_swimming",
+          "target_age": "child"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "level",
+        "options": [
+          "beginner"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "level",
+      "options": [
+        "beginner"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_115",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "newborn_swimming",
+          "target_age": "child",
+          "level": "wrong"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "level",
+        "options": [
+          "beginner"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "level",
+      "options": [
+        "beginner"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_116",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "newborn_swimming",
+          "target_age": "child",
+          "level": "beginner"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "day_preference",
+        "options": [
+          "saturday",
+          "sunday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "day_preference",
+      "options": [
+        "saturday",
+        "sunday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_117",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "newborn_swimming",
+          "target_age": "child",
+          "level": "beginner",
+          "day_preference": "wrongday"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "day_preference",
+        "options": [
+          "saturday",
+          "sunday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "day_preference",
+      "options": [
+        "saturday",
+        "sunday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_118",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "newborn_swimming",
+          "target_age": "child",
+          "level": "beginner",
+          "day_preference": "saturday"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_119",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "monday",
+          "name": "Anna",
+          "surname": null
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_120",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "monday",
+          "name": null,
+          "surname": "Blu"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_121",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "monday",
+          "name": "Anna",
+          "surname": "Blu"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_122",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "monday",
+          "name": "Anna",
+          "surname": "Blu",
+          "confirmation": "deny"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_123",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "monday",
+          "name": "Anna",
+          "surname": "Blu",
+          "confirmation": "agree"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_124",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "aquagym",
+          "target_age": "adult",
+          "level": "beginner",
+          "day_preference": "wednesday",
+          "name": "mario",
+          "surname": "rossi"
+        }
+      },
+      "db_result": {
+        "status": "OVERLAP",
+        "violating_slot": "day_preference",
+        "options": [
+          "monday",
+          "friday"
+        ],
+        "blacklist": [
+          "wednesday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "resolve_conflict",
+      "slot": "day_preference",
+      "options": [
+        "monday",
+        "friday"
+      ],
+      "blacklist": [
+        "wednesday"
+      ],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_125",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "adult",
+          "level": "advanced",
+          "day_preference": "thursday",
+          "name": "mario",
+          "surname": "rossi"
+        }
+      },
+      "db_result": {
+        "status": "OVERLAP",
+        "violating_slot": "level",
+        "options": [
+          "intermediate"
+        ],
+        "blacklist": [
+          "advanced"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "resolve_conflict",
+      "slot": "level",
+      "options": [
+        "intermediate"
+      ],
+      "blacklist": [
+        "advanced"
+      ],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_126",
+    "input": {
+      "dialogue_state": {
+        "intent": "book_course",
+        "slots": {
+          "course_activity": "hydrobike",
+          "target_age": "teen",
+          "level": "intermediate",
+          "day_preference": "thursday",
+          "name": "mario",
+          "surname": "rossi"
+        }
+      },
+      "db_result": {
+        "status": "OVERLAP",
+        "violating_slot": "target_age",
+        "options": [
+          "adult"
+        ],
+        "blacklist": [
+          "teen"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "resolve_conflict",
+      "slot": "target_age",
+      "options": [
+        "adult"
+      ],
+      "blacklist": [
+        "teen"
+      ],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_127",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "item",
+        "options": [
+          "goggles",
+          "swimsuit",
+          "towel",
+          "slippers",
+          "swimming_cap"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "item",
+      "options": [
+        "goggles",
+        "swimsuit",
+        "towel",
+        "slippers",
+        "swimming_cap"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_128",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "color",
+        "options": [
+          "blue",
+          "black",
+          "red",
+          "clear"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "color",
+      "options": [
+        "blue",
+        "black",
+        "red",
+        "clear"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_129",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles",
+          "color": "badcolor"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "color",
+        "options": [
+          "blue",
+          "black",
+          "red",
+          "clear"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "color",
+      "options": [
+        "blue",
+        "black",
+        "red",
+        "clear"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_130",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles",
+          "color": "blue"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "brand",
+        "options": [
+          "speedo",
+          "arena"
+        ],
+        "enriched_data": {
+          "brand_prices": {
+            "speedo": 15.0,
+            "arena": 18.0
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "brand",
+      "options": [
+        "speedo",
+        "arena"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "brand_prices": {
+          "speedo": 15.0,
+          "arena": 18.0
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_131",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles",
+          "color": "blue",
+          "size": "m"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "size",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "size",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_132",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles",
+          "color": "blue",
+          "brand": "badbrand"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "brand",
+        "options": {
+          "speedo": 15.0,
+          "arena": 18.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "brand",
+      "options": {
+        "speedo": 15.0,
+        "arena": 18.0
+      },
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_133",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles",
+          "color": "blue",
+          "brand": "speedo",
+          "size": "one_size"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "price": 15.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 15.0
+      }
+    }
+  },
+  {
+    "id": "dm_134",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles",
+          "color": "blue",
+          "brand": "speedo",
+          "confirmation": "deny",
+          "size": "one_size"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_135",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "goggles",
+          "color": "blue",
+          "brand": "speedo",
+          "confirmation": "agree",
+          "size": "one_size"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED",
+        "enriched_data": {
+          "price": 15.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 15.0
+      }
+    }
+  },
+  {
+    "id": "dm_136",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "color",
+        "options": [
+          "purple",
+          "black",
+          "red",
+          "white"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "color",
+      "options": [
+        "purple",
+        "black",
+        "red",
+        "white"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_137",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit",
+          "color": "badcolor"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "color",
+        "options": [
+          "purple",
+          "black",
+          "red",
+          "white"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "color",
+      "options": [
+        "purple",
+        "black",
+        "red",
+        "white"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_138",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit",
+          "color": "purple"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "size",
+        "options": [
+          "s",
+          "m",
+          "l",
+          "xl"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "size",
+      "options": [
+        "s",
+        "m",
+        "l",
+        "xl"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_139",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit",
+          "color": "purple",
+          "size": "badsize"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "size",
+        "options": [
+          "s",
+          "m",
+          "l",
+          "xl"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "size",
+      "options": [
+        "s",
+        "m",
+        "l",
+        "xl"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_140",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit",
+          "color": "purple",
+          "size": "s"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "brand",
+        "options": [
+          "arena",
+          "speedo"
+        ],
+        "enriched_data": {
+          "brand_prices": {
+            "arena": 35.0,
+            "speedo": 40.0
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "brand",
+      "options": [
+        "arena",
+        "speedo"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "brand_prices": {
+          "arena": 35.0,
+          "speedo": 40.0
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_141",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit",
+          "color": "purple",
+          "size": "s",
+          "brand": "badbrand"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "brand",
+        "options": {
+          "arena": 35.0,
+          "speedo": 40.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "brand",
+      "options": {
+        "arena": 35.0,
+        "speedo": 40.0
+      },
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_142",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit",
+          "color": "purple",
+          "size": "s",
+          "brand": "arena"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "price": 35.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 35.0
+      }
+    }
+  },
+  {
+    "id": "dm_143",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit",
+          "color": "purple",
+          "size": "s",
+          "brand": "arena",
+          "confirmation": "deny"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_144",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimsuit",
+          "color": "purple",
+          "size": "s",
+          "brand": "arena",
+          "confirmation": "agree"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED",
+        "enriched_data": {
+          "price": 35.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 35.0
+      }
+    }
+  },
+  {
+    "id": "dm_145",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "color",
+        "options": [
+          "white",
+          "blue"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "color",
+      "options": [
+        "white",
+        "blue"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_146",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "color": "badcolor"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "color",
+        "options": [
+          "white",
+          "blue"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "color",
+      "options": [
+        "white",
+        "blue"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_147",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "color": "white"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "size",
+        "options": [
+          "m",
+          "l"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "size",
+      "options": [
+        "m",
+        "l"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_148",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "color": "white",
+          "size": "badsize"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "size",
+        "options": [
+          "m",
+          "l"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "size",
+      "options": [
+        "m",
+        "l"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_149",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "color": "white",
+          "size": "m"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "brand",
+        "options": [
+          "decathlon",
+          "arena"
+        ],
+        "enriched_data": {
+          "brand_prices": {
+            "decathlon": 12.0,
+            "arena": 15.0
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "brand",
+      "options": [
+        "decathlon",
+        "arena"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "brand_prices": {
+          "decathlon": 12.0,
+          "arena": 15.0
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_150",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "color": "white",
+          "size": "m",
+          "brand": "badbrand"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "brand",
+        "options": {
+          "decathlon": 12.0,
+          "arena": 15.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "brand",
+      "options": {
+        "decathlon": 12.0,
+        "arena": 15.0
+      },
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_151",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "color": "white",
+          "size": "m",
+          "brand": "decathlon"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "price": 12.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 12.0
+      }
+    }
+  },
+  {
+    "id": "dm_152",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "color": "white",
+          "size": "m",
+          "brand": "decathlon",
+          "confirmation": "deny"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_153",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "towel",
+          "color": "white",
+          "size": "m",
+          "brand": "decathlon",
+          "confirmation": "agree"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED",
+        "enriched_data": {
+          "price": 12.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 12.0
+      }
+    }
+  },
+  {
+    "id": "dm_154",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "color",
+        "options": [
+          "blue",
+          "black",
+          "red"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "color",
+      "options": [
+        "blue",
+        "black",
+        "red"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_155",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers",
+          "color": "badcolor"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "color",
+        "options": [
+          "blue",
+          "black",
+          "red"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "color",
+      "options": [
+        "blue",
+        "black",
+        "red"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_156",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers",
+          "color": "blue"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "size",
+        "options": [
+          "xs",
+          "s",
+          "m",
+          "l",
+          "xl"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "size",
+      "options": [
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_157",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers",
+          "color": "blue",
+          "size": "badsize"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "size",
+        "options": [
+          "xs",
+          "s",
+          "m",
+          "l",
+          "xl"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "size",
+      "options": [
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_158",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers",
+          "color": "blue",
+          "size": "xs"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "brand",
+        "options": [
+          "adidas",
+          "nike"
+        ],
+        "enriched_data": {
+          "brand_prices": {
+            "adidas": 10.0,
+            "nike": 12.0
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "brand",
+      "options": [
+        "adidas",
+        "nike"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "brand_prices": {
+          "adidas": 10.0,
+          "nike": 12.0
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_159",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers",
+          "color": "blue",
+          "size": "xs",
+          "brand": "badbrand"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "brand",
+        "options": {
+          "adidas": 10.0,
+          "nike": 12.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "brand",
+      "options": {
+        "adidas": 10.0,
+        "nike": 12.0
+      },
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_160",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers",
+          "color": "blue",
+          "size": "xs",
+          "brand": "adidas"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "price": 10.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 10.0
+      }
+    }
+  },
+  {
+    "id": "dm_161",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers",
+          "color": "blue",
+          "size": "xs",
+          "brand": "adidas",
+          "confirmation": "deny"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_162",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "slippers",
+          "color": "blue",
+          "size": "xs",
+          "brand": "adidas",
+          "confirmation": "agree"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED",
+        "enriched_data": {
+          "price": 10.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 10.0
+      }
+    }
+  },
+  {
+    "id": "dm_163",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimming_cap"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "color",
+        "options": [
+          "red",
+          "blue",
+          "black",
+          "yellow"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "color",
+      "options": [
+        "red",
+        "blue",
+        "black",
+        "yellow"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_164",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimming_cap",
+          "color": "badcolor"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "color",
+        "options": [
+          "red",
+          "blue",
+          "black",
+          "yellow"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "color",
+      "options": [
+        "red",
+        "blue",
+        "black",
+        "yellow"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_165",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimming_cap",
+          "color": "red"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "brand",
+        "options": [
+          "arena",
+          "speedo"
+        ],
+        "enriched_data": {
+          "brand_prices": {
+            "arena": 5.0,
+            "speedo": 6.0
+          }
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "brand",
+      "options": [
+        "arena",
+        "speedo"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "brand_prices": {
+          "arena": 5.0,
+          "speedo": 6.0
+        }
+      }
+    }
+  },
+  {
+    "id": "dm_166",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimming_cap",
+          "color": "red",
+          "size": "m"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "size",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "size",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_167",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimming_cap",
+          "color": "red",
+          "brand": "badbrand"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "brand",
+        "options": {
+          "arena": 5.0,
+          "speedo": 6.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "brand",
+      "options": {
+        "arena": 5.0,
+        "speedo": 6.0
+      },
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_168",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimming_cap",
+          "color": "red",
+          "brand": "arena",
+          "size": "one_size"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "price": 5.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 5.0
+      }
+    }
+  },
+  {
+    "id": "dm_169",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimming_cap",
+          "color": "red",
+          "brand": "arena",
+          "confirmation": "deny",
+          "size": "one_size"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_170",
+    "input": {
+      "dialogue_state": {
+        "intent": "buy_equipment",
+        "slots": {
+          "item": "swimming_cap",
+          "color": "red",
+          "brand": "arena",
+          "confirmation": "agree",
+          "size": "one_size"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED",
+        "enriched_data": {
+          "price": 5.0
+        }
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {
+        "price": 5.0
+      }
+    }
+  },
+  {
+    "id": "dm_171",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_172",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Mario",
+          "surname": null
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_173",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": null,
+          "surname": "Rossi"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_174",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "lost_item",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "lost_item",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_175",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "lost_item": "wallet"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "item_color",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "item_color",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_176",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "lost_item": "wallet",
+          "item_color": "black"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "last_seen_location",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "last_seen_location",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_177",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "lost_item": "wallet",
+          "item_color": "black",
+          "last_seen_location": "spa"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "last_seen_date",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "last_seen_date",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_178",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "lost_item": "wallet",
+          "item_color": "black",
+          "last_seen_location": "spa",
+          "last_seen_date": "bad-date"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "last_seen_date",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "last_seen_date",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_179",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "lost_item": "wallet",
+          "item_color": "black",
+          "last_seen_location": "spa",
+          "last_seen_date": "2099-01-01"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "last_seen_date",
+        "options": [
+          "today or earlier"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "last_seen_date",
+      "options": [
+        "today or earlier"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_180",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "lost_item": "goggles",
+          "item_color": "red",
+          "last_seen_location": "swimming_pool",
+          "last_seen_date": "2026-02-22"
+        }
+      },
+      "db_result": {
+        "status": "OVERLAP",
+        "violating_slot": "lost_item",
+        "options": [],
+        "blacklist": [
+          "goggles"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "resolve_conflict",
+      "slot": "lost_item",
+      "options": [],
+      "blacklist": [
+        "goggles"
+      ],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_181",
+    "input": {
+      "dialogue_state": {
+        "intent": "report_lost_item",
+        "slots": {
+          "name": "Alice",
+          "surname": "Blue",
+          "lost_item": "wallet",
+          "item_color": "black",
+          "last_seen_location": "spa",
+          "last_seen_date": "2026-02-20"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_182",
+    "input": {
+      "dialogue_state": {
+        "intent": "user_identification",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_183",
+    "input": {
+      "dialogue_state": {
+        "intent": "user_identification",
+        "slots": {
+          "name": "Marco"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_184",
+    "input": {
+      "dialogue_state": {
+        "intent": "user_identification",
+        "slots": {
+          "surname": "Rossi"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_185",
+    "input": {
+      "dialogue_state": {
+        "intent": "greeting_closing",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {}
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_186",
+    "input": {
+      "dialogue_state": {
+        "intent": "out_of_scope",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "INFORM",
+        "enriched_data": {}
+      }
+    },
+    "annotation": {
+      "nba": "provide_information",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_187",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_188",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": null
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_189",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": null,
+          "surname": "Rossi"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_190",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Unknown",
+          "surname": "Person"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_191",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Empty",
+          "surname": "User"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "",
+        "options": [
+          "(no previous bookings)"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "",
+      "options": [
+        "(no previous bookings)"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_192",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity_old": "boxing"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "course_activity_old",
+        "options": [
+          "hydrobike",
+          "aquagym",
+          "swimming_school"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "course_activity_old",
+      "options": [
+        "hydrobike",
+        "aquagym",
+        "swimming_school"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_193",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "course_activity_old",
+        "options": [
+          "hydrobike",
+          "aquagym",
+          "swimming_school"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "course_activity_old",
+      "options": [
+        "hydrobike",
+        "aquagym",
+        "swimming_school"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_194",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity_old": "aquagym",
+          "target_age_old": "adult",
+          "level_old": "beginner",
+          "day_preference_old": "wednesday"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "day_preference_new",
+        "options": [
+          "monday",
+          "friday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "day_preference_new",
+      "options": [
+        "monday",
+        "friday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_195",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity_old": "aquagym",
+          "day_preference_new": "wednesday",
+          "target_age_old": "adult",
+          "level_old": "beginner",
+          "day_preference_old": "wednesday"
+        }
+      },
+      "db_result": {
+        "status": "OVERLAP",
+        "violating_slot": "day_preference_new",
+        "options": [
+          "monday",
+          "friday"
+        ],
+        "blacklist": [
+          "wednesday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "resolve_conflict",
+      "slot": "day_preference_new",
+      "options": [
+        "monday",
+        "friday"
+      ],
+      "blacklist": [
+        "wednesday"
+      ],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_196",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity_old": "aquagym",
+          "day_preference_new": "friday",
+          "target_age_old": "adult",
+          "level_old": "beginner",
+          "day_preference_old": "wednesday",
+          "course_activity_new": "aquagym",
+          "target_age_new": "adult",
+          "level_new": "beginner"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "old_booking": "aquagym (wednesday)",
+          "new_booking": "aquagym (friday)"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "old_booking": "aquagym (wednesday)",
+        "new_booking": "aquagym (friday)"
+      }
+    }
+  },
+  {
+    "id": "dm_197",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity_old": "aquagym",
+          "day_preference_new": "sunday",
+          "target_age_old": "adult",
+          "level_old": "beginner",
+          "day_preference_old": "wednesday"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "day_preference_new",
+        "options": [
+          "monday",
+          "wednesday",
+          "friday"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "day_preference_new",
+      "options": [
+        "monday",
+        "wednesday",
+        "friday"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_198",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity_old": "hydrobike",
+          "level_new": "advanced",
+          "day_preference_new": "thursday",
+          "target_age_old": "adult",
+          "level_old": "intermediate",
+          "day_preference_old": "tuesday",
+          "course_activity_new": "hydrobike",
+          "target_age_new": "adult"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "old_booking": "hydrobike (intermediate, tuesday)",
+          "new_booking": "hydrobike (advanced, thursday)"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "old_booking": "hydrobike (intermediate, tuesday)",
+        "new_booking": "hydrobike (advanced, thursday)"
+      }
+    }
+  },
+  {
+    "id": "dm_199",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity_old": "aquagym",
+          "day_preference_new": "friday",
+          "confirmation": "deny",
+          "target_age_old": "adult",
+          "level_old": "beginner",
+          "day_preference_old": "wednesday",
+          "course_activity_new": "aquagym",
+          "target_age_new": "adult",
+          "level_new": "beginner"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_200",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity_old": "aquagym",
+          "day_preference_new": "friday",
+          "confirmation": "agree",
+          "target_age_old": "adult",
+          "level_old": "beginner",
+          "day_preference_old": "wednesday",
+          "course_activity_new": "aquagym",
+          "target_age_new": "adult",
+          "level_new": "beginner"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_201",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_202",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": null
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_203",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": null,
+          "surname": "Verdi"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_204",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Unknown",
+          "surname": "Person"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_205",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Empty",
+          "surname": "User"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "",
+        "options": [
+          "(no previous bookings)"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "",
+      "options": [
+        "(no previous bookings)"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_206",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date_old": "2026-09-01"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "date_old",
+        "options": [
+          "2026-06-15"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "date_old",
+      "options": [
+        "2026-06-15"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_207",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Multi",
+          "surname": "Spa"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "date_old",
+        "options": [
+          "2026-07-01",
+          "2026-07-02"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "date_old",
+      "options": [
+        "2026-07-01",
+        "2026-07-02"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_208",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date_old": "2026-06-15",
+          "time_old": "15:30",
+          "people_count_old": "2"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "date_new",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "date_new",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_209",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date_new": "bad-date",
+          "date_old": "2026-06-15",
+          "time_old": "15:30",
+          "people_count_old": "2"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "date_new",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "date_new",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_210",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "time_new": "22:00",
+          "date_old": "2026-06-15",
+          "time_old": "15:30",
+          "people_count_old": "2"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "time_new",
+        "options": [
+          "10:00 - 21:00"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "time_new",
+      "options": [
+        "10:00 - 21:00"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_211",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "people_count_new": "9",
+          "date_old": "2026-06-15",
+          "time_old": "15:30",
+          "people_count_old": "2"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "people_count_new",
+        "options": [
+          "1-8"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "people_count_new",
+      "options": [
+        "1-8"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_212",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date_new": "2026-06-15",
+          "date_old": "2026-06-15",
+          "time_old": "15:30",
+          "people_count_old": "2"
+        }
+      },
+      "db_result": {
+        "status": "OVERLAP",
+        "violating_slot": "time_new",
+        "options": [
+          "10:00 - 21:00"
+        ],
+        "blacklist": [
+          "15:30"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "resolve_conflict",
+      "slot": "time_new",
+      "options": [
+        "10:00 - 21:00"
+      ],
+      "blacklist": [
+        "15:30"
+      ],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_213",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date_new": "2026-06-16",
+          "date_old": "2026-06-15",
+          "time_old": "15:30",
+          "people_count_old": "2",
+          "time_new": "15:30",
+          "people_count_new": "2"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "old_booking": "Spa (2026-06-15)",
+          "new_booking": "Spa (2026-06-16)"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "old_booking": "Spa (2026-06-15)",
+        "new_booking": "Spa (2026-06-16)"
+      }
+    }
+  },
+  {
+    "id": "dm_214",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date_new": "2026-06-16",
+          "confirmation": "deny",
+          "date_old": "2026-06-15",
+          "time_old": "15:30",
+          "people_count_old": "2",
+          "time_new": "15:30",
+          "people_count_new": "2"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_215",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date_new": "2026-06-16",
+          "confirmation": "agree",
+          "date_old": "2026-06-15",
+          "time_old": "15:30",
+          "people_count_old": "2",
+          "time_new": "15:30",
+          "people_count_new": "2"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_216",
+    "input": {
+      "dialogue_state": {
+        "intent": "modify_booked_spa",
+        "slots": {
+          "name": "Multi",
+          "surname": "Spa",
+          "date_old": "2026-07-01",
+          "date_new": "2026-07-02",
+          "time_old": "10:00",
+          "people_count_old": "2"
+        }
+      },
+      "db_result": {
+        "status": "OVERLAP",
+        "violating_slot": "date_new",
+        "options": [],
+        "blacklist": [
+          "2026-07-01",
+          "2026-07-02"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "resolve_conflict",
+      "slot": "date_new",
+      "options": [],
+      "blacklist": [
+        "2026-07-01",
+        "2026-07-02"
+      ],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_217",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_218",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": null
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_219",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": null,
+          "surname": "Rossi"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_220",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Unknown",
+          "surname": "Person"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_221",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Empty",
+          "surname": "User"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "",
+        "options": [
+          "(no previous bookings)"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "",
+      "options": [
+        "(no previous bookings)"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_222",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity": "boxing"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "course_activity",
+        "options": [
+          "hydrobike",
+          "aquagym",
+          "swimming_school"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "course_activity",
+      "options": [
+        "hydrobike",
+        "aquagym",
+        "swimming_school"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_223",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "course_activity",
+        "options": [
+          "hydrobike",
+          "aquagym",
+          "swimming_school"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "course_activity",
+      "options": [
+        "hydrobike",
+        "aquagym",
+        "swimming_school"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_224",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity": "hydrobike",
+          "target_age": "adult",
+          "level": "intermediate",
+          "day_preference": "tuesday"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "booking_to_cancel": "hydrobike (intermediate - tuesday)"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "booking_to_cancel": "hydrobike (intermediate - tuesday)"
+      }
+    }
+  },
+  {
+    "id": "dm_225",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity": "hydrobike",
+          "confirmation": "deny",
+          "target_age": "adult",
+          "level": "intermediate",
+          "day_preference": "tuesday"
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_226",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity": "hydrobike",
+          "confirmation": "agree",
+          "target_age": "adult",
+          "level": "intermediate",
+          "day_preference": "tuesday"
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_227",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "target_age": "adult"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "course_activity",
+        "options": [
+          "hydrobike",
+          "aquagym",
+          "swimming_school"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "course_activity",
+      "options": [
+        "hydrobike",
+        "aquagym",
+        "swimming_school"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_228",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_course",
+        "slots": {
+          "name": "Mario",
+          "surname": "Rossi",
+          "course_activity": "swimming_school",
+          "day_preference": "friday"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "course_activity",
+        "options": [
+          "hydrobike",
+          "aquagym",
+          "swimming_school"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "course_activity",
+      "options": [
+        "hydrobike",
+        "aquagym",
+        "swimming_school"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_229",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {}
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_230",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": null
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_231",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": null,
+          "surname": "Verdi"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "name",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "name",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_232",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Unknown",
+          "surname": "Person"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "name_surname",
+        "options": []
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "name_surname",
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_233",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Empty",
+          "surname": "User"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "",
+        "options": [
+          "(no previous bookings)"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "",
+      "options": [
+        "(no previous bookings)"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_234",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date": "2026-09-01"
+        }
+      },
+      "db_result": {
+        "status": "INVALID_VALUE",
+        "violating_slot": "date",
+        "options": [
+          "2026-06-15"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "clarify_invalid_value",
+      "slot": "date",
+      "options": [
+        "2026-06-15"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_235",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Multi",
+          "surname": "Spa"
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "date",
+        "options": [
+          "2026-07-01",
+          "2026-07-02"
+        ]
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "date",
+      "options": [
+        "2026-07-01",
+        "2026-07-02"
+      ],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_236",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "date": "2026-06-15",
+          "time": "15:30",
+          "people_count": 2
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "booking_to_cancel": "Spa (2026-06-15 at 15:30 for 2 people)"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "booking_to_cancel": "Spa (2026-06-15 at 15:30 for 2 people)"
+      }
+    }
+  },
+  {
+    "id": "dm_237",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "confirmation": "deny",
+          "date": "2026-06-15",
+          "time": "15:30",
+          "people_count": 2
+        }
+      },
+      "db_result": {
+        "status": "ABORTED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_aborted",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_238",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Luigi",
+          "surname": "Verdi",
+          "confirmation": "agree",
+          "date": "2026-06-15",
+          "time": "15:30",
+          "people_count": 2
+        }
+      },
+      "db_result": {
+        "status": "CONFIRMED"
+      }
+    },
+    "annotation": {
+      "nba": "notify_success",
+      "slot": null,
+      "options": [],
+      "blacklist": [],
+      "enriched_data": {}
+    }
+  },
+  {
+    "id": "dm_239",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Multi",
+          "surname": "Spa",
+          "date": "2026-07-01",
+          "time": "10:00",
+          "people_count": 2
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "booking_to_cancel": "Spa (2026-07-01 at 10:00 for 2 people)"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "booking_to_cancel": "Spa (2026-07-01 at 10:00 for 2 people)"
+      }
+    }
+  },
+  {
+    "id": "dm_240",
+    "input": {
+      "dialogue_state": {
+        "intent": "cancel_booked_spa",
+        "slots": {
+          "name": "Multi",
+          "surname": "Spa",
+          "time": "11:00",
+          "date": "2026-07-02",
+          "people_count": 3
+        }
+      },
+      "db_result": {
+        "status": "MISSING_SLOT",
+        "violating_slot": "confirmation",
+        "options": [
+          "agree",
+          "deny"
+        ],
+        "enriched_data": {
+          "booking_to_cancel": "Spa (2026-07-02 at 11:00 for 3 people)"
+        }
+      }
+    },
+    "annotation": {
+      "nba": "request_slot",
+      "slot": "confirmation",
+      "options": [
+        "agree",
+        "deny"
+      ],
+      "blacklist": [],
+      "enriched_data": {
+        "booking_to_cancel": "Spa (2026-07-02 at 11:00 for 3 people)"
+      }
+    }
+  }
+]

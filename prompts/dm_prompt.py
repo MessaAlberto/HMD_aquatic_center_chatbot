@@ -121,7 +121,9 @@ EXAMPLES:
   "slot": null,
   "options": [],
   "blacklist": [],
-  "enriched_data": {}
+  "enriched_data": {
+    "price": 5.0
+  }
 }
 
 - input:

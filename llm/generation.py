@@ -2,7 +2,7 @@ from typing import Dict, List, Optional
 import torch
 from transformers import PreTrainedTokenizer
 from datetime import datetime
-from settings import APP_DEBUG
+from utils.settings import APP_DEBUG
 import logging
 
 logger = logging.getLogger(__name__)

@@ -1,5 +1,6 @@
 import difflib
 from datetime import datetime
+from copy import deepcopy
 
 # ===================
 #    STATIC DATA
@@ -271,6 +272,13 @@ USERS_DB = {
     }
 }
 
+INITIAL_USERS_DB = deepcopy(USERS_DB)
+
+
+def reset_users_db() -> None:
+    USERS_DB.clear()
+    USERS_DB.update(deepcopy(INITIAL_USERS_DB))
+
 
 class MockDatabase:
     """
@@ -434,7 +442,7 @@ class MockDatabase:
             valid_categories = list(DISCOUNTS.keys())
             if service_type in ["spa", "gym"] and "child" in valid_categories:
                 valid_categories.remove("child")    # Children cannot access gym or spa
-                
+
             return {
                 "status": "MISSING_SLOT",
                 "violating_slot": "user_category",

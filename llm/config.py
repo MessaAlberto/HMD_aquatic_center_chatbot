@@ -12,12 +12,48 @@ quantization_config = BitsAndBytesConfig(
     bnb_4bit_use_double_quant=True,
 )
 
-# The tuple contains the model name, a partial function with the model specific arguments, the method to prepare the input text
+MODEL_LOADER = partial(
+    AutoModelForCausalLM.from_pretrained,
+    torch_dtype=torch.float16,
+    device_map="auto",
+    quantization_config=quantization_config,
+)
+
 MODELS: Dict[str, Tuple[str, Callable[..., Any], Callable[..., Any], Callable[..., Any]]] = {
-    "qwen3": (
+    "qwen3_4b": (
         "Qwen/Qwen3-4B-Instruct-2507",
-        partial(AutoModelForCausalLM.from_pretrained, trust_remote_code=True, quantization_config=quantization_config),
+        partial(MODEL_LOADER, trust_remote_code=True),
         generate_response,
-        generate_response_batch
-    )
+        generate_response_batch,
+    ),
+    "qwen25_3b": (
+        "Qwen/Qwen2.5-3B-Instruct",
+        partial(MODEL_LOADER, trust_remote_code=True),
+        generate_response,
+        generate_response_batch,
+    ),
+    "llama32_3b": (
+        "meta-llama/Llama-3.2-3B-Instruct",
+        MODEL_LOADER,
+        generate_response,
+        generate_response_batch,
+    ),
+    "gemma3_4b": (
+        "google/gemma-3-4b-it",
+        MODEL_LOADER,
+        generate_response,
+        generate_response_batch,
+    ),
+    "phi4_mini": (
+        "microsoft/Phi-4-mini-instruct",
+        MODEL_LOADER,
+        generate_response,
+        generate_response_batch,
+    ),
+    "mistral7b": (
+        "mistralai/Mistral-7B-Instruct-v0.3",
+        MODEL_LOADER,
+        generate_response,
+        generate_response_batch,
+    ),
 }

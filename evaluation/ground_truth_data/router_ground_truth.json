@@ -1,0 +1,3172 @@
+[
+  {
+    "id": "router_001",
+    "conversation_history": [],
+    "last_user_utterance": "What time does the swimming pool open tomorrow?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What time does the swimming pool open tomorrow?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_002",
+    "conversation_history": [],
+    "last_user_utterance": "Is the gym open at 9 PM on Friday?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Is the gym open at 9 PM on Friday?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_003",
+    "conversation_history": [],
+    "last_user_utterance": "When does the spa close today?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "When does the spa close today?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_004",
+    "conversation_history": [],
+    "last_user_utterance": "Is the lido open next Sunday morning?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Is the lido open next Sunday morning?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_005",
+    "conversation_history": [],
+    "last_user_utterance": "What are the reception hours during the weekend?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What are the reception hours during the weekend?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_006",
+    "conversation_history": [],
+    "last_user_utterance": "Can I enter the pool at 6 AM?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I enter the pool at 6 AM?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_007",
+    "conversation_history": [],
+    "last_user_utterance": "Is the gym open during lunch time?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Is the gym open during lunch time?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_008",
+    "conversation_history": [],
+    "last_user_utterance": "What time does the lido close in the evening?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What time does the lido close in the evening?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_009",
+    "conversation_history": [],
+    "last_user_utterance": "How much is a monthly swimming pool pass?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "How much is a monthly swimming pool pass?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_010",
+    "conversation_history": [],
+    "last_user_utterance": "What is the price of a gym annual subscription?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What is the price of a gym annual subscription?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_011",
+    "conversation_history": [],
+    "last_user_utterance": "How much does a spa day pass cost?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "How much does a spa day pass cost?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_012",
+    "conversation_history": [],
+    "last_user_utterance": "Do you have a student discount for swimming courses?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Do you have a student discount for swimming courses?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_013",
+    "conversation_history": [],
+    "last_user_utterance": "What is the cost of a 10-entry pass for public swimming?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What is the cost of a 10-entry pass for public swimming?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_014",
+    "conversation_history": [],
+    "last_user_utterance": "How much is the lido entrance for seniors?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "How much is the lido entrance for seniors?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_015",
+    "conversation_history": [],
+    "last_user_utterance": "What are the prices for hydrobike courses?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What are the prices for hydrobike courses?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_016",
+    "conversation_history": [],
+    "last_user_utterance": "How much does newborn swimming cost per month?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "How much does newborn swimming cost per month?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_017",
+    "conversation_history": [],
+    "last_user_utterance": "Do I need a swimming cap in the pool?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Do I need a swimming cap in the pool?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_018",
+    "conversation_history": [],
+    "last_user_utterance": "Are children allowed in the spa?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Are children allowed in the spa?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_019",
+    "conversation_history": [],
+    "last_user_utterance": "Can I bring food into the lido area?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I bring food into the lido area?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_020",
+    "conversation_history": [],
+    "last_user_utterance": "Do I need clean shoes in the gym?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Do I need clean shoes in the gym?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_021",
+    "conversation_history": [],
+    "last_user_utterance": "Are lockers available in the changing room?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Are lockers available in the changing room?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_022",
+    "conversation_history": [],
+    "last_user_utterance": "Can I use glass bottles near the pool?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I use glass bottles near the pool?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_023",
+    "conversation_history": [],
+    "last_user_utterance": "Are towels required on gym machines?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Are towels required on gym machines?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_024",
+    "conversation_history": [],
+    "last_user_utterance": "Do I need slippers in the changing room?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Do I need slippers in the changing room?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_025",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book an aquagym course.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book an aquagym course.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_026",
+    "conversation_history": [],
+    "last_user_utterance": "Can I subscribe to hydrobike on Monday?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I subscribe to hydrobike on Monday?",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_027",
+    "conversation_history": [],
+    "last_user_utterance": "I would like to book swimming lessons for my child.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I would like to book swimming lessons for my child.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_028",
+    "conversation_history": [],
+    "last_user_utterance": "Can I register for newborn swimming?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I register for newborn swimming?",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_029",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book an advanced swimming school course.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book an advanced swimming school course.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_030",
+    "conversation_history": [],
+    "last_user_utterance": "I need to book a beginner course for my son.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to book a beginner course for my son.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_031",
+    "conversation_history": [],
+    "last_user_utterance": "Can I sign up for aquagym on Thursday?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I sign up for aquagym on Thursday?",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_032",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book hydrobike for adults.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book hydrobike for adults.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_033",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book the spa for tomorrow evening.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book the spa for tomorrow evening.",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_034",
+    "conversation_history": [],
+    "last_user_utterance": "Can I reserve the spa for two people?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I reserve the spa for two people?",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_035",
+    "conversation_history": [],
+    "last_user_utterance": "I would like a spa session next Saturday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I would like a spa session next Saturday.",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_036",
+    "conversation_history": [],
+    "last_user_utterance": "Can I book the spa at 5 PM?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I book the spa at 5 PM?",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_037",
+    "conversation_history": [],
+    "last_user_utterance": "I need a spa reservation for four people.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need a spa reservation for four people.",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_038",
+    "conversation_history": [],
+    "last_user_utterance": "Please book a spa session for Monday morning.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Please book a spa session for Monday morning.",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_039",
+    "conversation_history": [],
+    "last_user_utterance": "I want to reserve the spa for me and my partner.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to reserve the spa for me and my partner.",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_040",
+    "conversation_history": [],
+    "last_user_utterance": "Can I book a spa slot tomorrow at noon?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I book a spa slot tomorrow at noon?",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_041",
+    "conversation_history": [],
+    "last_user_utterance": "I want to modify my booked course.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to modify my booked course.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_042",
+    "conversation_history": [],
+    "last_user_utterance": "Can I move my aquagym course to Friday?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I move my aquagym course to Friday?",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_043",
+    "conversation_history": [],
+    "last_user_utterance": "I need to change my swimming school booking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to change my swimming school booking.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_044",
+    "conversation_history": [],
+    "last_user_utterance": "Can I switch my course from beginner to intermediate?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I switch my course from beginner to intermediate?",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_045",
+    "conversation_history": [],
+    "last_user_utterance": "I want to move my hydrobike class from Tuesday to Thursday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to move my hydrobike class from Tuesday to Thursday.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_046",
+    "conversation_history": [],
+    "last_user_utterance": "I need to change the day of my booked course.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to change the day of my booked course.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_047",
+    "conversation_history": [],
+    "last_user_utterance": "Can I change my course from aquagym to swimming school?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I change my course from aquagym to swimming school?",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_048",
+    "conversation_history": [],
+    "last_user_utterance": "I want to update my course booking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to update my course booking.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_049",
+    "conversation_history": [],
+    "last_user_utterance": "I want to modify my spa booking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to modify my spa booking.",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_050",
+    "conversation_history": [],
+    "last_user_utterance": "Can I move my spa appointment to tomorrow?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I move my spa appointment to tomorrow?",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_051",
+    "conversation_history": [],
+    "last_user_utterance": "I need to change the time of my spa reservation.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to change the time of my spa reservation.",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_052",
+    "conversation_history": [],
+    "last_user_utterance": "Can I change my spa booking from 4 PM to 6 PM?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I change my spa booking from 4 PM to 6 PM?",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_053",
+    "conversation_history": [],
+    "last_user_utterance": "I want to add one person to my spa booking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to add one person to my spa booking.",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_054",
+    "conversation_history": [],
+    "last_user_utterance": "Can I reschedule my spa session to next Friday?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I reschedule my spa session to next Friday?",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_055",
+    "conversation_history": [],
+    "last_user_utterance": "I need to move my spa reservation to the evening.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to move my spa reservation to the evening.",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_056",
+    "conversation_history": [],
+    "last_user_utterance": "Can I update my spa appointment?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I update my spa appointment?",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_057",
+    "conversation_history": [],
+    "last_user_utterance": "I want to cancel my aquagym course.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to cancel my aquagym course.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_058",
+    "conversation_history": [],
+    "last_user_utterance": "Can I cancel my swimming school booking?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I cancel my swimming school booking?",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_059",
+    "conversation_history": [],
+    "last_user_utterance": "I need to cancel my hydrobike class.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to cancel my hydrobike class.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_060",
+    "conversation_history": [],
+    "last_user_utterance": "Please cancel my course on Monday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Please cancel my course on Monday.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_061",
+    "conversation_history": [],
+    "last_user_utterance": "I want to cancel the beginner course for my child.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to cancel the beginner course for my child.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_062",
+    "conversation_history": [],
+    "last_user_utterance": "Can you cancel my newborn swimming booking?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can you cancel my newborn swimming booking?",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_063",
+    "conversation_history": [],
+    "last_user_utterance": "I no longer want my course reservation.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I no longer want my course reservation.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_064",
+    "conversation_history": [],
+    "last_user_utterance": "Cancel my advanced course please.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Cancel my advanced course please.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_065",
+    "conversation_history": [],
+    "last_user_utterance": "I want to cancel my spa booking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to cancel my spa booking.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_066",
+    "conversation_history": [],
+    "last_user_utterance": "Can I cancel my spa appointment for tomorrow?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I cancel my spa appointment for tomorrow?",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_067",
+    "conversation_history": [],
+    "last_user_utterance": "Please cancel my spa reservation at 6 PM.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Please cancel my spa reservation at 6 PM.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_068",
+    "conversation_history": [],
+    "last_user_utterance": "I no longer need the spa session.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I no longer need the spa session.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_069",
+    "conversation_history": [],
+    "last_user_utterance": "Cancel my spa booking for two people.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Cancel my spa booking for two people.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_070",
+    "conversation_history": [],
+    "last_user_utterance": "Can you cancel my spa slot next Monday?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can you cancel my spa slot next Monday?",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_071",
+    "conversation_history": [],
+    "last_user_utterance": "I want to delete my spa reservation.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to delete my spa reservation.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_072",
+    "conversation_history": [],
+    "last_user_utterance": "Please cancel the spa appointment under my name.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Please cancel the spa appointment under my name.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_073",
+    "conversation_history": [],
+    "last_user_utterance": "I want to buy a swimming cap.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to buy a swimming cap.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_074",
+    "conversation_history": [],
+    "last_user_utterance": "Do you sell goggles?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Do you sell goggles?",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_075",
+    "conversation_history": [],
+    "last_user_utterance": "I need to buy a towel.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to buy a towel.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_076",
+    "conversation_history": [],
+    "last_user_utterance": "Can I purchase slippers at the center?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I purchase slippers at the center?",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_077",
+    "conversation_history": [],
+    "last_user_utterance": "I want to buy a black swimsuit.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to buy a black swimsuit.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_078",
+    "conversation_history": [],
+    "last_user_utterance": "Do you have Arena goggles?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Do you have Arena goggles?",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_079",
+    "conversation_history": [],
+    "last_user_utterance": "I need a blue swimming cap.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need a blue swimming cap.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_080",
+    "conversation_history": [],
+    "last_user_utterance": "Can I buy size M slippers?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I buy size M slippers?",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_081",
+    "conversation_history": [],
+    "last_user_utterance": "I lost my goggles yesterday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I lost my goggles yesterday.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_082",
+    "conversation_history": [],
+    "last_user_utterance": "I want to report a lost towel.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to report a lost towel.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_083",
+    "conversation_history": [],
+    "last_user_utterance": "I lost my black wallet in the changing room.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I lost my black wallet in the changing room.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_084",
+    "conversation_history": [],
+    "last_user_utterance": "Can I report a missing swimming cap?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I report a missing swimming cap?",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_085",
+    "conversation_history": [],
+    "last_user_utterance": "I left my backpack near the lido.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I left my backpack near the lido.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_086",
+    "conversation_history": [],
+    "last_user_utterance": "I lost my slippers by the showers.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I lost my slippers by the showers.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_087",
+    "conversation_history": [],
+    "last_user_utterance": "My daughter lost her red swimsuit.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "My daughter lost her red swimsuit.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_088",
+    "conversation_history": [],
+    "last_user_utterance": "I need help finding a lost phone.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need help finding a lost phone.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_089",
+    "conversation_history": [],
+    "last_user_utterance": "Hi, I'm Marco Bianchi.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Hi, I'm Marco Bianchi.",
+          "intent": "user_identification"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_090",
+    "conversation_history": [],
+    "last_user_utterance": "My name is Laura Rossi.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "My name is Laura Rossi.",
+          "intent": "user_identification"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_091",
+    "conversation_history": [],
+    "last_user_utterance": "I am Francesco Ferrari.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I am Francesco Ferrari.",
+          "intent": "user_identification"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_092",
+    "conversation_history": [],
+    "last_user_utterance": "Giulia Neri speaking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Giulia Neri speaking.",
+          "intent": "user_identification"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_093",
+    "conversation_history": [],
+    "last_user_utterance": "You can call me Matteo.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "You can call me Matteo.",
+          "intent": "user_identification"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_094",
+    "conversation_history": [],
+    "last_user_utterance": "Bianchi Sara here.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Bianchi Sara here.",
+          "intent": "user_identification"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_095",
+    "conversation_history": [],
+    "last_user_utterance": "Thanks, that's all.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Thanks, that's all.",
+          "intent": "greeting_closing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_096",
+    "conversation_history": [],
+    "last_user_utterance": "Thank you very much.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Thank you very much.",
+          "intent": "greeting_closing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_097",
+    "conversation_history": [],
+    "last_user_utterance": "Bye, have a nice day.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Bye, have a nice day.",
+          "intent": "greeting_closing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_098",
+    "conversation_history": [],
+    "last_user_utterance": "Hello there!",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Hello there!",
+          "intent": "greeting_closing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_099",
+    "conversation_history": [],
+    "last_user_utterance": "Good morning.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Good morning.",
+          "intent": "greeting_closing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_100",
+    "conversation_history": [],
+    "last_user_utterance": "Can you tell me a joke?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can you tell me a joke?",
+          "intent": "out_of_scope"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_101",
+    "conversation_history": [],
+    "last_user_utterance": "What's the weather like today?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What's the weather like today?",
+          "intent": "out_of_scope"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_102",
+    "conversation_history": [],
+    "last_user_utterance": "Can you order pizza for me?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can you order pizza for me?",
+          "intent": "out_of_scope"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_103",
+    "conversation_history": [],
+    "last_user_utterance": "Who won the football match yesterday?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Who won the football match yesterday?",
+          "intent": "out_of_scope"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_104",
+    "conversation_history": [],
+    "last_user_utterance": "Write a poem about summer.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Write a poem about summer.",
+          "intent": "out_of_scope"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_105",
+    "conversation_history": [],
+    "last_user_utterance": "Can you help me with my math homework?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can you help me with my math homework?",
+          "intent": "out_of_scope"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_106",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book the spa for tomorrow."
+      },
+      {
+        "role": "assistant",
+        "text": "How many people will be attending?"
+      }
+    ],
+    "last_user_utterance": "Just two.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Just two.",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_107",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Can I book a spa session?"
+      },
+      {
+        "role": "assistant",
+        "text": "What time would you prefer?"
+      }
+    ],
+    "last_user_utterance": "In the afternoon.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "In the afternoon.",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_108",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book hydrobike."
+      },
+      {
+        "role": "assistant",
+        "text": "Which day would you prefer?"
+      }
+    ],
+    "last_user_utterance": "On Wednesday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "On Wednesday.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_109",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book swimming lessons for my child."
+      },
+      {
+        "role": "assistant",
+        "text": "Which level should I select?"
+      }
+    ],
+    "last_user_utterance": "Beginner.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Beginner.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_110",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to change my spa booking."
+      },
+      {
+        "role": "assistant",
+        "text": "What new time would you prefer?"
+      }
+    ],
+    "last_user_utterance": "At 18:00 instead.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "At 18:00 instead.",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_111",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I need to modify my course."
+      },
+      {
+        "role": "assistant",
+        "text": "Which new day would you like?"
+      }
+    ],
+    "last_user_utterance": "Friday would be better.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Friday would be better.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_112",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to cancel my spa booking."
+      },
+      {
+        "role": "assistant",
+        "text": "When is the spa booking scheduled?"
+      }
+    ],
+    "last_user_utterance": "Tomorrow at 5 PM.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Tomorrow at 5 PM.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_113",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I need to cancel my course."
+      },
+      {
+        "role": "assistant",
+        "text": "Which course do you want to cancel?"
+      }
+    ],
+    "last_user_utterance": "The aquagym one.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "The aquagym one.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_114",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I lost my towel."
+      },
+      {
+        "role": "assistant",
+        "text": "Where did you last see it?"
+      }
+    ],
+    "last_user_utterance": "In the changing room.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "In the changing room.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_115",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to buy goggles."
+      },
+      {
+        "role": "assistant",
+        "text": "Which color would you prefer?"
+      }
+    ],
+    "last_user_utterance": "Clear, please.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Clear, please.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_116",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "How much is the day pass?"
+      },
+      {
+        "role": "assistant",
+        "text": "Which category is it for?"
+      }
+    ],
+    "last_user_utterance": "For a student.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "For a student.",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_117",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Is food allowed?"
+      },
+      {
+        "role": "assistant",
+        "text": "Which area are you asking about?"
+      }
+    ],
+    "last_user_utterance": "The lido area.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "The lido area.",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_118",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "What time does the gym close?"
+      },
+      {
+        "role": "assistant",
+        "text": "Which day do you mean?"
+      }
+    ],
+    "last_user_utterance": "Next Monday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Next Monday.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_119",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book the spa for Friday."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "last_user_utterance": "Anna Verdi.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Anna Verdi.",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_120",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I need to cancel my hydrobike course."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "last_user_utterance": "Paolo Russo.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Paolo Russo.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_121",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to report a lost wallet."
+      },
+      {
+        "role": "assistant",
+        "text": "Could you provide your name and surname?"
+      }
+    ],
+    "last_user_utterance": "Elena Greco.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Elena Greco.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_122",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to modify my spa booking."
+      },
+      {
+        "role": "assistant",
+        "text": "Do you confirm moving it to Sunday morning?"
+      }
+    ],
+    "last_user_utterance": "Yes, that's correct.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Yes, that's correct.",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_123",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book a course on Monday."
+      },
+      {
+        "role": "assistant",
+        "text": "Do you confirm the course booking?"
+      }
+    ],
+    "last_user_utterance": "No, not anymore.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "No, not anymore.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_124",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to buy a blue towel."
+      },
+      {
+        "role": "assistant",
+        "text": "Do you confirm the purchase?"
+      }
+    ],
+    "last_user_utterance": "Yes, confirm it.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Yes, confirm it.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_125",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Can I cancel my spa booking?"
+      },
+      {
+        "role": "assistant",
+        "text": "Do you confirm the cancellation?"
+      }
+    ],
+    "last_user_utterance": "No, keep it.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "No, keep it.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_126",
+    "conversation_history": [],
+    "last_user_utterance": "How much is the annual pass? And do I need a swimming cap?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "How much is the annual pass?",
+          "intent": "ask_pricing"
+        },
+        {
+          "segment": "And do I need a swimming cap?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_127",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book a course for my son and how much does it cost?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book a course for my son",
+          "intent": "book_course"
+        },
+        {
+          "segment": "and how much does it cost?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_128",
+    "conversation_history": [],
+    "last_user_utterance": "I want to buy goggles. Oh, and I lost my red towel yesterday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to buy goggles.",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "Oh, and I lost my red towel yesterday.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_129",
+    "conversation_history": [],
+    "last_user_utterance": "Can I book the spa for tomorrow? Also, what time does it close?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I book the spa for tomorrow?",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "Also, what time does it close?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_130",
+    "conversation_history": [],
+    "last_user_utterance": "I need to cancel my course, and I also want to ask about pool rules.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to cancel my course",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "and I also want to ask about pool rules.",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_131",
+    "conversation_history": [],
+    "last_user_utterance": "Can I change my spa booking to Friday? Also, how much is a towel?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I change my spa booking to Friday?",
+          "intent": "modify_booked_spa"
+        },
+        {
+          "segment": "Also, how much is a towel?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_132",
+    "conversation_history": [],
+    "last_user_utterance": "My name is Andrea Ferrari and I want to modify my spa booking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "My name is Andrea Ferrari",
+          "intent": "user_identification"
+        },
+        {
+          "segment": "and I want to modify my spa booking.",
+          "intent": "modify_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_133",
+    "conversation_history": [],
+    "last_user_utterance": "Good morning. I lost my goggles yesterday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Good morning.",
+          "intent": "greeting_closing"
+        },
+        {
+          "segment": "I lost my goggles yesterday.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_134",
+    "conversation_history": [],
+    "last_user_utterance": "Can you tell me a joke? Also, what time does the pool open?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can you tell me a joke?",
+          "intent": "out_of_scope"
+        },
+        {
+          "segment": "Also, what time does the pool open?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_135",
+    "conversation_history": [],
+    "last_user_utterance": "I want to cancel my spa appointment and buy a new swimming cap.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to cancel my spa appointment",
+          "intent": "cancel_booked_spa"
+        },
+        {
+          "segment": "buy a new swimming cap.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_136",
+    "conversation_history": [],
+    "last_user_utterance": "I want to move my hydrobike course to Thursday and ask if lockers are free.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to move my hydrobike course to Thursday",
+          "intent": "modify_booked_course"
+        },
+        {
+          "segment": "ask if lockers are free.",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_137",
+    "conversation_history": [],
+    "last_user_utterance": "How much is a gym pass? And is the gym open tonight?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "How much is a gym pass?",
+          "intent": "ask_pricing"
+        },
+        {
+          "segment": "And is the gym open tonight?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_138",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book newborn swimming and report a lost wallet.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book newborn swimming",
+          "intent": "book_course"
+        },
+        {
+          "segment": "report a lost wallet.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_139",
+    "conversation_history": [],
+    "last_user_utterance": "Can I reserve the spa for two people? Also, are children allowed there?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I reserve the spa for two people?",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "Also, are children allowed there?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_140",
+    "conversation_history": [],
+    "last_user_utterance": "I need to cancel my swimming lessons and know the lido opening hours.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to cancel my swimming lessons",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "know the lido opening hours.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_141",
+    "conversation_history": [],
+    "last_user_utterance": "Do you sell slippers? And can I wear them in the changing room?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Do you sell slippers?",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "And can I wear them in the changing room?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_142",
+    "conversation_history": [],
+    "last_user_utterance": "I'm Laura Bianchi. What is the price of a spa day pass?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I'm Laura Bianchi.",
+          "intent": "user_identification"
+        },
+        {
+          "segment": "What is the price of a spa day pass?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_143",
+    "conversation_history": [],
+    "last_user_utterance": "Thank you. Can I also book aquagym?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Thank you.",
+          "intent": "greeting_closing"
+        },
+        {
+          "segment": "Can I also book aquagym?",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_144",
+    "conversation_history": [],
+    "last_user_utterance": "Who won the match yesterday? Also, I need to buy goggles.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Who won the match yesterday?",
+          "intent": "out_of_scope"
+        },
+        {
+          "segment": "Also, I need to buy goggles.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_145",
+    "conversation_history": [],
+    "last_user_utterance": "I lost my black backpack and I want to check if reception is open.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I lost my black backpack",
+          "intent": "report_lost_item"
+        },
+        {
+          "segment": "I want to check if reception is open.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_146",
+    "conversation_history": [],
+    "last_user_utterance": "Can I modify my booking? How much is the monthly course price?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I modify my booking?",
+          "intent": "modify_booked_course"
+        },
+        {
+          "segment": "How much is the monthly course price?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_147",
+    "conversation_history": [],
+    "last_user_utterance": "Can I cancel my booking? Also, do I need a swimming cap?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I cancel my booking?",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "Also, do I need a swimming cap?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_148",
+    "conversation_history": [],
+    "last_user_utterance": "I want to change the spa time and buy a white towel.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to change the spa time",
+          "intent": "modify_booked_spa"
+        },
+        {
+          "segment": "buy a white towel.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_149",
+    "conversation_history": [],
+    "last_user_utterance": "Can I book the spa and the swimming school course?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I book the spa",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "and the swimming school course?",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_150",
+    "conversation_history": [],
+    "last_user_utterance": "What are the gym rules? Also, can I buy a swimsuit?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What are the gym rules?",
+          "intent": "ask_rules"
+        },
+        {
+          "segment": "Also, can I buy a swimsuit?",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_151",
+    "conversation_history": [],
+    "last_user_utterance": "I lost my towel in the lido. Is the lido open tomorrow?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I lost my towel in the lido.",
+          "intent": "report_lost_item"
+        },
+        {
+          "segment": "Is the lido open tomorrow?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_152",
+    "conversation_history": [],
+    "last_user_utterance": "Can I book hydrobike on Monday? And what is the price?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I book hydrobike on Monday?",
+          "intent": "book_course"
+        },
+        {
+          "segment": "And what is the price?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_153",
+    "conversation_history": [],
+    "last_user_utterance": "Please cancel my spa slot and tell me if the spa closes at 9.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Please cancel my spa slot",
+          "intent": "cancel_booked_spa"
+        },
+        {
+          "segment": "tell me if the spa closes at 9.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_154",
+    "conversation_history": [],
+    "last_user_utterance": "I need a towel and I want to know changing room rules.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need a towel",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "I want to know changing room rules.",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_155",
+    "conversation_history": [],
+    "last_user_utterance": "Hello. Can you help me cancel my spa appointment?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Hello.",
+          "intent": "greeting_closing"
+        },
+        {
+          "segment": "Can you help me cancel my spa appointment?",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_156",
+    "conversation_history": [],
+    "last_user_utterance": "Can you translate this sentence? Also, how much is public swimming?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can you translate this sentence?",
+          "intent": "out_of_scope"
+        },
+        {
+          "segment": "Also, how much is public swimming?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_157",
+    "conversation_history": [],
+    "last_user_utterance": "I'm Matteo Romano and I lost my swimming cap.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I'm Matteo Romano",
+          "intent": "user_identification"
+        },
+        {
+          "segment": "and I lost my swimming cap.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_158",
+    "conversation_history": [],
+    "last_user_utterance": "Can I move the course to Sunday and cancel the spa booking?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I move the course to Sunday",
+          "intent": "modify_booked_course"
+        },
+        {
+          "segment": "cancel the spa booking?",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_159",
+    "conversation_history": [],
+    "last_user_utterance": "I want to buy a black swimsuit and know if the pool is open.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to buy a black swimsuit",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "know if the pool is open.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_160",
+    "conversation_history": [],
+    "last_user_utterance": "Can I cancel hydrobike and book aquagym instead?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I cancel hydrobike",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "book aquagym instead?",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_161",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "How many people will attend the spa session?"
+      }
+    ],
+    "last_user_utterance": "Three people. Also, do we need towels?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Three people.",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "Also, do we need towels?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_162",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which day do you prefer for the course?"
+      }
+    ],
+    "last_user_utterance": "Tuesday. Also, how much is the monthly pass?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Tuesday.",
+          "intent": "book_course"
+        },
+        {
+          "segment": "Also, how much is the monthly pass?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_163",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What new time do you want for your spa booking?"
+      }
+    ],
+    "last_user_utterance": "At 6 PM. And what time does the spa close?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "At 6 PM.",
+          "intent": "modify_booked_spa"
+        },
+        {
+          "segment": "And what time does the spa close?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_164",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which course do you want to cancel?"
+      }
+    ],
+    "last_user_utterance": "The swimming school one. I also lost my goggles.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "The swimming school one.",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "I also lost my goggles.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_165",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What color would you prefer for the cap?"
+      }
+    ],
+    "last_user_utterance": "Blue. Also, can I book the spa?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Blue.",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "Also, can I book the spa?",
+          "intent": "book_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_166",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Where did you last see the item?"
+      }
+    ],
+    "last_user_utterance": "Near the lockers. Can I buy a new towel?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Near the lockers.",
+          "intent": "report_lost_item"
+        },
+        {
+          "segment": "Can I buy a new towel?",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_167",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which facility are you asking opening hours for?"
+      }
+    ],
+    "last_user_utterance": "The reception. Also, I need to cancel my spa booking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "The reception.",
+          "intent": "ask_opening_hours"
+        },
+        {
+          "segment": "Also, I need to cancel my spa booking.",
+          "intent": "cancel_booked_spa"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_168",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which area are you asking rules about?"
+      }
+    ],
+    "last_user_utterance": "The gym. And how much is the gym annual pass?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "The gym.",
+          "intent": "ask_rules"
+        },
+        {
+          "segment": "And how much is the gym annual pass?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_169",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which category is the price for?"
+      }
+    ],
+    "last_user_utterance": "For a senior. Also, is the lido open today?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "For a senior.",
+          "intent": "ask_pricing"
+        },
+        {
+          "segment": "Also, is the lido open today?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_170",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What is your name and surname for the spa booking?"
+      }
+    ],
+    "last_user_utterance": "Francesca Leone. Also, can I ask about spa rules?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Francesca Leone.",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "Also, can I ask about spa rules?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_171",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book the spa, know the price, and ask if children can enter.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book the spa",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "know the price",
+          "intent": "ask_pricing"
+        },
+        {
+          "segment": "ask if children can enter.",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_172",
+    "conversation_history": [],
+    "last_user_utterance": "Can I buy goggles, report a lost towel, and check reception hours?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I buy goggles",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "report a lost towel",
+          "intent": "report_lost_item"
+        },
+        {
+          "segment": "check reception hours?",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_173",
+    "conversation_history": [],
+    "last_user_utterance": "I need to cancel my course, book the spa, and know the spa price.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to cancel my course",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "book the spa",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "know the spa price.",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_174",
+    "conversation_history": [],
+    "last_user_utterance": "I want to modify my spa booking, buy slippers, and ask about changing room rules.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to modify my spa booking",
+          "intent": "modify_booked_spa"
+        },
+        {
+          "segment": "buy slippers",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "ask about changing room rules.",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_175",
+    "conversation_history": [],
+    "last_user_utterance": "My name is Paolo Neri, I lost my wallet, and I want to know if reception is open.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "My name is Paolo Neri",
+          "intent": "user_identification"
+        },
+        {
+          "segment": "I lost my wallet",
+          "intent": "report_lost_item"
+        },
+        {
+          "segment": "I want to know if reception is open.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_176",
+    "conversation_history": [],
+    "last_user_utterance": "Thanks, can I also book hydrobike and ask how much it costs?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Thanks",
+          "intent": "greeting_closing"
+        },
+        {
+          "segment": "can I also book hydrobike",
+          "intent": "book_course"
+        },
+        {
+          "segment": "ask how much it costs?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_177",
+    "conversation_history": [],
+    "last_user_utterance": "Can you tell me a joke, sell me a towel, and book the lido? ",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can you tell me a joke",
+          "intent": "out_of_scope"
+        },
+        {
+          "segment": "sell me a towel",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "book the lido?",
+          "intent": "out_of_scope"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_178",
+    "conversation_history": [],
+    "last_user_utterance": "I want to change my course, cancel my spa booking, and know the pool rules.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to change my course",
+          "intent": "modify_booked_course"
+        },
+        {
+          "segment": "cancel my spa booking",
+          "intent": "cancel_booked_spa"
+        },
+        {
+          "segment": "know the pool rules.",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_179",
+    "conversation_history": [],
+    "last_user_utterance": "I want to cancel my booking, buy a cap, and check the gym opening hours.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to cancel my booking",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "buy a cap",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "check the gym opening hours.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_180",
+    "conversation_history": [],
+    "last_user_utterance": "I'm Sara Conti, I want to book aquagym, and I need the price.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I'm Sara Conti",
+          "intent": "user_identification"
+        },
+        {
+          "segment": "I want to book aquagym",
+          "intent": "book_course"
+        },
+        {
+          "segment": "I need the price.",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_181",
+    "conversation_history": [],
+    "last_user_utterance": "Can I modify the spa booking, report lost goggles, and ask if food is allowed?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I modify the spa booking",
+          "intent": "modify_booked_spa"
+        },
+        {
+          "segment": "report lost goggles",
+          "intent": "report_lost_item"
+        },
+        {
+          "segment": "ask if food is allowed?",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_182",
+    "conversation_history": [],
+    "last_user_utterance": "Hello, I want to buy a swimsuit and know if the lido is open tomorrow.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Hello",
+          "intent": "greeting_closing"
+        },
+        {
+          "segment": "I want to buy a swimsuit",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "know if the lido is open tomorrow.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_183",
+    "conversation_history": [],
+    "last_user_utterance": "Can I cancel spa, book swimming school, and ask about monthly prices?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I cancel spa",
+          "intent": "cancel_booked_spa"
+        },
+        {
+          "segment": "book swimming school",
+          "intent": "book_course"
+        },
+        {
+          "segment": "ask about monthly prices?",
+          "intent": "ask_pricing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_184",
+    "conversation_history": [],
+    "last_user_utterance": "I need to change hydrobike to Friday, buy goggles, and report a missing towel.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to change hydrobike to Friday",
+          "intent": "modify_booked_course"
+        },
+        {
+          "segment": "buy goggles",
+          "intent": "buy_equipment"
+        },
+        {
+          "segment": "report a missing towel.",
+          "intent": "report_lost_item"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_185",
+    "conversation_history": [],
+    "last_user_utterance": "What's the weather, what time does the pool close, and do you sell caps?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "What's the weather",
+          "intent": "out_of_scope"
+        },
+        {
+          "segment": "what time does the pool close",
+          "intent": "ask_opening_hours"
+        },
+        {
+          "segment": "do you sell caps?",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_186",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book the spa, cancel my course, and say thanks.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book the spa",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "cancel my course",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "say thanks.",
+          "intent": "greeting_closing"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_187",
+    "conversation_history": [],
+    "last_user_utterance": "Can I ask the lido rules, know the lido price, and buy slippers?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I ask the lido rules",
+          "intent": "ask_rules"
+        },
+        {
+          "segment": "know the lido price",
+          "intent": "ask_pricing"
+        },
+        {
+          "segment": "buy slippers?",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_188",
+    "conversation_history": [],
+    "last_user_utterance": "I lost my backpack, I'm Luca Greco, and I want to know reception hours.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I lost my backpack",
+          "intent": "report_lost_item"
+        },
+        {
+          "segment": "I'm Luca Greco",
+          "intent": "user_identification"
+        },
+        {
+          "segment": "I want to know reception hours.",
+          "intent": "ask_opening_hours"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_189",
+    "conversation_history": [],
+    "last_user_utterance": "Book spa for tomorrow, change my course to Monday, and tell me if towels are required.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Book spa for tomorrow",
+          "intent": "book_spa"
+        },
+        {
+          "segment": "change my course to Monday",
+          "intent": "modify_booked_course"
+        },
+        {
+          "segment": "tell me if towels are required.",
+          "intent": "ask_rules"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_190",
+    "conversation_history": [],
+    "last_user_utterance": "I want to cancel newborn swimming, ask course prices, and buy a white towel.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to cancel newborn swimming",
+          "intent": "cancel_booked_course"
+        },
+        {
+          "segment": "ask course prices",
+          "intent": "ask_pricing"
+        },
+        {
+          "segment": "buy a white towel.",
+          "intent": "buy_equipment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_191",
+    "conversation_history": [],
+    "last_user_utterance": "I want to modify my booking.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to modify my booking.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_192",
+    "conversation_history": [],
+    "last_user_utterance": "Can I cancel my booking?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I cancel my booking?",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_193",
+    "conversation_history": [],
+    "last_user_utterance": "I need to change my reservation.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to change my reservation.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_194",
+    "conversation_history": [],
+    "last_user_utterance": "Please cancel my reservation.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Please cancel my reservation.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_195",
+    "conversation_history": [],
+    "last_user_utterance": "I want to book something for Monday.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to book something for Monday.",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_196",
+    "conversation_history": [],
+    "last_user_utterance": "Can I make a booking?",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Can I make a booking?",
+          "intent": "book_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_197",
+    "conversation_history": [],
+    "last_user_utterance": "I want to move my appointment.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I want to move my appointment.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_198",
+    "conversation_history": [],
+    "last_user_utterance": "Cancel my appointment please.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "Cancel my appointment please.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_199",
+    "conversation_history": [],
+    "last_user_utterance": "I need to change the day.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I need to change the day.",
+          "intent": "modify_booked_course"
+        }
+      ]
+    }
+  },
+  {
+    "id": "router_200",
+    "conversation_history": [],
+    "last_user_utterance": "I don't want my booking anymore.",
+    "annotation": {
+      "segments": [
+        {
+          "segment": "I don't want my booking anymore.",
+          "intent": "cancel_booked_course"
+        }
+      ]
+    }
+  }
+]

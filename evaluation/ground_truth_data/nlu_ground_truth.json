@@ -1,0 +1,4677 @@
+[
+  {
+    "id": "nlu_001",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "What time does the spa open today?"
+      },
+      {
+        "role": "assistant",
+        "text": "The spa opens at 10:00 today."
+      }
+    ],
+    "full_user_message": "And the gym tomorrow morning? Also, I need to buy goggles.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "And the gym tomorrow morning?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "gym",
+        "date": "tomorrow",
+        "time": "morning"
+      }
+    }
+  },
+  {
+    "id": "nlu_002",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Is the gym open on Saturday?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, the gym is open from 08:00 to 20:00 on Saturday."
+      }
+    ],
+    "full_user_message": "What about Sunday for the swimming pool? Also, how much is a day pass?",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "What about Sunday for the swimming pool?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "swimming_pool",
+        "date": "Sunday",
+        "time": null
+      }
+    }
+  },
+  {
+    "id": "nlu_003",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to visit the lido this week."
+      },
+      {
+        "role": "assistant",
+        "text": "Sure. Which day are you interested in?"
+      }
+    ],
+    "full_user_message": "Does it close late on Friday? And can I book the spa?",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "Does it close late on Friday?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "lido",
+        "date": "Friday",
+        "time": null
+      }
+    }
+  },
+  {
+    "id": "nlu_004",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with opening hours. Which facility do you mean?"
+      }
+    ],
+    "full_user_message": "Is reception open at 19:30 today? I also lost a towel.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "Is reception open at 19:30 today?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "reception",
+        "date": "today",
+        "time": "19:30"
+      }
+    }
+  },
+  {
+    "id": "nlu_005",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Is the spa open tonight?"
+      },
+      {
+        "role": "assistant",
+        "text": "The spa is open from 10:00 to 21:00."
+      }
+    ],
+    "full_user_message": "And tomorrow evening? Also tell me the spa rules.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "And tomorrow evening?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "spa",
+        "date": "tomorrow",
+        "time": "evening"
+      }
+    }
+  },
+  {
+    "id": "nlu_006",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I usually use the pool before work."
+      },
+      {
+        "role": "assistant",
+        "text": "I can check if the swimming pool is open."
+      }
+    ],
+    "full_user_message": "Can I swim at 6 AM on Monday? Also I want a student price.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "Can I swim at 6 AM on Monday?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "swimming_pool",
+        "date": "Monday",
+        "time": "6 AM"
+      }
+    }
+  },
+  {
+    "id": "nlu_007",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Is the gym open today?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, the gym is open today."
+      }
+    ],
+    "full_user_message": "What about the day after tomorrow for the gym? I may also buy slippers.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "What about the day after tomorrow for the gym?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "gym",
+        "date": "the day after tomorrow",
+        "time": null
+      }
+    }
+  },
+  {
+    "id": "nlu_008",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to go to the spa."
+      },
+      {
+        "role": "assistant",
+        "text": "The spa is available every day."
+      }
+    ],
+    "full_user_message": "When does it close on weekends? And I need to cancel a spa booking.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "When does it close on weekends?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "spa",
+        "date": "weekends",
+        "time": null
+      }
+    }
+  },
+  {
+    "id": "nlu_009",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with prices. Which service are you interested in?"
+      }
+    ],
+    "full_user_message": "How much is a monthly course pass for a student? Also, can I book hydrobike?",
+    "target_intent": "ask_pricing",
+    "target_segment": "How much is a monthly course pass for a student?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "course",
+        "sub_type": "monthly_pass",
+        "user_category": "student"
+      }
+    }
+  },
+  {
+    "id": "nlu_010",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "How much is the monthly pass for public swimming?"
+      },
+      {
+        "role": "assistant",
+        "text": "Which category is it for: adult, child, student, or senior?"
+      }
+    ],
+    "full_user_message": "I'm a senior, and I also want to know the gym opening hours.",
+    "target_intent": "ask_pricing",
+    "target_segment": "I'm a senior",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": null,
+        "sub_type": null,
+        "user_category": "senior"
+      }
+    }
+  },
+  {
+    "id": "nlu_011",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can check prices for public swimming, gym, spa, courses, or lido."
+      }
+    ],
+    "full_user_message": "Do you have a 10-entry pass for public swimming? I also need a towel.",
+    "target_intent": "ask_pricing",
+    "target_segment": "Do you have a 10-entry pass for public swimming?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "public_swim",
+        "sub_type": "10_entry_pass",
+        "user_category": null
+      }
+    }
+  },
+  {
+    "id": "nlu_012",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I am thinking about going to the spa."
+      },
+      {
+        "role": "assistant",
+        "text": "Sure, I can give prices or rules."
+      }
+    ],
+    "full_user_message": "How much is the spa day pass for adults? Also, are kids allowed there?",
+    "target_intent": "ask_pricing",
+    "target_segment": "How much is the spa day pass for adults?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "spa",
+        "sub_type": "day_pass",
+        "user_category": "adult"
+      }
+    }
+  },
+  {
+    "id": "nlu_013",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Tell me the monthly lido price."
+      },
+      {
+        "role": "assistant",
+        "text": "The lido also has day, monthly, and annual passes."
+      }
+    ],
+    "full_user_message": "And annual for the lido? I might also book a spa session.",
+    "target_intent": "ask_pricing",
+    "target_segment": "And annual for the lido?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "lido",
+        "sub_type": "annual_pass",
+        "user_category": null
+      }
+    }
+  },
+  {
+    "id": "nlu_014",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "How much is the day pass for public swimming?"
+      },
+      {
+        "role": "assistant",
+        "text": "Which category is it for?"
+      }
+    ],
+    "full_user_message": "For a child, please. Also, I want to ask about swimming caps.",
+    "target_intent": "ask_pricing",
+    "target_segment": "For a child, please.",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": null,
+        "sub_type": null,
+        "user_category": "child"
+      }
+    }
+  },
+  {
+    "id": "nlu_015",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with subscriptions and day passes."
+      }
+    ],
+    "full_user_message": "What is the price of the gym annual pass? Also, what time does it close?",
+    "target_intent": "ask_pricing",
+    "target_segment": "What is the price of the gym annual pass?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "gym",
+        "sub_type": "annual_pass",
+        "user_category": null
+      }
+    }
+  },
+  {
+    "id": "nlu_016",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Course prices include swimming school, aquagym, hydrobike, and newborn swimming."
+      }
+    ],
+    "full_user_message": "How much do swimming lessons cost monthly for adults? Also, I lost my goggles.",
+    "target_intent": "ask_pricing",
+    "target_segment": "How much do swimming lessons cost monthly for adults?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "course",
+        "sub_type": "monthly_pass",
+        "user_category": "adult"
+      }
+    }
+  },
+  {
+    "id": "nlu_017",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can explain facility rules. Which area are you asking about?"
+      }
+    ],
+    "full_user_message": "Do I need a swimming cap in the pool? Also, how much is a day pass?",
+    "target_intent": "ask_rules",
+    "target_segment": "Do I need a swimming cap in the pool?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "swimming_pool",
+        "specific_inquiry": "swimming cap"
+      }
+    }
+  },
+  {
+    "id": "nlu_018",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Are slippers required in the changing room?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, slippers are mandatory in the changing rooms and showers."
+      }
+    ],
+    "full_user_message": "What about lockers? And can I buy a towel?",
+    "target_intent": "ask_rules",
+    "target_segment": "What about lockers?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "changing_room",
+        "specific_inquiry": "lockers"
+      }
+    }
+  },
+  {
+    "id": "nlu_019",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with spa rules and bookings."
+      }
+    ],
+    "full_user_message": "Can children enter the spa? I also want to book it for tomorrow.",
+    "target_intent": "ask_rules",
+    "target_segment": "Can children enter the spa?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "spa",
+        "specific_inquiry": "children"
+      }
+    }
+  },
+  {
+    "id": "nlu_020",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to spend the afternoon at the lido."
+      },
+      {
+        "role": "assistant",
+        "text": "Sure. Do you need rules or opening hours?"
+      }
+    ],
+    "full_user_message": "Is food allowed in the lido area? Also, when does it close?",
+    "target_intent": "ask_rules",
+    "target_segment": "Is food allowed in the lido area?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "lido",
+        "specific_inquiry": "food"
+      }
+    }
+  },
+  {
+    "id": "nlu_021",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to use the gym today."
+      },
+      {
+        "role": "assistant",
+        "text": "I can help with gym rules."
+      }
+    ],
+    "full_user_message": "Do I need clean shoes there? Also, I need to cancel aquagym.",
+    "target_intent": "ask_rules",
+    "target_segment": "Do I need clean shoes there?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "gym",
+        "specific_inquiry": "clean shoes"
+      }
+    }
+  },
+  {
+    "id": "nlu_022",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Are picnics allowed in the lido?"
+      },
+      {
+        "role": "assistant",
+        "text": "Picnics are allowed only in designated lawn areas."
+      }
+    ],
+    "full_user_message": "What about glass bottles? And I may report a lost wallet.",
+    "target_intent": "ask_rules",
+    "target_segment": "What about glass bottles?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "lido",
+        "specific_inquiry": "glass bottles"
+      }
+    }
+  },
+  {
+    "id": "nlu_023",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which gym rule are you asking about?"
+      }
+    ],
+    "full_user_message": "Tell me about towels on machines, and also the monthly gym price.",
+    "target_intent": "ask_rules",
+    "target_segment": "Tell me about towels on machines",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "gym",
+        "specific_inquiry": "towels on machines"
+      }
+    }
+  },
+  {
+    "id": "nlu_024",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help you book a course."
+      }
+    ],
+    "full_user_message": "I want to book beginner aquagym for adults on Monday. Also, how much is it?",
+    "target_intent": "book_course",
+    "target_segment": "I want to book beginner aquagym for adults on Monday.",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": "aquagym",
+        "target_age": "adult",
+        "level": "beginner",
+        "day_preference": "Monday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_025",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book hydrobike."
+      },
+      {
+        "role": "assistant",
+        "text": "We offer intermediate and advanced hydrobike. Which level would you prefer?"
+      }
+    ],
+    "full_user_message": "The intermediate one, and can you also tell me the pool opening hours?",
+    "target_intent": "book_course",
+    "target_segment": "The intermediate one",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": "intermediate",
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_026",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Can I book swimming lessons?"
+      },
+      {
+        "role": "assistant",
+        "text": "Who is the course for?"
+      }
+    ],
+    "full_user_message": "It is for my child, and I also need to buy goggles.",
+    "target_intent": "book_course",
+    "target_segment": "It is for my child",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": "child",
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_027",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book newborn swimming for my baby."
+      },
+      {
+        "role": "assistant",
+        "text": "Newborn swimming is available on Saturday or Sunday. Which day do you prefer?"
+      }
+    ],
+    "full_user_message": "Saturday works, but I also want to ask about spa rules.",
+    "target_intent": "book_course",
+    "target_segment": "Saturday works",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": "Saturday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_028",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book an advanced swimming school course."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "I am Marco Bianchi, and I need to know the lido price too.",
+    "target_intent": "book_course",
+    "target_segment": "I am Marco Bianchi",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": "Marco",
+        "surname": "Bianchi",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_029",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Just to confirm, you want to book an intermediate hydrobike course for adults on Thursday. Is that correct?"
+      }
+    ],
+    "full_user_message": "Yes, that's correct. Also, what time does the gym open?",
+    "target_intent": "book_course",
+    "target_segment": "Yes, that's correct.",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_030",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Just to confirm, you want to book aquagym on Wednesday. Is that correct?"
+      }
+    ],
+    "full_user_message": "No, cancel that. Also, I lost a red towel.",
+    "target_intent": "book_course",
+    "target_segment": "No, cancel that.",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_031",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which course would you like to book?"
+      }
+    ],
+    "full_user_message": "I want swimming lessons for my teen on Friday, and I need the price too.",
+    "target_intent": "book_course",
+    "target_segment": "I want swimming lessons for my teen on Friday",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": "swimming_school",
+        "target_age": "teen",
+        "level": null,
+        "day_preference": "Friday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_032",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help you book a spa session."
+      }
+    ],
+    "full_user_message": "I want to book the spa tomorrow evening for two people. Also, are swimsuits mandatory?",
+    "target_intent": "book_spa",
+    "target_segment": "I want to book the spa tomorrow evening for two people.",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": "tomorrow",
+        "time": "evening",
+        "people_count": 2,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_033",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book the spa for next Saturday."
+      },
+      {
+        "role": "assistant",
+        "text": "What time would you prefer?"
+      }
+    ],
+    "full_user_message": "At 16:30, and I also want to buy a cap.",
+    "target_intent": "book_spa",
+    "target_segment": "At 16:30",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": "16:30",
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_034",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "How many people will be attending?"
+      }
+    ],
+    "full_user_message": "We will be four. Also, how much does the spa cost?",
+    "target_intent": "book_spa",
+    "target_segment": "We will be four.",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": 4,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_035",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Book the spa for Friday at 18:00 for 3 people."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "I'm Laura Neri, and can you also tell me the gym hours?",
+    "target_intent": "book_spa",
+    "target_segment": "I'm Laura Neri",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": "Laura",
+        "surname": "Neri",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_036",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Just to confirm, you want to book the spa for Monday at 15:00 for 2 people. Is that correct?"
+      }
+    ],
+    "full_user_message": "Yes, confirm it. Also, what are the lido rules?",
+    "target_intent": "book_spa",
+    "target_segment": "Yes, confirm it.",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_037",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm the spa booking for tomorrow at 10:00?"
+      }
+    ],
+    "full_user_message": "No, not anymore. Also, I want to report a lost bag.",
+    "target_intent": "book_spa",
+    "target_segment": "No, not anymore.",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_038",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "When would you like to book the spa?"
+      }
+    ],
+    "full_user_message": "Next Friday morning for just me, and I also need the monthly course price.",
+    "target_intent": "book_spa",
+    "target_segment": "Next Friday morning for just me",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": "Next Friday",
+        "time": "morning",
+        "people_count": 1,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_039",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book the spa tomorrow."
+      },
+      {
+        "role": "assistant",
+        "text": "What time and how many people?"
+      }
+    ],
+    "full_user_message": "For me and my partner at 2 PM, and can we eat in the spa?",
+    "target_intent": "book_spa",
+    "target_segment": "For me and my partner at 2 PM",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": "2 PM",
+        "people_count": 2,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_040",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help you modify a booked course."
+      }
+    ],
+    "full_user_message": "I want to move my aquagym course from Monday to Wednesday, and I also lost goggles.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "I want to move my aquagym course from Monday to Wednesday",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": "aquagym",
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": "Monday",
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": "Wednesday",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_041",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I need to modify my swimming school booking."
+      },
+      {
+        "role": "assistant",
+        "text": "What would you like to change?"
+      }
+    ],
+    "full_user_message": "Can I change from beginner to advanced? Also, what is the gym price?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "Can I change from beginner to advanced?",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": "beginner",
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": "advanced",
+        "day_preference_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_042",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to change my hydrobike course."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "I'm Sara Conti, and also tell me the pool hours.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "I'm Sara Conti",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": "Sara",
+        "surname": "Conti",
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_043",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I have two courses booked on Tuesday."
+      },
+      {
+        "role": "assistant",
+        "text": "Which course do you want to change: aquagym or hydrobike?"
+      }
+    ],
+    "full_user_message": "The hydrobike one, and I want to buy slippers too.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "The hydrobike one",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": "hydrobike",
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_044",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to change my aquagym booking."
+      },
+      {
+        "role": "assistant",
+        "text": "Which new day would you prefer?"
+      }
+    ],
+    "full_user_message": "Move it to Friday, and also how much is a day pass?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "Move it to Friday",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": "Friday",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_045",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What change would you like to make to the course?"
+      }
+    ],
+    "full_user_message": "It's for my teen now, not adult. Also, can I book the spa?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "It's for my teen now, not adult.",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": "adult",
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": "teen",
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_046",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Just to confirm, you want to change hydrobike from Tuesday to Thursday. Is that correct?"
+      }
+    ],
+    "full_user_message": "Yes, that's correct. Also, what are the rules for towels?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "Yes, that's correct.",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_047",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm changing your swimming school course to Friday?"
+      }
+    ],
+    "full_user_message": "No, keep the old one. Also, I need the lido hours.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "No, keep the old one.",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_048",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help you modify your spa booking."
+      }
+    ],
+    "full_user_message": "I want to move my spa booking from Tuesday to Thursday, and also buy goggles.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "I want to move my spa booking from Tuesday to Thursday",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": "Tuesday",
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": "Thursday",
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_049",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to change my spa appointment."
+      },
+      {
+        "role": "assistant",
+        "text": "What new time would you prefer?"
+      }
+    ],
+    "full_user_message": "Can we move it to 18:00? Also, what time does the spa close?",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Can we move it to 18:00?",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": "18:00",
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_050",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What would you like to change about your spa booking?"
+      }
+    ],
+    "full_user_message": "Actually, three people instead of two. Also, tell me spa rules.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Actually, three people instead of two.",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": 2,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": 3,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_051",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to change my spa booking from Friday to Sunday."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "I'm Elena Greco, and I want to ask the course price too.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "I'm Elena Greco",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": "Elena",
+        "surname": "Greco",
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_052",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I need to modify my spa booking."
+      },
+      {
+        "role": "assistant",
+        "text": "You have bookings on July 10th and July 15th. Which one should I modify?"
+      }
+    ],
+    "full_user_message": "The one on July 15th, and I also need a towel.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "The one on July 15th",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": "July 15th",
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_053",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What new date or time would you like?"
+      }
+    ],
+    "full_user_message": "Tomorrow evening instead, and can we eat there?",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Tomorrow evening instead",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": "Tomorrow",
+        "time_new": "evening",
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_054",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Just to confirm, you want to move your spa booking from Monday at 15:00 to Wednesday at 18:00. Is that right?"
+      }
+    ],
+    "full_user_message": "Yes, that's right. Also, what is the gym annual price?",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Yes, that's right.",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_055",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm changing your spa booking to Saturday morning?"
+      }
+    ],
+    "full_user_message": "No, don't change it. Also, I lost my cap.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "No, don't change it.",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_056",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help you cancel a course booking."
+      }
+    ],
+    "full_user_message": "I want to cancel my advanced aquagym course on Friday, and I also need spa prices.",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "I want to cancel my advanced aquagym course on Friday",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": "aquagym",
+        "target_age": null,
+        "level": "advanced",
+        "day_preference": "Friday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_057",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I need to cancel my hydrobike course."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "I'm Luca Ferri, and can you tell me pool hours?",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "I'm Luca Ferri",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": "Luca",
+        "surname": "Ferri",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_058",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I have two courses booked."
+      },
+      {
+        "role": "assistant",
+        "text": "Which one do you want to cancel: aquagym or swimming school?"
+      }
+    ],
+    "full_user_message": "The swimming school one, and I also want to report a lost towel.",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "The swimming school one",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": "swimming_school",
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_059",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "You have hydrobike on Monday and Friday. Which booking should I cancel?"
+      }
+    ],
+    "full_user_message": "The Monday one, and can I buy slippers?",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "The Monday one",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": "Monday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_060",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Just to confirm, you want to cancel your Monday aquagym course. Is that correct?"
+      }
+    ],
+    "full_user_message": "Yes, cancel it. Also, what are gym rules?",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "Yes, cancel it.",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_061",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm cancelling your swimming school course?"
+      }
+    ],
+    "full_user_message": "No, keep it. Also, I want a spa booking.",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "No, keep it.",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_062",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which course booking would you like to cancel?"
+      }
+    ],
+    "full_user_message": "Cancel the children's beginner course on Wednesday, and tell me the lido hours too.",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "Cancel the children's beginner course on Wednesday",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": "child",
+        "level": "beginner",
+        "day_preference": "Wednesday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_063",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help you cancel a spa booking."
+      }
+    ],
+    "full_user_message": "I want to cancel my spa booking for tomorrow at 5 PM, and I also lost my goggles.",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "I want to cancel my spa booking for tomorrow at 5 PM",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": "tomorrow",
+        "time": "5 PM",
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_064",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I need to cancel my spa appointment."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "I'm Paolo Russo, and what time does the reception close?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "I'm Paolo Russo",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": "Paolo",
+        "surname": "Russo",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_065",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "You have spa bookings for July 10th and July 15th. Which one do you want to cancel?"
+      }
+    ],
+    "full_user_message": "The first one, and I also need to buy a towel.",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "The first one",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": "July 10th",
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_066",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "You have two spa bookings on Saturday, one at 10:00 and one at 18:00."
+      }
+    ],
+    "full_user_message": "The one at 18:00, and can I ask about the spa swimsuit rule?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "The one at 18:00",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": "18:00",
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_067",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you want to cancel your spa booking for next Tuesday at 16:00?"
+      }
+    ],
+    "full_user_message": "Yes, that's the one. Also, how much is a course?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "Yes, that's the one.",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_068",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Just to confirm, should I cancel your spa booking for Friday?"
+      }
+    ],
+    "full_user_message": "No, do not cancel it. Also, I want opening hours.",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "No, do not cancel it.",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_069",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which spa booking should I cancel?"
+      }
+    ],
+    "full_user_message": "Cancel the booking for 3 people next Sunday morning, and tell me if food is allowed in the lido.",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "Cancel the booking for 3 people next Sunday morning",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": "next Sunday",
+        "time": "morning",
+        "people_count": 3,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_070",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with shop purchases."
+      }
+    ],
+    "full_user_message": "I need to buy blue goggles, and I also want the pool hours.",
+    "target_intent": "buy_equipment",
+    "target_segment": "I need to buy blue goggles",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "goggles",
+        "size": null,
+        "color": "blue",
+        "brand": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_071",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to buy a swimsuit."
+      },
+      {
+        "role": "assistant",
+        "text": "Which size do you need: XS, S, M, L, or XL?"
+      }
+    ],
+    "full_user_message": "Size M, and can I book the spa too?",
+    "target_intent": "buy_equipment",
+    "target_segment": "Size M",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": null,
+        "size": "M",
+        "color": null,
+        "brand": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_072",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which brand would you prefer: Speedo or Arena?"
+      }
+    ],
+    "full_user_message": "Arena is fine, and how much is swimming school?",
+    "target_intent": "buy_equipment",
+    "target_segment": "Arena is fine",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": null,
+        "size": null,
+        "color": null,
+        "brand": "arena",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_073",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to buy a swimming cap."
+      },
+      {
+        "role": "assistant",
+        "text": "What color would you prefer?"
+      }
+    ],
+    "full_user_message": "Any color is fine. Also, what are changing room rules?",
+    "target_intent": "buy_equipment",
+    "target_segment": "Any color is fine.",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": null,
+        "size": null,
+        "color": "(any)",
+        "brand": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_074",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What item do you want to buy?"
+      }
+    ],
+    "full_user_message": "I need red slippers, and I lost my wallet too.",
+    "target_intent": "buy_equipment",
+    "target_segment": "I need red slippers",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "slippers",
+        "size": null,
+        "color": "red",
+        "brand": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_075",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "The shop sells towels, goggles, caps, slippers, and swimsuits."
+      }
+    ],
+    "full_user_message": "A white towel from Decathlon, and what time does the gym close?",
+    "target_intent": "buy_equipment",
+    "target_segment": "A white towel from Decathlon",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "towel",
+        "size": null,
+        "color": "white",
+        "brand": "decathlon",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_076",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm you want to buy black Arena goggles?"
+      }
+    ],
+    "full_user_message": "Yes, I confirm. Also, can I cancel my course?",
+    "target_intent": "buy_equipment",
+    "target_segment": "Yes, I confirm.",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": null,
+        "size": null,
+        "color": null,
+        "brand": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_077",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm you want to buy a red Speedo swimming cap?"
+      }
+    ],
+    "full_user_message": "No, I don't want it. Also, I need spa prices.",
+    "target_intent": "buy_equipment",
+    "target_segment": "No, I don't want it.",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": null,
+        "size": null,
+        "color": null,
+        "brand": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_078",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help report lost items."
+      }
+    ],
+    "full_user_message": "I lost my black wallet in the lido yesterday, and I also want to book the spa.",
+    "target_intent": "report_lost_item",
+    "target_segment": "I lost my black wallet in the lido yesterday",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": "wallet",
+        "item_color": "black",
+        "last_seen_location": "lido",
+        "last_seen_date": "yesterday",
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_079",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I lost my towel."
+      },
+      {
+        "role": "assistant",
+        "text": "Where did you last see it?"
+      }
+    ],
+    "full_user_message": "Probably in the changing room. Also, I need the gym price.",
+    "target_intent": "report_lost_item",
+    "target_segment": "Probably in the changing room.",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": null,
+        "item_color": null,
+        "last_seen_location": "changing room",
+        "last_seen_date": null,
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_080",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Can you describe the lost item?"
+      }
+    ],
+    "full_user_message": "It was a blue towel, and can you tell me the lido hours?",
+    "target_intent": "report_lost_item",
+    "target_segment": "It was a blue towel",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": "towel",
+        "item_color": "blue",
+        "last_seen_location": null,
+        "last_seen_date": null,
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_081",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I lost red goggles yesterday."
+      },
+      {
+        "role": "assistant",
+        "text": "Can you provide your name and surname for the report?"
+      }
+    ],
+    "full_user_message": "I'm Giulia Riva, and I also need a swimming cap.",
+    "target_intent": "report_lost_item",
+    "target_segment": "I'm Giulia Riva",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": null,
+        "item_color": null,
+        "last_seen_location": null,
+        "last_seen_date": null,
+        "name": "Giulia",
+        "surname": "Riva"
+      }
+    }
+  },
+  {
+    "id": "nlu_082",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I lost my black swimsuit in the changing room."
+      },
+      {
+        "role": "assistant",
+        "text": "When did you last see it?"
+      }
+    ],
+    "full_user_message": "Last Friday, and how much is a spa day pass?",
+    "target_intent": "report_lost_item",
+    "target_segment": "Last Friday",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": null,
+        "item_color": null,
+        "last_seen_location": null,
+        "last_seen_date": "Last Friday",
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_083",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Tell me what you lost and where you last saw it."
+      }
+    ],
+    "full_user_message": "I lost a red swimming cap near the pool, and I also want the rules for caps.",
+    "target_intent": "report_lost_item",
+    "target_segment": "I lost a red swimming cap near the pool",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": "swimming cap",
+        "item_color": "red",
+        "last_seen_location": "pool",
+        "last_seen_date": null,
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_084",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Can you describe the item you lost?"
+      }
+    ],
+    "full_user_message": "It was clear goggles. Also, I need to cancel my spa booking.",
+    "target_intent": "report_lost_item",
+    "target_segment": "It was clear goggles.",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": "goggles",
+        "item_color": "clear",
+        "last_seen_location": null,
+        "last_seen_date": null,
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_085",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Hello, how can I help you today?"
+      }
+    ],
+    "full_user_message": "Hi, I'm Martina Serra, and I want to book a course.",
+    "target_intent": "user_identification",
+    "target_segment": "Hi, I'm Martina Serra",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Martina",
+        "surname": "Serra"
+      }
+    }
+  },
+  {
+    "id": "nlu_086",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Please introduce yourself if you need bookings."
+      }
+    ],
+    "full_user_message": "Ferrari Alessandro here. Also, what time does the spa close?",
+    "target_intent": "user_identification",
+    "target_segment": "Ferrari Alessandro here.",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Alessandro",
+        "surname": "Ferrari"
+      }
+    }
+  },
+  {
+    "id": "nlu_087",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Sure, I can help. Who am I speaking with?"
+      }
+    ],
+    "full_user_message": "My name is Chiara, and I need prices.",
+    "target_intent": "user_identification",
+    "target_segment": "My name is Chiara",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Chiara",
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_088",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Can you tell me your name?"
+      }
+    ],
+    "full_user_message": "I am Davide Moretti. Also, I lost a towel.",
+    "target_intent": "user_identification",
+    "target_segment": "I am Davide Moretti.",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Davide",
+        "surname": "Moretti"
+      }
+    }
+  },
+  {
+    "id": "nlu_089",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Before starting, could you give me your name?"
+      }
+    ],
+    "full_user_message": "You can call me Elena, and can I buy goggles?",
+    "target_intent": "user_identification",
+    "target_segment": "You can call me Elena",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Elena",
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_090",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Your spa booking has been confirmed."
+      }
+    ],
+    "full_user_message": "Thanks, that's all. Also, maybe I will come tomorrow.",
+    "target_intent": "greeting_closing",
+    "target_segment": "Thanks, that's all.",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_091",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Welcome to the aquatic center."
+      }
+    ],
+    "full_user_message": "Hello there, I also need to know the gym hours.",
+    "target_intent": "greeting_closing",
+    "target_segment": "Hello there",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_092",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "The swimming pool is open from 06:00 to 22:00."
+      }
+    ],
+    "full_user_message": "Okay perfect, and how much is a towel?",
+    "target_intent": "greeting_closing",
+    "target_segment": "Okay perfect",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_093",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Your cancellation has been completed."
+      }
+    ],
+    "full_user_message": "Bye, and please don't change anything else.",
+    "target_intent": "greeting_closing",
+    "target_segment": "Bye",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_094",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Hi, how can I help you?"
+      }
+    ],
+    "full_user_message": "Good morning, I want to ask about courses too.",
+    "target_intent": "greeting_closing",
+    "target_segment": "Good morning",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_095",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with aquatic center services."
+      }
+    ],
+    "full_user_message": "Can you tell me a joke? Also, how much is the gym?",
+    "target_intent": "out_of_scope",
+    "target_segment": "Can you tell me a joke?",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_096",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What do you need help with?"
+      }
+    ],
+    "full_user_message": "What's the weather today? And is the spa open?",
+    "target_intent": "out_of_scope",
+    "target_segment": "What's the weather today?",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_097",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Please ask me about the aquatic center."
+      }
+    ],
+    "full_user_message": "Who won the football match yesterday? Also, I lost my cap.",
+    "target_intent": "out_of_scope",
+    "target_segment": "Who won the football match yesterday?",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_098",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with bookings, prices, rules, and lost items."
+      }
+    ],
+    "full_user_message": "Can you solve my math homework? And I want to book swimming school.",
+    "target_intent": "out_of_scope",
+    "target_segment": "Can you solve my math homework?",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_099",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "How can I assist you?"
+      }
+    ],
+    "full_user_message": "Tell me a movie recommendation, and then I need spa rules.",
+    "target_intent": "out_of_scope",
+    "target_segment": "Tell me a movie recommendation",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_100",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I am the aquatic center assistant."
+      }
+    ],
+    "full_user_message": "Write a poem for me. Also, do you sell goggles?",
+    "target_intent": "out_of_scope",
+    "target_segment": "Write a poem for me.",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_101",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can check opening hours for any facility."
+      }
+    ],
+    "full_user_message": "Is the lido open next Saturday afternoon? Also, I want to buy a swimsuit.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "Is the lido open next Saturday afternoon?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "lido",
+        "date": "next Saturday",
+        "time": "afternoon"
+      }
+    }
+  },
+  {
+    "id": "nlu_102",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Is the gym open today?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, the gym is open today."
+      }
+    ],
+    "full_user_message": "And at 21:30? Also, do you sell towels?",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "And at 21:30?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "gym",
+        "date": "today",
+        "time": "21:30"
+      }
+    }
+  },
+  {
+    "id": "nlu_103",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which facility do you want opening hours for?"
+      }
+    ],
+    "full_user_message": "What time does the reception open tomorrow? I also need to cancel a spa booking.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "What time does the reception open tomorrow?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "reception",
+        "date": "tomorrow",
+        "time": null
+      }
+    }
+  },
+  {
+    "id": "nlu_104",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to swim this weekend."
+      },
+      {
+        "role": "assistant",
+        "text": "I can check the swimming pool schedule."
+      }
+    ],
+    "full_user_message": "Does the pool close early on Sunday morning? Also, can I book a course?",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "Does the pool close early on Sunday morning?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "swimming_pool",
+        "date": "Sunday",
+        "time": "morning"
+      }
+    }
+  },
+  {
+    "id": "nlu_105",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to go to the spa tomorrow."
+      },
+      {
+        "role": "assistant",
+        "text": "The spa schedule can be checked for specific times."
+      }
+    ],
+    "full_user_message": "Is it still open at noon? Also, what are the spa rules?",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "Is it still open at noon?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "spa",
+        "date": "tomorrow",
+        "time": "noon"
+      }
+    }
+  },
+  {
+    "id": "nlu_106",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with opening and closing hours."
+      }
+    ],
+    "full_user_message": "When does the gym close during the week? Also, I lost my swimming cap.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "When does the gym close during the week?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "gym",
+        "date": "during the week",
+        "time": null
+      }
+    }
+  },
+  {
+    "id": "nlu_107",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Is the swimming pool open at 7 PM on Thursday?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, it is open at 7 PM on Thursday."
+      }
+    ],
+    "full_user_message": "And the same time on Friday? I also want to know the student price.",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "And the same time on Friday?",
+    "annotation": {
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "swimming_pool",
+        "date": "Friday",
+        "time": "7 PM"
+      }
+    }
+  },
+  {
+    "id": "nlu_108",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can provide prices for passes and subscriptions."
+      }
+    ],
+    "full_user_message": "How much is a 10-entry gym pass for adults? Also, when does the gym close?",
+    "target_intent": "ask_pricing",
+    "target_segment": "How much is a 10-entry gym pass for adults?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "gym",
+        "sub_type": "10_entry_pass",
+        "user_category": "adult"
+      }
+    }
+  },
+  {
+    "id": "nlu_109",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which service and category do you need pricing for?"
+      }
+    ],
+    "full_user_message": "Do children get a discount for public swimming? I also want to buy goggles.",
+    "target_intent": "ask_pricing",
+    "target_segment": "Do children get a discount for public swimming?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "public_swim",
+        "sub_type": null,
+        "user_category": "child"
+      }
+    }
+  },
+  {
+    "id": "nlu_110",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "How much do swimming lessons cost?"
+      },
+      {
+        "role": "assistant",
+        "text": "Do you mean a monthly or annual course pass?"
+      }
+    ],
+    "full_user_message": "The annual one, and can I book the spa tomorrow?",
+    "target_intent": "ask_pricing",
+    "target_segment": "The annual one",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "course",
+        "sub_type": "annual_pass",
+        "user_category": null
+      }
+    }
+  },
+  {
+    "id": "nlu_111",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "How much is the annual lido subscription?"
+      },
+      {
+        "role": "assistant",
+        "text": "Which user category is it for?"
+      }
+    ],
+    "full_user_message": "For students, please. Also, are glass bottles allowed in the lido?",
+    "target_intent": "ask_pricing",
+    "target_segment": "For students, please.",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": null,
+        "sub_type": null,
+        "user_category": "student"
+      }
+    }
+  },
+  {
+    "id": "nlu_112",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Spa prices include day passes and 10-entry passes."
+      }
+    ],
+    "full_user_message": "What is the cost of a spa 10-entry pass? Also, can children enter the spa?",
+    "target_intent": "ask_pricing",
+    "target_segment": "What is the cost of a spa 10-entry pass?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "spa",
+        "sub_type": "10_entry_pass",
+        "user_category": null
+      }
+    }
+  },
+  {
+    "id": "nlu_113",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can check lido prices."
+      }
+    ],
+    "full_user_message": "How much is one day at the lido for seniors? Also, what are the lido hours?",
+    "target_intent": "ask_pricing",
+    "target_segment": "How much is one day at the lido for seniors?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "lido",
+        "sub_type": "day_pass",
+        "user_category": "senior"
+      }
+    }
+  },
+  {
+    "id": "nlu_114",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Course pricing covers swimming school, aquagym, hydrobike, and newborn swimming."
+      }
+    ],
+    "full_user_message": "How much are baby swimming courses monthly? And I need to report a lost item.",
+    "target_intent": "ask_pricing",
+    "target_segment": "How much are baby swimming courses monthly?",
+    "annotation": {
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": "course",
+        "sub_type": "monthly_pass",
+        "user_category": null
+      }
+    }
+  },
+  {
+    "id": "nlu_115",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with gym policies."
+      }
+    ],
+    "full_user_message": "Can I bring street shoes into the gym? Also, how much is the monthly pass?",
+    "target_intent": "ask_rules",
+    "target_segment": "Can I bring street shoes into the gym?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "gym",
+        "specific_inquiry": "street shoes"
+      }
+    }
+  },
+  {
+    "id": "nlu_116",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which swimming pool rule are you asking about?"
+      }
+    ],
+    "full_user_message": "Is a shower required before entering the pool? Also, I want a day pass price.",
+    "target_intent": "ask_rules",
+    "target_segment": "Is a shower required before entering the pool?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "swimming_pool",
+        "specific_inquiry": "shower"
+      }
+    }
+  },
+  {
+    "id": "nlu_117",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to know the rules in the spa."
+      },
+      {
+        "role": "assistant",
+        "text": "Sure, what specific spa rule are you asking about?"
+      }
+    ],
+    "full_user_message": "What about silence there? And can I book a spa session?",
+    "target_intent": "ask_rules",
+    "target_segment": "What about silence there?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "spa",
+        "specific_inquiry": "silence"
+      }
+    }
+  },
+  {
+    "id": "nlu_118",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can explain changing room rules."
+      }
+    ],
+    "full_user_message": "Are padlocks needed for lockers? Also, what time does reception open?",
+    "target_intent": "ask_rules",
+    "target_segment": "Are padlocks needed for lockers?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "changing_room",
+        "specific_inquiry": "padlocks for lockers"
+      }
+    }
+  },
+  {
+    "id": "nlu_119",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I am going to the lido today."
+      },
+      {
+        "role": "assistant",
+        "text": "Do you need opening hours or rules for the lido?"
+      }
+    ],
+    "full_user_message": "Can I bring glass containers there? Also, I lost a black wallet.",
+    "target_intent": "ask_rules",
+    "target_segment": "Can I bring glass containers there?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "lido",
+        "specific_inquiry": "glass containers"
+      }
+    }
+  },
+  {
+    "id": "nlu_120",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with swimming pool and course-related rules."
+      }
+    ],
+    "full_user_message": "Do I need a medical certificate for an annual course? Also, how much is it?",
+    "target_intent": "ask_rules",
+    "target_segment": "Do I need a medical certificate for an annual course?",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "swimming_pool",
+        "specific_inquiry": "medical certificate"
+      }
+    }
+  },
+  {
+    "id": "nlu_121",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What spa rule do you want to know?"
+      }
+    ],
+    "full_user_message": "Are swimsuits mandatory in the spa, and what is the annual gym price?",
+    "target_intent": "ask_rules",
+    "target_segment": "Are swimsuits mandatory in the spa",
+    "annotation": {
+      "intent": "ask_rules",
+      "slots": {
+        "topic": "spa",
+        "specific_inquiry": "swimsuits"
+      }
+    }
+  },
+  {
+    "id": "nlu_122",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help book a course."
+      }
+    ],
+    "full_user_message": "I want to book advanced hydrobike for adults on Thursday, and I also need goggles.",
+    "target_intent": "book_course",
+    "target_segment": "I want to book advanced hydrobike for adults on Thursday",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": "hydrobike",
+        "target_age": "adult",
+        "level": "advanced",
+        "day_preference": "Thursday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_123",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book swimming school."
+      },
+      {
+        "role": "assistant",
+        "text": "What age and level is the course for?"
+      }
+    ],
+    "full_user_message": "For a teen beginner, and what are pool rules?",
+    "target_intent": "book_course",
+    "target_segment": "For a teen beginner",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": "teen",
+        "level": "beginner",
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_124",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which course are you interested in: aquagym, hydrobike, swimming school, or newborn swimming?"
+      }
+    ],
+    "full_user_message": "The newborn swimming one, and also tell me the lido opening hours.",
+    "target_intent": "book_course",
+    "target_segment": "The newborn swimming one",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": "newborn_swimming",
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_125",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book swimming school for my child."
+      },
+      {
+        "role": "assistant",
+        "text": "Which day would you prefer?"
+      }
+    ],
+    "full_user_message": "Tuesday would be good, and how much is the gym pass?",
+    "target_intent": "book_course",
+    "target_segment": "Tuesday would be good",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": "Tuesday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_126",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to book aquagym on Monday."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "My name is Matteo Romano, and I need to know if the spa is open.",
+    "target_intent": "book_course",
+    "target_segment": "My name is Matteo Romano",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": "Matteo",
+        "surname": "Romano",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_127",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "You selected beginner aquagym. Do you want to provide any correction?"
+      }
+    ],
+    "full_user_message": "Actually make it intermediate, not beginner. Also, I lost my bag.",
+    "target_intent": "book_course",
+    "target_segment": "Actually make it intermediate, not beginner.",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": "intermediate",
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_128",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm booking swimming school for your child on Wednesday?"
+      }
+    ],
+    "full_user_message": "Yes, please confirm. Also, how much is a towel?",
+    "target_intent": "book_course",
+    "target_segment": "Yes, please confirm.",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_129",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm the newborn swimming course on Sunday?"
+      }
+    ],
+    "full_user_message": "No, that is wrong. Also, what time does the pool close?",
+    "target_intent": "book_course",
+    "target_segment": "No, that is wrong.",
+    "annotation": {
+      "intent": "book_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_130",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help book the spa."
+      }
+    ],
+    "full_user_message": "Can I book the spa next Monday at 14:00 for 5 people? Also, do you sell towels?",
+    "target_intent": "book_spa",
+    "target_segment": "Can I book the spa next Monday at 14:00 for 5 people?",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": "next Monday",
+        "time": "14:00",
+        "people_count": 5,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_131",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "When would you like the spa appointment?"
+      }
+    ],
+    "full_user_message": "Tomorrow at noon, and how much is a lido pass?",
+    "target_intent": "book_spa",
+    "target_segment": "Tomorrow at noon",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": "Tomorrow",
+        "time": "noon",
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_132",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want the spa tomorrow evening."
+      },
+      {
+        "role": "assistant",
+        "text": "How many people will attend?"
+      }
+    ],
+    "full_user_message": "Just one person, and do I need a swimsuit there?",
+    "target_intent": "book_spa",
+    "target_segment": "Just one person",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": 1,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_133",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Book the spa for Saturday."
+      },
+      {
+        "role": "assistant",
+        "text": "Please tell me time and number of people."
+      }
+    ],
+    "full_user_message": "There will be 8 of us at 20:00, and what time does it close?",
+    "target_intent": "book_spa",
+    "target_segment": "There will be 8 of us at 20:00",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": "20:00",
+        "people_count": 8,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_134",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want a spa booking for June 20th at 18:00."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "I'm Francesca Leone. Also, can I buy a cap?",
+    "target_intent": "book_spa",
+    "target_segment": "I'm Francesca Leone.",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": "Francesca",
+        "surname": "Leone",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_135",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm the spa booking for Thursday at 17:00 for 2 people?"
+      }
+    ],
+    "full_user_message": "Yes, go ahead. Also, I need to cancel a course.",
+    "target_intent": "book_spa",
+    "target_segment": "Yes, go ahead.",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_136",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm booking the spa for Sunday morning?"
+      }
+    ],
+    "full_user_message": "No, I don't confirm. Also, tell me spa prices.",
+    "target_intent": "book_spa",
+    "target_segment": "No, I don't confirm.",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_137",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Please tell me when and for how many people."
+      }
+    ],
+    "full_user_message": "For me, my wife, and our son tomorrow evening. Also, are children allowed?",
+    "target_intent": "book_spa",
+    "target_segment": "For me, my wife, and our son tomorrow evening.",
+    "annotation": {
+      "intent": "book_spa",
+      "slots": {
+        "date": "tomorrow",
+        "time": "evening",
+        "people_count": 3,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_138",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help modify course bookings."
+      }
+    ],
+    "full_user_message": "Change my swimming school course from Friday to Monday, and tell me spa hours.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "Change my swimming school course from Friday to Monday",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": "swimming_school",
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": "Friday",
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": "Monday",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_139",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to change my booked course."
+      },
+      {
+        "role": "assistant",
+        "text": "Which course change do you want?"
+      }
+    ],
+    "full_user_message": "From hydrobike to aquagym, and can I also buy slippers?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "From hydrobike to aquagym",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": "hydrobike",
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": "aquagym",
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_140",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What level change do you need for your course?"
+      }
+    ],
+    "full_user_message": "It was the advanced one, and I want intermediate now. Also, what time is reception open?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "It was the advanced one, and I want intermediate now.",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": "advanced",
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": "intermediate",
+        "day_preference_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_141",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What would you like to modify?"
+      }
+    ],
+    "full_user_message": "The adult course should become for a child. Also, I lost goggles.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "The adult course should become for a child.",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": "adult",
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": "child",
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_142",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to modify my course booking."
+      },
+      {
+        "role": "assistant",
+        "text": "Can you provide your name and surname?"
+      }
+    ],
+    "full_user_message": "I'm Roberto De Luca, and I also want to know the annual pass price.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "I'm Roberto De Luca",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": "Roberto",
+        "surname": "De Luca",
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_143",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which day change would you like?"
+      }
+    ],
+    "full_user_message": "Move the Tuesday booking to Sunday, and also tell me the lido rules.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "Move the Tuesday booking to Sunday",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": "Tuesday",
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": "Sunday",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_144",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm changing the aquagym course from Monday to Friday?"
+      }
+    ],
+    "full_user_message": "Yes, correct. Also, do you sell goggles?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "Yes, correct.",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_145",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm changing swimming school to Tuesday?"
+      }
+    ],
+    "full_user_message": "No, that is not correct. Also, I need the spa day pass price.",
+    "target_intent": "modify_booked_course",
+    "target_segment": "No, that is not correct.",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": null,
+        "target_age_new": null,
+        "level_new": null,
+        "day_preference_new": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_146",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I need to modify my course booking."
+      },
+      {
+        "role": "assistant",
+        "text": "What new course details would you like?"
+      }
+    ],
+    "full_user_message": "Change it to advanced hydrobike on Thursday, and what are pool cap rules?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "Change it to advanced hydrobike on Thursday",
+    "annotation": {
+      "intent": "modify_booked_course",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "course_activity_old": null,
+        "target_age_old": null,
+        "level_old": null,
+        "day_preference_old": null,
+        "course_activity_new": "hydrobike",
+        "target_age_new": null,
+        "level_new": "advanced",
+        "day_preference_new": "Thursday",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_147",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help modify spa bookings."
+      }
+    ],
+    "full_user_message": "Move my spa booking from next Tuesday morning to next Friday evening, and I need the gym price.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Move my spa booking from next Tuesday morning to next Friday evening",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": "next Tuesday",
+        "time_old": "morning",
+        "people_count_old": null,
+        "date_new": "next Friday",
+        "time_new": "evening",
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_148",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What part of the spa booking do you want to change?"
+      }
+    ],
+    "full_user_message": "Change the time from 15:00 to 19:00, and can I buy a towel?",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Change the time from 15:00 to 19:00",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": "15:00",
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": "19:00",
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_149",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to update my spa reservation."
+      },
+      {
+        "role": "assistant",
+        "text": "What would you like to change?"
+      }
+    ],
+    "full_user_message": "From 2 people to 6 people, and what are the spa rules?",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "From 2 people to 6 people",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": 2,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": 6,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_150",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What new date do you want for your spa booking?"
+      }
+    ],
+    "full_user_message": "I want it next Sunday instead, and also tell me pool hours.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "I want it next Sunday instead",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": "next Sunday",
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_151",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to change my spa appointment."
+      },
+      {
+        "role": "assistant",
+        "text": "Please give me your name and surname."
+      }
+    ],
+    "full_user_message": "Bianchi Sofia, and I also need slippers.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Bianchi Sofia",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": "Sofia",
+        "surname": "Bianchi",
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_152",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which spa booking do you want to modify?"
+      }
+    ],
+    "full_user_message": "The booking for tomorrow at 10:00 should become at 17:30, and I need the lido price.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "The booking for tomorrow at 10:00 should become at 17:30",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": "tomorrow",
+        "time_old": "10:00",
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": "17:30",
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_153",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm moving your spa booking to Friday at 18:00?"
+      }
+    ],
+    "full_user_message": "Yes, confirm the change. Also, can I report a lost wallet?",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Yes, confirm the change.",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_154",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm changing the spa booking from Wednesday to Sunday?"
+      }
+    ],
+    "full_user_message": "No, leave it as it is. Also, what time does the gym close?",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "No, leave it as it is.",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_155",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "You have several spa bookings. Which one should I move?"
+      }
+    ],
+    "full_user_message": "Move the July 20th one to the evening, and do I need a swimsuit?",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Move the July 20th one to the evening",
+    "annotation": {
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": "July 20th",
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": "evening",
+        "people_count_new": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_156",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can cancel a booked course."
+      }
+    ],
+    "full_user_message": "Cancel my hydrobike course for adults on Tuesday, and I need the spa opening hours.",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "Cancel my hydrobike course for adults on Tuesday",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": "hydrobike",
+        "target_age": "adult",
+        "level": null,
+        "day_preference": "Tuesday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_157",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to cancel one of my aquagym bookings."
+      },
+      {
+        "role": "assistant",
+        "text": "Is it the beginner or advanced one?"
+      }
+    ],
+    "full_user_message": "The advanced one, and can I book the spa?",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "The advanced one",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": "advanced",
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_158",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which course booking should I cancel?"
+      }
+    ],
+    "full_user_message": "It is the course for my teen, and what is the monthly pass price?",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "It is the course for my teen",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": "teen",
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_159",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to cancel my swimming school course."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "My name is Andrea Fontana, and I also lost a cap.",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "My name is Andrea Fontana",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": "Andrea",
+        "surname": "Fontana",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_160",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "You have course bookings on Monday and Thursday. Which one should I cancel?"
+      }
+    ],
+    "full_user_message": "The one on Thursday, and do you sell goggles?",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "The one on Thursday",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": "Thursday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_161",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm cancelling the hydrobike course on Tuesday?"
+      }
+    ],
+    "full_user_message": "Yes, cancel that course. Also, is the lido open tomorrow?",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "Yes, cancel that course.",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_162",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Should I cancel your swimming school booking?"
+      }
+    ],
+    "full_user_message": "No, do not cancel the course. Also, tell me gym rules.",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "No, do not cancel the course.",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": null,
+        "target_age": null,
+        "level": null,
+        "day_preference": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_163",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which booked course do you want to cancel?"
+      }
+    ],
+    "full_user_message": "Cancel newborn swimming on Sunday, and I want the student price too.",
+    "target_intent": "cancel_booked_course",
+    "target_segment": "Cancel newborn swimming on Sunday",
+    "annotation": {
+      "intent": "cancel_booked_course",
+      "slots": {
+        "course_activity": "newborn_swimming",
+        "target_age": null,
+        "level": null,
+        "day_preference": "Sunday",
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_164",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help cancel spa bookings."
+      }
+    ],
+    "full_user_message": "Cancel my spa appointment next Thursday evening for two people, and I need a towel.",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "Cancel my spa appointment next Thursday evening for two people",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": "next Thursday",
+        "time": "evening",
+        "people_count": 2,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_165",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to cancel my spa booking for Saturday."
+      },
+      {
+        "role": "assistant",
+        "text": "What time was the booking?"
+      }
+    ],
+    "full_user_message": "It was at 11 AM, and what are the pool rules?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "It was at 11 AM",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": "11 AM",
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_166",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "You have multiple spa bookings. Which one should I cancel?"
+      }
+    ],
+    "full_user_message": "The booking for four people, and how much is a day pass?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "The booking for four people",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": 4,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_167",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "Please cancel my spa reservation."
+      },
+      {
+        "role": "assistant",
+        "text": "What is your name and surname?"
+      }
+    ],
+    "full_user_message": "I am Giorgia Sala, and I also need to buy slippers.",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "I am Giorgia Sala",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": "Giorgia",
+        "surname": "Sala",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_168",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which spa reservation would you like to cancel?"
+      }
+    ],
+    "full_user_message": "The July 22nd reservation, and what time does reception close?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "The July 22nd reservation",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": "July 22nd",
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_169",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm cancelling your spa booking for Sunday at 18:00?"
+      }
+    ],
+    "full_user_message": "Yes, cancel it. Also, can I report my lost wallet?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "Yes, cancel it.",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_170",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Should I cancel the spa reservation?"
+      }
+    ],
+    "full_user_message": "No, don't cancel anything. Also, what is the gym annual price?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "No, don't cancel anything.",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": null,
+        "time": null,
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": "deny"
+      }
+    }
+  },
+  {
+    "id": "nlu_171",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which spa booking do you want to cancel?"
+      }
+    ],
+    "full_user_message": "Cancel tomorrow's evening spa slot, and are glass bottles allowed at the lido?",
+    "target_intent": "cancel_booked_spa",
+    "target_segment": "Cancel tomorrow's evening spa slot",
+    "annotation": {
+      "intent": "cancel_booked_spa",
+      "slots": {
+        "date": "tomorrow",
+        "time": "evening",
+        "people_count": null,
+        "name": null,
+        "surname": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_172",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What would you like to buy from the shop?"
+      }
+    ],
+    "full_user_message": "I want black Arena goggles, and can I book hydrobike?",
+    "target_intent": "buy_equipment",
+    "target_segment": "I want black Arena goggles",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "goggles",
+        "size": null,
+        "color": "black",
+        "brand": "arena",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_173",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "The shop sells swimsuits and other swimming equipment."
+      }
+    ],
+    "full_user_message": "A swimsuit in size L, and how much is the pool pass?",
+    "target_intent": "buy_equipment",
+    "target_segment": "A swimsuit in size L",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "swimsuit",
+        "size": "L",
+        "color": null,
+        "brand": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_174",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What color or item do you need?"
+      }
+    ],
+    "full_user_message": "Clear goggles, and tell me if the spa is open.",
+    "target_intent": "buy_equipment",
+    "target_segment": "Clear goggles",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "goggles",
+        "size": null,
+        "color": "clear",
+        "brand": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_175",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Which brand or item do you prefer?"
+      }
+    ],
+    "full_user_message": "Nike slippers please, and I also lost my cap.",
+    "target_intent": "buy_equipment",
+    "target_segment": "Nike slippers please",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "slippers",
+        "size": null,
+        "color": null,
+        "brand": "nike",
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_176",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with shop equipment."
+      }
+    ],
+    "full_user_message": "I need a purple swimsuit in XL, and do I need a swimming cap?",
+    "target_intent": "buy_equipment",
+    "target_segment": "I need a purple swimsuit in XL",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "swimsuit",
+        "size": "XL",
+        "color": "purple",
+        "brand": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_177",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I want to buy a swimming cap."
+      },
+      {
+        "role": "assistant",
+        "text": "What color would you like?"
+      }
+    ],
+    "full_user_message": "The red one, and I also want lido prices.",
+    "target_intent": "buy_equipment",
+    "target_segment": "The red one",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": null,
+        "size": null,
+        "color": "red",
+        "brand": null,
+        "confirmation": null
+      }
+    }
+  },
+  {
+    "id": "nlu_178",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Do you confirm buying a blue Decathlon towel?"
+      }
+    ],
+    "full_user_message": "Yes, buy it. Also, I want to cancel my course.",
+    "target_intent": "buy_equipment",
+    "target_segment": "Yes, buy it.",
+    "annotation": {
+      "intent": "buy_equipment",
+      "slots": {
+        "item": null,
+        "size": null,
+        "color": null,
+        "brand": null,
+        "confirmation": "agree"
+      }
+    }
+  },
+  {
+    "id": "nlu_179",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help report a lost item."
+      }
+    ],
+    "full_user_message": "I lost my yellow swimming cap in the changing room yesterday, and I want to buy a new one.",
+    "target_intent": "report_lost_item",
+    "target_segment": "I lost my yellow swimming cap in the changing room yesterday",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": "swimming cap",
+        "item_color": "yellow",
+        "last_seen_location": "changing room",
+        "last_seen_date": "yesterday",
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_180",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Can you describe the lost item?"
+      }
+    ],
+    "full_user_message": "It was a black backpack, and what time does reception close?",
+    "target_intent": "report_lost_item",
+    "target_segment": "It was a black backpack",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": "backpack",
+        "item_color": "black",
+        "last_seen_location": null,
+        "last_seen_date": null,
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_181",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I lost my wallet."
+      },
+      {
+        "role": "assistant",
+        "text": "Where did you last see it?"
+      }
+    ],
+    "full_user_message": "Near the reception desk, and I also need gym prices.",
+    "target_intent": "report_lost_item",
+    "target_segment": "Near the reception desk",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": null,
+        "item_color": null,
+        "last_seen_location": "reception desk",
+        "last_seen_date": null,
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_182",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I lost my blue towel at the lido."
+      },
+      {
+        "role": "assistant",
+        "text": "When did you last see it?"
+      }
+    ],
+    "full_user_message": "Two days ago, and can I book spa?",
+    "target_intent": "report_lost_item",
+    "target_segment": "Two days ago",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": null,
+        "item_color": null,
+        "last_seen_location": null,
+        "last_seen_date": "Two days ago",
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_183",
+    "conversation_history": [
+      {
+        "role": "user",
+        "text": "I lost my red goggles in the pool."
+      },
+      {
+        "role": "assistant",
+        "text": "Can you provide your name and surname?"
+      }
+    ],
+    "full_user_message": "My name is Silvia Marini, and how much is a day pass?",
+    "target_intent": "report_lost_item",
+    "target_segment": "My name is Silvia Marini",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": null,
+        "item_color": null,
+        "last_seen_location": null,
+        "last_seen_date": null,
+        "name": "Silvia",
+        "surname": "Marini"
+      }
+    }
+  },
+  {
+    "id": "nlu_184",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What item did you lose?"
+      }
+    ],
+    "full_user_message": "I lost blue slippers by the showers this morning, and what are changing room rules?",
+    "target_intent": "report_lost_item",
+    "target_segment": "I lost blue slippers by the showers this morning",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": "slippers",
+        "item_color": "blue",
+        "last_seen_location": "showers",
+        "last_seen_date": "this morning",
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_185",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Tell me what you lost and where."
+      }
+    ],
+    "full_user_message": "A white towel in the gym yesterday evening, and I want to cancel spa too.",
+    "target_intent": "report_lost_item",
+    "target_segment": "A white towel in the gym yesterday evening",
+    "annotation": {
+      "intent": "report_lost_item",
+      "slots": {
+        "lost_item": "towel",
+        "item_color": "white",
+        "last_seen_location": "gym",
+        "last_seen_date": "yesterday evening",
+        "name": null,
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_186",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Before helping with bookings, may I have your name?"
+      }
+    ],
+    "full_user_message": "I'm Riccardo Galli, and I want to cancel a course.",
+    "target_intent": "user_identification",
+    "target_segment": "I'm Riccardo Galli",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Riccardo",
+        "surname": "Galli"
+      }
+    }
+  },
+  {
+    "id": "nlu_187",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Can you identify yourself?"
+      }
+    ],
+    "full_user_message": "Rossi Federica speaking, and what are spa prices?",
+    "target_intent": "user_identification",
+    "target_segment": "Rossi Federica speaking",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Federica",
+        "surname": "Rossi"
+      }
+    }
+  },
+  {
+    "id": "nlu_188",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "What is your name?"
+      }
+    ],
+    "full_user_message": "Just Anna, and I need a towel.",
+    "target_intent": "user_identification",
+    "target_segment": "Just Anna",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Anna",
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_189",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Who am I speaking with?"
+      }
+    ],
+    "full_user_message": "Call me Pietro, and can I book the spa?",
+    "target_intent": "user_identification",
+    "target_segment": "Call me Pietro",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Pietro",
+        "surname": null
+      }
+    }
+  },
+  {
+    "id": "nlu_190",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Please provide your full name."
+      }
+    ],
+    "full_user_message": "I am De Santis Marco. Also, tell me pool hours.",
+    "target_intent": "user_identification",
+    "target_segment": "I am De Santis Marco.",
+    "annotation": {
+      "intent": "user_identification",
+      "slots": {
+        "name": "Marco",
+        "surname": "De Santis"
+      }
+    }
+  },
+  {
+    "id": "nlu_191",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "The gym is open until 23:00 on weekdays."
+      }
+    ],
+    "full_user_message": "Thank you, that helps. Also, I may need prices later.",
+    "target_intent": "greeting_closing",
+    "target_segment": "Thank you, that helps.",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_192",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Welcome."
+      }
+    ],
+    "full_user_message": "Hi there, and I need to buy a cap.",
+    "target_intent": "greeting_closing",
+    "target_segment": "Hi there",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_193",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Your course booking has been confirmed."
+      }
+    ],
+    "full_user_message": "Great, perfect. Also, can I change my spa booking?",
+    "target_intent": "greeting_closing",
+    "target_segment": "Great, perfect.",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_194",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "The cancellation is complete."
+      }
+    ],
+    "full_user_message": "See you, and don't cancel anything else.",
+    "target_intent": "greeting_closing",
+    "target_segment": "See you",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_195",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Hello, how can I help?"
+      }
+    ],
+    "full_user_message": "Good evening, I need help with the lido.",
+    "target_intent": "greeting_closing",
+    "target_segment": "Good evening",
+    "annotation": {
+      "intent": "greeting_closing",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_196",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with aquatic center services."
+      }
+    ],
+    "full_user_message": "Can you recommend a restaurant nearby? Also, what time does the spa open?",
+    "target_intent": "out_of_scope",
+    "target_segment": "Can you recommend a restaurant nearby?",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_197",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "Please ask about the aquatic center."
+      }
+    ],
+    "full_user_message": "Tell me the latest news, and I want to buy goggles.",
+    "target_intent": "out_of_scope",
+    "target_segment": "Tell me the latest news",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_198",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I can help with bookings, pricing, rules, shop, or lost items."
+      }
+    ],
+    "full_user_message": "Can you translate this sentence for me? Also, do you have spa prices?",
+    "target_intent": "out_of_scope",
+    "target_segment": "Can you translate this sentence for me?",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_199",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "How can I assist you?"
+      }
+    ],
+    "full_user_message": "What is the capital of Canada? And can I book aquagym?",
+    "target_intent": "out_of_scope",
+    "target_segment": "What is the capital of Canada?",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  },
+  {
+    "id": "nlu_200",
+    "conversation_history": [
+      {
+        "role": "assistant",
+        "text": "I am the aquatic center chatbot."
+      }
+    ],
+    "full_user_message": "Write Python code for me. Also, is the pool open?",
+    "target_intent": "out_of_scope",
+    "target_segment": "Write Python code for me.",
+    "annotation": {
+      "intent": "out_of_scope",
+      "slots": {}
+    }
+  }
+]
