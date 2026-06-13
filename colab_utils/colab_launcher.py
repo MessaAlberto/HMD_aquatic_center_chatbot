@@ -39,7 +39,7 @@ def setup_project(project_dir: str, debug: bool = False) -> None:
     )
 
 
-def load_bot(model_name: str = "qwen3"):
+def load_bot(model_name: str = "qwen3_4b"):
     from app.chatbot import Chatbot
 
     bot = Chatbot(model_name=model_name)
@@ -62,8 +62,16 @@ def start_chat(bot, ui_path: str = "colab_utils/colab_ui.html") -> None:
         except Exception as e:
             return {"ok": False, "response": f"Error: {e}"}
 
+    def restart_demo():
+        try:
+            bot.reset_all()
+            return {"ok": True, "response": "Demo restarted from the initial data."}
+        except Exception as e:
+            return {"ok": False, "response": f"Error: {e}"}
+
     output.register_callback("notebook.send_message_to_bot", send_message_to_bot)
     output.register_callback("notebook.reset_bot_state", reset_bot_state)
+    output.register_callback("notebook.restart_demo", restart_demo)
 
     with open(ui_path, "r", encoding="utf-8") as f:
         display(HTML(f.read()))

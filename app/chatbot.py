@@ -1,17 +1,27 @@
+import logging
+from typing import Any
+
 from components.router import Router
 from components.NLU import NLU
 from components.DM import DM
 from components.NLG import NLG
+from database.db_controller import DBController
+from llm.loader import load_llm
 from state.dialogue_state_tracker import StateTracker
 from state.history import History
-from database.db_controller import DBController
 from state.task_queue import TaskQueue
-from llm.loader import load_llm
-import logging
+
+
 logger = logging.getLogger(__name__)
+
+Task = dict[str, Any]
 
 
 class Chatbot:
+    """Orchestrates the full dialogue pipeline."""
+
+    DONE_STATUSES = ("INFORM", "CONFIRMED", "ABORTED")
+
     def __init__(self, model_name: str) -> None:
         self.llm = load_llm(model_name)
 
@@ -25,164 +35,180 @@ class Chatbot:
         self.history = History()
         self.task_queue = TaskQueue()
 
-        self.DONE_STATUSES = ["INFORM", "CONFIRMED", "ABORTED"]
-
     def reset_state(self) -> None:
+        """Reset the dialogue state while keeping the database unchanged."""
         self.dst = StateTracker()
         self.db_controller = DBController(self.dst)
         self.history = History()
         self.task_queue = TaskQueue()
 
     def reset_all(self) -> None:
+        """Reset both the dialogue state and the database state."""
         self.reset_state()
         self.db_controller.reset_database()
 
-    def _prepare_pipeline(self, nlu_result, target_dst, lenient=False):
-        ds = target_dst.update(nlu_result)
-        user_prof = self.dst.get_user_profile()
+    def _prepare_pipeline(self, nlu_result: dict[str, Any], target_dst: StateTracker, lenient: bool = False) -> tuple[dict[str, Any], dict[str, Any] | None, bool]:
+        """Update the target DST and resolve the resulting state through the database."""
+        dialogue_state = target_dst.update(nlu_result)
+        user_profile = self.dst.get_user_profile()
 
-        db_res = self.db_controller.resolve_state(ds, user_prof, lenient=lenient, target_dst=target_dst)
-        is_done = db_res and db_res.get("status") in self.DONE_STATUSES
+        db_result = self.db_controller.resolve_state(
+            dialogue_state, user_profile, lenient=lenient, target_dst=target_dst)
+        is_done = bool(db_result and db_result.get("status") in self.DONE_STATUSES)
 
-        logger.debug("DST after update: {ds}")
-        logger.debug("DB Result: {db_res}")
-        logger.debug("Is intent done? {'Yes' if is_done else 'No'}\n")
+        logger.debug("DST after update: %s", dialogue_state)
+        logger.debug("DB result: %s", db_result)
+        logger.debug("Intent done: %s", is_done)
 
-        return ds.copy(), db_res, is_done
+        return dialogue_state.copy(), db_result, is_done
 
-    def _disambiguate_intents(self, nlu_results):
-        curr_intent = self.dst.ds["intent"]
+    def _disambiguate_intents(self, nlu_results: list[dict[str, Any]]) -> tuple[dict[str, Any], dict[str, Any]]:
+        """Select the main intent when the router returns two candidate segments."""
+        current_intent = self.dst.ds["intent"]
 
-        if curr_intent and nlu_results[0].get("intent") == nlu_results[1].get("intent") == curr_intent:
-            logger.debug("Parallel instances of the same intent! Using slot-scoring to disambiguate.")
+        if current_intent and nlu_results[0].get("intent") == nlu_results[1].get("intent") == current_intent:
+            logger.debug("Parallel instances of the same intent. Applying slot scoring.")
 
-            def score_nlu(nlu_res, current_slots):
+            def score_nlu(nlu_result: dict[str, Any], current_slots: dict[str, Any]) -> int:
                 score = 0
-                for k, v in nlu_res.get("slots", {}).items():
-                    if v is not None:
-                        if current_slots.get(k) is None:
-                            score += 1
-                        elif str(current_slots.get(k)).lower() != str(v).lower():
-                            score -= 2
+
+                for slot_name, slot_value in nlu_result.get("slots", {}).items():
+                    if slot_value is None:
+                        continue
+
+                    if current_slots.get(slot_name) is None:
+                        score += 1
+                    elif str(current_slots.get(slot_name)).lower() != str(slot_value).lower():
+                        score -= 2
+
                 return score
 
-            score0 = score_nlu(nlu_results[0], self.dst.ds["slots"])
-            score1 = score_nlu(nlu_results[1], self.dst.ds["slots"])
+            score_0 = score_nlu(nlu_results[0], self.dst.ds["slots"])
+            score_1 = score_nlu(nlu_results[1], self.dst.ds["slots"])
 
-            if score1 > score0:
+            if score_1 > score_0:
                 return nlu_results[1], nlu_results[0]
+
             return nlu_results[0], nlu_results[1]
 
-        elif curr_intent and nlu_results[1].get("intent") == curr_intent:
-            logger.debug("Current dialogue state intent '{curr_intent}' matches second NLU result intent.")
+        if current_intent and nlu_results[1].get("intent") == current_intent:
+            logger.debug("Current dialogue intent matches the second NLU result.")
             return nlu_results[1], nlu_results[0]
 
-        logger.debug("Treating first NLU result {nlu_results[0].get('intent')} as main intent.")
+        logger.debug("Using the first NLU result as the main intent.")
         return nlu_results[0], nlu_results[1]
 
-    # =========================================================================
-    # METODI DI SUPPORTO (Estratti dal chat_loop per pulizia del codice)
-    # =========================================================================
+    def _process_single_intent(self, nlu_result: dict[str, Any], segment_text: str) -> tuple[list[Task], bool, bool, str | None, None, bool]:
+        """Process a turn where the router identified a single intent."""
+        logger.debug("Single intent detected.")
 
-    def _process_single_intent(self, nlu_result, segment_text):
-        logger.debug("Single intent detected. Processing normally.")
         resumed_queued_task = self.task_queue.consume_if_resumed(nlu_result)
-        
+
         if resumed_queued_task:
-            logger.debug("User resumed queued task. Clearing queue.")
+            logger.debug("User resumed a queued task. Clearing queue.")
 
         main_task = {"nlu": nlu_result, "segment": segment_text}
         main_task["ds"], main_task["db_res"], main_task["is_done"] = self._prepare_pipeline(
             main_task["nlu"], self.dst, lenient=False)
 
-        logger.debug("DST after update: {main_task['ds']}")
-        logger.debug("DB Result: {main_task['db_res']}")
-        logger.debug("Main intent done: {main_task['is_done']}\n")
+        logger.debug("Main task DST: %s", main_task["ds"])
+        logger.debug("Main task DB result: %s", main_task["db_res"])
+        logger.debug("Main task done: %s", main_task["is_done"])
 
         main_task["nba"] = self.DM.predict_batch(
             [{"dialogue_state": main_task["ds"], "db_result": main_task["db_res"]}])[0]
-        
-        logger.debug("DM NBA: {main_task['nba']}")
+        logger.debug("Main task NBA: %s", main_task["nba"])
 
         should_recover_queue = main_task["is_done"] and not resumed_queued_task
-        
+
         return [main_task], main_task["is_done"], False, main_task["nlu"].get("intent"), None, should_recover_queue
 
-    def _process_double_intent(self, nlu_results, segments):
-        logger.debug("Two intents detected. Applying disambiguation heuristic.")
-        main_nlu, sec_nlu = self._disambiguate_intents(nlu_results)
+    def _process_double_intent(self, nlu_results: list[dict[str, Any]], segments: list[dict[str, Any]]) -> tuple[list[Task], bool, bool, str | None, dict[str, Any] | None, bool]:
+        """Process a turn where the router identified two intents."""
+        logger.debug("Two intents detected. Applying disambiguation.")
+
+        main_nlu, secondary_nlu = self._disambiguate_intents(nlu_results)
 
         main_segment = segments[0]["segment"] if nlu_results[0] is main_nlu else segments[1]["segment"]
-        sec_segment = segments[0]["segment"] if nlu_results[0] is sec_nlu else segments[1]["segment"]
+        secondary_segment = segments[0]["segment"] if nlu_results[0] is secondary_nlu else segments[1]["segment"]
 
         main_task = {"nlu": main_nlu, "segment": main_segment}
-        sec_task = {"nlu": sec_nlu, "segment": sec_segment}
+        secondary_task = {"nlu": secondary_nlu, "segment": secondary_segment}
 
         main_task["ds"], main_task["db_res"], main_task["is_done"] = self._prepare_pipeline(
             main_task["nlu"], self.dst, lenient=False)
 
-        sec_dst = StateTracker()
-        sec_dst.user_profile = self.dst.user_profile.copy()
-        sec_task["ds"], sec_task["db_res"], sec_task["is_done"] = self._prepare_pipeline(
-            sec_task["nlu"], sec_dst, lenient=True)
-        self.dst.user_profile.update(sec_dst.user_profile)
+        secondary_dst = StateTracker()
+        secondary_dst.user_profile = self.dst.user_profile.copy()
+        secondary_task["ds"], secondary_task["db_res"], secondary_task["is_done"] = self._prepare_pipeline(
+            secondary_task["nlu"], secondary_dst, lenient=True)
+
+        self.dst.user_profile.update(secondary_dst.user_profile)
 
         nbas = self.DM.predict_batch([
             {"dialogue_state": main_task["ds"], "db_result": main_task["db_res"]},
-            {"dialogue_state": sec_task["ds"], "db_result": sec_task["db_res"]}
+            {"dialogue_state": secondary_task["ds"], "db_result": secondary_task["db_res"]},
         ])
-        main_task["nba"], sec_task["nba"] = nbas[0], nbas[1]
 
-        tasks_to_execute = []
-        
-        # NUOVO BLOCCO: Se entrambi sono done, diamo la precedenza assoluta al saluto
-        if main_task["is_done"] and sec_task["is_done"]:
-            if sec_task["nlu"].get("intent") == "user_identification":
-                logger.debug("Both intents done. Forcing 'user_identification' to be the first response.")
-                tasks_to_execute = [sec_task, main_task]
-            else:
-                logger.debug("Both intents done. Maintaining original order.")
-                tasks_to_execute = [main_task, sec_task]
-                
-        elif not main_task["is_done"] and sec_task["is_done"]:
-            logger.debug("Secondary intent is done but main is not. Prioritizing secondary.")
-            tasks_to_execute = [sec_task, main_task]
-            
-        elif not main_task["is_done"] and not sec_task["is_done"]:
-            logger.debug("Neither intent is done. Prioritizing main intent and queuing secondary.")
+        main_task["nba"] = nbas[0]
+        secondary_task["nba"] = nbas[1]
+
+        tasks_to_execute = self._select_tasks_to_execute(main_task, secondary_task)
+
+        return tasks_to_execute, main_task["is_done"], secondary_task["is_done"], main_task["nlu"].get("intent"), secondary_task["ds"], False
+
+    def _select_tasks_to_execute(self, main_task: Task, secondary_task: Task) -> list[Task]:
+        """Decide response order and queue unfinished secondary tasks."""
+        main_done = main_task["is_done"]
+        secondary_done = secondary_task["is_done"]
+
+        if main_done and secondary_done:
+            if secondary_task["nlu"].get("intent") == "user_identification":
+                logger.debug("Both intents done. Prioritizing user identification.")
+                return [secondary_task, main_task]
+
+            logger.debug("Both intents done. Keeping main-first order.")
+            return [main_task, secondary_task]
+
+        if not main_done and secondary_done:
+            logger.debug("Secondary intent is done while main intent is incomplete.")
+            return [secondary_task, main_task]
+
+        if not main_done and not secondary_done:
+            logger.debug("Both intents incomplete. Queuing secondary intent.")
+
             self.task_queue.store(
-                nlu_result=sec_task["nlu"],
-                segment=sec_task["segment"],
-                dialogue_state=sec_task["ds"]
-            )
+                nlu_result=secondary_task["nlu"], segment=secondary_task["segment"], dialogue_state=secondary_task["ds"])
             main_task["nba"]["step_by_step_mode"] = True
-            tasks_to_execute = [main_task]
-            
-        else:
-            logger.debug("Main intent prioritized in response.")
-            tasks_to_execute = [main_task, sec_task]
 
-        return tasks_to_execute, main_task["is_done"], sec_task["is_done"], main_task["nlu"].get("intent"), sec_task["ds"], False
+            return [main_task]
 
-    def _update_dst_and_queue(self, main_is_done, sec_is_done, main_intent_name, sec_ds, should_recover_queue, nba_list):
+        logger.debug("Main intent is prioritized.")
+        return [main_task, secondary_task]
+
+    def _update_dst_and_queue(self, main_is_done: bool, secondary_is_done: bool, main_intent_name: str | None, secondary_dialogue_state: dict[str, Any] | None, should_recover_queue: bool, nba_list: list[dict[str, Any]]) -> None:
+        """Update the global DST after task execution and recover queued tasks when needed."""
         if main_is_done:
             logger.debug("Main intent is done.")
             self.dst.complete_task()
-            logger.debug("Completed task for main intent: {main_intent_name}")
-            
+            logger.debug("Completed task for main intent: %s", main_intent_name)
+
             if should_recover_queue and self.task_queue.is_active():
                 queued_intent = self.task_queue.pop_intent()
-                logger.debug("Recovering queued intent '{queued_intent}' into dialogue state.")
+                logger.debug("Recovering queued intent into DST: %s", queued_intent)
+
                 self.dst.ds["intent"] = queued_intent
+
                 if nba_list:
                     nba_list[0]["queue_recovery"] = True
                     nba_list[0]["recovered_intent"] = queued_intent
 
-        if sec_ds is not None and main_is_done and not sec_is_done:
-            logger.debug("Main intent is done but secondary is not. Updating DST to reflect completion of main intent while preserving secondary intent.")
-            self.dst.ds = sec_ds.copy()
+        if secondary_dialogue_state is not None and main_is_done and not secondary_is_done:
+            logger.debug("Preserving unfinished secondary intent after main completion.")
+            self.dst.ds = secondary_dialogue_state.copy()
 
     def reply(self, user_input: str) -> str:
+        """Generate a chatbot response for a single user turn."""
         command = user_input.strip().lower()
 
         if command in ["exit", "quit", "stop"]:
@@ -198,17 +224,14 @@ class Chatbot:
 
         self.history.add_message("user", user_input)
 
-        logger.debug("====== Router & NLU Processing ======")
+        logger.debug("====== Router and NLU processing ======")
+
         excluded_segments = self.task_queue.get_excluded_segment()
         active_intent = self.dst.ds.get("intent")
-
         router_output = self.router.predict(
-            self.history,
-            excluded_segments=excluded_segments,
-            active_intent=active_intent,
-        )
+            self.history, excluded_segments=excluded_segments, active_intent=active_intent)
 
-        logger.debug("Router Output: %s", router_output)
+        logger.debug("Router output: %s", router_output)
 
         if isinstance(router_output, dict):
             segments = router_output.get("segments", [])
@@ -217,78 +240,61 @@ class Chatbot:
             segments = router_output[:2]
             step_by_step_mode = len(router_output) > 2
 
-        logger.debug(
-            "Parsed Router Segments: %s, Discarded Info Flag: %s",
-            segments,
-            step_by_step_mode,
-        )
+        logger.debug("Parsed router segments: %s", segments)
+        logger.debug("Step-by-step mode: %s", step_by_step_mode)
 
         nlu_results = self.NLU.predict_batch(segments, self.history)
-        logger.debug("NLU Batch Results: %s", nlu_results)
+        logger.debug("NLU batch results: %s", nlu_results)
 
-        logger.debug("====== Intent Processing ======")
+        logger.debug("====== Intent processing ======")
 
         if len(nlu_results) == 1:
-            tasks_to_execute, main_is_done, sec_is_done, main_intent_name, sec_ds, should_recover = (
-                self._process_single_intent(nlu_results[0], segments[0]["segment"])
-            )
+            tasks_to_execute, main_is_done, secondary_is_done, main_intent_name, secondary_dialogue_state, should_recover = self._process_single_intent(
+                nlu_results[0], segments[0]["segment"])
         elif len(nlu_results) == 2:
-            tasks_to_execute, main_is_done, sec_is_done, main_intent_name, sec_ds, should_recover = (
-                self._process_double_intent(nlu_results, segments)
-            )
+            tasks_to_execute, main_is_done, secondary_is_done, main_intent_name, secondary_dialogue_state, should_recover = self._process_double_intent(
+                nlu_results, segments)
         else:
             return "I could not understand the request."
 
         nba_list = [task["nba"] for task in tasks_to_execute]
-        ds_list = [task["ds"] for task in tasks_to_execute]
-        active_segments_list = [task["segment"] for task in tasks_to_execute]
+        dialogue_state_list = [task["ds"] for task in tasks_to_execute]
+        active_segments = [task["segment"] for task in tasks_to_execute]
 
-        logger.debug(
-            "Tasks to Execute: %s, Main Intent Done: %s, Secondary Intent Done: %s",
-            len(tasks_to_execute),
-            main_is_done,
-            sec_is_done,
-        )
+        logger.debug("Tasks to execute: %s", len(tasks_to_execute))
+        logger.debug("Main intent done: %s", main_is_done)
+        logger.debug("Secondary intent done: %s", secondary_is_done)
 
-        logger.debug("====== DST Update and Queue Management ======")
+        logger.debug("====== DST update and queue management ======")
 
-        self._update_dst_and_queue(
-            main_is_done,
-            sec_is_done,
-            main_intent_name,
-            sec_ds,
-            should_recover,
-            nba_list,
-        )
+        self._update_dst_and_queue(main_is_done, secondary_is_done, main_intent_name,
+                                   secondary_dialogue_state, should_recover, nba_list)
 
         combined_response = self.NLG.generate_multi_response(
             nba_list=nba_list,
-            ds_list=ds_list,
-            active_segments=active_segments_list,
+            ds_list=dialogue_state_list,
+            active_segments=active_segments,
             global_history=self.history,
             step_by_step_mode=step_by_step_mode,
         )
 
-        logger.debug("Bot: %s", combined_response)
+        logger.debug("Bot response: %s", combined_response)
 
         self.history.add_message("assistant", combined_response)
 
         return combined_response
 
-    # =========================================================================
-    # CORE LOOP
-    # =========================================================================
-
-    def chat_loop(self):
+    def chat_loop(self) -> None:
+        """Run an interactive terminal chat loop."""
         print("Chatbot is ready! Type 'exit' to quit.")
 
         while True:
-            logger.debug("\n-------------------- new turn -------------------------")
+            logger.debug("-------------------- New turn --------------------")
+
             user_input = input("You: ")
             command = user_input.strip().lower()
 
             response = self.reply(user_input)
-
             print(f"Bot: {response}")
 
             if command in ["exit", "quit", "stop"]:

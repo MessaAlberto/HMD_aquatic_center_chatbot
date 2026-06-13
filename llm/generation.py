@@ -67,7 +67,7 @@ def generate_response_batch(model, tokenizer, messages_batch, max_new_tokens=128
         messages = messages if messages else []
         text_inputs.append(prepare_text(tokenizer, messages))
 
-    # --- SALVATAGGIO DEBUG BATCH ---
+    # Debug: save batch prompts to files
     if APP_DEBUG:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"prompt_batch_debug_{timestamp}.txt"

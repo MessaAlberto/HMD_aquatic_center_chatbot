@@ -1,32 +1,34 @@
-class History():
-    def __init__(self):
-        self.messages = []
+class History:
+    """Stores the conversation turns and exposes formatted history views."""
+
+    def __init__(self) -> None:
+        self.messages: list[dict[str, str]] = []
         self.last_system_action = None
         self.active_task = None
         self.flag = None
 
-    def add_message(self, role, content):
+    def add_message(self, role: str, content: str) -> None:
         self.messages.append({"role": role, "content": content})
 
-    def get_last_user_message(self):
-        for msg in reversed(self.messages):
-            if msg["role"] == "user":
-                return msg["content"]
+    def get_last_user_message(self) -> str | None:
+        for message in reversed(self.messages):
+            if message["role"] == "user":
+                return message["content"]
         return None
 
-    def get_last_bot_message(self):
-        for msg in reversed(self.messages):
-            if msg["role"] == "assistant":
-                return msg["content"]
+    def get_last_bot_message(self) -> str | None:
+        for message in reversed(self.messages):
+            if message["role"] == "assistant":
+                return message["content"]
         return None
 
-    def set_last_system_action(self, action):
+    def set_last_system_action(self, action) -> None:
         self.last_system_action = action
 
     def get_last_system_action(self):
         return self.last_system_action
-    
-    def set_active_task(self, task):
+
+    def set_active_task(self, task) -> None:
         self.active_task = task
 
     def get_active_task(self):
@@ -35,91 +37,73 @@ class History():
     def get_flag(self):
         return self.flag
 
-    def get_last_n_messages(self, n=4):
+    def get_last_n_messages(self, n: int = 4) -> list[dict[str, str]]:
         if n <= 0:
             return []
         return self.messages[-n:]
-    
-    # ====================================================
-    # NUOVO METODO PER I SYSTEM PROMPT (ANTI-RLHF)
-    # ====================================================
-    def get_prompt_formatted_history(self, n=4) -> str:
-        """
-        Restituisce gli ultimi 'n' messaggi come stringa di puro testo.
-        Da usare per NLU e Router per evitare che l'LLM interpreti i ruoli nativi.
-        """
-        hist_msgs = self.get_last_n_messages(n)
-        if not hist_msgs:
-            return "No previous history."
-        
-        history_text = ""
-        for msg in hist_msgs:
-            role_name = "ASSISTANT" if msg["role"] == "assistant" else "USER"
-            history_text += f"{role_name}: {msg['content']}\n"
-            
-        return history_text.strip()
-    # ====================================================
 
-    def get_full_conversation(self):
-        """Restituisce l'intera conversazione come una singola stringa formattata."""
+    def get_prompt_formatted_history(self, n: int = 4) -> str:
+        """Return the latest turns as plain text for prompt injection-safe contexts."""
+        history_messages = self.get_last_n_messages(n)
+
+        if not history_messages:
+            return "No previous history."
+
+        lines = []
+        for message in history_messages:
+            role_name = "ASSISTANT" if message["role"] == "assistant" else "USER"
+            lines.append(f"{role_name}: {message['content']}")
+
+        return "\n".join(lines)
+
+    def get_full_conversation(self) -> str:
+        """Return the full conversation as a readable transcript."""
         if not self.messages:
-            return "Nessun messaggio nella cronologia."
-        
+            return "No messages in the conversation history."
+
         transcript = []
-        for msg in self.messages:
-            # Formatta il ruolo (es. 'user' -> 'User', 'assistant' -> 'Assistant')
-            role = msg["role"].capitalize()
-            content = msg["content"]
-            transcript.append(f"{role}: {content}")
-            
+        for message in self.messages:
+            role = message["role"].capitalize()
+            transcript.append(f"{role}: {message['content']}")
+
         return "\n".join(transcript)
 
-    # ====================================================
-    # METODO PER INPUT STRUTTURATO (JSON PAYLOAD)
-    # ====================================================
-    def get_json_history_and_last_utterance(self, n=4) -> tuple:
-        """
-        Scorpora l'ultimo messaggio dell'utente dalla history passata.
-        Restituisce (lista_history_passata, ultimo_messaggio).
-        """
+    def get_json_history_and_last_utterance(self, n: int = 4) -> tuple[list[dict[str, str]], str]:
+        """Split the current user message from the previous structured history."""
         if not self.messages:
             return [], ""
-            
-        # L'ultimo messaggio è l'input corrente dell'utente
+
         last_utterance = self.messages[-1]["content"] if self.messages[-1]["role"] == "user" else ""
-        
-        # Prendiamo gli 'n' messaggi precedenti, escludendo l'ultimo
-        past_msgs = self.messages[:-1]
-        past_msgs = past_msgs[-n:] if n > 0 else []
-        
-        formatted_history = [{"role": m["role"], "text": m["content"]} for m in past_msgs]
-        
+        past_messages = self.messages[:-1]
+        past_messages = past_messages[-n:] if n > 0 else []
+
+        formatted_history = [{"role": message["role"], "text": message["content"]} for message in past_messages]
+
         return formatted_history, last_utterance
 
-    def get_json_history_and_last_utterance_filtered(self, n=6, excluded_segments=None):
-        if excluded_segments is None:
-            excluded_segments = []
-
-        conv_history, last_utterance = self.get_json_history_and_last_utterance(n=n)
+    def get_json_history_and_last_utterance_filtered(self, n: int = 6, excluded_segments: list[str] | None = None) -> tuple[list[dict[str, str]], str]:
+        """Return structured history while removing segments that belong to queued tasks."""
+        excluded_segments = excluded_segments or []
+        conversation_history, last_utterance = self.get_json_history_and_last_utterance(n=n)
 
         filtered_history = []
-        for msg in conv_history:
-            if msg["role"] != "user":
-                filtered_history.append(msg)
+        for message in conversation_history:
+            if message["role"] != "user":
+                filtered_history.append(message)
                 continue
 
-            text = msg["text"]
+            text = message["text"]
             for segment in excluded_segments:
                 text = text.replace(segment, "").strip()
 
             if text:
-                filtered_history.append({"role": msg["role"], "text": text})
+                filtered_history.append({"role": message["role"], "text": text})
 
         return filtered_history, last_utterance
 
-    def print_full_conversation(self):
-        print("\n" + "="*50)
-        print("📜 FULL CONVERSATION HISTORY 📜")
-        print("="*50)
+    def print_full_conversation(self) -> None:
+        print("\n" + "=" * 50)
+        print("FULL CONVERSATION HISTORY")
+        print("=" * 50)
         print(self.get_full_conversation())
-        print("="*50 + "\n")
+        print("=" * 50 + "\n")

@@ -1,9 +1,12 @@
-from typing import Dict, Any, Optional
+from typing import Any
+
 from database.mock_database import MockDatabase, reset_users_db
 
 
 class DBController:
-    def __init__(self, dst):
+    """Routes resolved dialogue states to the corresponding database operation."""
+
+    def __init__(self, dst) -> None:
         self.db = MockDatabase(dst)
 
         self.intent_to_method = {
@@ -20,49 +23,42 @@ class DBController:
             "report_lost_item": self.db.get_report_lost_item,
             "user_identification": self.db.get_user_identification,
             "greeting_closing": self.db.get_greeting_closing,
-            "out_of_scope": self.db.get_out_of_scope
+            "out_of_scope": self.db.get_out_of_scope,
         }
 
         self.needs_user_profile = {
-            "book_course", "book_spa", "modify_booked_course",
-            "modify_booked_spa", "cancel_booked_course", "cancel_booked_spa",
-            "report_lost_item"
+            "book_course", "book_spa", "modify_booked_course", "modify_booked_spa",
+            "cancel_booked_course", "cancel_booked_spa", "report_lost_item",
         }
 
     def reset_database(self) -> None:
         reset_users_db()
 
-    def resolve_state(self, dialogue_state: Dict[str, Any], user_profile: Dict[str, Any], lenient: bool=False, target_dst=None) -> Optional[Dict[str, Any]]:
+    def resolve_state(self, dialogue_state: dict[str, Any], user_profile: dict[str, Any], lenient: bool = False, target_dst=None) -> dict[str, Any] | None:
+        """Resolve a dialogue state through the database and clean invalid slots when needed."""
         intent = dialogue_state.get("intent")
         slots = dialogue_state.get("slots", {})
-
-        original_dst = self.db.dst
-        if target_dst:
-            self.db.dst = target_dst
-
         db_method = self.intent_to_method.get(intent)
 
         if not db_method:
-            if target_dst:
-                self.db.dst = original_dst # Restore
-            return {
-                "status": "UNKNOWN_INTENT"
-            }
-        
-        if intent in self.needs_user_profile:
-            # Corretto: user=user_profile
-            db_result = db_method(**slots, user=user_profile, lenient=lenient)
-        else:
-            db_result = db_method(**slots, lenient=lenient)
+            return {"status": "UNKNOWN_INTENT"}
 
-        # ====================================================
-        # PULIZIA CENTRALIZZATA DEGLI SLOT INVALIDI
-        # ====================================================
-        if db_result and db_result.get("status") == "INVALID_VALUE":
-            violating_slot = db_result.get("violating_slot")
-            if violating_slot:
-                self.db.dst.clean_invalid_slots(violating_slot)
+        original_dst = self.db.dst
 
-        if target_dst:
-            self.db.dst = original_dst # Restore
-        return db_result
+        try:
+            if target_dst is not None:
+                self.db.dst = target_dst
+
+            if intent in self.needs_user_profile:
+                db_result = db_method(**slots, user=user_profile, lenient=lenient)
+            else:
+                db_result = db_method(**slots, lenient=lenient)
+
+            if db_result and db_result.get("status") == "INVALID_VALUE":
+                violating_slot = db_result.get("violating_slot")
+                if violating_slot:
+                    self.db.dst.clean_invalid_slots(violating_slot)
+
+            return db_result
+        finally:
+            self.db.dst = original_dst

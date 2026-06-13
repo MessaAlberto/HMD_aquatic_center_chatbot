@@ -37,37 +37,10 @@ OUTPUT FORMAT:
 }
 """
 
-# 3. Use 'conversation_history' and 'full_user_message' only to interpret 'target_segment' in context, especially when it contains pronouns, short answers, corrections, or indirect references.
-
-# HOW TO PROCESS THE USER JSON PAYLOAD:
-# 1. The user will send a JSON containing: 'conversation_history', 'full_user_message', 'target_intent' and 'target_segment'.
-# 2. The 'target_intent' dictates the specific intent schema you must apply. It represents the logical intent of the 'target_segment'.
-# 3. The 'target_segment' is the actual phrase you must analyze and extract data from.
-# 4. The 'conversation_history' and 'full_user_message' are your background context. Use them to fully understand what the user means in the target segment (e.g., resolving pronouns, understanding temporal references, or recognizing if the user is accepting an option just offered by the assistant).
-
-# RULES:
-# 1. Output strictly a JSON object. No conversational text.
-# 2. Extract all relevant slots that are expressed, implied, or confirmed within the 'target_segment'. If the user accepts, repeats, or selects an option provided by the assistant, you MUST extract it as a valid slot.
-# 3. If a slot defines allowed values in brackets [], map the input to one of those terms ONLY if it is a clear match. If the user mentions something completely unrelated or out of scope, return null for that slot.
-# 4. If a slot is completely unmentioned and cannot be logically deduced from the 'target_segment', set its value to null.
-# 5. Extract temporal expressions (dates and times) verbatim exactly as spoken (e.g., "tomorrow", "next Monday", "morning"). Do not format them.
-# 6. Leave the 'confirmation' slot as null unless the user explicitly agrees or denies within the 'target_segment'.
-# 7. Correctly identify names and surnames even if provided in "Surname Name" order.
-
-# 2. Extract slot values EXCLUSIVELY from the 'target_segment'. Never copy old slot values from the history into your output.
-# 2. Extract slot values EXCLUSIVELY from the 'target_segment'. If a valid value is explicitly spoken by the user in the 'target_segment', you MUST extract it, even if the assistant just suggested that word in the history. However, do NOT hallucinate or copy data that exists ONLY in the history and is missing from the current user message.
-# 2. Primary Extraction Source: Focus primarily on the 'target_segment' to extract your slots. You are AUTHORIZED to use the 'conversation_history' and 'full_user_message' to fill in slots ONLY IF they logically complete the meaning of the target segment (e.g., accepting an option just offered by the assistant, or resolving pronouns like 'it' or 'he'). Do NOT extract unrelated slots that clearly belong to another distinct request.
-
 # ==========================================
 #        INTENT-SPECIFIC SCHEMAS
 # ==========================================
-#
-# 4 examples per intent:
-# - 1 example with with empty history
-# - 3 examples with history:
-#   - 1 example risposta secca
-#   - 1 example risoluzione contesto temporale/pronominale
-#   - 1 example multi intento tagliato
+
 
 ASK_OPENING_HOURS_SCHEMA = """
 TARGET INTENT: ask_opening_hours
@@ -75,8 +48,8 @@ CONTEXT: The user is asking about the opening or closing hours of a specific fac
 
 SLOTS:
 - facility_type: [swimming_pool, gym, spa, lido, reception].
-- date: verbatim temporal expressions.
-- time: verbatim temporal expressions.
+- date: verbatim calendar/date expression, such as today, tomorrow, next Friday, Sunday, this weekend.
+- time: verbatim time or time-of-day expression, such as morning, afternoon, evening, night, 10:00, 5 PM.
 
 EXAMPLES:
 - input:
@@ -329,8 +302,8 @@ TARGET INTENT: book_spa
 CONTEXT: The user wants to book a NEW session at the spa facility.
 
 SLOTS:
-- date: verbatim temporal expressions.
-- time: verbatim temporal expressions.
+- date: verbatim calendar/date expression, such as today, tomorrow, next Friday, Sunday, this weekend.
+- time: verbatim time or time-of-day expression, such as morning, afternoon, evening, night, 10:00, 5 PM.
 - people_count: integers from 1 to 8.
 - name: user's first name.
 - surname: user's last name.
@@ -457,6 +430,18 @@ EXAMPLES:
 
 - input:
   {
+    "conversation_history": [
+      {"role": "user", "text": "I need to modify my swimming school booking."},
+      {"role": "assistant", "text": "What would you like to change?"}
+    ],
+    "full_user_message": "Can I change from intermediate to beginner? Also, what is the gym price?",
+    "target_intent": "modify_booked_course",
+    "target_segment": "Can I change from intermediate to beginner?"
+  }
+  output: {"intent": "modify_booked_course", "slots": {"name": null, "surname": null, "course_activity_old": null, "target_age_old": null, "level_old": "intermediate", "day_preference_old": null, "course_activity_new": null, "target_age_new": null, "level_new": "beginner", "day_preference_new": null, "confirmation": null}}
+
+- input:
+  {
     "conversation_history": [],
     "full_user_message": "I want to move my course from Tuesday to Thursday, and also report that I lost my swimming cap in the pool area.",
     "target_intent": "modify_booked_course",
@@ -483,12 +468,12 @@ CONTEXT: The user wants to change, modify, or cancel a spa appointment they ALRE
 SLOTS:
 - name: user's first name.
 - surname: user's last name.
-- date_old: verbatim temporal expressions.
-- time_old: verbatim temporal expressions.
-- people_count_old: integers from 1 to 8.
-- date_new: verbatim temporal expressions.
-- time_new: verbatim temporal expressions.
-- people_count_new: integers from 1 to 8.
+- date_old: old calendar/date expression, such as today, tomorrow, next Friday, Sunday, this weekend.
+- time_old: old time or time-of-day expression, such as morning, afternoon, evening, night, 10:00, 5 PM.
+- people_count_old: old number of people, integer from 1 to 8.
+- date_new: new calendar/date expression, such as today, tomorrow, next Friday, Sunday, this weekend.
+- time_new: new time or time-of-day expression, such as morning, afternoon, evening, night, 10:00, 5 PM.
+- people_count_new: new number of people, integer from 1 to 8.
 - confirmation: [agree, deny].
 
 EXAMPLES:
@@ -511,6 +496,17 @@ EXAMPLES:
     "target_segment": "Can we move it to 16:00 instead?"
   }
   output: {"intent": "modify_booked_spa", "slots": {"name": null, "surname": null, "date_old": null, "time_old": null, "people_count_old": null, "date_new": null, "time_new": "16:00", "people_count_new": null, "confirmation": null}}
+
+- input:
+  {
+    "conversation_history": [
+      {"role": "assistant", "text": "What would you like to change about your spa booking?"}
+    ],
+    "full_user_message": "Actually, six people instead of four. Also, tell me spa rules.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "Actually, six people instead of four."
+  }
+  output: {"intent": "modify_booked_spa", "slots": {"name": null, "surname": null, "date_old": null, "time_old": null, "people_count_old": 4, "date_new": null, "time_new": null, "people_count_new": 6, "confirmation": null}}
 
 - input:
   {
@@ -640,8 +636,8 @@ TARGET INTENT: cancel_booked_spa
 CONTEXT: The user wants to cancel a spa appointment they ALREADY booked.
 
 SLOTS:
-- date: verbatim temporal expressions.
-- time: verbatim temporal expressions.
+- date: verbatim calendar/date expression, such as today, tomorrow, next Friday, Sunday, this weekend.
+- time: verbatim time or time-of-day expression, such as morning, afternoon, evening, night, 10:00, 5 PM.
 - people_count: integers from 1 to 8.
 - name: user's first name.
 - surname: user's last name.

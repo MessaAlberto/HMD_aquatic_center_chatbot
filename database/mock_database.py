@@ -223,7 +223,7 @@ SHOP_INVENTORY = {
     "swimming_cap": {"colors": ["red", "blue", "black", "yellow"], "brands": {"arena": 5.00, "speedo": 6.00}},
 }
 
-# Subscription
+# Mock user data.
 USERS_DB = {
     "mario_rossi": {
         "booked_courses": [
@@ -282,7 +282,7 @@ def reset_users_db() -> None:
 
 class MockDatabase:
     """
-    Slot values are aready cleaned up through dst. They are or None or DB values.
+    Slot values are already normalized by the DST. They are either None or database-compatible values.
     """
 
     def __init__(self, dst):
@@ -306,7 +306,7 @@ class MockDatabase:
     def get_opening_hours(self, facility_type=None, date=None, time=None, lenient=False, **kwargs):
         if lenient and not facility_type:
             facility_type = "swimming_pool"
-            # AVVISA IL DST DEL DEFAULT SCELTO
+            # Store the selected default in the dialogue state.
             self.dst.update_predicted_slots({"facility_type": facility_type})
 
         # VALIDATE values if present
@@ -343,11 +343,6 @@ class MockDatabase:
         notes = FACILITY_NOTES.get(facility_type, "")
 
         if time and not date:
-            # return {
-            #     "status": "MISSING_SLOT",
-            #     "violating_slot": "date",
-            #     "options": []
-            # }
             return {
                 "status": "INFORM",
                 "enriched_data": {
@@ -401,13 +396,13 @@ class MockDatabase:
                     sub_type = "monthly_pass"
                 else:
                     sub_type = "day_pass"
-                updates["sub_type"] = sub_type  # <-- AGGIUNTO
+                updates["sub_type"] = sub_type  
             # if service_type and not user_category:
             #     user_category = "adult"
-            #     updates["user_category"] = "adult" # <-- AGGIUNTO
+            #     updates["user_category"] = "adult" 
 
-            # AVVISA IL DST DEI DEFAULT SCELTI
-            # self.dst punta già a quello giusto grazie allo swap nel DBController!
+            # Store selected defaults in the dialogue state.
+            # The active DST is selected by DBController before this call.
             if updates:
                 self.dst.update_predicted_slots(updates)
 
@@ -460,7 +455,7 @@ class MockDatabase:
     def get_rules(self, topic=None, specific_inquiry=None, lenient=False, **kwargs):
         if lenient and not topic:
             topic = "swimming_pool"
-            # AVVISA IL DST DEL DEFAULT SCELTO
+            # Store the selected default in the dialogue state.
             self.dst.update_predicted_slots({"topic": topic})
 
         # VALIDATE values if present
@@ -687,7 +682,6 @@ class MockDatabase:
             try:
                 datetime.strptime(date, "%Y-%m-%d")
             except ValueError:
-                # TODO: if INVALID_VALUE dst should remove this slot
                 return {
                     "status": "INVALID_VALUE",
                     "violating_slot": "date",
@@ -795,7 +789,7 @@ class MockDatabase:
 
         user_data = user or {}
 
-        # FASE 1: IDENTITÀ
+        # Step 1: validate user identity.
         if not user_data.get("name") and not user_data.get("surname"):
             return {"status": "MISSING_SLOT", "violating_slot": "name_surname", "options": []}
         if not user_data.get("name"):
@@ -807,15 +801,15 @@ class MockDatabase:
         if user_id not in USERS_DB:
             return {
                 "status": "INVALID_VALUE",
-                "violating_slot": f"name_surname",
+                "violating_slot": "name_surname",
                 "options": []
             }
 
-        # FASE 2: RICERCA INTELLIGENTE (Auto-completamento)
+        # Step 2: find the matching existing booking.
         user_bookings = USERS_DB.get(user_id, {}).get("booked_courses", [])
 
         if not user_bookings:
-            # L'utente esiste, ma non ha MAI prenotato un corso
+            # The user exists but has no previous course bookings.
             return {
                 "status": "INVALID_VALUE",
                 "violating_slot": "",
@@ -860,7 +854,7 @@ class MockDatabase:
             if not target_age_old and len(unique_ages) > 1:
                 return {"status": "MISSING_SLOT", "violating_slot": "target_age_old", "options": unique_ages}
 
-        # A single booking matches the provided old values
+        # A single booking matches the provided old values.
         old_booking = matching_bookings[0]
         course_activity_old = old_booking["course_activity"]
         target_age_old = old_booking["target_age"]
@@ -875,14 +869,14 @@ class MockDatabase:
             "day_preference_old": day_preference_old
         })
 
-        # FASE 3: IL MERGING
+        # Step 3: merge old and new values.
         if not any([course_activity_new, target_age_new, level_new, day_preference_new]):
-            avilable_days = [d for d in course_rules_old["days"] if d != day_preference_old]
+            available_days = [d for d in course_rules_old["days"] if d != day_preference_old]
             # User didn't provide any new value, we can assume they want to change only the day
             return {
                 "status": "MISSING_SLOT",
                 "violating_slot": "day_preference_new",
-                "options": avilable_days
+                "options": available_days
             }
 
         eval_course = course_activity_new or course_activity_old
@@ -890,7 +884,7 @@ class MockDatabase:
         eval_level = level_new or level_old
         eval_day = day_preference_new or day_preference_old
 
-        # FASE 4: VALIDAZIONE DELLA NUOVA PRENOTAZIONE
+        # Step 4: validate the updated course booking.
         new_course_rules = COURSES_DB[eval_course]
 
         if eval_age not in new_course_rules["ages"]:
@@ -910,7 +904,7 @@ class MockDatabase:
                 "blacklist": [day_preference_old]
             }
 
-        # FASE 5: REGOLE DI BUSINESS SULLE SOVRAPPOSIZIONI
+        # Step 5: apply overlap and business rules.
         for booking in user_bookings:
             if (booking["course_activity"] == course_activity_old and
                 booking["target_age"] == target_age_old and
@@ -958,7 +952,7 @@ class MockDatabase:
         # Update possible null value slots in the dialogue state
         self.dst.update_predicted_slots(full_slots_to_save)
 
-        # FASE 6: CONFERMA
+        # Step 6: ask for confirmation before applying the change.
         if not confirmation:
             diff_old = []
             diff_new = []
@@ -991,7 +985,7 @@ class MockDatabase:
                 "status": "ABORTED"
             }
 
-        # --- SALVATAGGIO NEL DB ---
+        # Apply the confirmed change to the mock database.
         user_id = f"{user_data.get('name')}_{user_data.get('surname')}".lower()
         user_courses = USERS_DB.get(user_id, {}).get("booked_courses", [])
 
@@ -1001,9 +995,9 @@ class MockDatabase:
                 booking["level"] == level_old and
                     booking["day_preference"] == day_preference_old):
 
-                # Rimuove la vecchia prenotazione
+                # Remove the old booking.
                 user_courses.pop(i)
-                # Inserisce la nuova
+                # Add the updated booking.
                 user_courses.append({
                     "course_activity": eval_course,
                     "target_age": eval_age,
@@ -1019,7 +1013,7 @@ class MockDatabase:
                               user=None, confirmation=None, **kwargs):
         user_data = user or {}
 
-        # FASE 1: IDENTITÀ
+        # Step 1: validate user identity.
         if not user_data.get("name") and not user_data.get("surname"):
             return {"status": "MISSING_SLOT", "violating_slot": "name_surname", "options": []}
         if not user_data.get("name"):
@@ -1035,13 +1029,13 @@ class MockDatabase:
                 "options": []
             }
 
-        # FASE 2: RICERCA INTELLIGENTE (Auto-completamento)
+        # Step 2: find the matching existing booking.
         user_bookings = USERS_DB.get(user_id, {}).get("booked_spa", [])
 
         if not user_bookings:
             return {
                 "status": "INVALID_VALUE",
-                "violating_slot": "",  # La data è il perno della spa, quindi la blocchiamo
+                "violating_slot": "",  # Date is the main identifier for spa bookings.
                 "options": ["(no previous bookings)"]
             }
 
@@ -1053,7 +1047,7 @@ class MockDatabase:
                 match = False
             if time_old and b["time"] != time_old:
                 match = False
-            # Convertiamo in stringa per evitare problemi di tipo (int vs str dal DST)
+            # Compare as strings to avoid int/string mismatches from the DST.
             if people_count_old and str(b["people_count"]) != str(people_count_old):
                 match = False
 
@@ -1063,7 +1057,7 @@ class MockDatabase:
         if len(matching_bookings) == 0:
             return {
                 "status": "INVALID_VALUE",
-                "violating_slot": "date_old",  # Usiamo la data come perno per l'errore
+                "violating_slot": "date_old",  # Use the date as the main recovery slot.
                 "options": list(set([b["date"] for b in user_bookings]))
             }
 
@@ -1079,7 +1073,7 @@ class MockDatabase:
             if not people_count_old and len(unique_counts) > 1:
                 return {"status": "MISSING_SLOT", "violating_slot": "people_count_old", "options": unique_counts}
 
-        # A single booking matches the provided old values
+        # A single booking matches the provided old values.
         old_booking = matching_bookings[0]
         date_old = old_booking["date"]
         time_old = old_booking["time"]
@@ -1091,7 +1085,7 @@ class MockDatabase:
             "people_count_old": people_count_old
         })
 
-        # FASE 3: IL MERGING
+        # Step 3: merge old and new values.
         if not any([date_new, time_new, people_count_new]):
             # User didn't provide any new value, we can assume they want to change only the date
             return {
@@ -1104,7 +1098,7 @@ class MockDatabase:
         eval_time = time_new or time_old
         eval_count = people_count_new or people_count_old
 
-        # FASE 4: VALIDAZIONE DELLA NUOVA PRENOTAZIONE (Formato e Limiti SPA)
+        # Step 4: validate the updated course booking. (Formato e Limiti SPA)
         if date_new:
             try:
                 datetime.strptime(eval_date, "%Y-%m-%d")
@@ -1129,34 +1123,34 @@ class MockDatabase:
             except ValueError:
                 return {"status": "INVALID_VALUE", "violating_slot": "people_count_new", "options": []}
 
-        # Controllo anti-pigrizia (se i dati mixati sono uguali a quelli di partenza)
+        # Reject updates that do not actually change the booking.
         if (eval_date == date_old and eval_time == time_old and str(eval_count) == str(people_count_old)):
             return {
                 "status": "OVERLAP",
                 "violating_slot": "time_new",  # Chiediamo un nuovo orario per risolvere il loop
-                # Anche se in realtà tutte le fasce orarie sono libere, forniamo un'opzione valida per sbloccare
+                # Provide a valid range to help the dialogue recover.
                 "options": ["10:00 - 21:00"],
-                "blacklist": [time_old]  # Escludiamo l'orario vecchio per evitare che l'utente lo riproponga
+                "blacklist": [time_old]  # Exclude the old time to avoid repeating the same value.
             }
 
-        # FASE 5: REGOLE DI BUSINESS SULLE SOVRAPPOSIZIONI
+        # Step 5: apply overlap and business rules.
         for booking in user_bookings:
-            # Ignoriamo la prenotazione che stiamo attivamente modificando
+            # Ignore the booking currently being modified.
             if (booking["date"] == date_old and booking["time"] == time_old and
                     str(booking["people_count"]) == str(people_count_old)):
                 continue
 
-            # NUOVA POLICY: Se sta cercando di prenotare in una data in cui ha GIÀ un'altra prenotazione
+            # Policy: a user cannot have another spa booking on the same date.
             if booking["date"] == eval_date:
                 booked_dates = [b["date"] for b in user_bookings]
                 return {
                     "status": "OVERLAP",
-                    "violating_slot": "date_new",  # Diamo la colpa alla data, non più all'orario
-                    "options": [],  # Le opzioni sono le date libere, ma non conoscendole a priori lo lasciamo vuoto
-                    "blacklist": booked_dates  # Escludiamo tutte le date già prenotate per evitare che l'utente le riproponga
+                    "violating_slot": "date_new",  # Use the new date as the recovery slot.
+                    "options": [],  # Free dates are not precomputed, so the options list stays empty.
+                    "blacklist": booked_dates  # Exclude already-booked dates to avoid repeated invalid choices.
                 }
 
-        # FASE 6: CONFERMA
+        # Step 6: ask for confirmation before applying the change.
         full_slots_to_save = {
             "name": user_data.get("name"),
             "surname": user_data.get("surname"),
@@ -1202,7 +1196,7 @@ class MockDatabase:
                 "status": "ABORTED"
             }
 
-        # --- SALVATAGGIO NEL DB ---
+        # Apply the confirmed change to the mock database.
         user_id = f"{user_data.get('name')}_{user_data.get('surname')}".lower()
         user_spas = USERS_DB.get(user_id, {}).get("booked_spa", [])
 
@@ -1211,9 +1205,9 @@ class MockDatabase:
                 booking["time"] == time_old and
                     str(booking["people_count"]) == str(people_count_old)):
 
-                # Rimuove la vecchia prenotazione
+                # Remove the old booking.
                 user_spas.pop(i)
-                # Inserisce la nuova
+                # Add the updated booking.
                 user_spas.append({
                     "date": eval_date,
                     "time": eval_time,
@@ -1226,7 +1220,7 @@ class MockDatabase:
     def get_cancel_booked_course(self, course_activity=None, target_age=None, level=None, day_preference=None, user=None, confirmation=None, **kwargs):
         user_data = user or {}
 
-        # FASE 1: IDENTITÀ
+        # Step 1: validate user identity.
         if not user_data.get("name") and not user_data.get("surname"):
             return {"status": "MISSING_SLOT", "violating_slot": "name_surname", "options": []}
         if not user_data.get("name"):
@@ -1243,7 +1237,7 @@ class MockDatabase:
                 "options": []
             }
 
-        # FASE 2: RICERCA INTELLIGENTE (Auto-completamento)
+        # Step 2: find the matching existing booking.
         user_bookings = USERS_DB.get(user_id, {}).get("booked_courses", [])
 
         if not user_bookings:
@@ -1269,7 +1263,7 @@ class MockDatabase:
             if match:
                 matching_bookings.append(b)
 
-        # Se non c'è nessun match con i parametri forniti
+        # No booking matches the provided filters.
         if len(matching_bookings) == 0:
             return {
                 "status": "INVALID_VALUE",
@@ -1277,7 +1271,7 @@ class MockDatabase:
                 "options": list(set([b["course_activity"] for b in user_bookings]))
             }
 
-        # Se ci sono più prenotazioni corrispondenti, cerchiamo lo slot discriminante
+        # If multiple bookings match, ask for the most discriminative missing slot.
         elif len(matching_bookings) > 1:
             unique_courses = list(set([b["course_activity"] for b in matching_bookings]))
             unique_days = list(set([b["day_preference"] for b in matching_bookings]))
@@ -1293,10 +1287,10 @@ class MockDatabase:
             if not target_age and len(unique_ages) > 1:
                 return {"status": "MISSING_SLOT", "violating_slot": "target_age", "options": unique_ages}
 
-        # Trovato ESATTAMENTE un match. Estraiamo i dati completi.
+        # Exactly one booking matched. Complete the missing slots from it.
         matched_booking = matching_bookings[0]
 
-        # Aggiorniamo il Dialogue State Tracker in modo che abbia tutto pieno
+        # Update the DST with the fully identified booking.
         self.dst.update_predicted_slots({
             "course_activity": matched_booking["course_activity"],
             "target_age": matched_booking["target_age"],
@@ -1304,7 +1298,7 @@ class MockDatabase:
             "day_preference": matched_booking["day_preference"]
         })
 
-        # FASE 3: CONFERMA
+        # Step 3: ask for confirmation before deleting the booking.
         if not confirmation:
             return {
                 "status": "MISSING_SLOT",
@@ -1315,13 +1309,13 @@ class MockDatabase:
                 }
             }
 
-        # Se l'utente decide di NON cancellare, l'operazione di annullamento è "ABORTED"
+        # If the user denies, the cancellation is aborted.
         if confirmation == "deny":
             return {
                 "status": "ABORTED"
             }
 
-        # --- FASE 4: CANCELLAZIONE DAL DB ---
+        # Step 4: remove the booking from the mock database.
         for i, booking in enumerate(user_bookings):
             if (booking["course_activity"] == matched_booking["course_activity"] and
                 booking["target_age"] == matched_booking["target_age"] and
@@ -1331,13 +1325,13 @@ class MockDatabase:
                 user_bookings.pop(i)
                 break
 
-        # Restituendo CONFIRMED segnaliamo al DM che l'operazione (la cancellazione) è andata a buon fine
+        # CONFIRMED tells the DM that the cancellation was completed.
         return {"status": "CONFIRMED"}
 
     def get_cancel_booked_spa(self, date=None, time=None, people_count=None, user=None, confirmation=None, **kwargs):
         user_data = user or {}
 
-        # FASE 1: IDENTITÀ
+        # Step 1: validate user identity.
         if not user_data.get("name") and not user_data.get("surname"):
             return {"status": "MISSING_SLOT", "violating_slot": "name_surname", "options": []}
         if not user_data.get("name"):
@@ -1354,7 +1348,7 @@ class MockDatabase:
                 "options": []
             }
 
-        # FASE 2: RICERCA INTELLIGENTE
+        # Step 2: find the matching existing booking.
         user_spas = USERS_DB.get(user_id, {}).get("booked_spa", [])
 
         if not user_spas:
@@ -1406,7 +1400,7 @@ class MockDatabase:
             "people_count": matched_booking["people_count"]
         })
 
-        # FASE 3: CONFERMA
+        # Step 3: ask for confirmation before deleting the booking.
         if not confirmation:
             return {
                 "status": "MISSING_SLOT",
@@ -1422,7 +1416,7 @@ class MockDatabase:
                 "status": "ABORTED"
             }
 
-        # --- FASE 4: CANCELLAZIONE DAL DB ---
+        # Step 4: remove the booking from the mock database.
         for i, booking in enumerate(user_spas):
             if (booking["date"] == matched_booking["date"] and
                 booking["time"] == matched_booking["time"] and

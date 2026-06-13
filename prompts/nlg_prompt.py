@@ -25,13 +25,6 @@ GENERAL RULES:
 8. Strict Data Fidelity: NEVER blend, mask, or replace the values present in the Dialogue State with information from the conversation history. The Dialogue State and 'enriched_data' represent the ABSOLUTE TRUTH.
 """
 
-# 6. Avoid slot fatigue and false confirmations: When nba is 'request_slot', ask only for the missing or invalid slot. Do NOT summarize the booking, do NOT state that anything is confirmed/booked/finalized, and do NOT use words like "confirm", "confirmed", "booked", or "finalized". Use only a brief acknowledgment if needed, then ask for the required slot. Use summaries or confirmation wording only when the requested slot is 'confirmation' or when nba is 'notify_success'.
-# 6. Strict Acknowledgment Rule: When nba is 'request_slot', you MUST acknowledge the user's input using ONLY simple phrases like "Got it", "Perfect", "Understood", or "Noted", followed immediately by the direct question for the missing slot. Keep the flow fast without repeating their previous answers. You are AUTHORIZED to summarize the booking or use terms like "confirm", "confirmed", or "booked" EXCLUSIVELY when the requested slot is exactly 'confirmation', or when the nba is 'notify_success'.
-# 6. Fast Acknowledgment: When nba is 'request_slot', keep the flow fast. Acknowledge the input briefly (e.g., "Got it", "Perfect") and directly ask for the missing slot. NEVER summarize the booking or use words like "confirm", "confirmed", or "booked" UNLESS the requested slot is exactly 'confirmation' or nba is 'notify_success'.
-# 6. FAST ACKNOWLEDGMENT & LEXICAL BLACKLIST: When nba is 'request_slot', you must keep the flow fast. Acknowledge the input briefly (e.g., "Got it", "Perfect") and immediately ask for the missing slot. You are STRICTLY FORBIDDEN from using the words "confirm", "confirmed", "book", "booked", or "finalized" UNLESS the requested slot is exactly 'confirmation' or the nba is 'notify_success'. Do not summarize the booking prematurely.
-# 6. NO ECHOING (ANTI-PARROTING RULE): When nba is 'request_slot', NEVER repeat the slots the user just filled and NEVER summarize the Dialogue State. For example, if the user chooses "Monday", DO NOT say "Perfect, Monday is set. What time?". Reply ONLY with the acknowledgment and the next question: "Perfect. What time?".
-# 7. AUTHORIZED SUMMARIES: You are STRICTLY FORBIDDEN from using words like "confirm", "confirmed", or summarizing the current booking UNLESS the requested slot is exactly 'confirmation', or the nba is 'notify_success'.
-
 FLAG_RULES = {
     "step_by_step_mode": "- STEP BY STEP MODE: The user made multiple requests. You MUST use this exact structural formula: [Short acknowledgment like 'Let's do one thing at a time' or 'Starting with the...'] + [Direct question for the missing 'slot']. DO NOT add any other context.",
 
@@ -41,130 +34,10 @@ FLAG_RULES = {
 
     "queue_recovery": "- QUEUE RECOVERY: You are resuming a previously paused topic. Use this exact structural formula: [Brief confirmation of the just completed action] + [Natural transition back to the paused topic, e.g., 'Now, going back to your question about...', or 'And about your earlier request...'] + [Direct question for the missing slot]. DO NOT use raw system intent names."
 }
-# FLAG_RULES = {
-#     "step_by_step_mode": "- STEP BY STEP MODE: The user made multiple requests. You MUST use this exact structural formula: [Short acknowledgment like 'Let's do one thing at a time' or 'Starting with the...'] + [Direct question for the missing 'slot']. DO NOT add any other context.",
 
-#     "is_multitask": "- MULTITASK (FIRST PART): You are answering the first part of a combined request. Use this exact structural formula: [Extremely concise direct answer from enriched_data]. DO NOT ask closing questions. DO NOT add conversational filler.",
-
-#     "is_second_response": "- MULTITASK (SECOND PART): This is the second part of a combined request. Use this exact structural formula: [Connective word like 'Furthermore' or 'Also'] + [Direct answer or question].",
-
-#     "queue_recovery": "- QUEUE RECOVERY: You are resuming a previously paused topic. Use this exact structural formula: [Confirmation of the just completed action]. + 'By the way, what about your previous request regarding {recovered_intent}?'"
-# }
-
-# "step_by_step_mode": "- STEP BY STEP MODE: The user made multiple requests. Start by politely stating you will handle things one step at a time.",
-# "queue_recovery": "- QUEUE RECOVERY: You are resuming a previously paused topic. Start by acknowledging the previous task is done and naturally transition back to the topic of '{recovered_intent}'."
-# "queue_recovery": "- QUEUE RECOVERY: You are resuming a previously paused topic. Start by acknowledging the current task is done, then naturally ask if the user still wants help with their previous request regarding '{recovered_intent}'. CRITICAL RULE: DO NOT invent, guess, or add specific details to the recovered topic."
-
-GLOBAL_SCENARIO_EXAMPLES = {
-    "step_by_step_mode": """
-STRUCTURAL EXAMPLES (STEP BY STEP MODE):
-- HISTORY: [{"role": "user", "content": "I want to book the spa. Also how much is the gym?"}]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "book_spa", "slots": {"date": null, "time": null, "people_count": null, "name": null, "surname": null, "confirmation": null}}
-    CURRENT DM INSTRUCTION: {"nba": "request_slot", "slot": "time", "options": ["10:00 - 21:00"], "blacklist": [], "enriched_data": {}, "step_by_step_mode": true}
-  RESPONSE: Let’s go one step at a time. Regarding the booking for the spa, what time would you prefer?
-
-- HISTORY: [{"role": "user", "content": "Can I book a swimming school class? And I want to buy a towel."}]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "book_course", "slots": {"course_activity": "swimming_school", "target_age": null, "level": null, "day_preference": null, "name": null, "surname": null, "confirmation": null}}
-    CURRENT DM INSTRUCTION: {"nba": "request_slot", "slot": "target_age", "options": ["child", "teen", "adult"], "blacklist": [], "step_by_step_mode": true}
-  RESPONSE: I’ll help with each request in order. About the swimming school, are you a child, a teen, or an adult?
-""",
-
-
-    "is_multitask": """
-STRUCTURAL EXAMPLES (MULTITASK FIRST PART):
-- HISTORY: [{"role": "user", "content": "What are the opening hours for the pool and the gym?"}]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "ask_opening_hours", "slots": {"facility_type": "swimming_pool", "date": null, "time": null}}
-    CURRENT DM INSTRUCTION: {"nba": "provide_information", "slot": null, "options": [], "blacklist": [], "enriched_data": {"schedule": {"Mon-Fri": "06:00-22:00", "Sat": "08:00-20:00", "Sun": "09:00-14:00"}}, "is_multitask": true}
-	RESPONSE: Pool hours are Mon-Fri 06:00-22:00, Sat 08:00-20:00, and Sun 09:00-14:00.
-
-- HISTORY: [
-    {"role": "assistant", "content": "Can you confirm your booking for the spa tomorrow at 5 PM?"},
-    {"role": "user", "content": "I, confirm the booking. Also, what are the prices for the gym?"}
-  ]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "book_spa", "slots": {"date": "2026-07-13", "time": "09:00", "people_count": 2, "name": "John", "surname": "Doe", "confirmation": "agree"}}
-    CURRENT DM INSTRUCTION: {"nba": "notify_success", "slot": null, "options": [], "blacklist": [], "enriched_data": {}, "is_multitask": true}
-	RESPONSE: Your spa booking for tomorrow at 5 PM has been confirmed.
-
-- HISTORY: [{"role": "user", "content": "I'd like to sign my son up for swimming lessons. He's a beginner. How much would it cost?"}]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "ask_pricing", "slots": {"service_type": "course", "sub_type": "monthly_pass", "user_category": "child"}}
-    CURRENT DM INSTRUCTION: {"nba": "provide_information", "slot": null, "options": [], "blacklist": [], "enriched_data": {"price": 30.0}, "is_multitask": true}
-  RESPONSE: The monthly pass for a child in the swimming lessons costs €30.00.
-""",
-
-
-    "is_multitask_second": """
-STRUCTURAL EXAMPLES (MULTITASK SECOND PART):
-- HISTORY: [
-    {"role": "assistant", "content": "Can you confirm your booking for the spa tomorrow at 5 PM?"},
-    {"role": "user", "content": "I, confirm the booking. Also, what are the prices for the gym?"},
-    {"role": "assistant", "content": "Your spa booking for tomorrow at 5 PM has been confirmed."}
-  ]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "ask_pricing", "slots": {"service_type": "gym", "sub_type": "day_pass", "user_category": "adult"}}
-    CURRENT DM INSTRUCTION: {"nba": "provide_information", "slot": null, "options": [], "blacklist": [], "enriched_data": {"price": 8.0}, "is_multitask": true, "is_second_response": true}
-  RESPONSE: Furthermore, the price for a day pass to the gym is €8.00.
-
-- HISTORY: [
-    {"role": "assistant", "content": "Do you remember where you see your swim suit?"},
-    {"role": "user", "content": "I think I left it in the changing room. Is it possible to buy a new one?"},
-    {"role": "assistant", "content": "We've correctly reported your lost item."}
-  ]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "buy_equipment", "slots": {"item": "swim_suit", "size": null, "color": null, "brand": null, "confirmation": null}}
-    CURRENT DM INSTRUCTION: {"nba": "request_slot", "slot": "color", "options": ["green", "blue", "red"], "blacklist": [], "is_multitask": true, "is_second_response": true}
-	RESPONSE: And also, for the new swimsuit, which color do you prefer?
-""",
-
-
-    "is_multitask_step_by_step": """
-STRUCTURAL EXAMPLES (MULTITASK FIRST PART + STEP BY STEP MODE):
-- HISTORY: [{"role": "user", "content": "I want to book the spa for two people. Can you tell me the price and opening hours?"}]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "ask_pricing", "slots": {"service_type": "spa", "sub_type": "day_pass", "user_category": "adult"}}
-    CURRENT DM INSTRUCTION: {"nba": "provide_information", "slot": null, "options": [], "blacklist": [], "enriched_data": {"price": 20.0}, "is_multitask": true, "step_by_step_mode": true}
-  RESPONSE: Let’s start simple. The price for a day pass to the spa is €20.00.
-
-- HISTORY: [{"role": "user", "content": "Is it allowed to bring food to the pool area? Moreover, is it possible to change course level? And is there a discount for student?"}]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "ask_rules", "slots": {"topic": "swimming_pool", "specific_inquiry": "food"}}
-    CURRENT DM INSTRUCTION: {"nba": "provide_information", "slot": null, "options": [], "blacklist": [], "enriched_data": {"matched_rules": {"food": "Food is not allowed in the pool area."}}, "is_multitask": true, "step_by_step_mode": true}
-	RESPONSE: Let’s focus on one thing first. Regarding the pool area, food is not allowed.
-""",
-
-
-    "queue_recovery": """
-STRUCTURAL EXAMPLES (QUEUE RECOVERY):
-- HISTORY: [
-    {"role": "assistant", "content": "Do you prefer the green, yellow or red goggles?"},
-    {"role": "user", "content": "I choose the red ones."},
-    {"role": "assistant", "content": "Okay, they cost €10.00. Do you confirm the purchase?"},
-    {"role": "user", "content": "Yes, I do."}
-  ]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "buy_equipment", "slots": {"item": "goggles", "size": null, "color": "red", "brand": "arena", "confirmation": "agree"}}
-    CURRENT DM INSTRUCTION: {"nba": "notify_success", "slot": null, "options": [], "blacklist": [], "enriched_data": {"price": 10.0}, "queue_recovery": true, "recovered_intent": "modify_booked_course"}
-  RESPONSE: Sure! Please proceed to the reception to pay and pick up your item. By the way, what about your previous request to modify the booked course?
-
-- HISTORY: [
-    {"role": "user", "content": "How much is a day pass for the gym? Can I also book a spa for 2 people?"},
-    {"role": "assistant", "content": "Let’s start simple. About the price for the gym it depends whether it's for a child, student, senior, or adult. Could you please specify?"},
-    {"role": "user", "content": "I'm an adult."}
-  ]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "ask_pricing", "slots": {"service_type": "gym", "sub_type": "day_pass", "user_category": "adult"}}
-    CURRENT DM INSTRUCTION: {"nba": "provide_information", "slot": null, "options": [], "blacklist": [], "enriched_data": {"price": 10.0}, "queue_recovery": true, "recovered_intent": "book_spa"}
-	RESPONSE: The price for a day pass is €10.00 for adults. Now, are you still interested in booking the spa?
-    """
-}
-
-# =====================================================================
-# INTENT PROMPTS (ONLY DEFAULT EXAMPLES FOR VOCABULARY AND TONE)
-# =====================================================================
+# ================
+# INTENT PROMPTS
+# ================
 
 ASK_OPENING_HOURS_PROMPT = {
     "rules": """

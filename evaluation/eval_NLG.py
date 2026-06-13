@@ -133,7 +133,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--results-dir", type=Path, default=None, help="Optional custom directory for result files.")
     parser.add_argument("--predictions-path", type=Path, default=None, help="Optional path with pre-generated outputs to evaluate.")
     parser.add_argument("--max-samples", type=int, default=None, help="Optional limit for quick tests.")
-    parser.add_argument("--manual-review", action="store_true", help="Create nlg_manual_review.json with empty human scores.")
+    parser.add_argument("--manual-review", action="store_true", help="Deprecated: nlg_manual_review.json is always created.")
     return parser.parse_args()
 
 def load_nlg_class():
@@ -554,7 +554,7 @@ def run_evaluation(
     results_dir: Path | None = None,
     predictions_path: Path | None = None,
     max_samples: int | None = None,
-    manual_review: bool = False,
+    manual_review: bool = True,
 ) -> Dict[str, Any]:
     paths = get_eval_paths(__file__, "nlg", model_name=model_name)
 
@@ -651,9 +651,8 @@ def run_evaluation(
     save_json(error_report, paths["errors"])
     save_json(prediction_records, paths["predictions"])
 
-    if manual_review:
-        manual_review_report = build_manual_review_report(predictions, evaluations, samples)
-        save_json(manual_review_report, paths["manual_review"])
+    manual_review_report = build_manual_review_report(predictions, evaluations, samples)
+    save_json(manual_review_report, paths["manual_review"])
 
     return {"results": results, "paths": paths}
 
@@ -667,14 +666,14 @@ def main() -> None:
         results_dir=args.results_dir,
         predictions_path=args.predictions_path,
         max_samples=args.max_samples,
-        manual_review=args.manual_review,
+        manual_review=True,
     )
 
     print(json.dumps(output["results"]["metrics"], indent=2, ensure_ascii=False), flush=True)
     print_final_paths(
         output["paths"],
         include_predictions=True,
-        include_manual_review=args.manual_review,
+        include_manual_review=True,
     )
 
 

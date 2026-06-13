@@ -1,14 +1,18 @@
 import json
 import re
+from typing import Any
 
 from prompts.dm_prompt import DM_SYSTEM_PROMPT
 
 
 class DM:
-    def __init__(self, llm):
+    """Predicts the next best action from the current dialogue state."""
+
+    def __init__(self, llm) -> None:
         self.llm = llm
 
-    def parse_llm_json(self, text: str) -> dict:
+    def parse_llm_json(self, text: str) -> dict[str, Any]:
+        """Parse the LLM output and return a safe fallback when parsing fails."""
         try:
             return json.loads(text)
         except Exception:
@@ -21,13 +25,9 @@ class DM:
                 except Exception:
                     pass
 
-            return {
-                "nba": "fallback",
-                "slot": None,
-                "options": []
-            }
+            return {"nba": "fallback", "slot": None, "options": []}
 
-    def predict_batch(self, payloads: list) -> list:
+    def predict_batch(self, payloads: list[dict[str, Any]]) -> list[dict[str, Any]]:
         messages_batch = []
 
         for payload in payloads:
@@ -35,14 +35,11 @@ class DM:
 
             messages = [
                 {"role": "system", "content": DM_SYSTEM_PROMPT},
-                {"role": "user", "content": f"CURRENT INPUT:\n{payload_str}"}
+                {"role": "user", "content": f"CURRENT INPUT:\n{payload_str}"},
             ]
 
             messages_batch.append(messages)
 
-        dm_outputs = self.llm.generate_batch(
-            messages_batch=messages_batch,
-            max_new_tokens=256
-        )
+        dm_outputs = self.llm.generate_batch(messages_batch=messages_batch, max_new_tokens=256)
 
-        return [self.parse_llm_json(out) for out in dm_outputs]
+        return [self.parse_llm_json(output) for output in dm_outputs]

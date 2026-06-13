@@ -6,8 +6,8 @@ pyarrow
 python-dotenv
 bitsandbytes
 sacrebleu
-protobuf
 sentencepiece
 pandas
 pillow
 dateparser
+tqdm
