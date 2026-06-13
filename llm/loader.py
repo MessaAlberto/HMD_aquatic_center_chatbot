@@ -2,11 +2,12 @@ import os
 
 from dotenv import load_dotenv
 from huggingface_hub import login
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, AutoProcessor
 
 from llm.config import MODELS
 
 load_dotenv()
+
 
 def login_to_huggingface() -> None:
     token = os.getenv("HF_TOKEN")
@@ -28,14 +29,23 @@ class LLMService:
 
         if model_name not in MODELS:
             available_models = ", ".join(MODELS.keys())
-            raise ValueError(f"Unknown model '{model_name}'. Available models: {available_models}")
+            raise ValueError(
+                f"Unknown model '{model_name}'. Available models: {available_models}"
+            )
 
         name, init_model, generate_response, generate_response_batch = MODELS[model_name]
 
         self.model_name = model_name
         self.model_id = name
         self.model = init_model(name, device_map=device_map)
-        self.tokenizer = AutoTokenizer.from_pretrained(name, trust_remote_code=True)
+
+        if model_name == "gemma3_4b":
+            self.tokenizer = AutoProcessor.from_pretrained(name)
+        else:
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                name,
+                trust_remote_code=True,
+            )
 
         self._generate_response = generate_response
         self._generate_response_batch = generate_response_batch
@@ -45,15 +55,19 @@ class LLMService:
             model=self.model,
             tokenizer=self.tokenizer,
             messages=messages,
-            max_new_tokens=max_new_tokens
+            max_new_tokens=max_new_tokens,
         )
 
-    def generate_batch(self, messages_batch: list[list[dict[str, str]]], max_new_tokens: int = 128) -> list[str]:
+    def generate_batch(
+        self,
+        messages_batch: list[list[dict[str, str]]],
+        max_new_tokens: int = 128,
+    ) -> list[str]:
         return self._generate_response_batch(
             model=self.model,
             tokenizer=self.tokenizer,
             messages_batch=messages_batch,
-            max_new_tokens=max_new_tokens
+            max_new_tokens=max_new_tokens,
         )
 
 

@@ -1,9 +1,14 @@
 from typing import Any, Callable, Dict, Tuple
 from functools import partial
 import torch
-from transformers import AutoModelForCausalLM, BitsAndBytesConfig, Gemma3ForCausalLM
+from transformers import AutoModelForCausalLM, AutoModelForImageTextToText, BitsAndBytesConfig
 
-from llm.generation import generate_response, generate_response_batch
+from llm.generation import (
+    generate_response,
+    generate_response_batch,
+    generate_response_gemma3,
+    generate_response_batch_gemma3,
+)
 
 
 quantization_config = BitsAndBytesConfig(
@@ -11,10 +16,6 @@ quantization_config = BitsAndBytesConfig(
     bnb_4bit_compute_dtype=torch.float16,
     bnb_4bit_quant_type="nf4",
     bnb_4bit_use_double_quant=True,
-)
-
-gemma_quantization_config = BitsAndBytesConfig(
-    load_in_4bit=True,
 )
 
 MODEL_LOADER = partial(
@@ -25,10 +26,10 @@ MODEL_LOADER = partial(
 )
 
 GEMMA_MODEL_LOADER = partial(
-    Gemma3ForCausalLM.from_pretrained,
-    torch_dtype=torch.float32,
+    AutoModelForImageTextToText.from_pretrained,
+    torch_dtype=torch.float16,
     device_map="auto",
-    quantization_config=gemma_quantization_config,
+    quantization_config=quantization_config,
 )
 
 MODELS: Dict[str, Tuple[str, Callable[..., Any], Callable[..., Any], Callable[..., Any]]] = {
@@ -53,8 +54,8 @@ MODELS: Dict[str, Tuple[str, Callable[..., Any], Callable[..., Any], Callable[..
     "gemma3_4b": (
         "google/gemma-3-4b-it",
         GEMMA_MODEL_LOADER,
-        generate_response,
-        generate_response_batch,
+        generate_response_gemma3,
+        generate_response_batch_gemma3,
     ),
     "phi4_mini": (
         "microsoft/Phi-4-mini-instruct",
