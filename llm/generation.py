@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Any
+from typing import Any, Dict, List, Optional
 import logging
 from datetime import datetime
 
@@ -16,48 +16,102 @@ def _clear_cuda_cache() -> None:
         torch.cuda.empty_cache()
 
 
+def _get_input_device(model) -> torch.device:
+    if hasattr(model, "hf_device_map"):
+        for device in model.hf_device_map.values():
+            if isinstance(device, str) and device not in {"cpu", "disk"}:
+                return torch.device(device)
+    return model.device
+
+
+def _normalize_messages(
+    messages: Optional[List[Dict[str, Any]]] = None,
+) -> List[Dict[str, str]]:
+    if messages is None:
+        return []
+
+    normalized = []
+
+    for message in messages:
+        role = message.get("role", "user")
+        content = message.get("content", message.get("text", ""))
+
+        normalized.append(
+            {
+                "role": str(role),
+                "content": str(content),
+            }
+        )
+
+    return normalized
+
+
+def _prepare_tokenizer(tokenizer: PreTrainedTokenizer) -> None:
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    tokenizer.padding_side = "left"
+
+
 def prepare_text(
     tokenizer: PreTrainedTokenizer,
-    messages: Optional[List[Dict[str, str]]] = None,
+    messages: Optional[List[Dict[str, Any]]] = None,
 ) -> str:
-    if messages is None:
-        messages = []
+    normalized_messages = _normalize_messages(messages)
 
-    text = tokenizer.apply_chat_template(
-        messages,
+    return tokenizer.apply_chat_template(
+        normalized_messages,
         tokenize=False,
         add_generation_prompt=True,
     )
 
-    return text
+
+def _save_debug_prompt(filename_prefix: str, text: str) -> None:
+    if not APP_DEBUG:
+        return
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{filename_prefix}_{timestamp}.txt"
+
+    try:
+        with open(filename, "w", encoding="utf-8") as file:
+            file.write(text)
+    except Exception as error:
+        logger.warning("Failed to save debug prompt: %s", error)
+
+
+def _generation_kwargs(tokenizer, max_new_tokens: int) -> Dict[str, Any]:
+    return {
+        "max_new_tokens": max_new_tokens,
+        "do_sample": False,
+        "temperature": None,
+        "top_p": None,
+        "pad_token_id": tokenizer.pad_token_id,
+        "eos_token_id": tokenizer.eos_token_id,
+    }
 
 
 def generate_response(model, tokenizer, messages, max_new_tokens=128):
-    messages = messages if messages else []
+    _prepare_tokenizer(tokenizer)
+
     text_input = prepare_text(tokenizer, messages)
-
-    if APP_DEBUG:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"prompt_debug_{timestamp}.txt"
-
-        try:
-            with open(filename, "w", encoding="utf-8") as file:
-                file.write(text_input)
-        except Exception as error:
-            logger.warning("Failed to save debug file: %s", error)
+    _save_debug_prompt("prompt_debug", text_input)
 
     model_inputs = tokenizer(
         [text_input],
         return_tensors="pt",
-    ).to(model.device)
+    ).to(_get_input_device(model))
 
-    with torch.no_grad():
+    input_len = model_inputs["input_ids"].shape[-1]
+
+    with torch.inference_mode():
         generated_ids = model.generate(
             **model_inputs,
-            max_new_tokens=max_new_tokens,
+            **_generation_kwargs(tokenizer, max_new_tokens),
         ).cpu()
 
-    output_ids = generated_ids[0][len(model_inputs.input_ids[0]):]
+    output_ids = generated_ids[0][input_len:]
+
     response = tokenizer.decode(
         output_ids,
         skip_special_tokens=True,
@@ -71,16 +125,12 @@ def generate_response(model, tokenizer, messages, max_new_tokens=128):
 
 
 def generate_response_batch(model, tokenizer, messages_batch, max_new_tokens=128):
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token
+    _prepare_tokenizer(tokenizer)
 
-    tokenizer.padding_side = "left"
-
-    text_inputs = []
-
-    for messages in messages_batch:
-        messages = messages if messages else []
-        text_inputs.append(prepare_text(tokenizer, messages))
+    text_inputs = [
+        prepare_text(tokenizer, messages)
+        for messages in messages_batch
+    ]
 
     if APP_DEBUG:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -93,24 +143,25 @@ def generate_response_batch(model, tokenizer, messages_batch, max_new_tokens=128
                     file.write(text)
                     file.write("\n\n")
         except Exception as error:
-            logger.warning("Failed to save debug batch file: %s", error)
+            logger.warning("Failed to save debug batch prompt: %s", error)
 
     model_inputs = tokenizer(
         text_inputs,
         return_tensors="pt",
         padding=True,
-    ).to(model.device)
+    ).to(_get_input_device(model))
 
-    with torch.no_grad():
+    input_len = model_inputs["input_ids"].shape[-1]
+
+    with torch.inference_mode():
         generated_ids = model.generate(
             **model_inputs,
-            max_new_tokens=max_new_tokens,
+            **_generation_kwargs(tokenizer, max_new_tokens),
         ).cpu()
 
     responses = []
 
-    for index, output_id in enumerate(generated_ids):
-        input_len = len(model_inputs.input_ids[index])
+    for output_id in generated_ids:
         trimmed_id = output_id[input_len:]
 
         response = tokenizer.decode(
@@ -131,7 +182,7 @@ def _normalize_gemma_messages(
     messages: Optional[List[Dict[str, Any]]] = None,
 ) -> List[Dict[str, Any]]:
     if messages is None:
-        messages = []
+        return []
 
     normalized = []
 
@@ -151,12 +202,24 @@ def _normalize_gemma_messages(
 
         normalized.append(
             {
-                "role": role,
+                "role": str(role),
                 "content": normalized_content,
             }
         )
 
     return normalized
+
+
+def _prepare_gemma_processor(processor) -> None:
+    tokenizer = getattr(processor, "tokenizer", None)
+
+    if tokenizer is None:
+        return
+
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    tokenizer.padding_side = "left"
 
 
 def _decode_gemma_output(processor, output_ids) -> str:
@@ -172,37 +235,42 @@ def _decode_gemma_output(processor, output_ids) -> str:
     ).strip()
 
 
+def _gemma_generation_kwargs(processor, max_new_tokens: int) -> Dict[str, Any]:
+    tokenizer = getattr(processor, "tokenizer", processor)
+
+    return {
+        "max_new_tokens": max_new_tokens,
+        "do_sample": False,
+        "temperature": None,
+        "top_p": None,
+        "pad_token_id": tokenizer.pad_token_id,
+        "eos_token_id": tokenizer.eos_token_id,
+    }
+
+
 def generate_response_gemma3(model, tokenizer, messages, max_new_tokens=128):
     processor = tokenizer
-    gemma_messages = _normalize_gemma_messages(messages)
+    _prepare_gemma_processor(processor)
 
     text_input = processor.apply_chat_template(
-        gemma_messages,
+        _normalize_gemma_messages(messages),
         tokenize=False,
         add_generation_prompt=True,
     )
 
-    if APP_DEBUG:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"prompt_debug_gemma3_{timestamp}.txt"
-
-        try:
-            with open(filename, "w", encoding="utf-8") as file:
-                file.write(text_input)
-        except Exception as error:
-            logger.warning("Failed to save Gemma debug file: %s", error)
+    _save_debug_prompt("prompt_debug_gemma3", text_input)
 
     model_inputs = processor(
         text=[text_input],
         return_tensors="pt",
-    ).to(model.device)
+    ).to(_get_input_device(model))
 
     input_len = model_inputs["input_ids"].shape[-1]
 
-    with torch.no_grad():
+    with torch.inference_mode():
         generated_ids = model.generate(
             **model_inputs,
-            max_new_tokens=max_new_tokens,
+            **_gemma_generation_kwargs(processor, max_new_tokens),
         ).cpu()
 
     output_ids = generated_ids[0][input_len:]
@@ -217,19 +285,16 @@ def generate_response_gemma3(model, tokenizer, messages, max_new_tokens=128):
 
 def generate_response_batch_gemma3(model, tokenizer, messages_batch, max_new_tokens=128):
     processor = tokenizer
+    _prepare_gemma_processor(processor)
 
-    text_inputs = []
-
-    for messages in messages_batch:
-        gemma_messages = _normalize_gemma_messages(messages)
-
-        text_input = processor.apply_chat_template(
-            gemma_messages,
+    text_inputs = [
+        processor.apply_chat_template(
+            _normalize_gemma_messages(messages),
             tokenize=False,
             add_generation_prompt=True,
         )
-
-        text_inputs.append(text_input)
+        for messages in messages_batch
+    ]
 
     if APP_DEBUG:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -242,20 +307,20 @@ def generate_response_batch_gemma3(model, tokenizer, messages_batch, max_new_tok
                     file.write(text)
                     file.write("\n\n")
         except Exception as error:
-            logger.warning("Failed to save Gemma batch debug file: %s", error)
+            logger.warning("Failed to save Gemma debug batch prompt: %s", error)
 
     model_inputs = processor(
         text=text_inputs,
         return_tensors="pt",
         padding=True,
-    ).to(model.device)
+    ).to(_get_input_device(model))
 
     input_len = model_inputs["input_ids"].shape[-1]
 
-    with torch.no_grad():
+    with torch.inference_mode():
         generated_ids = model.generate(
             **model_inputs,
-            max_new_tokens=max_new_tokens,
+            **_gemma_generation_kwargs(processor, max_new_tokens),
         ).cpu()
 
     responses = []

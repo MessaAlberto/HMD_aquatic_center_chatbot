@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 from huggingface_hub import login
-from transformers import AutoTokenizer, AutoProcessor
+from transformers import AutoProcessor, AutoTokenizer
 
 from llm.config import MODELS
 
@@ -19,12 +19,12 @@ def login_to_huggingface() -> None:
     try:
         login(token=token)
         print("Hugging Face login completed.")
-    except Exception as e:
-        print(f"Hugging Face login failed: {e}")
+    except Exception as error:
+        print(f"Hugging Face login failed: {error}")
 
 
 class LLMService:
-    def __init__(self, model_name: str, device_map: str = "cuda:0") -> None:
+    def __init__(self, model_name: str, device_map: str = "auto") -> None:
         login_to_huggingface()
 
         if model_name not in MODELS:
@@ -33,17 +33,25 @@ class LLMService:
                 f"Unknown model '{model_name}'. Available models: {available_models}"
             )
 
-        name, init_model, generate_response, generate_response_batch = MODELS[model_name]
+        model_id, init_model, generate_response, generate_response_batch = MODELS[model_name]
 
         self.model_name = model_name
-        self.model_id = name
-        self.model = init_model(name, device_map=device_map)
+        self.model_id = model_id
+        self.model = init_model(model_id, device_map=device_map)
 
         if model_name == "gemma3_4b":
-            self.tokenizer = AutoProcessor.from_pretrained(name)
+            self.tokenizer = AutoProcessor.from_pretrained(
+                model_id,
+                trust_remote_code=True,
+            )
+        elif model_name == "phi4_mini":
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                model_id,
+                trust_remote_code=True,
+            )
         else:
             self.tokenizer = AutoTokenizer.from_pretrained(
-                name,
+                model_id,
                 trust_remote_code=True,
             )
 
@@ -71,5 +79,5 @@ class LLMService:
         )
 
 
-def load_llm(model_name: str, device_map: str = "cuda:0") -> LLMService:
+def load_llm(model_name: str, device_map: str = "auto") -> LLMService:
     return LLMService(model_name=model_name, device_map=device_map)
