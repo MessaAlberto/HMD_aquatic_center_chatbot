@@ -1,9 +1,10 @@
 from typing import Any, Callable, Dict, Tuple
 from functools import partial
 import torch
-from transformers import AutoModelForCausalLM, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, BitsAndBytesConfig, Gemma3ForCausalLM
 
 from llm.generation import generate_response, generate_response_batch
+
 
 quantization_config = BitsAndBytesConfig(
     load_in_4bit=True,
@@ -12,11 +13,22 @@ quantization_config = BitsAndBytesConfig(
     bnb_4bit_use_double_quant=True,
 )
 
+gemma_quantization_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+)
+
 MODEL_LOADER = partial(
     AutoModelForCausalLM.from_pretrained,
     torch_dtype=torch.float16,
     device_map="auto",
     quantization_config=quantization_config,
+)
+
+GEMMA_MODEL_LOADER = partial(
+    Gemma3ForCausalLM.from_pretrained,
+    torch_dtype=torch.float32,
+    device_map="auto",
+    quantization_config=gemma_quantization_config,
 )
 
 MODELS: Dict[str, Tuple[str, Callable[..., Any], Callable[..., Any], Callable[..., Any]]] = {
@@ -40,7 +52,7 @@ MODELS: Dict[str, Tuple[str, Callable[..., Any], Callable[..., Any], Callable[..
     ),
     "gemma3_4b": (
         "google/gemma-3-4b-it",
-        MODEL_LOADER,
+        GEMMA_MODEL_LOADER,
         generate_response,
         generate_response_batch,
     ),
