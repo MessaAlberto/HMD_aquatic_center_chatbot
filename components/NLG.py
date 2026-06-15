@@ -3,7 +3,12 @@ import json
 import logging
 from typing import Any
 
-from prompts.nlg_prompt import FLAG_RULES, INTENT_PROMPTS, NLG_BASE_PROMPT
+from prompts.nlg_prompt import (
+    FLAG_RULES,
+    INTENT_PROMPTS,
+    NLG_COMPATIBLE_BASE_PROMPT,
+    NLG_QWEN_BASE_PROMPT,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -58,8 +63,14 @@ class NLG:
 
         return instructions
 
+    def _get_base_prompt(self) -> str:
+        if self._uses_qwen_chat_format():
+            return NLG_QWEN_BASE_PROMPT
+
+        return NLG_COMPATIBLE_BASE_PROMPT
+
     def _build_system_content(self, dialogue_state: dict[str, Any]) -> str:
-        prompt_parts = [NLG_BASE_PROMPT]
+        prompt_parts = [self._get_base_prompt()]
         current_intent = dialogue_state.get("intent", "default")
         intent_dict = INTENT_PROMPTS.get(current_intent, {})
 
@@ -74,7 +85,12 @@ class NLG:
 
         prompt_parts.append("\n--- END OF GENERAL INSTRUCTIONS & EXAMPLES ---")
 
-        return "\n".join(prompt_parts).strip()
+        system_content = "\n".join(prompt_parts).strip()
+
+        if not self._uses_qwen_chat_format():
+            system_content = system_content.replace("FINAL SYSTEM COMMAND:", "FINAL INSTRUCTION BLOCK:")
+
+        return system_content
 
     def _build_final_command(self, dm_action_data: dict[str, Any], dialogue_state: dict[str, Any]) -> str:
         current_intent = dialogue_state.get("intent", "default")
@@ -100,18 +116,81 @@ class NLG:
 
         return "\n".join(command_parts).strip()
 
+    def _get_model_name(self) -> str:
+        return str(getattr(self.llm, "model_name", "")).lower()
+
+    def _uses_qwen_chat_format(self) -> bool:
+        return "qwen" in self._get_model_name()
+
+    def _format_history_as_text(self, history_messages: list[dict[str, str]]) -> str:
+        if not history_messages:
+            return "No recent conversation history."
+
+        lines = []
+
+        for message in history_messages:
+            role = message.get("role", "unknown")
+            content = message.get("content", "")
+            lines.append(f"{role.upper()}: {content}")
+
+        return "\n".join(lines)
+
+    def _build_qwen_messages(
+        self,
+        system_content: str,
+        final_command: str,
+        history_messages: list[dict[str, str]],
+    ) -> list[dict[str, str]]:
+        messages = [{"role": "system", "content": system_content}]
+
+        if history_messages:
+            messages.extend(history_messages)
+
+        messages.append({"role": "system", "content": final_command})
+        return messages
+
+    def _build_compatible_messages(
+        self,
+        system_content: str,
+        final_command: str,
+        history_messages: list[dict[str, str]],
+    ) -> list[dict[str, str]]:
+        history_text = self._format_history_as_text(history_messages)
+
+        user_content = "\n\n".join([
+            "RECENT CONVERSATION HISTORY:",
+            history_text,
+            "",
+            "CRITICAL INSTRUCTIONS FOR THE NEXT ANSWER:",
+            final_command,
+            "",
+            "Generate only the next assistant response.",
+        ])
+
+        return [
+            {"role": "system", "content": system_content},
+            {"role": "user", "content": user_content},
+        ]
+
+    def _build_messages(
+        self,
+        system_content: str,
+        final_command: str,
+        history_messages: list[dict[str, str]],
+    ) -> list[dict[str, str]]:
+        if self._uses_qwen_chat_format():
+            return self._build_qwen_messages(system_content, final_command, history_messages)
+
+        return self._build_compatible_messages(system_content, final_command, history_messages)
+
     def predict(self, dm_action_data: dict[str, Any], dialogue_state: dict[str, Any], history) -> str:
         system_content = self._build_system_content(dialogue_state)
         final_command = self._build_final_command(dm_action_data, dialogue_state)
+        history_messages = history.get_last_n_messages(4)
 
-        messages = [{"role": "system", "content": system_content}]
+        messages = self._build_messages(system_content, final_command, history_messages)
 
-        hist_msgs = history.get_last_n_messages(4)
-        if hist_msgs:
-            messages.extend(hist_msgs)
-
-        messages.append({"role": "system", "content": final_command})
-
+        logger.debug("NLG model-specific format for %s", self._get_model_name() or "unknown_model")
         return self.llm.generate(messages=messages, max_new_tokens=256).strip()
 
     def _apply_response_flags(self, nba_list: list[dict[str, Any]], step_by_step_mode: bool) -> None:
