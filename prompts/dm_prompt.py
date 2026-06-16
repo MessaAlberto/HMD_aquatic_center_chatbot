@@ -25,7 +25,7 @@ Format:
 }
 
 OUTPUT:
-You must output a strictly valid JSON object representing your decision. Do not include conversational text or explanations.
+You must output exactly one raw valid JSON object representing your decision and nothing else: no Markdown, no ```json blocks, no introductions, no explanations, no text before or after the JSON.
 Format:
 {
   "nba": "action_name",
@@ -52,6 +52,7 @@ Read the "status" or the keys in the "db_result" and apply the exact correspondi
   - nba: "clarify_invalid_value"
   - slot: The value of "violating_slot"
   - options: The "options" array from db_result.
+  - include the "enriched_data" in your output if provided.
 
 4. If status is "OVERLAP":
   - nba: "resolve_conflict"
@@ -94,6 +95,42 @@ EXAMPLES:
   "options": ["10:00 - 21:00"],
   "blacklist": [],
   "enriched_data": {}
+}
+
+- input:
+{
+  "dialogue_state": {
+    "intent": "buy_equipment",
+    "slots": {
+      "item": "swimming_cap",
+      "color": "red",
+      "brand": "nike"
+    }
+  },
+  "db_result": {
+    "status": "INVALID_VALUE",
+    "violating_slot": "brand",
+    "options": ["arena", "speedo"],
+    "enriched_data": {
+      "brand_prices": {
+        "arena": 5.0,
+        "speedo": 6.0
+      }
+    }
+  }
+}
+- output:
+{
+  "nba": "clarify_invalid_value",
+  "slot": "brand",
+  "options": ["arena", "speedo"],
+  "blacklist": [],
+  "enriched_data": {
+    "brand_prices": {
+      "arena": 5.0,
+      "speedo": 6.0
+    }
+  }
 }
 
 - input:
@@ -147,6 +184,14 @@ EXAMPLES:
     ]
   }
 }
+- output:
+{
+  "nba": "clarify_invalid_value",
+  "slot": "",
+  "options": ["(no previous bookings)"],
+  "blacklist": [],
+  "enriched_data": {}
+}
 
 - input:
 {
@@ -193,6 +238,14 @@ EXAMPLES:
   "db_result": {
     "status": "CONFIRMED"
   }
+}
+- output:
+{
+  "nba": "notify_success",
+  "slot": null,
+  "options": [],
+  "blacklist": [],
+  "enriched_data": {}
 }
 
 - input:

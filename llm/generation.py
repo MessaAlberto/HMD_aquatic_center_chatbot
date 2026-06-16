@@ -252,16 +252,11 @@ def generate_response_gemma3(model, tokenizer, messages, max_new_tokens=128):
     processor = tokenizer
     _prepare_gemma_processor(processor)
 
-    text_input = processor.apply_chat_template(
+    model_inputs = processor.apply_chat_template(
         _normalize_gemma_messages(messages),
-        tokenize=False,
+        tokenize=True,
         add_generation_prompt=True,
-    )
-
-    _save_debug_prompt("prompt_debug_gemma3", text_input)
-
-    model_inputs = processor(
-        text=[text_input],
+        return_dict=True,
         return_tensors="pt",
     ).to(_get_input_device(model))
 
@@ -270,11 +265,24 @@ def generate_response_gemma3(model, tokenizer, messages, max_new_tokens=128):
     with torch.inference_mode():
         generated_ids = model.generate(
             **model_inputs,
-            **_gemma_generation_kwargs(processor, max_new_tokens),
+            max_new_tokens=max_new_tokens,
+            do_sample=False,
+            pad_token_id=processor.tokenizer.pad_token_id,
+            eos_token_id=processor.tokenizer.eos_token_id,
         ).cpu()
 
     output_ids = generated_ids[0][input_len:]
-    response = _decode_gemma_output(processor, output_ids)
+
+    if hasattr(processor, "decode"):
+        response = processor.decode(
+            output_ids,
+            skip_special_tokens=True,
+        ).strip()
+    else:
+        response = processor.tokenizer.decode(
+            output_ids,
+            skip_special_tokens=True,
+        ).strip()
 
     del model_inputs
     del generated_ids

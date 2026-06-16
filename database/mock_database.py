@@ -243,7 +243,7 @@ USERS_DB = {
                 "course_activity": "hydrobike",
                 "target_age": "adult",
                 "level": "intermediate",
-                "day_preference": "tuesday",
+                "day_preference": "thursday",
             }
         ],
         "lost_items": [
@@ -264,9 +264,14 @@ USERS_DB = {
     "luigi_verdi": {
         "booked_spa": [
             {
-                "date": "2026-06-15",
+                "date": "2026-07-15",
                 "time": "15:30",
                 "people_count": 2,
+            },
+            {
+                "date": "2026-08-22",
+                "time": "16:00",
+                "people_count": 4,
             }
         ],
     }
@@ -1458,7 +1463,10 @@ class MockDatabase:
                 return {
                     "status": "INVALID_VALUE",
                     "violating_slot": "brand",
-                    "options": item_data["brands"]
+                    "options": list(item_data["brands"].keys()),
+                    "enriched_data": {
+                        "brand_prices": item_data["brands"]
+                    }
                 }
 
         # CHECK completeness

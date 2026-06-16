@@ -13,7 +13,7 @@
     ],
     "full_user_message": "And the gym tomorrow morning? Also, I need to buy goggles.",
     "target_intent": "ask_opening_hours",
-    "target_segment": "And the gym tomorrow morning?",
+    "target_segment": "the gym tomorrow morning?",
     "annotation": {
       "intent": "ask_opening_hours",
       "slots": {
@@ -105,7 +105,7 @@
     ],
     "full_user_message": "And tomorrow evening? Also tell me the spa rules.",
     "target_intent": "ask_opening_hours",
-    "target_segment": "And tomorrow evening?",
+    "target_segment": "tomorrow evening?",
     "annotation": {
       "intent": "ask_opening_hours",
       "slots": {
@@ -289,7 +289,7 @@
     ],
     "full_user_message": "And annual for the lido? I might also book a spa session.",
     "target_intent": "ask_pricing",
-    "target_segment": "And annual for the lido?",
+    "target_segment": "annual for the lido?",
     "annotation": {
       "intent": "ask_pricing",
       "slots": {
@@ -2084,7 +2084,7 @@
     ],
     "full_user_message": "Hi, I'm Martina Serra, and I want to book a course.",
     "target_intent": "user_identification",
-    "target_segment": "Hi, I'm Martina Serra",
+    "target_segment": "I'm Martina Serra",
     "annotation": {
       "intent": "user_identification",
       "slots": {
@@ -2194,11 +2194,15 @@
       }
     ],
     "full_user_message": "Hello there, I also need to know the gym hours.",
-    "target_intent": "greeting_closing",
-    "target_segment": "Hello there",
+    "target_intent": "ask_opening_hours",
+    "target_segment": "I need to know the gym hours.",
     "annotation": {
-      "intent": "greeting_closing",
-      "slots": {}
+      "intent": "ask_opening_hours",
+      "slots": {
+        "facility_type": "gym",
+        "date": null,
+        "time": null
+      }
     }
   },
   {
@@ -2210,11 +2214,15 @@
       }
     ],
     "full_user_message": "Okay perfect, and how much is a towel?",
-    "target_intent": "greeting_closing",
-    "target_segment": "Okay perfect",
+    "target_intent": "ask_pricing",
+    "target_segment": "how much is a towel?",
     "annotation": {
-      "intent": "greeting_closing",
-      "slots": {}
+      "intent": "ask_pricing",
+      "slots": {
+        "service_type": null,
+        "sub_type": null,
+        "user_category": null
+      }
     }
   },
   {
@@ -2242,10 +2250,10 @@
       }
     ],
     "full_user_message": "Good morning, I want to ask about courses too.",
-    "target_intent": "greeting_closing",
-    "target_segment": "Good morning",
+    "target_intent": "out_of_scope",
+    "target_segment": "I want to ask about courses too.",
     "annotation": {
-      "intent": "greeting_closing",
+      "intent": "out_of_scope",
       "slots": {}
     }
   },
@@ -2379,7 +2387,7 @@
     ],
     "full_user_message": "And at 21:30? Also, do you sell towels?",
     "target_intent": "ask_opening_hours",
-    "target_segment": "And at 21:30?",
+    "target_segment": "at 21:30?",
     "annotation": {
       "intent": "ask_opening_hours",
       "slots": {
@@ -2491,7 +2499,7 @@
     ],
     "full_user_message": "And the same time on Friday? I also want to know the student price.",
     "target_intent": "ask_opening_hours",
-    "target_segment": "And the same time on Friday?",
+    "target_segment": "the same time on Friday?",
     "annotation": {
       "intent": "ask_opening_hours",
       "slots": {
@@ -4539,11 +4547,17 @@
       }
     ],
     "full_user_message": "Hi there, and I need to buy a cap.",
-    "target_intent": "greeting_closing",
-    "target_segment": "Hi there",
+    "target_intent": "buy_equipment",
+    "target_segment": "I need to buy a cap.",
     "annotation": {
-      "intent": "greeting_closing",
-      "slots": {}
+      "intent": "buy_equipment",
+      "slots": {
+        "item": "swimming_cap",
+        "size": null,
+        "color": null,
+        "brand": null,
+        "confirmation": null
+      }
     }
   },
   {
@@ -4555,11 +4569,21 @@
       }
     ],
     "full_user_message": "Great, perfect. Also, can I change my spa booking?",
-    "target_intent": "greeting_closing",
-    "target_segment": "Great, perfect.",
+    "target_intent": "modify_booked_spa",
+    "target_segment": "can I change my spa booking?",
     "annotation": {
-      "intent": "greeting_closing",
-      "slots": {}
+      "intent": "modify_booked_spa",
+      "slots": {
+        "name": null,
+        "surname": null,
+        "date_old": null,
+        "time_old": null,
+        "people_count_old": null,
+        "date_new": null,
+        "time_new": null,
+        "people_count_new": null,
+        "confirmation": null
+      }
     }
   },
   {
@@ -4587,10 +4611,10 @@
       }
     ],
     "full_user_message": "Good evening, I need help with the lido.",
-    "target_intent": "greeting_closing",
-    "target_segment": "Good evening",
+    "target_intent": "out_of_scope",
+    "target_segment": "I need help with the lido.",
     "annotation": {
-      "intent": "greeting_closing",
+      "intent": "out_of_scope",
       "slots": {}
     }
   },

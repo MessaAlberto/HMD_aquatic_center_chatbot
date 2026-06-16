@@ -1150,7 +1150,7 @@
     "annotation": {
       "segments": [
         {
-          "segment": "Hi, I'm Marco Bianchi.",
+          "segment": "I'm Marco Bianchi.",
           "intent": "user_identification"
         }
       ]
@@ -1667,7 +1667,7 @@
       "segments": [
         {
           "segment": "Anna Verdi.",
-          "intent": "book_spa"
+          "intent": "user_identification"
         }
       ]
     }
@@ -1689,7 +1689,7 @@
       "segments": [
         {
           "segment": "Paolo Russo.",
-          "intent": "cancel_booked_course"
+          "intent": "user_identification"
         }
       ]
     }
@@ -1711,7 +1711,7 @@
       "segments": [
         {
           "segment": "Elena Greco.",
-          "intent": "report_lost_item"
+          "intent": "user_identification"
         }
       ]
     }
@@ -1815,7 +1815,7 @@
           "intent": "ask_pricing"
         },
         {
-          "segment": "And do I need a swimming cap?",
+          "segment": "do I need a swimming cap?",
           "intent": "ask_rules"
         }
       ]
@@ -1832,7 +1832,7 @@
           "intent": "book_course"
         },
         {
-          "segment": "and how much does it cost?",
+          "segment": "how much does it cost?",
           "intent": "ask_pricing"
         }
       ]
@@ -1849,7 +1849,7 @@
           "intent": "buy_equipment"
         },
         {
-          "segment": "Oh, and I lost my red towel yesterday.",
+          "segment": "I lost my red towel yesterday.",
           "intent": "report_lost_item"
         }
       ]
@@ -1866,7 +1866,7 @@
           "intent": "book_spa"
         },
         {
-          "segment": "Also, what time does it close?",
+          "segment": "what time does it close?",
           "intent": "ask_opening_hours"
         }
       ]
@@ -1883,7 +1883,7 @@
           "intent": "cancel_booked_course"
         },
         {
-          "segment": "and I also want to ask about pool rules.",
+          "segment": "I want to ask about pool rules.",
           "intent": "ask_rules"
         }
       ]
@@ -1900,7 +1900,7 @@
           "intent": "modify_booked_spa"
         },
         {
-          "segment": "Also, how much is a towel?",
+          "segment": "how much is a towel?",
           "intent": "ask_pricing"
         }
       ]
@@ -1917,7 +1917,7 @@
           "intent": "user_identification"
         },
         {
-          "segment": "and I want to modify my spa booking.",
+          "segment": "I want to modify my spa booking.",
           "intent": "modify_booked_spa"
         }
       ]
@@ -1929,10 +1929,6 @@
     "last_user_utterance": "Good morning. I lost my goggles yesterday.",
     "annotation": {
       "segments": [
-        {
-          "segment": "Good morning.",
-          "intent": "greeting_closing"
-        },
         {
           "segment": "I lost my goggles yesterday.",
           "intent": "report_lost_item"
@@ -1951,7 +1947,7 @@
           "intent": "out_of_scope"
         },
         {
-          "segment": "Also, what time does the pool open?",
+          "segment": "what time does the pool open?",
           "intent": "ask_opening_hours"
         }
       ]
@@ -2002,7 +1998,7 @@
           "intent": "ask_pricing"
         },
         {
-          "segment": "And is the gym open tonight?",
+          "segment": "is the gym open tonight?",
           "intent": "ask_opening_hours"
         }
       ]
@@ -2036,7 +2032,7 @@
           "intent": "book_spa"
         },
         {
-          "segment": "Also, are children allowed there?",
+          "segment": "are children allowed there?",
           "intent": "ask_rules"
         }
       ]
@@ -2070,7 +2066,7 @@
           "intent": "buy_equipment"
         },
         {
-          "segment": "And can I wear them in the changing room?",
+          "segment": "can I wear them in the changing room?",
           "intent": "ask_rules"
         }
       ]
@@ -2100,10 +2096,6 @@
     "annotation": {
       "segments": [
         {
-          "segment": "Thank you.",
-          "intent": "greeting_closing"
-        },
-        {
           "segment": "Can I also book aquagym?",
           "intent": "book_course"
         }
@@ -2121,7 +2113,7 @@
           "intent": "out_of_scope"
         },
         {
-          "segment": "Also, I need to buy goggles.",
+          "segment": "I need to buy goggles.",
           "intent": "buy_equipment"
         }
       ]
@@ -2172,7 +2164,7 @@
           "intent": "cancel_booked_course"
         },
         {
-          "segment": "Also, do I need a swimming cap?",
+          "segment": "do I need a swimming cap?",
           "intent": "ask_rules"
         }
       ]
@@ -2206,7 +2198,7 @@
           "intent": "book_spa"
         },
         {
-          "segment": "and the swimming school course?",
+          "segment": "the swimming school course?",
           "intent": "book_course"
         }
       ]
@@ -2223,7 +2215,7 @@
           "intent": "ask_rules"
         },
         {
-          "segment": "Also, can I buy a swimsuit?",
+          "segment": "can I buy a swimsuit?",
           "intent": "buy_equipment"
         }
       ]
@@ -2257,7 +2249,7 @@
           "intent": "book_course"
         },
         {
-          "segment": "And what is the price?",
+          "segment": "what is the price?",
           "intent": "ask_pricing"
         }
       ]
@@ -2304,10 +2296,6 @@
     "annotation": {
       "segments": [
         {
-          "segment": "Hello.",
-          "intent": "greeting_closing"
-        },
-        {
           "segment": "Can you help me cancel my spa appointment?",
           "intent": "cancel_booked_spa"
         }
@@ -2325,7 +2313,7 @@
           "intent": "out_of_scope"
         },
         {
-          "segment": "Also, how much is public swimming?",
+          "segment": "how much is public swimming?",
           "intent": "ask_pricing"
         }
       ]
@@ -2342,7 +2330,7 @@
           "intent": "user_identification"
         },
         {
-          "segment": "and I lost my swimming cap.",
+          "segment": "I lost my swimming cap.",
           "intent": "report_lost_item"
         }
       ]
@@ -2389,12 +2377,8 @@
     "annotation": {
       "segments": [
         {
-          "segment": "Can I cancel hydrobike",
-          "intent": "cancel_booked_course"
-        },
-        {
-          "segment": "book aquagym instead?",
-          "intent": "book_course"
+          "segment": "Can I cancel hydrobike and book aquagym instead?",
+          "intent": "modify_booked_course"
         }
       ]
     }
@@ -2415,7 +2399,7 @@
           "intent": "book_spa"
         },
         {
-          "segment": "Also, do we need towels?",
+          "segment": "do we need towels?",
           "intent": "ask_rules"
         }
       ]
@@ -2437,7 +2421,7 @@
           "intent": "book_course"
         },
         {
-          "segment": "Also, how much is the monthly pass?",
+          "segment": "how much is the monthly pass?",
           "intent": "ask_pricing"
         }
       ]
@@ -2459,7 +2443,7 @@
           "intent": "modify_booked_spa"
         },
         {
-          "segment": "And what time does the spa close?",
+          "segment": "what time does the spa close?",
           "intent": "ask_opening_hours"
         }
       ]
@@ -2503,7 +2487,7 @@
           "intent": "buy_equipment"
         },
         {
-          "segment": "Also, can I book the spa?",
+          "segment": "can I book the spa?",
           "intent": "book_spa"
         }
       ]
@@ -2547,7 +2531,7 @@
           "intent": "ask_opening_hours"
         },
         {
-          "segment": "Also, I need to cancel my spa booking.",
+          "segment": "I need to cancel my spa booking.",
           "intent": "cancel_booked_spa"
         }
       ]
@@ -2569,7 +2553,7 @@
           "intent": "ask_rules"
         },
         {
-          "segment": "And how much is the gym annual pass?",
+          "segment": "how much is the gym annual pass?",
           "intent": "ask_pricing"
         }
       ]
@@ -2591,7 +2575,7 @@
           "intent": "ask_pricing"
         },
         {
-          "segment": "Also, is the lido open today?",
+          "segment": "is the lido open today?",
           "intent": "ask_opening_hours"
         }
       ]
@@ -2610,10 +2594,10 @@
       "segments": [
         {
           "segment": "Francesca Leone.",
-          "intent": "book_spa"
+          "intent": "user_identification"
         },
         {
-          "segment": "Also, can I ask about spa rules?",
+          "segment": "can I ask about spa rules?",
           "intent": "ask_rules"
         }
       ]
@@ -2730,10 +2714,6 @@
     "last_user_utterance": "Thanks, can I also book hydrobike and ask how much it costs?",
     "annotation": {
       "segments": [
-        {
-          "segment": "Thanks",
-          "intent": "greeting_closing"
-        },
         {
           "segment": "can I also book hydrobike",
           "intent": "book_course"
@@ -2856,10 +2836,6 @@
     "last_user_utterance": "Hello, I want to buy a swimsuit and know if the lido is open tomorrow.",
     "annotation": {
       "segments": [
-        {
-          "segment": "Hello",
-          "intent": "greeting_closing"
-        },
         {
           "segment": "I want to buy a swimsuit",
           "intent": "buy_equipment"

@@ -17,8 +17,8 @@ HOW TO PROCESS THE INPUT:
 5. If the full user message contains multiple requests, extract only the information that belongs to 'target_segment' and 'target_intent'.
 
 RULES:
-1. Output strictly a JSON object. No conversational text.
-2. Extract slot values from 'target_segment'.
+1. Output exactly one raw valid JSON object and nothing else: no Markdown, no ```json blocks, no introductions, no explanations, no text before or after the JSON.
+2. Extract slot values only from 'target_segment'.
 3. Use 'conversation_history' and 'full_user_message' only to interpret explicit references in 'target_segment', such as pronouns, short answers, corrections, confirmations, or choices among options just offered by the assistant.
 4. If a slot defines allowed values in brackets [], map the user's wording to one of those values when the meaning is clear. If the user mentions something unrelated or out of scope for that slot, such as "luna park", return null.
 5. If a slot is not present or cannot be understood from the target segment in context, set its value to null.
@@ -78,7 +78,7 @@ EXAMPLES:
     ],
     "full_user_message": "And what about the gym?",
     "target_intent": "ask_opening_hours",
-    "target_segment": "And what about the gym?"
+    "target_segment": "what about the gym?"
   }
   output: {"intent": "ask_opening_hours", "slots": {"facility_type": "gym", "date": "today", "time": null}}
 
@@ -90,7 +90,7 @@ EXAMPLES:
     ],
     "full_user_message": "Great, and the day after tomorrow?",
     "target_intent": "ask_opening_hours",
-    "target_segment": "Great, and the day after tomorrow?"
+    "target_segment": "the day after tomorrow?"
   }
   output: {"intent": "ask_opening_hours", "slots": {"facility_type": "swimming_pool", "date": "the day after tomorrow", "time": null}}
 
@@ -102,7 +102,7 @@ EXAMPLES:
     ],
     "full_user_message": "And tomorrow evening?",
     "target_intent": "ask_opening_hours",
-    "target_segment": "And tomorrow evening?"
+    "target_segment": "tomorrow evening?"
   }
   output: {"intent": "ask_opening_hours", "slots": {"facility_type": "spa", "date": "tomorrow", "time": "evening"}}
 
@@ -111,7 +111,7 @@ EXAMPLES:
     "conversation_history": [],
     "full_user_message": "I want to book the spa for tomorrow. Also, when does it close?",
     "target_intent": "ask_opening_hours",
-    "target_segment": "Also, when does it close?"
+    "target_segment": "when does it close?"
   }
   output: {"intent": "ask_opening_hours", "slots": {"facility_type": "spa", "date": "tomorrow", "time": null}}
 """
@@ -165,7 +165,7 @@ EXAMPLES:
     "conversation_history": [],
     "full_user_message": "I want to book a spa session for tomorrow. Also, how much is a day pass for the gym?",
     "target_intent": "ask_pricing",
-    "target_segment": "Also, how much is a day pass for the gym?"
+    "target_segment": "how much is a day pass for the gym?"
   }
   output: {"intent": "ask_pricing", "slots": {"service_type": "gym", "sub_type": "day_pass", "user_category": null}}
 """
@@ -220,7 +220,7 @@ EXAMPLES:
     ],
     "full_user_message": "And what about wearing swimsuits in the spa? Can I book a spa session for tomorrow?",
     "target_intent": "ask_rules",
-    "target_segment": "And what about wearing swimsuits in the spa?"
+    "target_segment": "what about wearing swimsuits in the spa?"
   }
   output: {"intent": "ask_rules", "slots": {"topic": "spa", "specific_inquiry": "swimsuits"}}
 """
@@ -247,6 +247,18 @@ EXAMPLES:
     "target_segment": "I want to book a swimming school course for my child on Saturdays"
   }
   output: {"intent": "book_course", "slots": {"course_activity": "swimming_school", "target_age": "child", "level": null, "day_preference": "Saturday", "name": null, "surname": null, "confirmation": null}}
+
+- input:
+  {
+    "conversation_history": [
+      {"role": "user", "text": "I want to book hydrobike."},
+      {"role": "assistant", "text": "We offer intermediate and advanced hydrobike. Which level would you prefer?"}
+    ],
+    "full_user_message": "The intermediate one.",
+    "target_intent": "book_course",
+    "target_segment": "The intermediate one."
+  }
+  output: {"intent": "book_course", "slots": {"course_activity": null, "target_age": null, "level": "intermediate", "day_preference": null, "name": null, "surname": null, "confirmation": null}}
 
 - input:
   {
@@ -736,6 +748,18 @@ EXAMPLES:
 - input:
   {
     "conversation_history": [
+      {"role": "user", "text": "I want to buy a swimming cap."},
+      {"role": "assistant", "text": "What color would you like?"}
+    ],
+    "full_user_message": "The red one.",
+    "target_intent": "buy_equipment",
+    "target_segment": "The red one."
+  }
+  output: {"intent": "buy_equipment", "slots": {"item": null, "size": null, "color": "red", "brand": null, "confirmation": null}}
+
+- input:
+  {
+    "conversation_history": [
       {"role": "assistant", "text": "Which size do you need: XS, S, M, L, or XL?"}
     ],
     "full_user_message": "Size M.",
@@ -876,7 +900,7 @@ EXAMPLES:
     "conversation_history": [],
     "full_user_message": "Hello, I am Jane.",
     "target_intent": "user_identification",
-    "target_segment": "Hello, I am Jane."
+    "target_segment": "I am Jane."
   }
   output: {"intent": "user_identification", "slots": {"name": "Jane", "surname": null}}
 
@@ -894,14 +918,14 @@ EXAMPLES:
     "conversation_history": [],
     "full_user_message": "Hi, I'm Giulia Serra.",
     "target_intent": "user_identification",
-    "target_segment": "Hi, I'm Giulia Serra."
+    "target_segment": "I'm Giulia Serra."
   }
   output: {"intent": "user_identification", "slots": {"name": "Giulia", "surname": "Serra"}}
 """
 
 GREETING_CLOSING_SCHEMA = """
 TARGET INTENT: greeting_closing
-CONTEXT: The user is saying hello, expressing gratitude, or saying goodbye (e.g., "thanks", "ok perfect", "bye", "hello").
+CONTEXT: The user is saying hello, expressing gratitude, or saying goodbye as standalone conversational content, without making or completing another supported request.
 
 SLOTS: no slots needed.
 

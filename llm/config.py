@@ -2,7 +2,7 @@ from typing import Any, Callable, Dict, Tuple
 from functools import partial
 
 import torch
-from transformers import AutoModelForCausalLM, AutoModelForImageTextToText, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, Gemma3ForConditionalGeneration, BitsAndBytesConfig
 
 from llm.generation import (
     generate_response,
@@ -31,11 +31,16 @@ def load_causal_model(model_id: str, device_map: str = "auto", **kwargs: Any):
 
 
 def load_gemma3_model(model_id: str, device_map: str = "auto", **kwargs: Any):
-    return AutoModelForImageTextToText.from_pretrained(
+    return Gemma3ForConditionalGeneration.from_pretrained(
         model_id,
-        torch_dtype=torch.float16,
+        torch_dtype=torch.bfloat16,
         device_map=device_map,
-        quantization_config=quantization_config,
+        quantization_config=BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+        ),
         **kwargs,
     )
 

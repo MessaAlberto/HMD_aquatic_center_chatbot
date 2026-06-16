@@ -7,12 +7,13 @@ INPUT PAYLOAD DEFINITION:
 - 'last_user_utterance': Your TARGET. This is the ONLY message you must split and route.
 
 RULES:
-1. Output strictly a JSON object. Do not add any conversational text.
+1. Output exactly one raw valid JSON object and nothing else: no Markdown, no ```json blocks, no introductions, no explanations, no text before or after the JSON.
 2. Extract ALL distinct logical requests from 'last_user_utterance'. Do not limit the number of segments.
 3. The 'segment' string must be a direct substring or a slightly cleaned version of 'last_user_utterance'.
-4. CONTEXTUAL CONTINUATION: If the user is answering a direct question from the assistant to complete an ongoing task, assign that segment to the ongoing intent, not to generic intents like 'user_identification' or 'out_of_scope'.
+4. CONTEXTUAL CONTINUATION: If the user is answering a direct question from the assistant to complete an ongoing task, assign the segment to the ongoing intent. However, if the user provides identity information such as a name or surname, always classify that segment as user_identification.
 5. If the user says "booking" without specifying spa or course, default to course-related intents.
 6. Do not create a separate greeting_closing segment when the greeting is only a polite opener attached to another supported intent.
+7. When a segment starts with a connector or polite opener used only to link requests, such as "and", "also", "oh, and", "by the way", "hi", "hello", or "thanks", omit it from the segment. Keep only the meaningful request or identity information.
 
 SUPPORTED INTENTS AND DEFINITIONS:
 - ask_opening_hours: User is asking about the opening or closing hours of a facility, such as swimming pool, gym, spa, lido, or reception.
@@ -84,6 +85,17 @@ EXAMPLES:
 - input:
   {
     "conversation_history": [
+      {"role": "user", "text": "I want to book the spa for Friday."},
+      {"role": "assistant", "text": "What is your name and surname?"}
+    ],
+    "last_user_utterance": "Anna Verdi."
+  }
+  output: {"segments": [{"segment": "Anna Verdi.", "intent": "user_identification"}]}
+
+
+- input:
+  {
+    "conversation_history": [
       {"role": "user", "text": "I need to change my spa booking from 5 PM to 6 PM tomorrow."},
       {"role": "assistant", "text": "Okay, do you confirm that you want to change your spa booking from 5 PM to 6 PM tomorrow?"}
     ],
@@ -129,13 +141,13 @@ EXAMPLES:
 - input:
   {
     "conversation_history": [],
-    "last_user_utterance": "Goodmorning. My name is Nadia Gallo and I want to modify my spa booking."
+    "last_user_utterance": "Good morning. My name is Nadia Gallo and I want to modify my spa booking."
   }
   output:
   {
     "segments": [
-      {"segment": "Goodmorning. My name is Nadia Gallo", "intent": "user_identification"},
-      {"segment": "and I want to modify my spa booking.", "intent": "modify_booked_spa"}
+      {"segment": "My name is Nadia Gallo", "intent": "user_identification"},
+      {"segment": "I want to modify my spa booking.", "intent": "modify_booked_spa"}
     ]
   }
 
@@ -148,7 +160,7 @@ EXAMPLES:
   {
     "segments": [
       {"segment": "How much is the annual pass?", "intent": "ask_pricing"},
-      {"segment": "And do I need a swimming cap?", "intent": "ask_rules"}
+      {"segment": "do I need a swimming cap?", "intent": "ask_rules"}
     ]
   }
 
@@ -161,7 +173,7 @@ EXAMPLES:
   {
     "segments": [
       {"segment": "I want to buy some goggles.", "intent": "buy_equipment"},
-      {"segment": "Oh, and I lost my red towel yesterday.", "intent": "report_lost_item"}
+      {"segment": "I lost my red towel yesterday.", "intent": "report_lost_item"}
     ]
   }
 
@@ -176,7 +188,7 @@ EXAMPLES:
   {
     "segments": [
       {"segment": "Size L.", "intent": "buy_equipment"},
-      {"segment": "Also, what time does the pool open?", "intent": "ask_opening_hours"}
+      {"segment": "what time does the pool open?", "intent": "ask_opening_hours"}
     ]
   }
 
@@ -189,7 +201,7 @@ EXAMPLES:
   {
     "segments": [
       {"segment": "I want to move my spa booking to next Friday.", "intent": "modify_booked_spa"},
-      {"segment": "By the way, I'm Andrea Ferrari.", "intent": "user_identification"}
+      {"segment": "I'm Andrea Ferrari.", "intent": "user_identification"}
     ]
   }
 
@@ -202,7 +214,7 @@ EXAMPLES:
   {
     "segments": [
       {"segment": "I want to book a course for my son", "intent": "book_course"},
-      {"segment": "and how much does it cost?", "intent": "ask_pricing"}
+      {"segment": "how much does it cost?", "intent": "ask_pricing"}
     ]
   }
 
@@ -230,7 +242,7 @@ EXAMPLES:
     "conversation_history": [],
     "last_user_utterance": "Hi, I'm Marco Bianchi."
   }
-  output: {"segments": [{"segment": "Hi, I'm Marco Bianchi.", "intent": "user_identification"}]}
+  output: {"segments": [{"segment": "I'm Marco Bianchi.", "intent": "user_identification"}]}
 
 
 --- AMBIGUOUS REQUESTS ---
