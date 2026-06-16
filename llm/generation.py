@@ -235,8 +235,55 @@ def _decode_gemma_output(processor, output_ids) -> str:
     ).strip()
 
 
+def _add_valid_token_id(token_ids: List[int], token_id: Any) -> None:
+    if isinstance(token_id, list):
+        for item in token_id:
+            _add_valid_token_id(token_ids, item)
+        return
+
+    if not isinstance(token_id, int):
+        return
+
+    if token_id < 0 or token_id in token_ids:
+        return
+
+    token_ids.append(token_id)
+
+
+def _get_token_id_if_known(tokenizer, token: str) -> Optional[int]:
+    if not hasattr(tokenizer, "convert_tokens_to_ids"):
+        return None
+
+    token_id = tokenizer.convert_tokens_to_ids(token)
+    unk_token_id = getattr(tokenizer, "unk_token_id", None)
+
+    if not isinstance(token_id, int) or token_id < 0:
+        return None
+
+    if unk_token_id is not None and token_id == unk_token_id:
+        return None
+
+    return token_id
+
+
+def _get_gemma_eos_token_ids(processor) -> List[int]:
+    tokenizer = getattr(processor, "tokenizer", processor)
+    eos_token_ids: List[int] = []
+
+    _add_valid_token_id(eos_token_ids, getattr(tokenizer, "eos_token_id", None))
+
+    for stop_token in ["<end_of_turn>"]:
+        _add_valid_token_id(
+            eos_token_ids,
+            _get_token_id_if_known(tokenizer, stop_token),
+        )
+
+    return eos_token_ids
+
+
 def _gemma_generation_kwargs(processor, max_new_tokens: int) -> Dict[str, Any]:
     tokenizer = getattr(processor, "tokenizer", processor)
+    eos_token_ids = _get_gemma_eos_token_ids(processor)
 
     return {
         "max_new_tokens": max_new_tokens,
@@ -244,7 +291,7 @@ def _gemma_generation_kwargs(processor, max_new_tokens: int) -> Dict[str, Any]:
         "temperature": None,
         "top_p": None,
         "pad_token_id": tokenizer.pad_token_id,
-        "eos_token_id": tokenizer.eos_token_id,
+        "eos_token_id": eos_token_ids or tokenizer.eos_token_id,
     }
 
 
@@ -265,10 +312,7 @@ def generate_response_gemma3(model, tokenizer, messages, max_new_tokens=128):
     with torch.inference_mode():
         generated_ids = model.generate(
             **model_inputs,
-            max_new_tokens=max_new_tokens,
-            do_sample=False,
-            pad_token_id=processor.tokenizer.pad_token_id,
-            eos_token_id=processor.tokenizer.eos_token_id,
+            **_gemma_generation_kwargs(processor, max_new_tokens),
         ).cpu()
 
     output_ids = generated_ids[0][input_len:]
