@@ -1699,12 +1699,12 @@
       "history": [
         {
           "role": "user",
-          "content": "I want to book the spa, ask the gym day price, and know the pool rules."
+          "content": "I want to book the spa, and ask the gym day price."
         }
       ],
       "active_segments": [
         "I want to book the spa",
-        "ask the gym day price"
+        "and ask the gym day price"
       ],
       "step_by_step_mode": true,
       "dialogue_state_list": [
@@ -1790,7 +1790,15 @@
       "history": [
         {
           "role": "user",
-          "content": "Thanks, now what about the spa booking?"
+          "content": "I want to book the spa for July 13th."
+        },
+        {
+          "role": "assistant",
+          "content": "What time would you like to visit the spa?"
+        },
+        {
+          "role": "user",
+          "content": "Actually, how much is a gym day pass for adults?"
         }
       ],
       "dialogue_state": {
@@ -1825,12 +1833,17 @@
           "gym"
         ],
         [
-          "back",
-          "going back",
-          "previous",
-          "earlier",
           "spa",
-          "booking"
+          "booking",
+          "appointment"
+        ],
+        [
+          "still interested",
+          "continue",
+          "go back",
+          "going back",
+          "back to",
+          "earlier"
         ]
       ],
       "check_flags": true

@@ -23,9 +23,6 @@ GENERAL RULES:
 6. CONTEXTUAL ANCHORING (NOT PARROTING): You must keep the conversational context alive naturally, without blindly repeating every slot. Briefly anchor your question to the service being discussed to help the user flow. For example, instead of asking "What time?", ask "What time would you like to use the spa?". Instead of "Which category?", ask "To check that price, are you a student or an adult?".
 7. THE "NO FALSE PROMISES" RULE: You are STRICTLY FORBIDDEN from making the booking sound final before it is. Never use words like "confirmed", "booked", "done", or "reserved" UNLESS the requested slot is exactly 'confirmation' or the nba is 'notify_success'. Use phrases like "For the spa...", "Regarding the pricing...", "Let's set up the...".
 8. Strict Data Fidelity: NEVER blend, mask, or replace the values present in the Dialogue State with information from the conversation history. The Dialogue State and 'enriched_data' represent the ABSOLUTE TRUTH.
-9. Render normalized slot values naturally, but do not change their meaning. For example, lowercase names such as "mario" and "rossi" may be written as "Mario Rossi"; underscored values such as "swimming_school" may be written as "swimming school".
-10. If 'queue_recovery' is true, use 'recovered_dialogue_state' and 'recovered_dm_action' when they are present. Do not invent the paused topic or the next missing slot from conversation history.
-11. If 'is_multitask' is true, answer only the current DM instruction. Do not answer another request from the conversation history unless the current DM instruction explicitly tells you to do so.
 """
 
 NLG_COMPATIBLE_BASE_PROMPT = """
@@ -54,22 +51,19 @@ GENERAL RULES:
 6. CONTEXTUAL ANCHORING (NOT PARROTING): You must keep the conversational context alive naturally, without blindly repeating every slot. Briefly anchor your question to the service being discussed to help the user flow. For example, instead of asking "What time?", ask "What time would you like to use the spa?". Instead of "Which category?", ask "To check that price, are you a student or an adult?".
 7. THE "NO FALSE PROMISES" RULE: You are STRICTLY FORBIDDEN from making the booking sound final before it is. Never use words like "confirmed", "booked", "done", or "reserved" UNLESS the requested slot is exactly 'confirmation' or the nba is 'notify_success'. Use phrases like "For the spa...", "Regarding the pricing...", "Let's set up the...".
 8. Strict Data Fidelity: NEVER blend, mask, or replace the values present in the Dialogue State with information from the conversation history. The Dialogue State and 'enriched_data' represent the ABSOLUTE TRUTH.
-9. Render normalized slot values naturally, but do not change their meaning. For example, lowercase names such as "mario" and "rossi" may be written as "Mario Rossi"; underscored values such as "swimming_school" may be written as "swimming school".
-10. If 'queue_recovery' is true, use 'recovered_dialogue_state' and 'recovered_dm_action' when they are present. Do not invent the paused topic or the next missing slot from conversation history.
-11. If 'is_multitask' is true, answer only the current DM instruction. Do not answer another request from the conversation history unless the current DM instruction explicitly tells you to do so.
 """
 
 NLG_BASE_PROMPT = NLG_QWEN_BASE_PROMPT
 
 
 FLAG_RULES = {
-    "step_by_step_mode": "- STEP BY STEP MODE: The user made multiple requests. You MUST use this exact structural formula: [Short acknowledgment like 'Let's do one thing at a time' or 'Starting with the...'] + [Direct question for the missing 'slot']. If options are provided, include them inside the same question. DO NOT add any other context.",
+    "step_by_step_mode": "- STEP BY STEP MODE: The user made multiple requests. You MUST use this exact structural formula: [Short acknowledgment like 'Let's do one thing at a time' or 'Starting with the...'] + [Direct question for the missing 'slot']. DO NOT add any other context.",
 
     "is_multitask": "- MULTITASK (FIRST PART): You are answering the first part of a combined request. Use this exact structural formula: [Extremely concise direct answer from enriched_data]. DO NOT ask closing questions and DO NOT use greetings or conversational filler.",
 
     "is_second_response": "- MULTITASK (SECOND PART): This is the second part of a combined request. Use this exact structural formula: [Natural transition like 'As for...', 'And regarding...', or 'Also,'] + [Direct answer or question]. Avoid overly formal words like 'Furthermore'.",
 
-    "queue_recovery": "- QUEUE RECOVERY: You are resuming a previously paused topic. Use this exact structural formula: [Brief confirmation of the just completed action] + [Natural transition back to the paused topic, e.g., 'Now, going back to your earlier request...'] + [Direct answer or question required by recovered_dm_action]. Use recovered_dialogue_state and recovered_dm_action if present. DO NOT use raw system intent names and DO NOT invent missing-slot details."
+    "queue_recovery": "- QUEUE RECOVERY: You are resuming a previously paused topic. Use this exact structural formula: [Brief confirmation of the just completed action] + [Natural transition back to {recovered_intent}, e.g., 'Now, going back to your question about {recovered_intent}...', or 'And about your earlier request about {recovered_intent}...'] + [Ask whether the user wants to continue with that request]. DO NOT use raw system intent names."
 }
 
 # ================
@@ -162,11 +156,11 @@ The user is asking about the rules of a facility.
     CURRENT DM INSTRUCTION: {"nba": "provide_information", "slot": null, "options": [], "blacklist": [], "enriched_data": {"matched_rules": {"towel": "Mandatory to use on all machines and benches.", "shoes": "Clean indoor shoes are required. No street shoes allowed.", "weights": "Please return all dumbbells and weights to their racks after use."}}}
   RESPONSE: In the gym, you must use a towel on all machines and benches. Clean indoor shoes are required, and all dumbbells and weights should be returned after use.
 
-- HISTORY: [{"role": "user", "content": "Can I smoke there?"}]
+- HISTORY: [{"role": "user", "content": "Can I smoke in the bar?"}]
   FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "ask_rules", "slots": {"topic": null, "specific_inquiry": "smoking"}}
-    CURRENT DM INSTRUCTION: {"nba": "request_slot", "slot": "topic", "options": ["swimming_pool", "gym", "changing_room", "spa", "lido"], "blacklist": [], "enriched_data": {}}
-  RESPONSE: Which area are you asking about for that rule: the swimming pool, gym, changing room, spa, or lido?
+    CURRENT DIALOGUE STATE: {"intent": "ask_rules", "slots": {"topic": "bar", "specific_inquiry": "smoking"}}
+    CURRENT DM INSTRUCTION: {"nba": "clarify_invalid_value", "slot": "topic", "options": ["swimming_pool", "gym", "changing_room", "spa", "lido"], "blacklist": [], "enriched_data": {}}
+  RESPONSE: We don't have specific regulations for a bar area. Did you want to know the rules for the swimming pool, gym, changing room, spa, or lido?
 """
     }
 }
@@ -208,11 +202,11 @@ The user wants to book a course.
     CURRENT DM INSTRUCTION: {"nba": "request_slot", "slot": "confirmation", "options": ["agree", "deny"], "blacklist": [], "enriched_data": {}}
   RESPONSE: Just to confirm: you'd like to book a beginner swimming school course for a child on Monday, under the name Emma Williams. Is that correct?
 
-- HISTORY: [{"role": "user", "content": "I want to book a course on Friday."}]
+- HISTORY: [{"role": "user", "content": "I want to book a yoga course on Friday."}]
   FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "book_course", "slots": {"course_activity": null, "target_age": "adult", "level": null, "day_preference": "friday", "name": null, "surname": null, "confirmation": null}}
-    CURRENT DM INSTRUCTION: {"nba": "request_slot", "slot": "course_activity", "options": ["hydrobike", "swimming_school", "aquagym", "newborn_swimming"], "blacklist": [], "enriched_data": {}}
-  RESPONSE: Which course would you like to book: hydrobike, swimming school, aquagym, or newborn swimming?
+    CURRENT DIALOGUE STATE: {"intent": "book_course", "slots": {"course_activity": "yoga", "target_age": "adult", "level": null, "day_preference": "Friday", "name": null, "surname": null, "confirmation": null}}
+    CURRENT DM INSTRUCTION: {"nba": "clarify_invalid_value", "slot": "course_activity", "options": ["hydrobike", "swimming_school", "aquagym", "newborn_swimming"], "blacklist": [], "enriched_data": {}}
+  RESPONSE: We don't offer yoga. However, you can choose from hydrobike, swimming school, aquagym, or newborn swimming.
 
 - HISTORY: [{"role": "user", "content": "I want to book swimming lessons for my child on Friday."}]
   FINAL SYSTEM COMMAND:
@@ -603,12 +597,6 @@ The user is providing their name or surname without asking for a specific action
     CURRENT DIALOGUE STATE: {"intent": "user_identification", "slots": {"name": "Laura", "surname": null}}
     CURRENT DM INSTRUCTION: {"nba": "notify_success", "slot": null, "options": [], "blacklist": [], "enriched_data": {}}
   RESPONSE: Good morning, Laura. What can I do for you today?
-
-- HISTORY: [{"role": "user", "content": "I'm Laura. Also, what time does the pool open?"}]
-  FINAL SYSTEM COMMAND:
-    CURRENT DIALOGUE STATE: {"intent": "user_identification", "slots": {"name": "laura", "surname": null}}
-    CURRENT DM INSTRUCTION: {"nba": "notify_success", "slot": null, "options": [], "blacklist": [], "enriched_data": {}, "is_multitask": true}
-  RESPONSE: Got it, Laura.
 """
     }
 }
