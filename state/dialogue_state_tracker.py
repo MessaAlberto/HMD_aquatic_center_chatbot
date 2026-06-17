@@ -207,6 +207,13 @@ class StateTracker:
     def _contains_right_now(self, slots: dict[str, Any]) -> bool:
         return any(str(value).lower().strip() == "right now" for key, value in slots.items() if value is not None and ("date" in key or "time" in key))
 
+    def _base_slot_name(self, slot_name: str) -> str:
+        if slot_name.endswith("_old"):
+            return slot_name[:-4]
+        if slot_name.endswith("_new"):
+            return slot_name[:-4]
+        return slot_name
+
     def _clean_slot_value(self, slot_name: str, value: Any) -> Any:
         val_str = str(value).strip().lower()
         val_underscored = val_str.replace(" ", "_")
@@ -228,13 +235,18 @@ class StateTracker:
         if slot_name in ["color", "item_color", "brand", "size", "specific_inquiry"]:
             return val_str
 
-        if slot_name in VALIDATION_MAP:
-            value_to_check = val_underscored if "_" in val_underscored and slot_name in ["facility_type", "topic", "course_activity", "item", "sub_type"] else val_str
+        base_slot_name = self._base_slot_name(slot_name)
+        if base_slot_name in VALIDATION_MAP:
+            value_to_check = (
+                val_underscored
+                if "_" in val_underscored and base_slot_name in ["facility_type", "topic", "course_activity", "item", "sub_type"]
+                else val_str
+            )
 
-            if value_to_check in VALIDATION_MAP[slot_name]:
+            if value_to_check in VALIDATION_MAP[base_slot_name]:
                 return value_to_check
 
-            matches = difflib.get_close_matches(value_to_check, VALIDATION_MAP[slot_name], n=1, cutoff=0.7)
+            matches = difflib.get_close_matches(value_to_check, VALIDATION_MAP[base_slot_name], n=1, cutoff=0.7)
             return matches[0] if matches else None
 
         return val_str
