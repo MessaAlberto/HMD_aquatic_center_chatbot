@@ -37,17 +37,38 @@ The intrinsic evaluation compared the following models:
 | NLG acceptance rate     |     0.941 |   0.941 |   0.912 | **1.000** |
 | **Final average score** |     0.929 |   0.851 |   0.906 | **0.969** |
 
-The final average score is computed as the simple average of the four intrinsic component metrics.
-
 Based on these results, **Qwen3-4B** was selected as the main model for the final chatbot evaluation.
 
-## Running the Chatbot
 
-The easiest way to test the chatbot is to open the UI notebook:
+## Running the Notebooks
+
+The easiest way to run the project is to open the notebooks in **Google Colab** and execute them from there.
+
+### UI Chatbot Notebook
+
+Use this notebook to test the chatbot with the final user interface and experience the system as a real user.
 
 ```text
-UI_chatbot.ipynb
+notebooks/UI_chatbot.ipynb
 ```
+
+### Main Notebook
+
+Use this notebook to run the chatbot with debug information enabled during the conversation. This is useful to inspect intermediate pipeline steps, such as routing, slot extraction, dialogue state updates, and system actions.
+
+```text
+notebooks/main.ipynb
+```
+
+### Evaluation Notebook
+
+Use this notebook to run the intrinsic evaluation of the chatbot components and compare the tested models.
+
+```text
+notebooks/eval_all_model_components.ipynb
+```
+
+
 
 The notebook is designed to run the chatbot interactively and allows testers to try realistic conversations with the aquatic center assistant.
 
