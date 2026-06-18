@@ -1,0 +1,274 @@
+[
+  {
+    "model": "gemma3_4b",
+    "components": {
+      "router": {
+        "component": "router",
+        "main_metric": 0.955,
+        "metrics": {
+          "total_samples": 200,
+          "main_metric": 0.955,
+          "soft_segment_accuracy": 0.955,
+          "wrong_samples": 9,
+          "soft_segment_f1_threshold": 0.9
+        },
+        "results_path": "evaluation\\results\\gemma3_4b\\router_results.json",
+        "errors_path": "evaluation\\results\\gemma3_4b\\router_errors.json",
+        "manual_review_path": ""
+      },
+      "nlu": {
+        "component": "nlu",
+        "main_metric": 0.665,
+        "metrics": {
+          "total_samples": 200,
+          "main_metric": 0.665,
+          "nlu_slot_accuracy": 0.665,
+          "wrong_samples": 67,
+          "free_text_slots": [
+            "last_seen_location",
+            "lost_item",
+            "specific_inquiry"
+          ],
+          "free_text_f1_threshold": 0.5,
+          "null_slots_ignored": true
+        },
+        "results_path": "evaluation\\results\\gemma3_4b\\nlu_results.json",
+        "errors_path": "evaluation\\results\\gemma3_4b\\nlu_errors.json",
+        "manual_review_path": ""
+      },
+      "dm": {
+        "component": "dm",
+        "main_metric": 0.9957081545064378,
+        "metrics": {
+          "total_samples": 233,
+          "main_metric": 0.9957081545064378,
+          "dm_accuracy": 0.9957081545064378,
+          "wrong_samples": 1,
+          "options_blacklist_order_insensitive": true
+        },
+        "results_path": "evaluation\\results\\gemma3_4b\\dm_results.json",
+        "errors_path": "evaluation\\results\\gemma3_4b\\dm_errors.json",
+        "manual_review_path": ""
+      },
+      "nlg": {
+        "component": "nlg",
+        "main_metric": 0.9117647058823529,
+        "metrics": {
+          "total_samples": 34,
+          "main_metric": 0.9117647058823529,
+          "nlg_auto_acceptance_rate": 0.9117647058823529,
+          "passed_samples": 21,
+          "manual_review_samples": 11,
+          "failed_samples": 2
+        },
+        "results_path": "evaluation\\results\\gemma3_4b\\nlg_results.json",
+        "errors_path": "evaluation\\results\\gemma3_4b\\nlg_errors.json",
+        "manual_review_path": "evaluation\\results\\gemma3_4b\\nlg_manual_review.json"
+      }
+    }
+  },
+  {
+    "model": "mistral7b",
+    "components": {
+      "router": {
+        "component": "router",
+        "main_metric": 0.94,
+        "metrics": {
+          "total_samples": 200,
+          "main_metric": 0.94,
+          "soft_segment_accuracy": 0.94,
+          "wrong_samples": 12,
+          "soft_segment_f1_threshold": 0.9
+        },
+        "results_path": "evaluation\\results\\mistral7b\\router_results.json",
+        "errors_path": "evaluation\\results\\mistral7b\\router_errors.json",
+        "manual_review_path": ""
+      },
+      "nlu": {
+        "component": "nlu",
+        "main_metric": 0.325,
+        "metrics": {
+          "total_samples": 200,
+          "main_metric": 0.325,
+          "nlu_slot_accuracy": 0.325,
+          "wrong_samples": 135,
+          "free_text_slots": [
+            "last_seen_location",
+            "lost_item",
+            "specific_inquiry"
+          ],
+          "free_text_f1_threshold": 0.5,
+          "null_slots_ignored": true
+        },
+        "results_path": "evaluation\\results\\mistral7b\\nlu_results.json",
+        "errors_path": "evaluation\\results\\mistral7b\\nlu_errors.json",
+        "manual_review_path": ""
+      },
+      "dm": {
+        "component": "dm",
+        "main_metric": 0.9957081545064378,
+        "metrics": {
+          "total_samples": 233,
+          "main_metric": 0.9957081545064378,
+          "dm_accuracy": 0.9957081545064378,
+          "wrong_samples": 1,
+          "options_blacklist_order_insensitive": true
+        },
+        "results_path": "evaluation\\results\\mistral7b\\dm_results.json",
+        "errors_path": "evaluation\\results\\mistral7b\\dm_errors.json",
+        "manual_review_path": ""
+      },
+      "nlg": {
+        "component": "nlg",
+        "main_metric": 0.8235294117647058,
+        "metrics": {
+          "total_samples": 34,
+          "main_metric": 0.8235294117647058,
+          "nlg_auto_acceptance_rate": 0.8235294117647058,
+          "passed_samples": 23,
+          "manual_review_samples": 9,
+          "failed_samples": 2
+        },
+        "results_path": "evaluation\\results\\mistral7b\\nlg_results.json",
+        "errors_path": "evaluation\\results\\mistral7b\\nlg_errors.json",
+        "manual_review_path": "evaluation\\results\\mistral7b\\nlg_manual_review.json"
+      }
+    }
+  },
+  {
+    "model": "qwen25_3b",
+    "components": {
+      "router": {
+        "component": "router",
+        "main_metric": 0.905,
+        "metrics": {
+          "total_samples": 200,
+          "main_metric": 0.905,
+          "soft_segment_accuracy": 0.905,
+          "wrong_samples": 19,
+          "soft_segment_f1_threshold": 0.9
+        },
+        "results_path": "evaluation\\results\\qwen25_3b\\router_results.json",
+        "errors_path": "evaluation\\results\\qwen25_3b\\router_errors.json",
+        "manual_review_path": ""
+      },
+      "nlu": {
+        "component": "nlu",
+        "main_metric": 0.74,
+        "metrics": {
+          "total_samples": 200,
+          "main_metric": 0.74,
+          "nlu_slot_accuracy": 0.74,
+          "wrong_samples": 52,
+          "free_text_slots": [
+            "last_seen_location",
+            "lost_item",
+            "specific_inquiry"
+          ],
+          "free_text_f1_threshold": 0.5,
+          "null_slots_ignored": true
+        },
+        "results_path": "evaluation\\results\\qwen25_3b\\nlu_results.json",
+        "errors_path": "evaluation\\results\\qwen25_3b\\nlu_errors.json",
+        "manual_review_path": ""
+      },
+      "dm": {
+        "component": "dm",
+        "main_metric": 0.9399141630901288,
+        "metrics": {
+          "total_samples": 233,
+          "main_metric": 0.9399141630901288,
+          "dm_accuracy": 0.9399141630901288,
+          "wrong_samples": 14,
+          "options_blacklist_order_insensitive": true
+        },
+        "results_path": "evaluation\\results\\qwen25_3b\\dm_results.json",
+        "errors_path": "evaluation\\results\\qwen25_3b\\dm_errors.json",
+        "manual_review_path": ""
+      },
+      "nlg": {
+        "component": "nlg",
+        "main_metric": 0.8235294117647058,
+        "metrics": {
+          "total_samples": 34,
+          "main_metric": 0.8235294117647058,
+          "nlg_auto_acceptance_rate": 0.8235294117647058,
+          "passed_samples": 24,
+          "manual_review_samples": 7,
+          "failed_samples": 3
+        },
+        "results_path": "evaluation\\results\\qwen25_3b\\nlg_results.json",
+        "errors_path": "evaluation\\results\\qwen25_3b\\nlg_errors.json",
+        "manual_review_path": "evaluation\\results\\qwen25_3b\\nlg_manual_review.json"
+      }
+    }
+  },
+  {
+    "model": "qwen3_4b",
+    "components": {
+      "router": {
+        "component": "router",
+        "main_metric": 0.94,
+        "metrics": {
+          "total_samples": 200,
+          "main_metric": 0.94,
+          "soft_segment_accuracy": 0.94,
+          "wrong_samples": 12,
+          "soft_segment_f1_threshold": 0.9
+        },
+        "results_path": "evaluation\\results\\qwen3_4b\\router_results.json",
+        "errors_path": "evaluation\\results\\qwen3_4b\\router_errors.json",
+        "manual_review_path": ""
+      },
+      "nlu": {
+        "component": "nlu",
+        "main_metric": 0.865,
+        "metrics": {
+          "total_samples": 200,
+          "main_metric": 0.865,
+          "nlu_slot_accuracy": 0.865,
+          "wrong_samples": 27,
+          "free_text_slots": [
+            "last_seen_location",
+            "lost_item",
+            "specific_inquiry"
+          ],
+          "free_text_f1_threshold": 0.5,
+          "null_slots_ignored": true
+        },
+        "results_path": "evaluation\\results\\qwen3_4b\\nlu_results.json",
+        "errors_path": "evaluation\\results\\qwen3_4b\\nlu_errors.json",
+        "manual_review_path": ""
+      },
+      "dm": {
+        "component": "dm",
+        "main_metric": 1.0,
+        "metrics": {
+          "total_samples": 233,
+          "main_metric": 1.0,
+          "dm_accuracy": 1.0,
+          "wrong_samples": 0,
+          "options_blacklist_order_insensitive": true
+        },
+        "results_path": "evaluation\\results\\qwen3_4b\\dm_results.json",
+        "errors_path": "evaluation\\results\\qwen3_4b\\dm_errors.json",
+        "manual_review_path": ""
+      },
+      "nlg": {
+        "component": "nlg",
+        "main_metric": 0.9411764705882353,
+        "metrics": {
+          "total_samples": 34,
+          "main_metric": 0.9411764705882353,
+          "nlg_auto_acceptance_rate": 0.9411764705882353,
+          "passed_samples": 29,
+          "manual_review_samples": 5,
+          "failed_samples": 0
+        },
+        "results_path": "evaluation\\results\\qwen3_4b\\nlg_results.json",
+        "errors_path": "evaluation\\results\\qwen3_4b\\nlg_errors.json",
+        "manual_review_path": "evaluation\\results\\qwen3_4b\\nlg_manual_review.json"
+      }
+    }
+  }
+]
