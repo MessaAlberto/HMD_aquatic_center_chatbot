@@ -18,7 +18,7 @@ HOW TO PROCESS THE INPUT:
 
 RULES:
 1. Output exactly one raw valid JSON object and nothing else: no Markdown, no ```json blocks, no introductions, no explanations, no text before or after the JSON.
-2. Extract slot values only from 'target_segment'.
+2. Extract slot values from 'target_segment'.
 3. Use 'conversation_history' and 'full_user_message' only to interpret explicit references in 'target_segment', such as pronouns, short answers, corrections, confirmations, or choices among options just offered by the assistant.
 4. If a slot defines allowed values in brackets [], map the user's wording to one of those values when the meaning is clear. If the user mentions something unrelated or out of scope for that slot, such as "luna park", return null.
 5. If a slot is not present or cannot be understood from the target segment in context, set its value to null.
@@ -532,14 +532,13 @@ EXAMPLES:
 - input:
   {
     "conversation_history": [
-      {"role": "user", "text": "I want to change the number of people for my spa booking."},
-      {"role": "assistant", "text": "How many people will be attending instead?"}
+      {"role": "assistant", "text": "What time would you like to move your spa booking to? Available options are 16:00 or 18:00."}
     ],
-    "full_user_message": "Sorry, we're 2, not just me.",
+    "full_user_message": "The second option.",
     "target_intent": "modify_booked_spa",
-    "target_segment": "Sorry, we're 2, not just me."
+    "target_segment": "The second option."
   }
-  output: {"intent": "modify_booked_spa", "slots": {"name": null, "surname": null, "date_old": null, "time_old": null, "people_count_old": null, "date_new": null, "time_new": null, "people_count_new": 2, "confirmation": null}}
+  output: {"intent": "modify_booked_spa", "slots": {"name": null, "surname": null, "date_old": null, "time_old": null, "people_count_old": null, "date_new": null, "time_new": "18:00", "people_count_new": null, "confirmation": null}}
 
 - input:
   {
